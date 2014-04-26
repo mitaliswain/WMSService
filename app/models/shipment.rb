@@ -10,7 +10,7 @@ class Shipment
     if valid_shipment?(client, warehouse, channel, building, shipment_nbr) && 
        valid_shipment_details?(client, warehouse, channel, building, shipment_nbr, item, quantity) &&
        valid_existing_case?(case_id)
-       
+
        #process shipment
        create_case(case_id, quantity)
        update_asnheader(quantity)
@@ -33,7 +33,7 @@ class Shipment
     case 
       
     when @shipment_header.nil?
-      @error << "Shipment not found"
+      @error << "Shipment" + shipment_nbr + " not found"
       valid = false
     end
      
@@ -49,7 +49,7 @@ class Shipment
     
     case
     when @shipment_details.nil?
-      @error << "SKU not found in this shipment"
+      @error << "Item " + item + " not found in this shipment"
       valid = false
     end
     
@@ -66,7 +66,7 @@ class Shipment
     case
     when !@case.nil?
       
-      @error << "Case already exists"
+      @error << "Case" + case_id + " already exists"
       valid = false
     end
     
@@ -88,14 +88,13 @@ class Shipment
     @case.shipment_nbr = @shipment_header.shipment_nbr
     
     @case.save!
-    
+
     rescue => error
     @error <<  error.to_s
     
   end
   
   def update_asnheader(quantity)
-    puts "i am in"
     @shipment_header.units_rcvd =  @shipment_header.units_rcvd.to_i + quantity.to_i
     @shipment_header.cases_rcvd = @shipment_header.cases_rcvd.to_i + 1
     @shipment_header.receiving_started_date = Time.now if @shipment_header.receiving_started_date.nil?
