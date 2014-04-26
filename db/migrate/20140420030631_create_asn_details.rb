@@ -6,7 +6,7 @@ class CreateAsnDetails < ActiveRecord::Migration
       t.string :channel
       t.string :building
       t.integer :asn_header_id
-      t.string :type
+      t.string :asn_type
       t.string :purchase_order_nbr
       t.integer :poline_nbr
       t.string :shipment_nbr

@@ -5,7 +5,7 @@ class CreateAsnHeaders < ActiveRecord::Migration
       t.string :warehouse
       t.string :channel
       t.string :building
-      t.string :type
+      t.string :asn_type
       t.string :purchase_order_nbr
       t.string :shipment_nbr
       t.string :source
