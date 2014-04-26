@@ -1,18 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
   asn_header_id: 1
-  type: 
+  asn_type: 
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: MyString
+  shipment_nbr: Shipment1
   sequence: 1
   hot_item: MyString
-  item: MyString
+  item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
   sku_attribute3: MyString
@@ -87,7 +87,7 @@ two:
   channel: MyString
   building: MyString
   asn_header_id: 1
-  type: 
+  asn_type: 
   purchase_order_nbr: MyString
   poline_nbr: 1
   shipment_nbr: MyString

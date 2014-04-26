@@ -34,7 +34,7 @@ class Shipment
     case 
       
     when @shipment_header.nil?
-      @error << "Shipment" + shipment_nbr + " not found"
+      @error << "Shipment " + shipment_nbr + " not found"
       valid = false
     end
      
@@ -109,6 +109,7 @@ class Shipment
  
  def update_asndetails(quantity)
    @shipment_details.received_qty =  @shipment_details.received_qty.to_i + quantity.to_i
+   puts  @shipment_details.received_qty
    @shipment_details.cases_rcvd =  @shipment_details.cases_rcvd.to_i + quantity.to_i
    
    @shipment_details.save!

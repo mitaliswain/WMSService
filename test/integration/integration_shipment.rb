@@ -38,7 +38,7 @@ fixtures :case_details
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Shipment'+  shipment_nbr + ' not found'
+        expected_message = 'Shipment '+  shipment_nbr + ' not found'
         assert_equal expected_message , message["message"][0],  "Shipment not found"
        
   end
@@ -53,6 +53,8 @@ fixtures :case_details
 
   def test_receive_shipment
 
+     puts asn_details(:one).received_qty
+     
     # Check the valida shipment
     post "/receive_shipment", 
       client: @client,
@@ -74,6 +76,8 @@ fixtures :case_details
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
     case_header = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id).first
 
+    puts asn_detail.received_qty
+    puts asn_details(:one).received_qty
     assert_equal asn_header.units_rcvd , asn_headers(:one).units_rcvd + @quantity , "ASN Header received quantity mismatch"
     assert_equal asn_detail.received_qty , asn_details(:one).received_qty + @quantity, "ASN Detail received quantity mismatch"
     assert_equal case_header.quantity , @quantity, "Case quantity mismatch"

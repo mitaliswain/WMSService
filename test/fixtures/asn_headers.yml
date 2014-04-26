@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
-  type: 
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  asn_type: 
   purchase_order_nbr: MyString
-  shipment_nbr: MyString
+  shipment_nbr: Shipment1
   source: MyString
   source_comment: MyString
   appointment_nbr: MyString
@@ -121,7 +121,7 @@ two:
   warehouse: MyString
   channel: MyString
   building: MyString
-  type: 
+  asn_type: 
   purchase_order_nbr: MyString
   shipment_nbr: MyString
   source: MyString
