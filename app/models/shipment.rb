@@ -14,6 +14,7 @@ class Shipment
        #process shipment
        create_case(case_id, quantity)
        update_asnheader(quantity)
+       update_asndetails(quantity)
        
        @success << "Shipment received successfully"
        return @success
@@ -95,18 +96,26 @@ class Shipment
   end
   
   def update_asnheader(quantity)
-    puts "i am in"
     @shipment_header.units_rcvd =  @shipment_header.units_rcvd.to_i + quantity.to_i
     @shipment_header.cases_rcvd = @shipment_header.cases_rcvd.to_i + 1
     @shipment_header.receiving_started_date = Time.now if @shipment_header.receiving_started_date.nil?
     
     @shipment_header.save!
     
-  
+     
+    rescue => error
+    @error <<  error.to_s
   end
  
- def update_asndetails()
+ def update_asndetails(quantity)
+   @shipment_details.received_qty =  @shipment_details.received_qty.to_i + quantity.to_i
+   @shipment_details.cases_rcvd =  @shipment_details.cases_rcvd.to_i + quantity.to_i
    
+   @shipment_details.save!
+   
+    
+    rescue => error
+    @error <<  error.to_s
  end
    
  
