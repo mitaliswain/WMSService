@@ -13,6 +13,7 @@ fixtures :case_details
   # end
 
   def setup
+    @url = '/shipment/' + asn_headers(:one).shipment_nbr + '/' + 'receive'
     @client = 'WM'
     @warehouse = 'WH1'
     @building = nil
@@ -25,20 +26,19 @@ fixtures :case_details
   end  
 
   def test_validate_shipment
-      shipment_nbr = 'Shipment2'
-      post "/receive_shipment", 
+      url = '/shipment/Shipment2/receive'
+      post url, 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        shipment_nbr: shipment_nbr,
         location: '',
         case_id: @case_id,
         item: @item,
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Shipment '+  shipment_nbr + ' not found'
+        expected_message = 'Shipment Shipment2 not found'
         assert_equal expected_message , message["message"][0],  "Shipment not found"
        
   end
@@ -56,12 +56,11 @@ fixtures :case_details
      puts asn_details(:one).received_qty
      
     # Check the valida shipment
-    post "/receive_shipment", 
+    post @url, 
       client: @client,
       warehouse: @warehouse,
       channel: @channel,
       building:@building,
-      shipment_nbr: @shipment_nbr,
       location: '',
       case_id: @case_id,
       item: @item,

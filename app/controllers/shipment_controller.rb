@@ -1,4 +1,4 @@
-class ReceiveShipmentController < ApplicationController
+class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
     message = Hash.new
@@ -6,7 +6,7 @@ class ReceiveShipmentController < ApplicationController
     render json: message
   end
   
-  def create
+  def receive
    message = Hash.new
    shipment = Shipment.new
    message[:message] = shipment.receive_shipment(params[:client], params[:warehouse], params[:channel],params[:building], params[:shipment_nbr], params[:location], params[:case_id], params[:item], params[:quantity])

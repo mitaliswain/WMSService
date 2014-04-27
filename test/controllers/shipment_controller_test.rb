@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReceiveShipmentControllerTest < ActionController::TestCase
+class ShipmentControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

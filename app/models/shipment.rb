@@ -1,4 +1,4 @@
-require 'concerns/receive_shipment.rb'
+require 'concerns/receive_shipment'
 class Shipment
   
   include ReceiveShipment
