@@ -67,7 +67,7 @@ module ReceiveShipment
       case
       when !@case.nil?
         
-        @error << "Case" + case_id + " already exists"
+        @error << "Case " + case_id + " already exists"
         valid = false
       end
       

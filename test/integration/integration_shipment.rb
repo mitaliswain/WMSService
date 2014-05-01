@@ -1,6 +1,5 @@
 require 'test_helper'
 
-
 class ReceiveShipmentControllerTest < ActionDispatch::IntegrationTest
  
 fixtures :asn_details
@@ -20,12 +19,13 @@ fixtures :case_details
     @channel = nil
     @shipment_nbr = asn_headers(:one).shipment_nbr
     @location = ''
-    @case_id = 'CASE1'
-    @item = '12345'
+    @case_id = 'CASE2'
+    @item = asn_details(:one).item
     @quantity = 2
   end  
 
   def test_validate_shipment
+    
       url = '/shipment/Shipment2/receive'
       post url, 
         client: @client,
@@ -43,12 +43,43 @@ fixtures :case_details
        
   end
   
+  
   def test_validate_item
-    
+  
+      
+      post @url,
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building: @building,
+        shipment_nbr: @shipment_nbr,
+        quantity: @quantity,
+        case_id: @case_id,
+        item: '12346'
+       
+        
+        message = JSON.parse(response.body)
+        expected_message = 'Item 12346 not found in this shipment' 
+        assert_equal expected_message , message["message"][0], "Item not found"
   end
     
   def test_duplicate_case
     
+      
+      post @url,
+         client: @client,
+         warehouse: @warehouse,
+         channel: @channel,
+        building: @building,
+        shipment_nbr: @shipment_nbr,
+        quantity: @quantity,
+        case_id: case_headers(:one).case_id,
+        item: @item
+        
+         message = JSON.parse(response.body)
+        expected_message = 'Case CASE1 already exists' 
+        assert_equal expected_message , message["message"][0], "Case  not found"
+  
   end
 
   def test_receive_shipment

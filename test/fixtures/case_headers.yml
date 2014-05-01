@@ -5,7 +5,7 @@ one:
   warehouse: MyString
   channel: MyString
   building: MyString
-  case_id: MyString
+  case_id: CASE1
   pallet_id: MyString
   status: MyString
   item: MyString

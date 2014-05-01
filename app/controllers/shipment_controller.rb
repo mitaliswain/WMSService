@@ -13,4 +13,10 @@ class ShipmentController < ApplicationController
    render json: message
   end
   
+  def show
+   
+   shipment = Shipment.new
+   shipment_hash = shipment.where(client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building], shipment_nbr: params[:shipment_nbr])
+   render json: shipment_hash
+  end
 end

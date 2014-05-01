@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  resources :shipment
+  
   
   post 'shipment/:shipment_nbr/receive' => 'shipment#receive' 
+  
+  get 'shipment/:shipment_nbr' => 'shipment#show' 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
