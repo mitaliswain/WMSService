@@ -10,7 +10,9 @@ module ReceiveShipment
      if  valid_location?(client, warehouse, channel, building, location) &&
          valid_shipment?(client, warehouse, channel, building, shipment_nbr) && 
          valid_shipment_details?(client, warehouse, channel, building, shipment_nbr, item, quantity) &&
-         valid_existing_case?(case_id)
+         valid_existing_case?(case_id) &&
+         valid_itemmaster?(client, item)
+         
   
          #process shipment
          create_case(case_id, quantity)
@@ -50,6 +52,24 @@ module ReceiveShipment
         
          return valid
      end
+     
+   def valid_itemmaster?(client, item)
+     
+     valid = true
+     item_master = ItemMaster.where(client: client, item: item).first
+     
+     #validating item
+     
+     case
+     when item_master.nil?
+       @error << "Item " + item + " does not exist in Itemmaster"
+       valid = false
+     end
+     
+      return valid
+      
+    end
+    
     
    def valid_shipment?(client, warehouse, channel, building, shipment_nbr)
       
@@ -115,6 +135,8 @@ module ReceiveShipment
       @case.item = @shipment_details.item
       @case.quantity = quantity
       @case.shipment_nbr = @shipment_header.shipment_nbr
+      @case.on_hold = 'Yes'
+      @case.hold_code = 'Received'
       
       @case.save!
   
