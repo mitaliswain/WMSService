@@ -30,16 +30,51 @@ fixtures :case_details
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        location: 'Location2',
+        location: 'Locationx',
         case_id: @case_id,
         item: @item,
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Location Location2 not found'
+        expected_message = 'Location Locationx not found'
         assert_equal expected_message , message["message"][0],  "Location not found"
        
     
+  end
+  
+  def test_validate_location_type
+    post @url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: location_masters(:three).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      
+        message =  JSON.parse(response.body)
+        expected_message = 'Can not receive to a non pending Location'
+        assert_equal expected_message , message["message"][0],  "Pending location"
+       
+    
+  end
+  
+  def test_record_status
+    post @url,
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: location_masters(:two).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      
+        message =  JSON.parse(response.body)
+        expected_message = 'Can not receive to a non empty location'
+        assert_equal expected_message , message["message"][0],  "Non Empty Location"
+       
   end
 
 
@@ -126,10 +161,13 @@ fixtures :case_details
     asn_header = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
     case_header = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id).first
+    location_master = LocationMaster.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, barcode: location).first
+
 
     assert_equal  asn_headers(:one).units_rcvd + @quantity , asn_header.units_rcvd , "ASN Header received quantity mismatch"
     assert_equal  asn_details(:one).received_qty + @quantity, asn_detail.received_qty , "ASN Detail received quantity mismatch"
     assert_equal  @quantity, case_header.quantity , "Case quantity mismatch"
+    assert_equal  @status, location_master.barcode , "Location not getting updated"
  
 
   end

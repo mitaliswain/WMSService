@@ -1,0 +1,105 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  item: MyString
+  sku_attribute1: MyString
+  sku_attribute2: MyString
+  sku_attribute3: MyString
+  sku_attribute4: MyString
+  sku_attribute5: MyString
+  sku_attribute6: MyString
+  sku_attribute7: MyString
+  sku_attribute8: MyString
+  sku_attribute9: MyString
+  sku_attribute10: MyString
+  sku_attribute11: MyString
+  sku_attribute12: MyString
+  sku_attribute13: MyString
+  sku_attribute14: MyString
+  sku_attribute15: MyString
+  sku_attribute16: MyString
+  sku_attribute17: MyString
+  sku_attribute18: MyString
+  sku_attribute19: MyString
+  sku_attribute20: MyString
+  sku_attribute21: MyString
+  sku_attribute22: MyString
+  sku_attribute23: MyString
+  sku_attribute24: MyString
+  sku_attribute25: MyString
+  concept: MyString
+  description: MyString
+  short_desc: MyString
+  barcode: MyString
+  innerpack_code: MyString
+  innerpack_qty: 1
+  innerpack_wgt: 9.99
+  innerpack_vol: 9.99
+  innerpack_len: 9.99
+  innerpack_wdt: 9.99
+  innerpack_hgt: 9.99
+  hold_inventory: MyString
+  hold_type: MyString
+  status: MyString
+  created_date: 2014-05-03 16:26:54
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-03 16:26:54
+  updated_user: MyString
+  updated_prc: MyString
+
+two:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  item: MyString
+  sku_attribute1: MyString
+  sku_attribute2: MyString
+  sku_attribute3: MyString
+  sku_attribute4: MyString
+  sku_attribute5: MyString
+  sku_attribute6: MyString
+  sku_attribute7: MyString
+  sku_attribute8: MyString
+  sku_attribute9: MyString
+  sku_attribute10: MyString
+  sku_attribute11: MyString
+  sku_attribute12: MyString
+  sku_attribute13: MyString
+  sku_attribute14: MyString
+  sku_attribute15: MyString
+  sku_attribute16: MyString
+  sku_attribute17: MyString
+  sku_attribute18: MyString
+  sku_attribute19: MyString
+  sku_attribute20: MyString
+  sku_attribute21: MyString
+  sku_attribute22: MyString
+  sku_attribute23: MyString
+  sku_attribute24: MyString
+  sku_attribute25: MyString
+  concept: MyString
+  description: MyString
+  short_desc: MyString
+  barcode: MyString
+  innerpack_code: MyString
+  innerpack_qty: 1
+  innerpack_wgt: 9.99
+  innerpack_vol: 9.99
+  innerpack_len: 9.99
+  innerpack_wdt: 9.99
+  innerpack_hgt: 9.99
+  hold_inventory: MyString
+  hold_type: MyString
+  status: MyString
+  created_date: 2014-05-03 16:26:54
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-03 16:26:54
+  updated_user: MyString
+  updated_prc: MyString

@@ -16,6 +16,8 @@ module ReceiveShipment
          create_case(case_id, quantity)
          update_asnheader(quantity)
          update_asndetails(quantity)
+         update_l(quantity)
+         
          
          @success << "Shipment received successfully"
          return @success
@@ -24,7 +26,7 @@ module ReceiveShipment
       end
     end
     
-    def valid_location?(client, warehouse, channel, building, location)
+  def valid_location?(client, warehouse, channel, building, location)
         
         valid = true
         @valid_location = LocationMaster.where(client: client, warehouse: warehouse, channel: channel, building: building, barcode: location ).first
@@ -48,7 +50,7 @@ module ReceiveShipment
          return valid
      end
     
-    def valid_shipment?(client, warehouse, channel, building, shipment_nbr)
+   def valid_shipment?(client, warehouse, channel, building, shipment_nbr)
       
       valid = true
       @shipment_header = AsnHeader.where(client: client, warehouse: warehouse, channel: channel, building: building, shipment_nbr: shipment_nbr).first
@@ -66,7 +68,7 @@ module ReceiveShipment
        return valid 
     end
     
-    def valid_shipment_details?(client, warehouse, channel, building, shipment_nbr, item, quantity)
+   def valid_shipment_details?(client, warehouse, channel, building, shipment_nbr, item, quantity)
       
       valid = true
       @shipment_details = AsnDetail.where(client: client, warehouse: warehouse, channel: channel, building: building, shipment_nbr: shipment_nbr, item: item).first
