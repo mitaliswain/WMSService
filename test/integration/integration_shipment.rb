@@ -30,13 +30,13 @@ fixtures :case_details
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        location: 'Location1',
+        location: 'Location2',
         case_id: @case_id,
         item: @item,
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Location Location1 not Exists'
+        expected_message = 'Location Location2 not found'
         assert_equal expected_message , message["message"][0],  "Location not found"
        
     
@@ -51,7 +51,7 @@ fixtures :case_details
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        location: '',
+        location: @location,
         case_id: @case_id,
         item: @item,
         quantity: @quantity
@@ -72,6 +72,7 @@ fixtures :case_details
         channel: @channel,
         building: @building,
         shipment_nbr: @shipment_nbr,
+        location: @location,
         quantity: @quantity,
         case_id: @case_id,
         item: '12346'
@@ -89,11 +90,12 @@ fixtures :case_details
          client: @client,
          warehouse: @warehouse,
          channel: @channel,
-        building: @building,
-        shipment_nbr: @shipment_nbr,
-        quantity: @quantity,
-        case_id: case_headers(:one).case_id,
-        item: @item
+         building: @building,
+         shipment_nbr: @shipment_nbr,
+         location: @location,
+         quantity: @quantity,
+         case_id: case_headers(:one).case_id,
+         item: @item
         
          message = JSON.parse(response.body)
         expected_message = 'Case CASE1 already exists' 
@@ -111,7 +113,7 @@ fixtures :case_details
       warehouse: @warehouse,
       channel: @channel,
       building:@building,
-      location: '',
+      location: @location,
       case_id: @case_id,
       item: @item,
       quantity: @quantity

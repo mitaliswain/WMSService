@@ -27,25 +27,23 @@ module ReceiveShipment
     def valid_location?(client, warehouse, channel, building, location)
         
         valid = true
-        @valid_location = LocationMaster.where(client: client, warehouse: warehouse, channel: channel, building: building, barcode: location )
+        @valid_location = LocationMaster.where(client: client, warehouse: warehouse, channel: channel, building: building, barcode: location ).first
         
-        #Validating Location
-        puts @valid_location.attributes
-        
-       # case
+        #Validating Location       
+        case
           
-       # when @valid_location.nil?
-       #   @error << "Location " + location + "not found"
-       #   valid = false
+        when @valid_location.nil?
+          @error << "Location " + location.to_s + " not found"
+          valid = false
         
-       # when @valid_location.location_type != "Pending" 
-       #   @error <<"Can not receive to a non pending Location"
-       #   valid = false
+        when @valid_location.location_type != "Pending" 
+          @error <<"Can not receive to a non pending Location"
+          valid = false
          
-       # when @valid_location.record_status != "Empty"
-       #   @error << "Can not receive to a non empty location"
-       #   valid = false
-       # end
+        when @valid_location.record_status != "Empty"
+          @error << "Can not receive to a non empty location"
+          valid = false
+        end
         
          return valid
      end
