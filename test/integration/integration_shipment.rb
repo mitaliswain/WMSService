@@ -18,11 +18,30 @@ fixtures :case_details
     @building = nil
     @channel = nil
     @shipment_nbr = asn_headers(:one).shipment_nbr
-    @location = ''
+    @location = location_masters(:one).barcode
     @case_id = 'CASE2'
     @item = asn_details(:one).item
     @quantity = 2
   end  
+
+  def test_validate_location
+    post @url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: 'Location1',
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      
+        message =  JSON.parse(response.body)
+        expected_message = 'Location Location1 not Exists'
+        assert_equal expected_message , message["message"][0],  "Location not found"
+       
+    
+  end
+
 
   def test_validate_shipment
     

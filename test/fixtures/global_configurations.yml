@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  sequence_no: 1
+  module_description: MyString
+  config_code: MyString
+  config_description: MyString
+  applied_at: MyString
+  config_attribute1: MyString
+  config_attribute2: MyString
+  config_attribute3: MyString
+  config_attribute4: MyString
+  config_attribute5: MyString
+  enable: false
+  disable: false
+  created_date: 2014-05-03 09:27:12
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-03 09:27:12
+  updated_user: MyString
+  updated_prc: MyString
+
+two:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  sequence_no: 1
+  module_description: MyString
+  config_code: MyString
+  config_description: MyString
+  applied_at: MyString
+  config_attribute1: MyString
+  config_attribute2: MyString
+  config_attribute3: MyString
+  config_attribute4: MyString
+  config_attribute5: MyString
+  enable: false
+  disable: false
+  created_date: 2014-05-03 09:27:12
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-03 09:27:12
+  updated_user: MyString
+  updated_prc: MyString
