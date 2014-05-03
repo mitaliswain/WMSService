@@ -162,12 +162,12 @@ fixtures :case_details
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
     case_header = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id).first
     location_master = LocationMaster.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, barcode: location).first
-
+    puts location_master
 
     assert_equal  asn_headers(:one).units_rcvd + @quantity , asn_header.units_rcvd , "ASN Header received quantity mismatch"
     assert_equal  asn_details(:one).received_qty + @quantity, asn_detail.received_qty , "ASN Detail received quantity mismatch"
     assert_equal  @quantity, case_header.quantity , "Case quantity mismatch"
-    assert_equal  @status, location_master.barcode , "Location not getting updated"
+    assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
  
 
   end

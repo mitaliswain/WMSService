@@ -16,7 +16,8 @@ module ReceiveShipment
          create_case(case_id, quantity)
          update_asnheader(quantity)
          update_asndetails(quantity)
-         update_l(quantity)
+         update_location(quantity)
+         
          
          
          @success << "Shipment received successfully"
@@ -29,20 +30,20 @@ module ReceiveShipment
   def valid_location?(client, warehouse, channel, building, location)
         
         valid = true
-        @valid_location = LocationMaster.where(client: client, warehouse: warehouse, channel: channel, building: building, barcode: location ).first
+        @location_master = LocationMaster.where(client: client, warehouse: warehouse, channel: channel, building: building, barcode: location ).first
         
         #Validating Location       
         case
           
-        when @valid_location.nil?
+        when @location_master.nil?
           @error << "Location " + location.to_s + " not found"
           valid = false
         
-        when @valid_location.location_type != "Pending" 
+        when @location_master.location_type != "Pending" 
           @error <<"Can not receive to a non pending Location"
           valid = false
          
-        when @valid_location.record_status != "Empty"
+        when @location_master.record_status != "Empty"
           @error << "Can not receive to a non empty location"
           valid = false
         end
@@ -143,6 +144,14 @@ module ReceiveShipment
       
       rescue => error
       @error <<  error.to_s
+   end
+   
+   def update_location(quantity)
+     @location_master.record_status = "Occupied"
+     @location_master.save!
+     
+     rescue => error
+     @error << error.to_s
    end
      
     
