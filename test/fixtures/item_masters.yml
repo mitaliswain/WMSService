@@ -123,11 +123,11 @@ one:
   updated_prc: MyString
 
 two:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
-  item: MyString
+  client: WM
+  warehouse: 
+  channel: 
+  building: 
+  item: 5678
   sku_attribute1: MyString
   sku_attribute2: MyString
   sku_attribute3: MyString

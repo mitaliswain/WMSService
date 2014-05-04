@@ -25,7 +25,9 @@ fixtures :item_inner_packs
     @location = location_masters(:one).barcode
     @case_id = 'CASE2'
     @item = asn_details(:one).item
-    @quantity = 2
+    @quantity = 5
+    @innerpack_qty = item_inner_packs(:one).innerpack_qty
+    
   end  
 
   def test_validate_location
@@ -153,7 +155,7 @@ fixtures :item_inner_packs
          item: @item
         
          message = JSON.parse(response.body)
-        expected_message = 'Case CASE1 already exists' 
+        expected_message = 'Case '+  ase_headers(:one).case_id + ' already exists' 
         assert_equal expected_message , message["message"][0], "Case  not found"
   
   end
@@ -191,19 +193,64 @@ fixtures :item_inner_packs
     assert_equal  @quantity, case_header.quantity , "Case quantity mismatch"
     assert_equal  'Yes' , case_header.on_hold , "Case put on hold"
     assert_equal  'Received' , case_header.hold_code , "On Hold Code for Case"
-    
-    
-    
-    
-
-
+   
     assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
  
 
   end
   
+  def test_item_innerpack_exists
 
+     #puts asn_details(:one).received_qty
+     
+    # Check the valida shipment
+    post @url, 
+      client: @client,
+      warehouse: @warehouse,
+      channel: @channel,
+      building:@building,
+      location: @location,
+      case_id: @case_id,
+      item: @item,
+      quantity: @quantity,
+      innerpack_qty: @innerpack_qty
+     
+    assert_equal 200, status , 'Error in service'
+    message =  JSON.parse(response.body)
+     
+    assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
+    item_inner_packs = ItemInnerPack.where(client: @client, item: @item)
+    assert_equal  1, item_inner_packs.length , "Received with existing innerpack"
+      
+    end
+    
+  def test_item_innerpack_not_exist
+
+    #puts asn_details(:one).received_qty
+     
+    # Check the valida shipment
+    post @url, 
+      client: @client,
+      warehouse: @warehouse,
+      channel: @channel,
+      building:@building,
+      location: @location,
+      case_id: @case_id,
+      item: asn_details(:two).item,
+      quantity: @quantity,
+      innerpack_qty: @innerpack_qty + 10
+     
+    assert_equal 200, status , 'Error in service'
+    message =  JSON.parse(response.body)
+     
+    assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
+    item_inner_packs = ItemInnerPack.where(client: @client, item: asn_details(:two).item).order(:id)
+    assert_equal  2, item_inner_packs.length , "Received with non existing innerpack"
+    assert_equal  @innerpack_qty + 10, item_inner_packs[1].innerpack_qty , "New innerpack "
+    
+      
+    end
+ 
+ 
+  end
   
-  
-  
-end

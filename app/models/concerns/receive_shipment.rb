@@ -5,20 +5,21 @@ module ReceiveShipment
    module ClassMethods
    end
    
-  def receive_shipment(client, warehouse, channel, building, shipment_nbr, location, case_id, item, quantity)
+  def receive_shipment(shipment)
       
-     if  valid_location?(client, warehouse, channel, building, location) &&
-         valid_shipment?(client, warehouse, channel, building, shipment_nbr) && 
-         valid_shipment_details?(client, warehouse, channel, building, shipment_nbr, item, quantity) &&
-         valid_existing_case?(case_id) &&
-         valid_itemmaster?(client, item)
+     if  valid_location?(shipment[:client], shipment[:warehouse], shipment[:channel], shipment[:building], shipment[:location]) &&
+         valid_shipment?(shipment[:client], shipment[:warehouse], shipment[:channel], shipment[:building], shipment[:shipment_nbr]) && 
+         valid_shipment_details?(shipment[:client], shipment[:warehouse], shipment[:channel], shipment[:building], shipment[:shipment_nbr], shipment[:item], shipment[:quantity].to_i) &&
+         valid_existing_case?(shipment[:client], shipment[:case_id]) &&
+         valid_itemmaster?(shipment[:client], shipment[:item])
          
   
          #process shipment
-         create_case(case_id, quantity)
-         update_asnheader(quantity)
-         update_asndetails(quantity)
-         update_location(quantity)
+         create_case(shipment[:case_id], shipment[:quantity].to_i)
+         update_asnheader(shipment[:quantity])
+         update_asndetails(shipment[:quantity])
+         update_location(shipment[:quantity])
+         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
          
          
          
@@ -105,10 +106,10 @@ module ReceiveShipment
       return valid
     end
     
-    def valid_existing_case?(case_id)
+    def valid_existing_case?(client, case_id)
       
       valid = true
-      @case = CaseHeader.where(case_id: case_id).first
+      @case = CaseHeader.where(client: client, case_id: case_id).first
       
       #checking whether case exist or not
       
@@ -171,6 +172,29 @@ module ReceiveShipment
    def update_location(quantity)
      @location_master.record_status = "Occupied"
      @location_master.save!
+     
+     rescue => error
+     @error << error.to_s
+   end
+
+   def update_innerpack_quantity(client, item, innerpack_qty)
+      
+      item_innerpacks = ItemInnerPack.where(client: client, item: item)
+      
+      if (lambda {
+
+          item_innerpacks.each do |item_innerpack| 
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                  return true
+              end    
+          end
+          return false
+          }).call == false
+        
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+       else
+                
+       end     
      
      rescue => error
      @error << error.to_s

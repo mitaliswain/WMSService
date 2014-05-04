@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
-  item: MyString
+  client: WM
+  warehouse: 
+  channel: 
+  building: 
+  item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
   sku_attribute3: MyString
@@ -36,7 +36,7 @@ one:
   short_desc: MyString
   barcode: MyString
   innerpack_code: MyString
-  innerpack_qty: 1
+  innerpack_qty: 2
   innerpack_wgt: 9.99
   innerpack_vol: 9.99
   innerpack_len: 9.99
@@ -53,11 +53,11 @@ one:
   updated_prc: MyString
 
 two:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
-  item: MyString
+  client: WM
+  warehouse: 
+  channel: 
+  building: 
+  item: 5678
   sku_attribute1: MyString
   sku_attribute2: MyString
   sku_attribute3: MyString
@@ -88,7 +88,7 @@ two:
   short_desc: MyString
   barcode: MyString
   innerpack_code: MyString
-  innerpack_qty: 1
+  innerpack_qty: 2
   innerpack_wgt: 9.99
   innerpack_vol: 9.99
   innerpack_len: 9.99

@@ -9,7 +9,9 @@ class ShipmentController < ApplicationController
   def receive
    message = Hash.new
    shipment = Shipment.new
-   message[:message] = shipment.receive_shipment(params[:client], params[:warehouse], params[:channel],params[:building], params[:shipment_nbr], params[:location], params[:case_id], params[:item], params[:quantity])
+   message[:message] = shipment.receive_shipment(client: params[:client], warehouse: params[:warehouse], channel: params[:channel],
+                                                 building: params[:building], shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                 case_id: params[:case_id], item: params[:item], quantity: params[:quantity], innerpack_qty: params[:innerpack_qty])
    render json: message
   end
   
