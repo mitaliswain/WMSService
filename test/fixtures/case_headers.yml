@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
+  client: WM
+  warehouse: WH1
+  channel:  
+  building:  
   case_id: CASE1
   pallet_id: MyString
   status: MyString

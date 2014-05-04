@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
+  client: WM
+  warehouse: WH1
+  channel:  
+  building:  
   sequence_no: 1
-  module_description: MyString
-  config_code: MyString
-  config_description: MyString
-  applied_at: MyString
-  config_attribute1: MyString
+  module_description: Receiving
+  config_code: Case 
+  config_description: Validate case existance
+  applied_at: blind_asn
+  config_attribute1: true
   config_attribute2: MyString
   config_attribute3: MyString
   config_attribute4: MyString
   config_attribute5: MyString
-  enable: false
+  enable: true
   disable: false
   created_date: 2014-05-03 09:27:12
   created_user: MyString

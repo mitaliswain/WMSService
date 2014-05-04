@@ -62,7 +62,7 @@ module ReceiveShipment
      #validating item
      
      case
-     when item_master.nil?
+     when item_master.nil? 
        @error << "Item " + item + " does not exist in Itemmaster"
        valid = false
      end

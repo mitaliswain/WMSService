@@ -155,7 +155,7 @@ fixtures :item_inner_packs
          item: @item
         
          message = JSON.parse(response.body)
-        expected_message = 'Case '+  ase_headers(:one).case_id + ' already exists' 
+        expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
         assert_equal expected_message , message["message"][0], "Case  not found"
   
   end
