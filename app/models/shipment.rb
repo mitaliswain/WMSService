@@ -1,12 +1,38 @@
 require 'concerns/receive_shipment'
+require 'concerns/validation_shipment'
 class Shipment
   
   include ReceiveShipment
+  include ValidationShipment
  
   def initialize
     @error  = []
     @success = []
   end
+  
+  def receive_shipment(shipment)
+      
+      valid = ValidationShipment::ClassMethods.valid_location?(shipment)
+      valid = ValidationShipment::ClassMethods.valid_shipment?(shipment) if(valid)
+      valid = ValidationShipment::ClassMethods.valid_shipment_details?(shipment) if(valid)
+      valid = ValidationShipment::ClassMethods.valid_existing_case?(shipment)  if(valid)
+      valid = ValidationShipment::ClassMethods.valid_itemmaster?(shipment)  if(valid)
+      if  valid
+         #process shipment
+         create_case(shipment[:case_id], shipment[:quantity].to_i)
+         update_asnheader(shipment[:quantity])
+         update_asndetails(shipment[:quantity])
+         update_location(shipment[:quantity])
+         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
+         
+         
+         
+         @success << "Shipment received successfully"
+         return @success
+      else
+        return @error
+      end
+    end
    
   def where(shipment)
      
