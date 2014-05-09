@@ -3,7 +3,7 @@ require 'concerns/validation_shipment'
 class Shipment
   
   include ReceiveShipment
-  include ValidationShipment
+  include ValidationShipment::ClassMethods
  
   def initialize
     @error  = []
@@ -12,11 +12,11 @@ class Shipment
   
   def receive_shipment(shipment)
       
-      valid = ValidationShipment::ClassMethods.valid_location?(shipment)
-      valid = ValidationShipment::ClassMethods.valid_shipment?(shipment) if(valid)
-      valid = ValidationShipment::ClassMethods.valid_shipment_details?(shipment) if(valid)
-      valid = ValidationShipment::ClassMethods.valid_existing_case?(shipment)  if(valid)
-      valid = ValidationShipment::ClassMethods.valid_itemmaster?(shipment)  if(valid)
+      valid = valid_location?(shipment)
+      valid = valid_shipment?(shipment) if(valid)
+      valid = valid_shipment_details?(shipment) if(valid)
+      valid = valid_existing_case?(shipment)  if(valid)
+      valid = valid_itemmaster?(shipment)  if(valid)
       if  valid
          #process shipment
          create_case(shipment[:case_id], shipment[:quantity].to_i)
