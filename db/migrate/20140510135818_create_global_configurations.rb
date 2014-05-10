@@ -6,17 +6,29 @@ class CreateGlobalConfigurations < ActiveRecord::Migration
       t.string :channel
       t.string :building
       t.integer :sequence_no
+      t.string :module
       t.string :module_description
-      t.string :config_code
-      t.string :config_description
-      t.string :applied_at
-      t.string :config_attribute1
-      t.string :config_attribute2
-      t.string :config_attribute3
-      t.string :config_attribute4
-      t.string :config_attribute5
+      t.string :submodule1
+      t.string :submodule2
+      t.string :submodule3
+      t.string :submodule4
+      t.string :submodule5
+      t.string :user
+      t.string :user_role
+      t.integer :app_id
+      t.string :key
+      t.string :value
+      t.string :attribute1
+      t.string :attribute2
+      t.string :attribute3
+      t.string :attribute4
+      t.string :attribute5
+      t.string :attribute6
+      t.string :attribute7
+      t.string :attribute8
+      t.string :attribute9
+      t.string :attribute10
       t.boolean :enable
-      t.boolean :disable
       t.datetime :created_date
       t.string :created_user
       t.string :created_prc

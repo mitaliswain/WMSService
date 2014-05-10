@@ -3,47 +3,378 @@
 one:
   client: WM
   warehouse: WH1
-  channel:  
-  building:  
+  channel: 
+  building: 
   sequence_no: 1
-  module_description: Receiving
-  config_code: Case 
-  config_description: Validate case existance
-  applied_at: blind_asn
-  config_attribute1: true
-  config_attribute2: MyString
-  config_attribute3: MyString
-  config_attribute4: MyString
-  config_attribute5: MyString
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: Receiving_Type
+  value: SKU
+  attribute1: {Options: ['SKU','Case']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
   enable: true
-  disable: false
-  created_date: 2014-05-03 09:27:12
+  created_date: 2014-05-10 08:58:18
   created_user: MyString
   created_prc: MyString
-  update_date: 2014-05-03 09:27:12
+  update_date: 2014-05-10 08:58:18
   updated_user: MyString
   updated_prc: MyString
 
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
 two:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
   sequence_no: 1
+  module: RECEIVING
   module_description: MyString
-  config_code: MyString
-  config_description: MyString
-  applied_at: MyString
-  config_attribute1: MyString
-  config_attribute2: MyString
-  config_attribute3: MyString
-  config_attribute4: MyString
-  config_attribute5: MyString
-  enable: false
-  disable: false
-  created_date: 2014-05-03 09:27:12
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key:  Receiving_Mode 
+  value: Single_SKU
+  attribute1: {Options: ['Single_SKU','Mixed_SKU']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
   created_user: MyString
   created_prc: MyString
-  update_date: 2014-05-03 09:27:12
+  update_date: 2014-05-10 08:58:18
   updated_user: MyString
   updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+three:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: 3. QC_Sampling 
+  value: Yes
+  attribute1: {Options: ['Yes','No','User_Defined']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+four:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: Purchase_Order_Required 
+  value: Yes
+  attribute1: {Options: ['Yes','No']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+five:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: 5. Lot_Tracking_Mode 
+  value: SKU
+  attribute1: {Options: ['SKU','Force','Never']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+six:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: 6. Serial_Number_Tracking 
+  value: SKU
+  attribute1: {Options: ['SKU','Force','Never']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+seven:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: 7. Receive_and_Palletize 
+  value: Yes
+  attribute1: {Options: ['Yes','No']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+eight:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: Enter_quantity_case_ASN
+  value: Force
+  attribute1: {Options: ['Force','Never']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+nine:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key: 9. Receiving_tolerance 
+  value: Warehouse_config
+  attribute1: {Options: ['Warehouse_config','ByPass','Manager_Approval']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ten:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key:  Track_COO 
+  value: SKU
+  attribute1: {Options: ['SKU','Force','Never']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+

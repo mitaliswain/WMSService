@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ReceiveShipment
+module ReceiveProcessing
     extend ActiveSupport::Concern
     
    module ClassMethods

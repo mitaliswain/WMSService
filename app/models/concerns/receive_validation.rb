@@ -1,5 +1,5 @@
 require 'active_support/concern'
-module ValidationShipment
+module ReceiveValidation
     extend ActiveSupport::Concern
   
  module ClassMethods

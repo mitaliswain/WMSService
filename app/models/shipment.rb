@@ -1,9 +1,9 @@
-require 'concerns/receive_shipment'
-require 'concerns/validation_shipment'
+require 'concerns/receive_processing'
+require 'concerns/receive_validation'
 class Shipment
   
-  include ReceiveShipment
-  include ValidationShipment::ClassMethods
+  include ReceiveProcessing
+  include ReceiveValidation::ClassMethods
  
   def initialize
     @error  = []
