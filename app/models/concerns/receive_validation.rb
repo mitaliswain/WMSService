@@ -5,9 +5,11 @@ module ReceiveValidation
  module ClassMethods
   
    def valid_location?(shipment)
-        
+       
         valid = true
-        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], barcode: shipment[:location] ).first
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+        return true if @configuration.Yard_Management == "f"
         
         #Validating Location       
         case
@@ -21,8 +23,14 @@ module ReceiveValidation
           valid = false
          
         when @location_master.record_status != "Empty"
-          @error << "Can not receive to a non empty location"
-          valid = false
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                @error << "Dock Door occupied by another shipment"
+                valid = false
+              else
+               valid = true 
+            end
+                
         end
         
          return valid
@@ -49,7 +57,7 @@ module ReceiveValidation
    def valid_shipment?(shipment)
       
       valid = true
-      @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr]).first
+      @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
       
       #validating shipment information
     
@@ -67,7 +75,7 @@ module ReceiveValidation
    def valid_shipment_details?(shipment)
       
       valid = true
-      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
       
       #validating shipment details
       
@@ -88,6 +96,11 @@ module ReceiveValidation
       #checking whether case exist or not
       
       case
+        
+      when shipment[:case_id].nil? || shipment[:case_id].blank?
+        @error << "Enter Case"
+        valid = false
+        
       when !@case.nil?
         
         @error << "Case " + shipment[:case_id] + " already exists"

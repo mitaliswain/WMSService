@@ -27,7 +27,7 @@ fixtures :item_inner_packs
     @item = asn_details(:one).item
     @quantity = 5
     @innerpack_qty = item_inner_packs(:one).innerpack_qty
-    
+    @configuration = GlobalConfiguration.get_configuration(client: @client, warehouse: @warehouse, building: @building, channel: @channel, module: 'RECEIVING')
   end  
 
   def test_validate_location
@@ -40,11 +40,14 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
-        message =  JSON.parse(response.body)
-        expected_message = 'Location Locationx not found'
-        assert_equal expected_message , message["message"][0],  "Location not found"
-       
+       expected_message = '' 
+       message =  JSON.parse(response.body)
+       if @configuration.Yard_Management == "t"
+         expected_message = 'Location Locationx not found' 
+       else
+          expected_message = 'Shipment received successfully'     
+       end   
+       assert_equal expected_message , message["message"][0],  "Location not found"
     
   end
   
@@ -76,8 +79,12 @@ fixtures :item_inner_packs
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Can not receive to a non pending Location'
-        assert_equal expected_message , message["message"][0],  "Pending location"
+        if @configuration.Yard_Management == "t"
+            expected_message = 'Can not receive to a non pending Location'
+        else    
+            expected_message = 'Shipment received successfully'   
+        end
+        assert_equal expected_message , message["message"][0], "Pending location"
        
     
   end
@@ -94,7 +101,11 @@ fixtures :item_inner_packs
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Can not receive to a non empty location'
+        if @configuration.Yard_Management == "t"
+             expected_message = 'Can not receive to a non empty location'
+        else
+            expected_message = 'Shipment received successfully'   
+        end
         assert_equal expected_message , message["message"][0],  "Non Empty Location"
        
   end

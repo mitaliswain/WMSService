@@ -92,7 +92,7 @@ three:
   user: MyString
   user_role: MyString
   app_id: 1
-  key: 3. QC_Sampling 
+  key:  QC_Sampling 
   value: Yes
   attribute1: {Options: ['Yes','No','User_Defined']}
   attribute2: MyString
@@ -131,7 +131,7 @@ four:
   user_role: MyString
   app_id: 1
   key: Purchase_Order_Required 
-  value: Yes
+  value: No
   attribute1: {Options: ['Yes','No']}
   attribute2: MyString
   attribute3: MyString
@@ -168,7 +168,7 @@ five:
   user: MyString
   user_role: MyString
   app_id: 1
-  key: 5. Lot_Tracking_Mode 
+  key: Lot_Tracking_Mode 
   value: SKU
   attribute1: {Options: ['SKU','Force','Never']}
   attribute2: MyString
@@ -206,7 +206,7 @@ six:
   user: MyString
   user_role: MyString
   app_id: 1
-  key: 6. Serial_Number_Tracking 
+  key: Serial_Number_Tracking 
   value: SKU
   attribute1: {Options: ['SKU','Force','Never']}
   attribute2: MyString
@@ -244,7 +244,7 @@ seven:
   user: MyString
   user_role: MyString
   app_id: 1
-  key: 7. Receive_and_Palletize 
+  key: Receive_and_Palletize 
   value: Yes
   attribute1: {Options: ['Yes','No']}
   attribute2: MyString
@@ -361,6 +361,42 @@ ten:
   key:  Track_COO 
   value: SKU
   attribute1: {Options: ['SKU','Force','Never']}
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  enable: true
+  created_date: 2014-05-10 08:58:18
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-05-10 08:58:18
+  updated_user: MyString
+  updated_prc: MyString
+  
+eleven:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  sequence_no: 1
+  module: RECEIVING
+  module_description: MyString
+  submodule1: MyString
+  submodule2: MyString
+  submodule3: MyString
+  submodule4: MyString
+  submodule5: MyString
+  user: MyString
+  user_role: MyString
+  app_id: 1
+  key:  Yard_Management
+  value: Yes
+  attribute1: {Options: ['Yes', 'No']}
   attribute2: MyString
   attribute3: MyString
   attribute4: MyString

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   
   get 'shipment/:shipment_nbr' => 'shipment#show' 
   
+  post 'shipment/:to_valiadte/validate' => 'shipment#validate' 
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,5 +1,5 @@
 class CreateGlobalConfigurations < ActiveRecord::Migration
-  def change
+  def up
     create_table :global_configurations do |t|
       t.string :client
       t.string :warehouse

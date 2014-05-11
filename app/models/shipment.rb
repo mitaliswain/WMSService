@@ -5,12 +5,16 @@ class Shipment
   include ReceiveProcessing
   include ReceiveValidation::ClassMethods
  
+  attr_accessor :error
   def initialize
     @error  = []
     @success = []
   end
   
   def receive_shipment(shipment)
+    
+      valid = true
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
       
       valid = valid_location?(shipment)
       valid = valid_shipment?(shipment) if(valid)
@@ -20,18 +24,14 @@ class Shipment
       if  valid
          #process shipment
          create_case(shipment[:case_id], shipment[:quantity].to_i)
-         update_asnheader(shipment[:quantity])
+         update_asnheader(shipment[:quantity], shipment[:location])
          update_asndetails(shipment[:quantity])
          update_location(shipment[:quantity])
          update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
-         
-         
-         
-         @success << "Shipment received successfully"
-         return @success
-      else
-        return @error
+         @error << "Shipment received successfully"
       end
+      
+      return valid
     end
    
   def where(shipment)
