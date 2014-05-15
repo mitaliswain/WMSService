@@ -161,3 +161,165 @@ two:
   update_date: 2014-04-19 22:06:31
   updated_user: MyString
   updated_prc: MyString
+
+three:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  asn_header_id: 1
+  asn_type: 
+  purchase_order_nbr: MyString
+  poline_nbr: PO2
+  shipment_nbr: Shipment2
+  sequence: 2
+  hot_item: MyString
+  item: 12345
+  sku_attribute1: MyString
+  sku_attribute2: MyString
+  sku_attribute3: MyString
+  sku_attribute4: MyString
+  sku_attribute5: MyString
+  sku_attribute6: MyString
+  sku_attribute7: MyString
+  sku_attribute8: MyString
+  sku_attribute9: MyString
+  sku_attribute10: MyString
+  concept: MyString
+  description: MyString
+  short_desc: MyString
+  barcode: MyString
+  inventory_type: MyString
+  vendor_factory: MyString
+  coo: MyString
+  innerpack_qty: 1
+  standardcase_qty: 1
+  po_qty: 1
+  received_qty: 1
+  verified_qty: 1
+  cases_rcvd: 1
+  cases_verified: 1
+  unit_cost: 1
+  landing_cost: 1
+  retail_price: 1
+  uom: MyString
+  unit_wgt: 1
+  track_lotcontrol: MyString
+  track_serial_nbr: MyString
+  track_coo: MyString
+  priority: MyString
+  receiver_comments: MyString
+  verifying_comments: MyString
+  record_status: MyString
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString
+  attribute13: MyString
+  attribute14: MyString
+  attribute15: MyString
+  attribute16: MyString
+  attribute17: MyString
+  attribute18: MyString
+  attribute19: MyString
+  attribute20: MyString
+  attribute21: MyString
+  attribute22: MyString
+  attribute23: MyString
+  attribute24: MyString
+  attribute25: MyString
+  created_date: 2014-04-19 22:06:31
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-04-19 22:06:31
+  updated_user: MyString
+  updated_prc: MyString
+
+four:
+  client: WM
+  warehouse: WH1
+  channel: 
+  building: 
+  asn_header_id: 1
+  asn_type: 
+  purchase_order_nbr: MyString
+  poline_nbr: PO2
+  shipment_nbr: Shipment3
+  sequence: 2
+  hot_item: MyString
+  item: 12345
+  sku_attribute1: MyString
+  sku_attribute2: MyString
+  sku_attribute3: MyString
+  sku_attribute4: MyString
+  sku_attribute5: MyString
+  sku_attribute6: MyString
+  sku_attribute7: MyString
+  sku_attribute8: MyString
+  sku_attribute9: MyString
+  sku_attribute10: MyString
+  concept: MyString
+  description: MyString
+  short_desc: MyString
+  barcode: MyString
+  inventory_type: MyString
+  vendor_factory: MyString
+  coo: MyString
+  innerpack_qty: 1
+  standardcase_qty: 1
+  po_qty: 1
+  received_qty: 1
+  verified_qty: 1
+  cases_rcvd: 1
+  cases_verified: 1
+  unit_cost: 1
+  landing_cost: 1
+  retail_price: 1
+  uom: MyString
+  unit_wgt: 1
+  track_lotcontrol: MyString
+  track_serial_nbr: MyString
+  track_coo: MyString
+  priority: MyString
+  receiver_comments: MyString
+  verifying_comments: MyString
+  record_status: created
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  attribute11: MyString
+  attribute12: MyString
+  attribute13: MyString
+  attribute14: MyString
+  attribute15: MyString
+  attribute16: MyString
+  attribute17: MyString
+  attribute18: MyString
+  attribute19: MyString
+  attribute20: MyString
+  attribute21: MyString
+  attribute22: MyString
+  attribute23: MyString
+  attribute24: MyString
+  attribute25: MyString
+  created_date: 2014-04-19 22:06:31
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-04-19 22:06:31
+  updated_user: MyString
+  updated_prc: MyString

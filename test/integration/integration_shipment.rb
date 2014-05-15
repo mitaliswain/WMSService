@@ -31,11 +31,13 @@ fixtures :item_inner_packs
   end  
 
   def test_validate_location
-    post @url, 
+    url = '/shipment/location/validate'
+    post url,  
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
+        shipment_nbr: asn_headers(:one).shipment_nbr,
         location: 'Locationx',
         case_id: @case_id,
         item: @item,
@@ -51,24 +53,75 @@ fixtures :item_inner_packs
     
   end
   
-  def test_validate_item
-    post @url, 
+   def test_validate_dock_door
+    url  = '/shipment/location/validate'
+    post url, 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        location: @location,
+        shipment_nbr: asn_headers(:two).shipment_nbr ,
+        location: location_masters(:four).barcode,
         case_id: @case_id,
-        item: 'abcd',
+        item: @item,
+        quantity: @quantity
+      
+       message =  JSON.parse(response.body)
+       expected_message = true
+       assert_equal expected_message , message["status"],  "Validate Non Empty dock door"
+    
+  end
+  
+  def test_record_status_of_dock_door
+    url = '/shipment/location/validate'
+    post url,
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: asn_headers(:two).shipment_nbr,
+        location: location_masters(:two).barcode,
+        case_id: @case_id,
+        item: @item,
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Item  abcd does not exist in Itemmaster'
-        assert_equal expected_message , message["message"][0],  "Item not found"
+        if @configuration.Yard_Management == "t"
+             expected_message = 'Dock Door occupied by another shipment'
+        else
+            expected_message = nil
+        end
+        assert_equal expected_message , message["message"][0],  "Non Empty Location"
+       
+  end
+
+  
+  def test_validate_shipment_number_and_dock_door
+    
+    url = '/shipment/shipment_nbr/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building: @building,
+        location: location_masters(:one).barcode,
+        shipment_nbr: asn_headers(:two).shipment_nbr ,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      
+       message =  JSON.parse(response.body)
+       expected_message = 'Shipment ' + asn_headers(:two).shipment_nbr + ' not assigned to this Dock Door'
+       assert_equal expected_message , message["message"][0],  "Validate Shipment to the assigned dock door"
+    
   end
   
+  
+   
+  
   def test_validate_location_type
-    post @url, 
+    url = '/shipment/location/validate'
+    post url, 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -89,31 +142,10 @@ fixtures :item_inner_packs
     
   end
   
-  def test_record_status
-    post @url,
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building:@building,
-        location: location_masters(:two).barcode,
-        case_id: @case_id,
-        item: @item,
-        quantity: @quantity
-      
-        message =  JSON.parse(response.body)
-        if @configuration.Yard_Management == "t"
-             expected_message = 'Can not receive to a non empty location'
-        else
-            expected_message = 'Shipment received successfully'   
-        end
-        assert_equal expected_message , message["message"][0],  "Non Empty Location"
-       
-  end
 
-
-  def test_validate_shipment
+  def test_validate_shipment_exist
     
-      url = '/shipment/Shipment2/receive'
+      url = '/shipment/shipment_nbr/validate'
       post url, 
         client: @client,
         warehouse: @warehouse,
@@ -122,19 +154,40 @@ fixtures :item_inner_packs
         location: @location,
         case_id: @case_id,
         item: @item,
-        quantity: @quantity
+        quantity: @quantity,
+        shipment_nbr: 'Shipment2x'
       
         message =  JSON.parse(response.body)
-        expected_message = 'Shipment Shipment2 not found'
+        expected_message = 'Shipment Shipment2x not found'
         assert_equal expected_message , message["message"][0],  "Shipment not found"
        
   end
   
-  
-  def test_validate_item
-  
+  def test_validate_shipment_record_status
+    url  = '/shipment/shipment_nbr/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: asn_headers(:three).shipment_nbr ,
+        location: location_masters(:four).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
       
-      post @url,
+       message =  JSON.parse(response.body)
+       expected_message =  'Invalid Shipment status'
+       assert_equal expected_message , message["message"][0],  "Validate shipment record status"
+    
+  end
+  
+  
+  
+  def test_validate_item_not_in_shipment
+  
+      url = '/shipment/item/validate'
+      post url,
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -143,18 +196,36 @@ fixtures :item_inner_packs
         location: @location,
         quantity: @quantity,
         case_id: @case_id,
-        item: '12346'
+        item: '123467'
        
         
         message = JSON.parse(response.body)
-        expected_message = 'Item 12346 not found in this shipment' 
+        expected_message = 'Item 123467 not found in this shipment' 
         assert_equal expected_message , message["message"][0], "Item not found"
   end
+  
+  def test_validate_item_not_in_itemmaster
+    url = '/shipment/item/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        case_id: @case_id,
+        item: 'abcd',
+        quantity: @quantity
+      
+        message =  JSON.parse(response.body)
+        expected_message = 'Item abcd does not exist in Itemmaster'
+        assert_equal expected_message , message["message"][0],  "Item not found"
+  end
+
     
   def test_duplicate_case
     
-      
-      post @url,
+      url = '/shipment/case/validate'
+      post url,
          client: @client,
          warehouse: @warehouse,
          channel: @channel,
@@ -186,7 +257,7 @@ fixtures :item_inner_packs
       item: @item,
       quantity: @quantity
      
-    assert_equal 200, status , 'Error in service'
+    assert_equal 200, status , 'message in service'
     message =  JSON.parse(response.body)
      
     assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"

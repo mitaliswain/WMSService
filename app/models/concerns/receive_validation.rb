@@ -61,12 +61,21 @@ module ReceiveValidation
       
       #validating shipment information
     
-      
       case 
         
       when @shipment_header.nil?
         @error << "Shipment " + shipment[:shipment_nbr] + " not found"
         valid = false
+        
+      when shipment[:location] !=  @shipment_header.first_recieve_dock_door
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+        valid = false
+        
+      when @shipment_header.record_status!= 'Initiated'
+        @error << 'Invalid Shipment status'
+        valid = false
+      else
+
       end
        
        return valid 
@@ -87,6 +96,7 @@ module ReceiveValidation
       
       return valid
     end
+    
     
     def valid_existing_case?(shipment)
       

@@ -1,0 +1,1790 @@
+Inspecting 15 files
+CCCC.C..WWC...W
+
+Offenses:
+
+controllers/application_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationController < ActionController::Base
+^^^^^
+controllers/shipment_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ShipmentController < ApplicationController
+^^^^^
+controllers/shipment_controller.rb:4:15: C: Use hash literal {} instead of Hash.new.
+    message = Hash.new
+              ^^^^^^^^
+controllers/shipment_controller.rb:5:25: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    message[:message] = "under constuction"
+                        ^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:8:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:10:3: C: Use 2 (not 1) spaces for indentation.
+   message = Hash.new
+  ^
+controllers/shipment_controller.rb:10:14: C: Use hash literal {} instead of Hash.new.
+   message = Hash.new
+             ^^^^^^^^
+controllers/shipment_controller.rb:12:80: C: Line is too long. [130/79]
+   message[:status] = shipment.receive_shipment(client: params[:client], warehouse: params[:warehouse], channel: params[:channel],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:13:50: C: Align the elements of a hash literal if they span more than one line.
+                                                 building: params[:building], shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:13:80: C: Line is too long. [144/79]
+                                                 building: params[:building], shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:13:144: C: Trailing whitespace detected.
+                                                 building: params[:building], shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                                                                                               ^
+controllers/shipment_controller.rb:14:50: C: Align the elements of a hash literal if they span more than one line.
+                                                 case_id: params[:case_id], item: params[:item], quantity: params[:quantity], innerpack_qty: params[:innerpack_qty])
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:14:80: C: Line is too long. [164/79]
+                                                 case_id: params[:case_id], item: params[:item], quantity: params[:quantity], innerpack_qty: params[:innerpack_qty])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:15:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:19:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:21:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:22:3: C: Use 2 (not 1) spaces for indentation.
+   shipment = Shipment.new
+  ^
+controllers/shipment_controller.rb:23:80: C: Line is too long. [182/79]
+   shipment_hash = shipment.where(client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building], shipment_nbr: params[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:27:3: C: Cyclomatic complexity for validate is too high. [10/6]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:27:3: C: Method has too many lines. [23/10]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:28:15: C: Space inside { missing.
+    message = {status:true, message:''}
+              ^
+controllers/shipment_controller.rb:28:22: C: Space missing after colon.
+    message = {status:true, message:''}
+                     ^
+controllers/shipment_controller.rb:28:36: C: Space missing after colon.
+    message = {status:true, message:''}
+                                   ^
+controllers/shipment_controller.rb:28:39: C: Space inside } missing.
+    message = {status:true, message:''}
+                                      ^
+controllers/shipment_controller.rb:30:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:34:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:34:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:35:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:39:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:39:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:44:80: C: Line is too long. [85/79]
+      message[:status] = shipment.valid_shipment_details?(params) if message[:status]
+                                                                               ^^^^^^
+controllers/shipment_controller.rb:45:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:45:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:50:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:50:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:53:29: C: Trailing whitespace detected.
+      message[:valid] = true   
+                            ^^^
+controllers/shipment_controller.rb:55:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:58:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:59:1: C: Trailing whitespace detected.
+helpers/application_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ApplicationHelper
+^^^^^^
+helpers/shipment_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ShipmentHelper
+^^^^^^
+models/asn_header.rb:2:4: C: Final newline missing.
+end
+   
+models/concerns/receive_processing.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveProcessing
+^^^^^^
+models/concerns/receive_processing.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_processing.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:5:4: C: Missing top-level module documentation comment.
+   module ClassMethods
+   ^^^^^^
+models/concerns/receive_processing.rb:5:4: C: Inconsistent indentation detected.
+   module ClassMethods
+   ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:7:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:8:5: C: Method has too many lines. [15/10]
+    def create_case(case_id, quantity)
+    ^^^
+models/concerns/receive_processing.rb:9:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:11:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:17:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @case.status = "created"
+                     ^^^^^^^^^
+models/concerns/receive_processing.rb:23:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:25:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:28:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:30:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:32:80: C: Line is too long. [85/79]
+      @shipment_header.units_rcvd =  @shipment_header.units_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^
+models/concerns/receive_processing.rb:34:80: C: Line is too long. [104/79]
+      @shipment_header.receiving_started_date = Time.now if @shipment_header.receiving_started_date.nil?
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:37:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:42:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:43:4: C: Inconsistent indentation detected.
+   def update_asndetails(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:44:80: C: Line is too long. [90/79]
+     @shipment_details.received_qty =  @shipment_details.received_qty.to_i + quantity.to_i
+                                                                               ^^^^^^^^^^^
+models/concerns/receive_processing.rb:45:80: C: Line is too long. [86/79]
+     @shipment_details.cases_rcvd =  @shipment_details.cases_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^^
+models/concerns/receive_processing.rb:46:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:48:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:49:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:54:4: C: Inconsistent indentation detected.
+   def update_location(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:54:24: W: Unused method argument - quantity. If it's necessary, use _ or _quantity as an argument name to indicate that it won't be used. You can also write as update_location(*) if you want the method to accept any arguments but don't care about them.
+   def update_location(quantity)
+                       ^^^^^^^^
+models/concerns/receive_processing.rb:55:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+     @location_master.record_status = "Occupied"
+                                      ^^^^^^^^^^
+models/concerns/receive_processing.rb:57:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:62:4: C: Inconsistent indentation detected.
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:62:4: C: Method has too many lines. [14/10]
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^
+models/concerns/receive_processing.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:64:4: C: Use 2 (not 3) spaces for indentation.
+      item_innerpacks = ItemInnerPack.where(client: client, item: item)
+   ^^^
+models/concerns/receive_processing.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:66:18: C: Avoid using {...} for multi-line blocks.
+      if (lambda {
+                 ^
+models/concerns/receive_processing.rb:68:11: C: Use 2 (not 0) spaces for indentation.
+          item_innerpacks.each do |item_innerpack| 
+          
+models/concerns/receive_processing.rb:68:51: C: Trailing whitespace detected.
+          item_innerpacks.each do |item_innerpack| 
+                                                  ^
+models/concerns/receive_processing.rb:69:11: C: Use 2 (not 4) spaces for indentation.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+          ^^^^
+models/concerns/receive_processing.rb:69:73: C: Trailing whitespace detected.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                        ^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:69:80: C: Line is too long. [88/79]
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                               ^^^^^^^^^
+models/concerns/receive_processing.rb:70:15: C: Use 2 (not 4) spaces for indentation.
+                  return true
+              ^^^^
+models/concerns/receive_processing.rb:71:18: C: Trailing whitespace detected.
+              end    
+                 ^^^^
+models/concerns/receive_processing.rb:75:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:76:7: C: Use 2 (not 9) spaces for indentation.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+      ^^^^^^^^^
+models/concerns/receive_processing.rb:76:16: W: Useless assignment to variable - new_item_innerpack.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+               ^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Redundant curly braces around a hash parameter.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Space inside { missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^
+models/concerns/receive_processing.rb:76:80: C: Line is too long. [122/79]
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:120: C: Space inside } missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                       ^
+models/concerns/receive_processing.rb:76:122: C: Trailing whitespace detected.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                         ^
+models/concerns/receive_processing.rb:78:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:79:8: W: end at 79, 7 is not aligned with if at 66, 6
+       end     
+       ^^^
+models/concerns/receive_processing.rb:79:11: C: Trailing whitespace detected.
+       end     
+          ^^^^^
+models/concerns/receive_processing.rb:80:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:84:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:85:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:86:4: C: Final newline missing.
+end
+   
+models/concerns/receive_validation.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveValidation
+^^^^^^
+models/concerns/receive_validation.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_validation.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:5:2: C: Missing top-level module documentation comment.
+ module ClassMethods
+ ^^^^^^
+models/concerns/receive_validation.rb:5:2: C: Inconsistent indentation detected.
+ module ClassMethods
+ ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:6:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:7:4: C: Method has too many lines. [21/10]
+   def valid_location?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:8:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:9:4: C: Use 2 (not 5) spaces for indentation.
+        valid = true
+   ^^^^^
+models/concerns/receive_validation.rb:10:80: C: Line is too long. [175/79]
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:10:164: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                   ^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:80: C: Line is too long. [173/79]
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:166: C: Space inside parentheses detected.
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                                                                                                                     ^
+models/concerns/receive_validation.rb:12:58: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        return true if @configuration.Yard_Management == "f"
+                                                         ^^^
+models/concerns/receive_validation.rb:13:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:14:9: C: Missing space after #.
+        #Validating Location       
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:14:29: C: Trailing whitespace detected.
+        #Validating Location       
+                            ^^^^^^^
+models/concerns/receive_validation.rb:16:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:18:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                    ^^^^^^^^^^^
+models/concerns/receive_validation.rb:18:57: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                                                        ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:20:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:21:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.location_type != "Pending" 
+                                               ^^^^^^^^^
+models/concerns/receive_validation.rb:21:57: C: Trailing whitespace detected.
+        when @location_master.location_type != "Pending" 
+                                                        ^
+models/concerns/receive_validation.rb:22:18: C: Surrounding space missing for operator '<<'.
+          @error <<"Can not receive to a non pending Location"
+                 ^^
+models/concerns/receive_validation.rb:22:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error <<"Can not receive to a non pending Location"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:24:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:25:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.record_status != "Empty"
+                                               ^^^^^^^
+models/concerns/receive_validation.rb:26:9: C: Use 2 (not 5) spaces for indentation.
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+        ^^^^^
+models/concerns/receive_validation.rb:26:80: C: Line is too long. [181/79]
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:13: C: Inconsistent indentation detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:79: C: Trailing whitespace detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                              ^^
+models/concerns/receive_validation.rb:27:80: C: Line is too long. [80/79]
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                               ^
+models/concerns/receive_validation.rb:28:13: C: Use 2 (not 4) spaces for indentation.
+                @error << "Dock Door occupied by another shipment"
+            ^^^^
+models/concerns/receive_validation.rb:28:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+                @error << "Dock Door occupied by another shipment"
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:31:15: C: Use 2 (not 1) spaces for indentation.
+               valid = true 
+              ^
+models/concerns/receive_validation.rb:31:28: C: Trailing whitespace detected.
+               valid = true 
+                           ^
+models/concerns/receive_validation.rb:33:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:35:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:36:10: C: Inconsistent indentation detected.
+         return valid
+         ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:36:10: C: Redundant return detected.
+         return valid
+         ^^^^^^
+models/concerns/receive_validation.rb:37:6: W: end at 37, 5 is not aligned with def at 7, 3
+     end
+     ^^^
+models/concerns/receive_validation.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:40:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:42:80: C: Line is too long. [91/79]
+     item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:43:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:44:6: C: Missing space after #.
+     #validating item
+     ^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:45:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:47:27: C: Trailing whitespace detected.
+     when item_master.nil? 
+                          ^
+models/concerns/receive_validation.rb:48:18: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                 ^^^^^^^
+models/concerns/receive_validation.rb:48:46: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:51:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:52:7: C: Inconsistent indentation detected.
+      return valid
+      ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:52:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:54:5: W: end at 54, 4 is not aligned with def at 39, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:55:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:56:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:57:4: C: Method has too many lines. [12/10]
+   def valid_shipment?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:58:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:59:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:60:80: C: Line is too long. [174/79]
+      @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:61:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:62:7: C: Missing space after #.
+      #validating shipment information
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:64:11: C: Trailing whitespace detected.
+      case 
+          ^
+models/concerns/receive_validation.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:67:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:67:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                                                          ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:69:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:71:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:80: C: Line is too long. [91/79]
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:76:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:77:8: C: Inconsistent indentation detected.
+       return valid 
+       ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:77:8: C: Redundant return detected.
+       return valid 
+       ^^^^^^
+models/concerns/receive_validation.rb:77:20: C: Trailing whitespace detected.
+       return valid 
+                   ^
+models/concerns/receive_validation.rb:78:5: W: end at 78, 4 is not aligned with def at 57, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:79:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:81:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:82:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:83:80: C: Line is too long. [198/79]
+      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:84:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:85:7: C: Missing space after #.
+      #validating shipment details
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:86:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:89:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:89:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:92:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:93:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:94:5: W: end at 94, 4 is not aligned with def at 80, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:95:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:96:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:97:5: C: Inconsistent indentation detected.
+    def valid_existing_case?(shipment)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:97:5: C: Method has too many lines. [11/10]
+    def valid_existing_case?(shipment)
+    ^^^
+models/concerns/receive_validation.rb:98:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:100:80: C: Line is too long. [92/79]
+      @case = CaseHeader.where(client: shipment[:client], case_id: shipment[:case_id]).first
+                                                                               ^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:101:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:102:7: C: Missing space after #.
+      #checking whether case exist or not
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:103:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:105:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:107:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Enter Case"
+                  ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:109:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:110:12: C: Explicit non-nil checks are usually redundant.
+      when !@case.nil?
+           ^^^^^^^^^^^
+models/concerns/receive_validation.rb:111:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:112:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:112:50: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                                                 ^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:115:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:116:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:118:5: C: Trailing whitespace detected.
+ end    
+    ^^^^
+models/concerns/receive_validation.rb:119:4: C: Final newline missing.
+end
+   
+models/global_configuration.rb:1:1: C: Missing top-level class documentation comment.
+class GlobalConfiguration < ActiveRecord::Base
+^^^^^
+models/global_configuration.rb:2:1: C: Trailing whitespace detected.
+models/global_configuration.rb:4:1: C: Trailing whitespace detected.
+models/global_configuration.rb:5:3: C: Use 2 (not 3) spaces for indentation.
+     configuration_hash = {}
+  ^^^
+models/global_configuration.rb:6:6: C: Redundant self detected.
+     self.where(input).where(enable: true).each do |configuration|
+     ^^^^^^^^^^^^^^^^^
+models/global_configuration.rb:7:1: C: Trailing whitespace detected.
+models/global_configuration.rb:9:1: C: Trailing whitespace detected.
+models/global_configuration.rb:11:6: C: Redundant return detected.
+     return OpenStruct.new(configuration_hash.symbolize_keys)
+     ^^^^^^
+models/shipment.rb:3:1: C: Missing top-level class documentation comment.
+class Shipment
+^^^^^
+models/shipment.rb:4:1: C: Trailing whitespace detected.
+models/shipment.rb:7:1: C: Trailing whitespace detected.
+models/shipment.rb:13:1: C: Trailing whitespace detected.
+models/shipment.rb:14:3: C: Method has too many lines. [16/10]
+  def receive_shipment(shipment)
+  ^^^
+models/shipment.rb:15:1: C: Trailing whitespace detected.
+models/shipment.rb:16:3: C: Use 2 (not 4) spaces for indentation.
+      valid = true
+  ^^^^
+models/shipment.rb:16:7: W: Useless assignment to variable - valid.
+      valid = true
+      ^^^^^
+models/shipment.rb:17:80: C: Line is too long. [172/79]
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:17:161: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                ^^^^^^^^^^^
+models/shipment.rb:18:1: C: Trailing whitespace detected.
+models/shipment.rb:20:41: C: Use space after control keywords.
+      valid = valid_shipment?(shipment) if(valid)
+                                        ^^
+models/shipment.rb:21:49: C: Use space after control keywords.
+      valid = valid_shipment_details?(shipment) if(valid)
+                                                ^^
+models/shipment.rb:22:47: C: Use space after control keywords.
+      valid = valid_existing_case?(shipment)  if(valid)
+                                              ^^
+models/shipment.rb:23:44: C: Use space after control keywords.
+      valid = valid_itemmaster?(shipment)  if(valid)
+                                           ^^
+models/shipment.rb:25:10: C: Missing space after #.
+         #process shipment
+         ^^^^^^^^^^^^^^^^^
+models/shipment.rb:26:7: C: Use 2 (not 3) spaces for indentation.
+         create_case(shipment[:case_id], shipment[:quantity].to_i)
+      ^^^
+models/shipment.rb:30:80: C: Line is too long. [96/79]
+         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
+                                                                               ^^^^^^^^^^^^^^^^^
+models/shipment.rb:31:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+         @error << "Shipment received successfully"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:33:1: C: Trailing whitespace detected.
+models/shipment.rb:34:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/shipment.rb:35:5: W: end at 35, 4 is not aligned with def at 14, 2
+    end
+    ^^^
+models/shipment.rb:36:1: C: Trailing whitespace detected.
+models/shipment.rb:38:1: C: Trailing whitespace detected.
+models/shipment.rb:40:5: W: Useless assignment to variable - shipment_hash.
+    shipment_hash = Hash.new
+    ^^^^^^^^^^^^^
+models/shipment.rb:40:21: C: Use hash literal {} instead of Hash.new.
+    shipment_hash = Hash.new
+                    ^^^^^^^^
+models/shipment.rb:41:80: C: Line is too long. [202/79]
+    shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:42:80: C: Line is too long. [197/79]
+    shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:43:21: C: Space inside { missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                    ^
+models/shipment.rb:43:80: C: Line is too long. [91/79]
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                               ^^^^^^^^^^^^
+models/shipment.rb:43:91: C: Space inside } missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                                          ^
+models/shipment.rb:45:5: C: Redundant return detected.
+    return shipment_hash   
+    ^^^^^^
+models/shipment.rb:45:25: C: Trailing whitespace detected.
+    return shipment_hash   
+                        ^^^
+models/shipment.rb:46:1: C: Trailing whitespace detected.
+models/shipment.rb:48:1: C: Trailing whitespace detected.
+models/shipment.rb:49:4: C: Final newline missing.
+end
+   
+
+15 files inspected, 253 offenses detected
+Inspecting 15 files
+CCCC.C..WWC...W
+
+Offenses:
+
+controllers/application_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationController < ActionController::Base
+^^^^^
+controllers/shipment_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ShipmentController < ApplicationController
+^^^^^
+controllers/shipment_controller.rb:8:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:10:3: C: Use 2 (not 1) spaces for indentation.
+   message = {}
+  ^
+controllers/shipment_controller.rb:12:80: C: Line is too long. [103/79]
+   message[:status] = shipment.receive_shipment(client: params[:client], warehouse: params[:warehouse],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:13:80: C: Line is too long. [104/79]
+                                                channel: params[:channel],  building: params[:building],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:14:80: C: Line is too long. [114/79]
+                                                shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:14:114: C: Trailing whitespace detected.
+                                                shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                                                                 ^
+controllers/shipment_controller.rb:15:80: C: Line is too long. [124/79]
+                                                case_id: params[:case_id], item: params[:item], quantity: params[:quantity],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:16:80: C: Line is too long. [86/79]
+                                                innerpack_qty: params[:innerpack_qty])
+                                                                               ^^^^^^^
+controllers/shipment_controller.rb:17:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:21:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:23:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:24:3: C: Use 2 (not 1) spaces for indentation.
+   shipment = Shipment.new
+  ^
+controllers/shipment_controller.rb:25:80: C: Line is too long. [182/79]
+   shipment_hash = shipment.where(client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building], shipment_nbr: params[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:29:3: C: Cyclomatic complexity for validate is too high. [10/6]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:29:3: C: Method has too many lines. [24/10]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:30:15: C: Space inside { missing.
+    message = {status:true, message:''}
+              ^
+controllers/shipment_controller.rb:30:22: C: Space missing after colon.
+    message = {status:true, message:''}
+                     ^
+controllers/shipment_controller.rb:30:36: C: Space missing after colon.
+    message = {status:true, message:''}
+                                   ^
+controllers/shipment_controller.rb:30:39: C: Space inside } missing.
+    message = {status:true, message:''}
+                                      ^
+controllers/shipment_controller.rb:32:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:36:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:36:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:37:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:41:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:41:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:46:80: C: Line is too long. [85/79]
+      message[:status] = shipment.valid_shipment_details?(params) if message[:status]
+                                                                               ^^^^^^
+controllers/shipment_controller.rb:47:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:47:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:52:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:52:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:56:57: C: Trailing whitespace detected.
+      message[:message] = 'Invalid validation requested'   
+                                                        ^^^
+controllers/shipment_controller.rb:58:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:61:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:62:1: C: Trailing whitespace detected.
+helpers/application_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ApplicationHelper
+^^^^^^
+helpers/shipment_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ShipmentHelper
+^^^^^^
+models/asn_header.rb:2:4: C: Final newline missing.
+end
+   
+models/concerns/receive_processing.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveProcessing
+^^^^^^
+models/concerns/receive_processing.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_processing.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:5:4: C: Missing top-level module documentation comment.
+   module ClassMethods
+   ^^^^^^
+models/concerns/receive_processing.rb:5:4: C: Inconsistent indentation detected.
+   module ClassMethods
+   ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:7:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:8:5: C: Method has too many lines. [15/10]
+    def create_case(case_id, quantity)
+    ^^^
+models/concerns/receive_processing.rb:9:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:11:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:17:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @case.status = "created"
+                     ^^^^^^^^^
+models/concerns/receive_processing.rb:23:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:25:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:28:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:30:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:32:80: C: Line is too long. [85/79]
+      @shipment_header.units_rcvd =  @shipment_header.units_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^
+models/concerns/receive_processing.rb:34:80: C: Line is too long. [104/79]
+      @shipment_header.receiving_started_date = Time.now if @shipment_header.receiving_started_date.nil?
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:37:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:42:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:43:4: C: Inconsistent indentation detected.
+   def update_asndetails(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:44:80: C: Line is too long. [90/79]
+     @shipment_details.received_qty =  @shipment_details.received_qty.to_i + quantity.to_i
+                                                                               ^^^^^^^^^^^
+models/concerns/receive_processing.rb:45:80: C: Line is too long. [86/79]
+     @shipment_details.cases_rcvd =  @shipment_details.cases_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^^
+models/concerns/receive_processing.rb:46:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:48:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:49:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:54:4: C: Inconsistent indentation detected.
+   def update_location(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:54:24: W: Unused method argument - quantity. If it's necessary, use _ or _quantity as an argument name to indicate that it won't be used. You can also write as update_location(*) if you want the method to accept any arguments but don't care about them.
+   def update_location(quantity)
+                       ^^^^^^^^
+models/concerns/receive_processing.rb:55:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+     @location_master.record_status = "Occupied"
+                                      ^^^^^^^^^^
+models/concerns/receive_processing.rb:57:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:62:4: C: Inconsistent indentation detected.
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:62:4: C: Method has too many lines. [14/10]
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^
+models/concerns/receive_processing.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:64:4: C: Use 2 (not 3) spaces for indentation.
+      item_innerpacks = ItemInnerPack.where(client: client, item: item)
+   ^^^
+models/concerns/receive_processing.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:66:18: C: Avoid using {...} for multi-line blocks.
+      if (lambda {
+                 ^
+models/concerns/receive_processing.rb:68:11: C: Use 2 (not 0) spaces for indentation.
+          item_innerpacks.each do |item_innerpack| 
+          
+models/concerns/receive_processing.rb:68:51: C: Trailing whitespace detected.
+          item_innerpacks.each do |item_innerpack| 
+                                                  ^
+models/concerns/receive_processing.rb:69:11: C: Use 2 (not 4) spaces for indentation.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+          ^^^^
+models/concerns/receive_processing.rb:69:73: C: Trailing whitespace detected.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                        ^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:69:80: C: Line is too long. [88/79]
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                               ^^^^^^^^^
+models/concerns/receive_processing.rb:70:15: C: Use 2 (not 4) spaces for indentation.
+                  return true
+              ^^^^
+models/concerns/receive_processing.rb:71:18: C: Trailing whitespace detected.
+              end    
+                 ^^^^
+models/concerns/receive_processing.rb:75:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:76:7: C: Use 2 (not 9) spaces for indentation.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+      ^^^^^^^^^
+models/concerns/receive_processing.rb:76:16: W: Useless assignment to variable - new_item_innerpack.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+               ^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Redundant curly braces around a hash parameter.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Space inside { missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^
+models/concerns/receive_processing.rb:76:80: C: Line is too long. [122/79]
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:120: C: Space inside } missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                       ^
+models/concerns/receive_processing.rb:76:122: C: Trailing whitespace detected.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                         ^
+models/concerns/receive_processing.rb:78:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:79:8: W: end at 79, 7 is not aligned with if at 66, 6
+       end     
+       ^^^
+models/concerns/receive_processing.rb:79:11: C: Trailing whitespace detected.
+       end     
+          ^^^^^
+models/concerns/receive_processing.rb:80:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:84:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:85:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:86:4: C: Final newline missing.
+end
+   
+models/concerns/receive_validation.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveValidation
+^^^^^^
+models/concerns/receive_validation.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_validation.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:5:2: C: Missing top-level module documentation comment.
+ module ClassMethods
+ ^^^^^^
+models/concerns/receive_validation.rb:5:2: C: Inconsistent indentation detected.
+ module ClassMethods
+ ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:6:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:7:4: C: Method has too many lines. [21/10]
+   def valid_location?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:8:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:9:4: C: Use 2 (not 5) spaces for indentation.
+        valid = true
+   ^^^^^
+models/concerns/receive_validation.rb:10:80: C: Line is too long. [175/79]
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:10:164: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                   ^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:80: C: Line is too long. [173/79]
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:166: C: Space inside parentheses detected.
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                                                                                                                     ^
+models/concerns/receive_validation.rb:12:58: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        return true if @configuration.Yard_Management == "f"
+                                                         ^^^
+models/concerns/receive_validation.rb:13:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:14:9: C: Missing space after #.
+        #Validating Location       
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:14:29: C: Trailing whitespace detected.
+        #Validating Location       
+                            ^^^^^^^
+models/concerns/receive_validation.rb:16:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:18:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                    ^^^^^^^^^^^
+models/concerns/receive_validation.rb:18:57: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                                                        ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:20:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:21:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.location_type != "Pending" 
+                                               ^^^^^^^^^
+models/concerns/receive_validation.rb:21:57: C: Trailing whitespace detected.
+        when @location_master.location_type != "Pending" 
+                                                        ^
+models/concerns/receive_validation.rb:22:18: C: Surrounding space missing for operator '<<'.
+          @error <<"Can not receive to a non pending Location"
+                 ^^
+models/concerns/receive_validation.rb:22:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error <<"Can not receive to a non pending Location"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:24:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:25:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.record_status != "Empty"
+                                               ^^^^^^^
+models/concerns/receive_validation.rb:26:9: C: Use 2 (not 5) spaces for indentation.
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+        ^^^^^
+models/concerns/receive_validation.rb:26:80: C: Line is too long. [181/79]
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:13: C: Inconsistent indentation detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:79: C: Trailing whitespace detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                              ^^
+models/concerns/receive_validation.rb:27:80: C: Line is too long. [80/79]
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                               ^
+models/concerns/receive_validation.rb:28:13: C: Use 2 (not 4) spaces for indentation.
+                @error << "Dock Door occupied by another shipment"
+            ^^^^
+models/concerns/receive_validation.rb:28:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+                @error << "Dock Door occupied by another shipment"
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:31:15: C: Use 2 (not 1) spaces for indentation.
+               valid = true 
+              ^
+models/concerns/receive_validation.rb:31:28: C: Trailing whitespace detected.
+               valid = true 
+                           ^
+models/concerns/receive_validation.rb:33:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:35:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:36:10: C: Inconsistent indentation detected.
+         return valid
+         ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:36:10: C: Redundant return detected.
+         return valid
+         ^^^^^^
+models/concerns/receive_validation.rb:37:6: W: end at 37, 5 is not aligned with def at 7, 3
+     end
+     ^^^
+models/concerns/receive_validation.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:40:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:42:80: C: Line is too long. [91/79]
+     item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:43:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:44:6: C: Missing space after #.
+     #validating item
+     ^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:45:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:47:27: C: Trailing whitespace detected.
+     when item_master.nil? 
+                          ^
+models/concerns/receive_validation.rb:48:18: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                 ^^^^^^^
+models/concerns/receive_validation.rb:48:46: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:51:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:52:7: C: Inconsistent indentation detected.
+      return valid
+      ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:52:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:54:5: W: end at 54, 4 is not aligned with def at 39, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:55:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:56:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:57:4: C: Method has too many lines. [15/10]
+   def valid_shipment?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:58:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:59:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:60:80: C: Line is too long. [174/79]
+      @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:61:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:62:7: C: Missing space after #.
+      #validating shipment information
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:64:11: C: Trailing whitespace detected.
+      case 
+          ^
+models/concerns/receive_validation.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:67:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:67:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                                                          ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:69:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:71:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:80: C: Line is too long. [91/79]
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:73:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:74:42: C: Surrounding space missing for operator '!='.
+      when @shipment_header.record_status!= 'Initiated'
+                                         ^^
+models/concerns/receive_validation.rb:80:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:81:8: C: Inconsistent indentation detected.
+       return valid 
+       ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:81:8: C: Redundant return detected.
+       return valid 
+       ^^^^^^
+models/concerns/receive_validation.rb:81:20: C: Trailing whitespace detected.
+       return valid 
+                   ^
+models/concerns/receive_validation.rb:82:5: W: end at 82, 4 is not aligned with def at 57, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:83:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:85:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:86:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:87:80: C: Line is too long. [198/79]
+      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:88:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:89:7: C: Missing space after #.
+      #validating shipment details
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:90:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:93:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:93:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:96:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:97:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:98:5: W: end at 98, 4 is not aligned with def at 84, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:99:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:100:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:101:5: C: Inconsistent indentation detected.
+    def valid_existing_case?(shipment)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:101:5: C: Method has too many lines. [11/10]
+    def valid_existing_case?(shipment)
+    ^^^
+models/concerns/receive_validation.rb:102:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:104:80: C: Line is too long. [92/79]
+      @case = CaseHeader.where(client: shipment[:client], case_id: shipment[:case_id]).first
+                                                                               ^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:105:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:106:7: C: Missing space after #.
+      #checking whether case exist or not
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:107:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:109:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:111:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Enter Case"
+                  ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:113:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:114:12: C: Explicit non-nil checks are usually redundant.
+      when !@case.nil?
+           ^^^^^^^^^^^
+models/concerns/receive_validation.rb:115:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:116:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:116:50: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                                                 ^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:119:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:120:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:122:5: C: Trailing whitespace detected.
+ end    
+    ^^^^
+models/concerns/receive_validation.rb:123:4: C: Final newline missing.
+end
+   
+models/global_configuration.rb:1:1: C: Missing top-level class documentation comment.
+class GlobalConfiguration < ActiveRecord::Base
+^^^^^
+models/global_configuration.rb:2:1: C: Trailing whitespace detected.
+models/global_configuration.rb:4:1: C: Trailing whitespace detected.
+models/global_configuration.rb:5:3: C: Use 2 (not 3) spaces for indentation.
+     configuration_hash = {}
+  ^^^
+models/global_configuration.rb:6:6: C: Redundant self detected.
+     self.where(input).where(enable: true).each do |configuration|
+     ^^^^^^^^^^^^^^^^^
+models/global_configuration.rb:7:1: C: Trailing whitespace detected.
+models/global_configuration.rb:9:1: C: Trailing whitespace detected.
+models/global_configuration.rb:11:6: C: Redundant return detected.
+     return OpenStruct.new(configuration_hash.symbolize_keys)
+     ^^^^^^
+models/shipment.rb:3:1: C: Missing top-level class documentation comment.
+class Shipment
+^^^^^
+models/shipment.rb:4:1: C: Trailing whitespace detected.
+models/shipment.rb:7:1: C: Trailing whitespace detected.
+models/shipment.rb:13:1: C: Trailing whitespace detected.
+models/shipment.rb:14:3: C: Method has too many lines. [16/10]
+  def receive_shipment(shipment)
+  ^^^
+models/shipment.rb:15:1: C: Trailing whitespace detected.
+models/shipment.rb:16:3: C: Use 2 (not 4) spaces for indentation.
+      valid = true
+  ^^^^
+models/shipment.rb:16:7: W: Useless assignment to variable - valid.
+      valid = true
+      ^^^^^
+models/shipment.rb:17:80: C: Line is too long. [172/79]
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:17:161: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                ^^^^^^^^^^^
+models/shipment.rb:18:1: C: Trailing whitespace detected.
+models/shipment.rb:20:41: C: Use space after control keywords.
+      valid = valid_shipment?(shipment) if(valid)
+                                        ^^
+models/shipment.rb:21:49: C: Use space after control keywords.
+      valid = valid_shipment_details?(shipment) if(valid)
+                                                ^^
+models/shipment.rb:22:47: C: Use space after control keywords.
+      valid = valid_existing_case?(shipment)  if(valid)
+                                              ^^
+models/shipment.rb:23:44: C: Use space after control keywords.
+      valid = valid_itemmaster?(shipment)  if(valid)
+                                           ^^
+models/shipment.rb:25:10: C: Missing space after #.
+         #process shipment
+         ^^^^^^^^^^^^^^^^^
+models/shipment.rb:26:7: C: Use 2 (not 3) spaces for indentation.
+         create_case(shipment[:case_id], shipment[:quantity].to_i)
+      ^^^
+models/shipment.rb:30:80: C: Line is too long. [96/79]
+         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
+                                                                               ^^^^^^^^^^^^^^^^^
+models/shipment.rb:31:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+         @error << "Shipment received successfully"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:33:1: C: Trailing whitespace detected.
+models/shipment.rb:34:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/shipment.rb:35:5: W: end at 35, 4 is not aligned with def at 14, 2
+    end
+    ^^^
+models/shipment.rb:36:1: C: Trailing whitespace detected.
+models/shipment.rb:38:1: C: Trailing whitespace detected.
+models/shipment.rb:40:5: W: Useless assignment to variable - shipment_hash.
+    shipment_hash = Hash.new
+    ^^^^^^^^^^^^^
+models/shipment.rb:40:21: C: Use hash literal {} instead of Hash.new.
+    shipment_hash = Hash.new
+                    ^^^^^^^^
+models/shipment.rb:41:80: C: Line is too long. [202/79]
+    shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:42:80: C: Line is too long. [197/79]
+    shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:43:21: C: Space inside { missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                    ^
+models/shipment.rb:43:80: C: Line is too long. [91/79]
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                               ^^^^^^^^^^^^
+models/shipment.rb:43:91: C: Space inside } missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                                          ^
+models/shipment.rb:45:5: C: Redundant return detected.
+    return shipment_hash   
+    ^^^^^^
+models/shipment.rb:45:25: C: Trailing whitespace detected.
+    return shipment_hash   
+                        ^^^
+models/shipment.rb:46:1: C: Trailing whitespace detected.
+models/shipment.rb:48:1: C: Trailing whitespace detected.
+models/shipment.rb:49:4: C: Final newline missing.
+end
+   
+
+15 files inspected, 252 offenses detected
+Inspecting 15 files
+CCCC.C..WWC...W
+
+Offenses:
+
+controllers/application_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationController < ActionController::Base
+^^^^^
+controllers/shipment_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ShipmentController < ApplicationController
+^^^^^
+controllers/shipment_controller.rb:8:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:10:3: C: Use 2 (not 1) spaces for indentation.
+   message = {}
+  ^
+controllers/shipment_controller.rb:12:80: C: Line is too long. [103/79]
+   message[:status] = shipment.receive_shipment(client: params[:client], warehouse: params[:warehouse],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:13:80: C: Line is too long. [104/79]
+                                                channel: params[:channel],  building: params[:building],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:14:80: C: Line is too long. [114/79]
+                                                shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:14:114: C: Trailing whitespace detected.
+                                                shipment_nbr: params[:shipment_nbr], location: params[:location], 
+                                                                                                                 ^
+controllers/shipment_controller.rb:15:80: C: Line is too long. [124/79]
+                                                case_id: params[:case_id], item: params[:item], quantity: params[:quantity],
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:16:80: C: Line is too long. [86/79]
+                                                innerpack_qty: params[:innerpack_qty])
+                                                                               ^^^^^^^
+controllers/shipment_controller.rb:17:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:21:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:23:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:24:3: C: Use 2 (not 1) spaces for indentation.
+   shipment = Shipment.new
+  ^
+controllers/shipment_controller.rb:25:80: C: Line is too long. [182/79]
+   shipment_hash = shipment.where(client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building], shipment_nbr: params[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:29:3: C: Cyclomatic complexity for validate is too high. [10/6]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:29:3: C: Method has too many lines. [24/10]
+  def validate
+  ^^^
+controllers/shipment_controller.rb:30:15: C: Space inside { missing.
+    message = {status:true, message:''}
+              ^
+controllers/shipment_controller.rb:30:22: C: Space missing after colon.
+    message = {status:true, message:''}
+                     ^
+controllers/shipment_controller.rb:30:36: C: Space missing after colon.
+    message = {status:true, message:''}
+                                   ^
+controllers/shipment_controller.rb:30:39: C: Space inside } missing.
+    message = {status:true, message:''}
+                                      ^
+controllers/shipment_controller.rb:32:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:36:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:36:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:37:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:41:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:41:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:46:80: C: Line is too long. [85/79]
+      message[:status] = shipment.valid_shipment_details?(params) if message[:status]
+                                                                               ^^^^^^
+controllers/shipment_controller.rb:47:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:47:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:52:7: C: Favor unless over if for negative conditions.
+      message[:message] = shipment.error if !message[:status] 
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+controllers/shipment_controller.rb:52:62: C: Trailing whitespace detected.
+      message[:message] = shipment.error if !message[:status] 
+                                                             ^
+controllers/shipment_controller.rb:56:57: C: Trailing whitespace detected.
+      message[:message] = 'Invalid validation requested'   
+                                                        ^^^
+controllers/shipment_controller.rb:58:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:61:1: C: Trailing whitespace detected.
+controllers/shipment_controller.rb:62:1: C: Trailing whitespace detected.
+helpers/application_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ApplicationHelper
+^^^^^^
+helpers/shipment_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ShipmentHelper
+^^^^^^
+models/asn_header.rb:2:4: C: Final newline missing.
+end
+   
+models/concerns/receive_processing.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveProcessing
+^^^^^^
+models/concerns/receive_processing.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_processing.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:5:4: C: Missing top-level module documentation comment.
+   module ClassMethods
+   ^^^^^^
+models/concerns/receive_processing.rb:5:4: C: Inconsistent indentation detected.
+   module ClassMethods
+   ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:7:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:8:5: C: Method has too many lines. [15/10]
+    def create_case(case_id, quantity)
+    ^^^
+models/concerns/receive_processing.rb:9:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:11:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:17:22: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @case.status = "created"
+                     ^^^^^^^^^
+models/concerns/receive_processing.rb:23:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:25:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:28:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:30:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:32:80: C: Line is too long. [85/79]
+      @shipment_header.units_rcvd =  @shipment_header.units_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^
+models/concerns/receive_processing.rb:34:80: C: Line is too long. [104/79]
+      @shipment_header.receiving_started_date = Time.now if @shipment_header.receiving_started_date.nil?
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:37:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:42:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:43:4: C: Inconsistent indentation detected.
+   def update_asndetails(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:44:80: C: Line is too long. [90/79]
+     @shipment_details.received_qty =  @shipment_details.received_qty.to_i + quantity.to_i
+                                                                               ^^^^^^^^^^^
+models/concerns/receive_processing.rb:45:80: C: Line is too long. [86/79]
+     @shipment_details.cases_rcvd =  @shipment_details.cases_rcvd.to_i + quantity.to_i
+                                                                               ^^^^^^^
+models/concerns/receive_processing.rb:46:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:48:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:49:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:54:4: C: Inconsistent indentation detected.
+   def update_location(quantity)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:54:24: W: Unused method argument - quantity. If it's necessary, use _ or _quantity as an argument name to indicate that it won't be used. You can also write as update_location(*) if you want the method to accept any arguments but don't care about them.
+   def update_location(quantity)
+                       ^^^^^^^^
+models/concerns/receive_processing.rb:55:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+     @location_master.record_status = "Occupied"
+                                      ^^^^^^^^^^
+models/concerns/receive_processing.rb:57:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:62:4: C: Inconsistent indentation detected.
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:62:4: C: Method has too many lines. [14/10]
+   def update_innerpack_quantity(client, item, innerpack_qty)
+   ^^^
+models/concerns/receive_processing.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:64:4: C: Use 2 (not 3) spaces for indentation.
+      item_innerpacks = ItemInnerPack.where(client: client, item: item)
+   ^^^
+models/concerns/receive_processing.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:66:18: C: Avoid using {...} for multi-line blocks.
+      if (lambda {
+                 ^
+models/concerns/receive_processing.rb:68:11: C: Use 2 (not 0) spaces for indentation.
+          item_innerpacks.each do |item_innerpack| 
+          
+models/concerns/receive_processing.rb:68:51: C: Trailing whitespace detected.
+          item_innerpacks.each do |item_innerpack| 
+                                                  ^
+models/concerns/receive_processing.rb:69:11: C: Use 2 (not 4) spaces for indentation.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+          ^^^^
+models/concerns/receive_processing.rb:69:73: C: Trailing whitespace detected.
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                        ^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:69:80: C: Line is too long. [88/79]
+              if item_innerpack.innerpack_qty.to_i == innerpack_qty.to_i                
+                                                                               ^^^^^^^^^
+models/concerns/receive_processing.rb:70:15: C: Use 2 (not 4) spaces for indentation.
+                  return true
+              ^^^^
+models/concerns/receive_processing.rb:71:18: C: Trailing whitespace detected.
+              end    
+                 ^^^^
+models/concerns/receive_processing.rb:75:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:76:7: C: Use 2 (not 9) spaces for indentation.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+      ^^^^^^^^^
+models/concerns/receive_processing.rb:76:16: W: Useless assignment to variable - new_item_innerpack.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+               ^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Redundant curly braces around a hash parameter.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:58: C: Space inside { missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                         ^
+models/concerns/receive_processing.rb:76:80: C: Line is too long. [122/79]
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_processing.rb:76:120: C: Space inside } missing.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                       ^
+models/concerns/receive_processing.rb:76:122: C: Trailing whitespace detected.
+               new_item_innerpack = ItemInnerPack.create({client: client, item: item, innerpack_qty: innerpack_qty.to_i}) 
+                                                                                                                         ^
+models/concerns/receive_processing.rb:78:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:79:8: W: end at 79, 7 is not aligned with if at 66, 6
+       end     
+       ^^^
+models/concerns/receive_processing.rb:79:11: C: Trailing whitespace detected.
+       end     
+          ^^^^^
+models/concerns/receive_processing.rb:80:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:84:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:85:1: C: Trailing whitespace detected.
+models/concerns/receive_processing.rb:86:4: C: Final newline missing.
+end
+   
+models/concerns/receive_validation.rb:2:1: C: Missing top-level module documentation comment.
+module ReceiveValidation
+^^^^^^
+models/concerns/receive_validation.rb:3:1: C: Use 2 (not 4) spaces for indentation.
+    extend ActiveSupport::Concern
+^^^^
+models/concerns/receive_validation.rb:4:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:5:2: C: Missing top-level module documentation comment.
+ module ClassMethods
+ ^^^^^^
+models/concerns/receive_validation.rb:5:2: C: Inconsistent indentation detected.
+ module ClassMethods
+ ^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:6:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:7:4: C: Method has too many lines. [21/10]
+   def valid_location?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:8:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:9:4: C: Use 2 (not 5) spaces for indentation.
+        valid = true
+   ^^^^^
+models/concerns/receive_validation.rb:10:80: C: Line is too long. [175/79]
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:10:164: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @configuration ||=  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                   ^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:80: C: Line is too long. [173/79]
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:11:166: C: Space inside parentheses detected.
+        @location_master = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, barcode: shipment[:location] ).first
+                                                                                                                                                                     ^
+models/concerns/receive_validation.rb:12:58: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        return true if @configuration.Yard_Management == "f"
+                                                         ^^^
+models/concerns/receive_validation.rb:13:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:14:9: C: Missing space after #.
+        #Validating Location       
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:14:29: C: Trailing whitespace detected.
+        #Validating Location       
+                            ^^^^^^^
+models/concerns/receive_validation.rb:16:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:18:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                    ^^^^^^^^^^^
+models/concerns/receive_validation.rb:18:57: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error << "Location " + shipment[:location] + " not found"
+                                                        ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:20:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:21:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.location_type != "Pending" 
+                                               ^^^^^^^^^
+models/concerns/receive_validation.rb:21:57: C: Trailing whitespace detected.
+        when @location_master.location_type != "Pending" 
+                                                        ^
+models/concerns/receive_validation.rb:22:18: C: Surrounding space missing for operator '<<'.
+          @error <<"Can not receive to a non pending Location"
+                 ^^
+models/concerns/receive_validation.rb:22:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          @error <<"Can not receive to a non pending Location"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:24:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:25:48: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        when @location_master.record_status != "Empty"
+                                               ^^^^^^^
+models/concerns/receive_validation.rb:26:9: C: Use 2 (not 5) spaces for indentation.
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+        ^^^^^
+models/concerns/receive_validation.rb:26:80: C: Line is too long. [181/79]
+             @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:13: C: Inconsistent indentation detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:27:79: C: Trailing whitespace detected.
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                              ^^
+models/concerns/receive_validation.rb:27:80: C: Line is too long. [80/79]
+            if @shipment_header.first_recieve_dock_door != shipment[:location]  
+                                                                               ^
+models/concerns/receive_validation.rb:28:13: C: Use 2 (not 4) spaces for indentation.
+                @error << "Dock Door occupied by another shipment"
+            ^^^^
+models/concerns/receive_validation.rb:28:27: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+                @error << "Dock Door occupied by another shipment"
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:31:15: C: Use 2 (not 1) spaces for indentation.
+               valid = true 
+              ^
+models/concerns/receive_validation.rb:31:28: C: Trailing whitespace detected.
+               valid = true 
+                           ^
+models/concerns/receive_validation.rb:33:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:35:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:36:10: C: Inconsistent indentation detected.
+         return valid
+         ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:36:10: C: Redundant return detected.
+         return valid
+         ^^^^^^
+models/concerns/receive_validation.rb:37:6: W: end at 37, 5 is not aligned with def at 7, 3
+     end
+     ^^^
+models/concerns/receive_validation.rb:38:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:40:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:42:80: C: Line is too long. [91/79]
+     item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:43:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:44:6: C: Missing space after #.
+     #validating item
+     ^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:45:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:47:27: C: Trailing whitespace detected.
+     when item_master.nil? 
+                          ^
+models/concerns/receive_validation.rb:48:18: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                 ^^^^^^^
+models/concerns/receive_validation.rb:48:46: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+       @error << "Item " + shipment[:item] + " does not exist in Itemmaster"
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:51:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:52:7: C: Inconsistent indentation detected.
+      return valid
+      ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:52:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:53:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:54:5: W: end at 54, 4 is not aligned with def at 39, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:55:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:56:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:57:4: C: Method has too many lines. [15/10]
+   def valid_shipment?(shipment)
+   ^^^
+models/concerns/receive_validation.rb:58:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:59:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:60:80: C: Line is too long. [174/79]
+      @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:61:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:62:7: C: Missing space after #.
+      #validating shipment information
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:63:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:64:11: C: Trailing whitespace detected.
+      case 
+          ^
+models/concerns/receive_validation.rb:65:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:67:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:67:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not found"
+                                                          ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:69:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:71:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                  ^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:59: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:71:80: C: Line is too long. [91/79]
+        @error << "Shipment " + shipment[:shipment_nbr] + " not assigned to this Dock Door"
+                                                                               ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:73:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:74:42: C: Surrounding space missing for operator '!='.
+      when @shipment_header.record_status!= 'Initiated'
+                                         ^^
+models/concerns/receive_validation.rb:80:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:81:8: C: Inconsistent indentation detected.
+       return valid 
+       ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:81:8: C: Redundant return detected.
+       return valid 
+       ^^^^^^
+models/concerns/receive_validation.rb:81:20: C: Trailing whitespace detected.
+       return valid 
+                   ^
+models/concerns/receive_validation.rb:82:5: W: end at 82, 4 is not aligned with def at 57, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:83:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:85:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:86:4: C: Use 2 (not 3) spaces for indentation.
+      valid = true
+   ^^^
+models/concerns/receive_validation.rb:87:80: C: Line is too long. [198/79]
+      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:88:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:89:7: C: Missing space after #.
+      #validating shipment details
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:90:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:93:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:93:47: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Item " + shipment[:item] + " not found in this shipment"
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:96:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:97:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:98:5: W: end at 98, 4 is not aligned with def at 84, 3
+    end
+    ^^^
+models/concerns/receive_validation.rb:99:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:100:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:101:5: C: Inconsistent indentation detected.
+    def valid_existing_case?(shipment)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:101:5: C: Method has too many lines. [11/10]
+    def valid_existing_case?(shipment)
+    ^^^
+models/concerns/receive_validation.rb:102:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:104:80: C: Line is too long. [92/79]
+      @case = CaseHeader.where(client: shipment[:client], case_id: shipment[:case_id]).first
+                                                                               ^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:105:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:106:7: C: Missing space after #.
+      #checking whether case exist or not
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:107:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:109:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:111:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Enter Case"
+                  ^^^^^^^^^^^^
+models/concerns/receive_validation.rb:113:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:114:12: C: Explicit non-nil checks are usually redundant.
+      when !@case.nil?
+           ^^^^^^^^^^^
+models/concerns/receive_validation.rb:115:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:116:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                  ^^^^^^^
+models/concerns/receive_validation.rb:116:50: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        @error << "Case " + shipment[:case_id] + " already exists"
+                                                 ^^^^^^^^^^^^^^^^^
+models/concerns/receive_validation.rb:119:1: C: Trailing whitespace detected.
+models/concerns/receive_validation.rb:120:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/concerns/receive_validation.rb:122:5: C: Trailing whitespace detected.
+ end    
+    ^^^^
+models/concerns/receive_validation.rb:123:4: C: Final newline missing.
+end
+   
+models/global_configuration.rb:1:1: C: Missing top-level class documentation comment.
+class GlobalConfiguration < ActiveRecord::Base
+^^^^^
+models/global_configuration.rb:2:1: C: Trailing whitespace detected.
+models/global_configuration.rb:4:1: C: Trailing whitespace detected.
+models/global_configuration.rb:5:3: C: Use 2 (not 3) spaces for indentation.
+     configuration_hash = {}
+  ^^^
+models/global_configuration.rb:6:6: C: Redundant self detected.
+     self.where(input).where(enable: true).each do |configuration|
+     ^^^^^^^^^^^^^^^^^
+models/global_configuration.rb:7:1: C: Trailing whitespace detected.
+models/global_configuration.rb:9:1: C: Trailing whitespace detected.
+models/global_configuration.rb:11:6: C: Redundant return detected.
+     return OpenStruct.new(configuration_hash.symbolize_keys)
+     ^^^^^^
+models/shipment.rb:3:1: C: Missing top-level class documentation comment.
+class Shipment
+^^^^^
+models/shipment.rb:4:1: C: Trailing whitespace detected.
+models/shipment.rb:7:1: C: Trailing whitespace detected.
+models/shipment.rb:13:1: C: Trailing whitespace detected.
+models/shipment.rb:14:3: C: Method has too many lines. [16/10]
+  def receive_shipment(shipment)
+  ^^^
+models/shipment.rb:15:1: C: Trailing whitespace detected.
+models/shipment.rb:16:3: C: Use 2 (not 4) spaces for indentation.
+      valid = true
+  ^^^^
+models/shipment.rb:16:7: W: Useless assignment to variable - valid.
+      valid = true
+      ^^^^^
+models/shipment.rb:17:80: C: Line is too long. [172/79]
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:17:161: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
+                                                                                                                                                                ^^^^^^^^^^^
+models/shipment.rb:18:1: C: Trailing whitespace detected.
+models/shipment.rb:20:41: C: Use space after control keywords.
+      valid = valid_shipment?(shipment) if(valid)
+                                        ^^
+models/shipment.rb:21:49: C: Use space after control keywords.
+      valid = valid_shipment_details?(shipment) if(valid)
+                                                ^^
+models/shipment.rb:22:47: C: Use space after control keywords.
+      valid = valid_existing_case?(shipment)  if(valid)
+                                              ^^
+models/shipment.rb:23:44: C: Use space after control keywords.
+      valid = valid_itemmaster?(shipment)  if(valid)
+                                           ^^
+models/shipment.rb:25:10: C: Missing space after #.
+         #process shipment
+         ^^^^^^^^^^^^^^^^^
+models/shipment.rb:26:7: C: Use 2 (not 3) spaces for indentation.
+         create_case(shipment[:case_id], shipment[:quantity].to_i)
+      ^^^
+models/shipment.rb:30:80: C: Line is too long. [96/79]
+         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
+                                                                               ^^^^^^^^^^^^^^^^^
+models/shipment.rb:31:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+         @error << "Shipment received successfully"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:33:1: C: Trailing whitespace detected.
+models/shipment.rb:34:7: C: Redundant return detected.
+      return valid
+      ^^^^^^
+models/shipment.rb:35:5: W: end at 35, 4 is not aligned with def at 14, 2
+    end
+    ^^^
+models/shipment.rb:36:1: C: Trailing whitespace detected.
+models/shipment.rb:38:1: C: Trailing whitespace detected.
+models/shipment.rb:40:5: W: Useless assignment to variable - shipment_hash.
+    shipment_hash = Hash.new
+    ^^^^^^^^^^^^^
+models/shipment.rb:40:21: C: Use hash literal {} instead of Hash.new.
+    shipment_hash = Hash.new
+                    ^^^^^^^^
+models/shipment.rb:41:80: C: Line is too long. [202/79]
+    shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr]).first
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:42:80: C: Line is too long. [197/79]
+    shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr])
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+models/shipment.rb:43:21: C: Space inside { missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                    ^
+models/shipment.rb:43:80: C: Line is too long. [91/79]
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                               ^^^^^^^^^^^^
+models/shipment.rb:43:91: C: Space inside } missing.
+    shipment_hash = {shipment_header:  shipment_header , shipment_detail: shipment_details}
+                                                                                          ^
+models/shipment.rb:45:5: C: Redundant return detected.
+    return shipment_hash   
+    ^^^^^^
+models/shipment.rb:45:25: C: Trailing whitespace detected.
+    return shipment_hash   
+                        ^^^
+models/shipment.rb:46:1: C: Trailing whitespace detected.
+models/shipment.rb:48:1: C: Trailing whitespace detected.
+models/shipment.rb:49:4: C: Final newline missing.
+end
+   
+
+15 files inspected, 252 offenses detected
