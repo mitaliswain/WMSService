@@ -17,7 +17,7 @@ one:
   user_role: MyString
   app_id: 1
   key: Receiving_Type
-  value: SKU
+  value: Case
   attribute1: {Options: ['SKU','Case']}
   attribute2: MyString
   attribute3: MyString

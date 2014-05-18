@@ -27,7 +27,8 @@ fixtures :item_inner_packs
     @item = asn_details(:one).item
     @quantity = 5
     @innerpack_qty = item_inner_packs(:one).innerpack_qty
-    @configuration = GlobalConfiguration.get_configuration(client: @client, warehouse: @warehouse, building: @building, channel: @channel, module: 'RECEIVING')
+    @condition = { client: @client, warehouse: @warehouse, building: @building, channel: @channel, module: 'RECEIVING' }
+    @configuration = GlobalConfiguration.get_configuration(@condition)
   end  
 
   def test_validate_location
@@ -182,9 +183,104 @@ fixtures :item_inner_packs
     
   end
   
+    
+  def test_duplicate_case_SKU
+      update_old = {value: @configuration.Receiving_Type} 
+      GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+      url = '/shipment/case/validate'
+    
+      post url,
+         client: @client,
+         warehouse: @warehouse,
+         channel: @channel,
+         building: @building,
+         shipment_nbr: @shipment_nbr,
+         location: @location,
+         quantity: @quantity,
+         case_id: case_headers(:one).case_id,
+         item: @item
+        
+      message = JSON.parse(response.body)
+      expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
+      assert_equal expected_message , message["message"][0], "Case  not found" 
+      GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+    
+  end
+  
+   def test_case_not_received_case
+    
+      url = '/shipment/case/validate'
+      update_old = {value: @configuration.Receiving_Type} 
+      GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+ 
+      
+      post url,
+         client: @client,
+         warehouse: @warehouse,
+         channel: @channel,
+         building: @building,
+         shipment_nbr: @shipment_nbr,
+         location: @location,
+         quantity: @quantity,
+         case_id: '@Case1x',
+         item: @item
+        
+         message = JSON.parse(response.body)
+       if @configuration.Receiving_Type == 'Case'
+         expected_message = 'Case @Case1x does not exist' 
+         assert_equal expected_message , message["message"][0], "Case  not found" 
+       end   
+       GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+
+  end
+  
+ def test_case_received_invalid_status_case
+    
+      url = '/shipment/case/validate'
+      update_old = {value: @configuration.Receiving_Type} 
+      GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+ 
+      
+      post url,
+         client: @client,
+         warehouse: @warehouse,
+         channel: @channel,
+         building: @building,
+         shipment_nbr: @shipment_nbr,
+         location: @location,
+         quantity: @quantity,
+         case_id: case_headers(:case_two).case_id,
+         item: @item
+        
+         message = JSON.parse(response.body)
+       if @configuration.Receiving_Type == 'Case'
+         expected_message = "Case #{case_headers(:case_two).case_id} already received"
+         assert_equal expected_message , message["message"][0], "Case  already received" 
+       end   
+       GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+
+  end  
   
   
-  def test_validate_item_not_in_shipment
+  def test_validate_item_not_in_itemmaster
+    
+    url = '/shipment/item/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        case_id: @case_id,
+        item: 'abcd',
+        quantity: @quantity
+      
+        message =  JSON.parse(response.body)
+        expected_message = 'Item abcd does not exist in Itemmaster'
+        assert_equal expected_message , message["message"][0],  "Item not found"
+  end
+  
+ def test_validate_item_not_in_shipment
   
       url = '/shipment/item/validate'
       post url,
@@ -203,8 +299,12 @@ fixtures :item_inner_packs
         expected_message = 'Item 123467 not found in this shipment' 
         assert_equal expected_message , message["message"][0], "Item not found"
   end
-  
-  def test_validate_item_not_in_itemmaster
+
+  def test_validate_item_in_case
+    
+     update_old = {value: @configuration.Receiving_Type} 
+     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+    
     url = '/shipment/item/validate'
     post url, 
         client: @client,
@@ -212,40 +312,45 @@ fixtures :item_inner_packs
         channel: @channel,
         building:@building,
         location: @location,
-        case_id: @case_id,
-        item: 'abcd',
+        shipment_nbr: @shipment_nbr,
+        case_id: case_headers(:case_one).case_id,
+        item: '1234678',
         quantity: @quantity
       
         message =  JSON.parse(response.body)
-        expected_message = 'Item abcd does not exist in Itemmaster'
-        assert_equal expected_message , message["message"][0],  "Item not found"
+        expected_message = 'Item 1234678 is not associated to this Case'
+        assert_equal expected_message , message["message"][0],  "Item not found in Case"
+  end
+ 
+ def test_validate_quantity_in_case
+    
+     update_old = {value: @configuration.Receiving_Type} 
+     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+    
+    url = '/shipment/quantity/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        shipment_nbr: @shipment_nbr,
+        case_id: case_headers(:case_three).case_id,
+        item: case_details(:case_three).item,
+        quantity: case_details(:case_three).quantity + 1
+              
+        message =  JSON.parse(response.body)
+        expected_message = 'Quantity entered does not match with the qty on the case'
+        assert_equal expected_message , message["message"][0],  "Quantity mismatch"
   end
 
-    
-  def test_duplicate_case
-    
-      url = '/shipment/case/validate'
-      post url,
-         client: @client,
-         warehouse: @warehouse,
-         channel: @channel,
-         building: @building,
-         shipment_nbr: @shipment_nbr,
-         location: @location,
-         quantity: @quantity,
-         case_id: case_headers(:one).case_id,
-         item: @item
-        
-         message = JSON.parse(response.body)
-        expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
-        assert_equal expected_message , message["message"][0], "Case  not found"
-  
-  end
 
-  def test_receive_shipment
+  def test_receive_shipment_SKU
 
-     puts asn_details(:one).received_qty
-     
+    puts asn_details(:one).received_qty
+    update_old = {value: @configuration.Receiving_Type} 
+    GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+
     # Check the valida shipment
     post @url, 
       client: @client,
@@ -278,12 +383,15 @@ fixtures :item_inner_packs
    
     assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
  
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
   
-  def test_item_innerpack_exists
+  def test_item_innerpack_exists_SKU
 
      #puts asn_details(:one).received_qty
+      update_old = {value: @configuration.Receiving_Type} 
+      GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
      
     # Check the valida shipment
     post @url, 
@@ -303,12 +411,15 @@ fixtures :item_inner_packs
     assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
     item_inner_packs = ItemInnerPack.where(client: @client, item: @item)
     assert_equal  1, item_inner_packs.length , "Received with existing innerpack"
-      
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+  
     end
     
-  def test_item_innerpack_not_exist
+  def test_item_innerpack_not_exist_SKU
 
     #puts asn_details(:one).received_qty
+    update_old = {value: @configuration.Receiving_Type} 
+    GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
      
     # Check the valida shipment
     post @url, 
@@ -330,7 +441,8 @@ fixtures :item_inner_packs
     assert_equal  2, item_inner_packs.length , "Received with non existing innerpack"
     assert_equal  @innerpack_qty + 10, item_inner_packs[1].innerpack_qty , "New innerpack "
     
-      
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+  
     end
  
  

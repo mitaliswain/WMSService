@@ -5,59 +5,50 @@ class ShipmentController < ApplicationController
     message[:message] = 'under constuction'
     render json: message
   end
-  
+
   def receive
-   message = {}
-   shipment = Shipment.new
-   message[:status] = shipment.receive_shipment(client: params[:client], warehouse: params[:warehouse],
-                                                channel: params[:channel],  building: params[:building],
-                                                shipment_nbr: params[:shipment_nbr], location: params[:location], 
-                                                case_id: params[:case_id], item: params[:item], quantity: params[:quantity],
-                                                innerpack_qty: params[:innerpack_qty])
-   
-   message[:message] = shipment.error
-   render json: message
+    message = {}
+    shipment = Shipment.new
+    message[:status] = shipment.receive_shipment(params)
+    message[:message] = shipment.error
+    render json: message
   end
-  
+
   def show
-   
-   shipment = Shipment.new
-   shipment_hash = shipment.where(client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building], shipment_nbr: params[:shipment_nbr])
-   render json: shipment_hash
+    shipment = Shipment.new
+    shipment_hash = shipment.where(client: params[:client],
+                                   warehouse: params[:warehouse],
+                                   channel: params[:channel],
+                                   building: params[:building],
+                                   shipment_nbr: params[:shipment_nbr])
+    render json: shipment_hash
   end
 
   def validate
-    message = {status:true, message:''}
+    message = {}
     case params[:to_valiadte]
-      
+
     when 'location'
-      shipment = Shipment.new
-      message[:status] = shipment.valid_location?(params)
-      message[:message] = shipment.error if !message[:status] 
-     
+      message = Shipment.new.valid_location?(params)
+
     when 'case'
-      shipment = Shipment.new
-      message[:status] = shipment.valid_existing_case?(params)
-      message[:message] = shipment.error if !message[:status] 
+      message = Shipment.new.valid_existing_case?(params)
 
     when 'item'
-      shipment = Shipment.new
-      message[:status] = shipment.valid_itemmaster?(params)
-      message[:status] = shipment.valid_shipment_details?(params) if message[:status]
-      message[:message] = shipment.error if !message[:status] 
-
-    when 'shipment_nbr'
-      shipment = Shipment.new
-      message[:status] = shipment.valid_shipment?(params)
-      message[:message] = shipment.error if !message[:status] 
-
-    else
-      message[:status] = false
-      message[:message] = 'Invalid validation requested'   
-    end
+      message = Shipment.new.valid_item?(params)
     
+    when 'shipment_nbr'
+
+      message = Shipment.new.valid_shipment?(params)
+   
+   when 'quantity'
+     
+     message = Shipment.new.valid_received_quantity?(params)
+     
+    else
+      { status: false, message: 'Invalid validation requested' }
+     end
+
     render json: message
   end
-  
-  
 end

@@ -9,5 +9,16 @@ class GlobalConfiguration < ActiveRecord::Base
        
      end
      return OpenStruct.new(configuration_hash.symbolize_keys)
+
   end
+
+  def self.set_configuration(update, condition)
+    
+    self.where(condition).where(enable: true).each do|configuration|
+      configuration.update_attributes(update) 
+    end
+          
+  end
+
+
 end
