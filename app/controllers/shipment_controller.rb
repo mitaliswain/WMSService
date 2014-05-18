@@ -7,10 +7,7 @@ class ShipmentController < ApplicationController
   end
 
   def receive
-    message = {}
-    shipment = Shipment.new
-    message[:status] = shipment.receive_shipment(params)
-    message[:message] = shipment.error
+    message = Shipment.receive_shipment(params)
     render json: message
   end
 
