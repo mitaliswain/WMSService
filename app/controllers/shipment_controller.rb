@@ -45,10 +45,13 @@ class ShipmentController < ApplicationController
      
      message = Shipment.new.valid_received_quantity?(params)
      
-    else
-      { status: false, message: 'Invalid validation requested' }
-     end
+   when 'inner_pack'  
+      message = { status: true, message: [''] }
+   else
+      
+     message = { status: false, message: ['Invalid validation requested'] }
+   end
 
-    render json: message
+   render json: message
   end
 end

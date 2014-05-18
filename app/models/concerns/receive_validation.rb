@@ -26,7 +26,7 @@ module ReceiveValidation
 
       when @location_master.record_status != 'Empty'
            @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
-          if @shipment_header.first_recieve_dock_door != shipment[:location]  
+          if !@shipment_header.nil? && @shipment_header.first_recieve_dock_door != shipment[:location]  
               @error << "Dock Door occupied by another shipment"
               valid = false
           else
@@ -135,11 +135,10 @@ module ReceiveValidation
       
       valid = true
       message = valid_item?(shipment)
-      
       if message[:status] 
         case 
            
-        when @configuration.Receiving_Type == 'Case' && @case_detail.quantity != shipment[:quantity]
+        when @configuration.Receiving_Type == 'Case' && @case_detail.quantity != shipment[:quantity].to_i
            @error << "Quantity entered does not match with the qty on the case"
            valid = false
         end
