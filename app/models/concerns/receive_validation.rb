@@ -141,6 +141,12 @@ module ReceiveValidation
         when @configuration.Receiving_Type == 'Case' && @case_detail.quantity != shipment[:quantity].to_i
            @error << "Quantity entered does not match with the qty on the case"
            valid = false
+           
+        when @configuration.Receiving_Type == 'SKU' &&
+             !@shipment_details.nil? && 
+             @shipment_details.shipped_quantity < (@shipment_details.received_qty + shipment[:quantity].to_i)
+             @error << "Quantity received exceeds shipped quantity"
+           valid = false
         end
        else
          

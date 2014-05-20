@@ -33,6 +33,7 @@ one:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
+  shipped_quantity: 20
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1
@@ -114,6 +115,7 @@ two:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
+  shipped_quantity: 20
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1
@@ -195,6 +197,7 @@ case_receiving_one:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
+  shipped_quantity: 20
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1
@@ -277,6 +280,7 @@ three:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
+  shipped_quantity: 20
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1
@@ -358,6 +362,7 @@ four:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
+  shipped_quantity: 20
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1

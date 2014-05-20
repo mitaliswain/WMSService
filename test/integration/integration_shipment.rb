@@ -33,7 +33,7 @@ fixtures :item_inner_packs
 
   def test_validate_location
     url = '/shipment/location/validate'
-    post url,  
+    post url, 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -228,7 +228,7 @@ fixtures :item_inner_packs
          message = JSON.parse(response.body)
        if @configuration.Receiving_Type == 'Case'
          expected_message = 'Case @Case1x does not exist' 
-         assert_equal expected_message , message["message"][0], "Case  not found" 
+         assert_equal expected_message , message["message"][0], "Case not found" 
        end   
        GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
@@ -342,6 +342,28 @@ fixtures :item_inner_packs
         message =  JSON.parse(response.body)
         expected_message = 'Quantity entered does not match with the qty on the case'
         assert_equal expected_message , message["message"][0],  "Quantity mismatch"
+  end
+  
+  def test_validate_quantity_for_SKU_receiving
+    
+     update_old = {value: @configuration.Receiving_Type} 
+     GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+    
+    url = '/shipment/quantity/validate'
+    post url, 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        shipment_nbr: @shipment_nbr,
+        case_id: '@case1',
+        item: asn_details(:one).item,
+        quantity: asn_details(:one).shipped_quantity - asn_details(:one).received_qty + 1
+              
+        message =  JSON.parse(response.body)
+        expected_message = 'Quantity received exceeds shipped quantity'
+        assert_equal expected_message , message["message"][0],  "Quantity mismatch in SKU"
   end
 
 
