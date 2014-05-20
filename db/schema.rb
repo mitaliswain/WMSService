@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510135819) do
+ActiveRecord::Schema.define(version: 20140519211107) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140510135819) do
     t.string   "updated_prc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shipped_quantity"
   end
 
   create_table "asn_headers", force: true do |t|
