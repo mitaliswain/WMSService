@@ -41,7 +41,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'tzinfo-data'
+#gem 'tzinfo-data'
 gem 'tzinfo'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

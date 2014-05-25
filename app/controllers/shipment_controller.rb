@@ -7,7 +7,7 @@ class ShipmentController < ApplicationController
   end
 
   def receive
-    message = Shipment.new.receive_shipment(params)
+    message = Shipment.new.receive_shipment(params[:shipment])
     render json: message
   end
 
@@ -24,7 +24,7 @@ class ShipmentController < ApplicationController
   def validate
      valid_table = {
       'location' => 'valid_location?',
-      'case' => 'valid_existing_case?',
+      'case' => 'valid_case?',
       'item' => 'valid_item?',
       'shipment_nbr' => 'valid_shipment?',
       'quantity' => 'valid_received_quantity?',
@@ -32,7 +32,7 @@ class ShipmentController < ApplicationController
     }
     
       if valid_table.key?(params[:to_valiadte])
-          message = Shipment.new.send(valid_table[params[:to_valiadte]], params) 
+          message = Shipment.send(valid_table[params[:to_valiadte]], params[:shipment]) 
       else  
           message = { status: false, message: ['Invalid validation requested'] }
       end

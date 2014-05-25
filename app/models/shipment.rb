@@ -1,38 +1,69 @@
 require 'concerns/receive_processing'
-require 'concerns/receive_validation'
+#require 'concerns/receive_validation'
 class Shipment
   
   include ReceiveProcessing
-  include ReceiveValidation::ClassMethods
+  include ReceiveValidation
  
   attr_accessor :message, :error
   def initialize
-    @message ={}
-    @error =[]
+    @message = {}
+    @error = []
   end
   
   def receive_shipment(shipment)
-    
-      valid = true
-      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: "RECEIVING")
-      
-      message = valid_location?(shipment)
-      message = valid_shipment?(shipment) if message[:status]
-      message = valid_existing_case?(shipment)  if message[:status]
-      message = valid_item?(shipment)  if message[:status]
-      message = valid_received_quantity?(shipment) if message[:status]
-      if message[:status]
-         create_case(shipment[:case_id], shipment[:quantity].to_i)
-         update_asnheader(shipment[:quantity], shipment[:location])
-         update_asndetails(shipment[:quantity])
-         update_location(shipment[:quantity])
-         update_innerpack_quantity(shipment[:client], shipment[:item], shipment[:innerpack_qty])
-         @error << "Shipment received successfully"
-      end
-      
-      return { status: valid, message: @error}  
-  end
    
+    @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: 'RECEIVING')
+
+    # workflow = WorkFlow.get_workflow('RECEIVING')
+
+    message = {status: true, message: []}   
+    workflow = OpenStruct.new(
+               {validate: [{ method: 'valid_location?' }, 
+                           { method: 'valid_shipment?' },
+                           { method: 'valid_case?' },
+                           { method: 'valid_item?' },
+                           { method: 'valid_received_quantity?' }
+                          ],
+                process:  [{ method: 'create_case' },
+                           { method: 'update_shipment' },
+                           { method: 'update_location' },
+                           { method: 'update_innerpack_quantity'}
+                          ],
+                trigger:  [],
+                house_keeping:  []
+               })     
+                  
+    workflow.validate.each do |validate|
+      message = Shipment.send(validate[:method], shipment)
+      break unless message[:status] 
+    end   
+    return message unless message[:status]
+    
+    workflow.process.each do |process| 
+      message = send(process[:method], shipment) 
+      break unless message[:status] 
+      
+    end    
+    return message unless message[:status]
+
+    workflow.trigger.each do |trigger| 
+      message = send(process[:method], shipment)
+    end    
+    return message unless message[:status]
+
+    workflow.house_keeping.each do |process| 
+      message = send(process[:method], shipment)
+    end    
+
+    return message unless message[:status]     
+    
+    
+    @error << 'Shipment received successfully'  
+    return { status: message[:status], message: @error}   
+    
+  end  
+     
   def where(shipment)
      
 

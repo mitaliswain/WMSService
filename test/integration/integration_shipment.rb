@@ -34,6 +34,8 @@ fixtures :item_inner_packs
   def test_validate_location
     url = '/shipment/location/validate'
     post url, 
+    
+    shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -43,12 +45,13 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
+        } 
        expected_message = '' 
        message =  JSON.parse(response.body)
        if @configuration.Yard_Management == "t"
          expected_message = 'Location Locationx not found' 
        else
-          expected_message = 'Shipment received successfully'     
+          expected_message = nil    
        end   
        assert_equal expected_message , message["message"][0],  "Location not found"
     
@@ -56,7 +59,9 @@ fixtures :item_inner_packs
   
    def test_validate_dock_door
     url  = '/shipment/location/validate'
-    post url, 
+    post url,
+    
+      shipment: { 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -66,7 +71,7 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
+      }
        message =  JSON.parse(response.body)
        expected_message = true
        assert_equal expected_message , message["status"],  "Validate Non Empty dock door"
@@ -76,6 +81,8 @@ fixtures :item_inner_packs
   def test_record_status_of_dock_door
     url = '/shipment/location/validate'
     post url,
+      
+      shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -85,8 +92,8 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
-        message =  JSON.parse(response.body)
+      }
+      message =  JSON.parse(response.body)
         if @configuration.Yard_Management == "t"
              expected_message = 'Dock Door occupied by another shipment'
         else
@@ -101,6 +108,8 @@ fixtures :item_inner_packs
     
     url = '/shipment/shipment_nbr/validate'
     post url, 
+    
+    shipment: {    
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -110,7 +119,7 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
+    }
        message =  JSON.parse(response.body)
        expected_message = 'Shipment ' + asn_headers(:two).shipment_nbr + ' not assigned to this Dock Door'
        assert_equal expected_message , message["message"][0],  "Validate Shipment to the assigned dock door"
@@ -123,6 +132,8 @@ fixtures :item_inner_packs
   def test_validate_location_type
     url = '/shipment/location/validate'
     post url, 
+     
+    shipment: { 
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -131,12 +142,12 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
+     } 
         message =  JSON.parse(response.body)
         if @configuration.Yard_Management == "t"
             expected_message = 'Can not receive to a non pending Location'
         else    
-            expected_message = 'Shipment received successfully'   
+            expected_message = nil   
         end
         assert_equal expected_message , message["message"][0], "Pending location"
        
@@ -148,6 +159,8 @@ fixtures :item_inner_packs
     
       url = '/shipment/shipment_nbr/validate'
       post url, 
+      
+      shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -157,7 +170,7 @@ fixtures :item_inner_packs
         item: @item,
         quantity: @quantity,
         shipment_nbr: 'Shipment2x'
-      
+      }
         message =  JSON.parse(response.body)
         expected_message = 'Shipment Shipment2x not found'
         assert_equal expected_message , message["message"][0],  "Shipment not found"
@@ -167,6 +180,8 @@ fixtures :item_inner_packs
   def test_validate_shipment_record_status
     url  = '/shipment/shipment_nbr/validate'
     post url, 
+       
+    shipment: {   
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -176,7 +191,7 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      
+     } 
        message =  JSON.parse(response.body)
        expected_message =  'Invalid Shipment status'
        assert_equal expected_message , message["message"][0],  "Validate shipment record status"
@@ -190,6 +205,8 @@ fixtures :item_inner_packs
       url = '/shipment/case/validate'
     
       post url,
+      
+      shipment: {
          client: @client,
          warehouse: @warehouse,
          channel: @channel,
@@ -199,7 +216,7 @@ fixtures :item_inner_packs
          quantity: @quantity,
          case_id: case_headers(:one).case_id,
          item: @item
-        
+      }  
       message = JSON.parse(response.body)
       expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
       assert_equal expected_message , message["message"][0], "Case  not found" 
@@ -215,6 +232,8 @@ fixtures :item_inner_packs
  
       
       post url,
+       
+      shipment: { 
          client: @client,
          warehouse: @warehouse,
          channel: @channel,
@@ -224,7 +243,7 @@ fixtures :item_inner_packs
          quantity: @quantity,
          case_id: '@Case1x',
          item: @item
-        
+      }  
          message = JSON.parse(response.body)
        if @configuration.Receiving_Type == 'Case'
          expected_message = 'Case @Case1x does not exist' 
@@ -242,6 +261,8 @@ fixtures :item_inner_packs
  
       
       post url,
+      
+      shipment: { 
          client: @client,
          warehouse: @warehouse,
          channel: @channel,
@@ -251,8 +272,8 @@ fixtures :item_inner_packs
          quantity: @quantity,
          case_id: case_headers(:case_two).case_id,
          item: @item
-        
-         message = JSON.parse(response.body)
+       } 
+       message = JSON.parse(response.body)
        if @configuration.Receiving_Type == 'Case'
          expected_message = "Case #{case_headers(:case_two).case_id} already received"
          assert_equal expected_message , message["message"][0], "Case  already received" 
@@ -266,6 +287,8 @@ fixtures :item_inner_packs
     
     url = '/shipment/item/validate'
     post url, 
+    
+    shipment: {   
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -274,7 +297,7 @@ fixtures :item_inner_packs
         case_id: @case_id,
         item: 'abcd',
         quantity: @quantity
-      
+    }  
         message =  JSON.parse(response.body)
         expected_message = 'Item abcd does not exist in Itemmaster'
         assert_equal expected_message , message["message"][0],  "Item not found"
@@ -284,6 +307,8 @@ fixtures :item_inner_packs
   
       url = '/shipment/item/validate'
       post url,
+      
+      shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -293,7 +318,7 @@ fixtures :item_inner_packs
         quantity: @quantity,
         case_id: @case_id,
         item: '123467'
-       
+       }
         
         message = JSON.parse(response.body)
         expected_message = 'Item 123467 not found in this shipment' 
@@ -307,6 +332,8 @@ fixtures :item_inner_packs
     
     url = '/shipment/item/validate'
     post url, 
+        
+    shipment: {    
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -316,7 +343,7 @@ fixtures :item_inner_packs
         case_id: case_headers(:case_one).case_id,
         item: '1234678',
         quantity: @quantity
-      
+    }  
         message =  JSON.parse(response.body)
         expected_message = 'Item 1234678 is not associated to this Case'
         assert_equal expected_message , message["message"][0],  "Item not found in Case"
@@ -329,6 +356,7 @@ fixtures :item_inner_packs
     
     url = '/shipment/quantity/validate'
     post url, 
+    shipment: {  
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -338,7 +366,7 @@ fixtures :item_inner_packs
         case_id: case_headers(:case_three).case_id,
         item: case_details(:case_three).item,
         quantity: case_details(:case_three).quantity + 1
-              
+    }          
         message =  JSON.parse(response.body)
         expected_message = 'Quantity entered does not match with the qty on the case'
         assert_equal expected_message , message["message"][0],  "Quantity mismatch"
@@ -351,6 +379,8 @@ fixtures :item_inner_packs
     
     url = '/shipment/quantity/validate'
     post url, 
+    
+    shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
@@ -360,7 +390,7 @@ fixtures :item_inner_packs
         case_id: '@case1',
         item: asn_details(:one).item,
         quantity: asn_details(:one).shipped_quantity - asn_details(:one).received_qty + 1
-              
+     }         
         message =  JSON.parse(response.body)
         expected_message = 'Quantity received exceeds shipped quantity'
         assert_equal expected_message , message["message"][0],  "Quantity mismatch in SKU"
@@ -375,15 +405,18 @@ fixtures :item_inner_packs
 
     # Check the valida shipment
     post @url, 
+      
+    shipment: {  
       client: @client,
       warehouse: @warehouse,
       channel: @channel,
       building:@building,
       location: @location,
+      shipment_nbr: @shipment_nbr,
       case_id: @case_id,
       item: @item,
       quantity: @quantity
-     
+    } 
     assert_equal 200, status , 'message in service'
     message =  JSON.parse(response.body)
      
@@ -392,6 +425,7 @@ fixtures :item_inner_packs
     asn_header = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
     case_header = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id).first
+    case_detail = CaseDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id, item: @item).first
     location_master = LocationMaster.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, barcode: @location).first
 
     #Shipment
@@ -399,7 +433,9 @@ fixtures :item_inner_packs
     assert_equal  asn_details(:one).received_qty + @quantity, asn_detail.received_qty , "ASN Detail received quantity mismatch"
 
     #Case
-    assert_equal  @quantity, case_header.quantity , "Case quantity mismatch"
+    assert_equal  @quantity, case_detail.quantity , "Case quantity mismatch"
+    
+    assert_equal  @case_id, case_header.case_id , "Case created"
     assert_equal  'Yes' , case_header.on_hold , "Case put on hold"
     assert_equal  'Received' , case_header.hold_code , "On Hold Code for Case"
    
@@ -417,16 +453,19 @@ fixtures :item_inner_packs
      
     # Check the valida shipment
     post @url, 
+     
+    shipment: { 
       client: @client,
       warehouse: @warehouse,
       channel: @channel,
       building:@building,
       location: @location,
+      shipment_nbr: @shipment_nbr,
       case_id: @case_id,
       item: @item,
       quantity: @quantity,
       innerpack_qty: @innerpack_qty
-     
+     }
     assert_equal 200, status , 'Error in service'
     message =  JSON.parse(response.body)
      
@@ -445,16 +484,19 @@ fixtures :item_inner_packs
      
     # Check the valida shipment
     post @url, 
+  
+    shipment: {
       client: @client,
       warehouse: @warehouse,
       channel: @channel,
       building:@building,
       location: @location,
+      shipment_nbr: @shipment_nbr,
       case_id: @case_id,
       item: asn_details(:two).item,
       quantity: @quantity,
       innerpack_qty: @innerpack_qty + 10
-     
+    } 
     assert_equal 200, status , 'Error in service'
     message =  JSON.parse(response.body)
      
@@ -469,4 +511,3 @@ fixtures :item_inner_packs
  
  
   end
-  
