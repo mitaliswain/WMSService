@@ -163,6 +163,10 @@ module ReceiveValidation
          
       end
        { status: valid, message: error}  
+       
+      rescue => error
+      { status: false, message: [error.to_s] }
+
     end
  end    
 end

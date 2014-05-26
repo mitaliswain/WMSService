@@ -31,7 +31,7 @@ fixtures :item_inner_packs
     @configuration = GlobalConfiguration.get_configuration(@condition)
   end  
 
-  def test_validate_location
+  def test_location_not_found_if_yard_managment_is_true
     url = '/shipment/location/validate'
     post url, 
     
@@ -127,8 +127,6 @@ fixtures :item_inner_packs
   end
   
   
-   
-  
   def test_validate_location_type
     url = '/shipment/location/validate'
     post url, 
@@ -150,8 +148,6 @@ fixtures :item_inner_packs
             expected_message = nil   
         end
         assert_equal expected_message , message["message"][0], "Pending location"
-       
-    
   end
   
 

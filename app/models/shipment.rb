@@ -17,22 +17,22 @@ class Shipment
 
     # workflow = WorkFlow.get_workflow('RECEIVING')
 
-    message = {status: true, message: []}   
+    message = { status: true, message: [] }   
     workflow = OpenStruct.new(
-               {validate: [{ method: 'valid_location?' }, 
+               { validate: [{ method: 'valid_location?' }, 
                            { method: 'valid_shipment?' },
                            { method: 'valid_case?' },
                            { method: 'valid_item?' },
                            { method: 'valid_received_quantity?' }
                           ],
-                process:  [{ method: 'create_case' },
+                 process:  [{ method: 'create_case' },
                            { method: 'update_shipment' },
                            { method: 'update_location' },
                            { method: 'update_innerpack_quantity'}
                           ],
-                trigger:  [],
-                house_keeping:  []
-               })     
+                 trigger:  [],
+                 house_keeping:  []
+                })     
                   
     workflow.validate.each do |validate|
       message = Shipment.send(validate[:method], shipment)
