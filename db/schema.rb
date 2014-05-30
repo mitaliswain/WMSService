@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519211107) do
+ActiveRecord::Schema.define(version: 20140530032042) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -707,6 +707,29 @@ ActiveRecord::Schema.define(version: 20140519211107) do
     t.datetime "created_date"
     t.string   "created_user"
     t.string   "created_prc"
+    t.datetime "update_date"
+    t.string   "updated_user"
+    t.string   "updated_prc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.string   "client"
+    t.string   "message_id"
+    t.string   "message_description"
+    t.string   "message_type"
+    t.integer  "message_severity"
+    t.string   "attribute1"
+    t.string   "attribute2"
+    t.string   "attribute3"
+    t.string   "attribute4"
+    t.string   "attribute5"
+    t.string   "attribute6"
+    t.string   "attribute7"
+    t.string   "attribute8"
+    t.string   "attribute9"
+    t.string   "attribute10"
     t.datetime "update_date"
     t.string   "updated_user"
     t.string   "updated_prc"

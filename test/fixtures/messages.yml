@@ -1,0 +1,281 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+no_param:
+  client: WM
+  message_id: one
+  message_description: This message has no parameters
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString
+
+one_param:
+  client: WM
+  message_id: two
+  message_description: 'This message has #{message_param[0]} parameter'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString
+  
+multiple_param:
+  client: WM
+  message_id: three
+  message_description: 'This message has #{message_param[0]} parameters & first param is #{message_param[1]}, second one is #{message_param[2]}'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString
+  
+RCV0001:
+  client: WM
+  message_id: RCV0001
+  message_description: 'Location #{message_param[0]} not found'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString
+
+RCV0002:
+  client: WM
+  message_id: RCV0002
+  message_description: 'Location #{message_id} is not valid receiving location'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString'
+  
+RCV0003:
+  client: WM
+  message_id: RCV0003
+  message_description: 'Dock Door occupied by another shipment'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString'  
+
+RCV0004:
+  client: WM
+  message_id: RCV0004
+  message_description: 'Shipment #{message_param[0]} not found'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString
+  
+RCV0005:
+  client: WM
+  message_id: RCV0005
+  message_description: 'Shipment #{message_param[0]} not assigned to this Dock Door'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString 
+
+RCV0006:
+  client: WM
+  message_id: RCV0006
+  message_description: 'Shipment #{message_param[0]} not initiated'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString 
+
+RCV0007:
+  client: WM
+  message_id: RCV0007
+  message_description: 'Enter Case'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString 
+  
+RCV0008:
+  client: WM
+  message_id: RCV0008
+  message_description: 'Case #{message_param[0]} already exists'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString   
+
+RCV0009:
+  client: WM
+  message_id: RCV0009
+  message_description: 'Case #{message_param[0]} does not exist'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString   
+
+RCV0010:
+  client: WM
+  message_id: RCV0010
+  message_description: 'Case #{message_param[0]} already received'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString    
+  
+RCV0011:
+  client: WM
+  message_id: RCV0011
+  message_description: 'Item #{message_param[0]} does not exist in Itemmaster'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString    

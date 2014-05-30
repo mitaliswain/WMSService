@@ -13,27 +13,23 @@ module ReceiveValidation
       @location_master = LocationMaster.where(
                                         client: shipment[:client], warehouse: shipment[:warehouse],
                                         channel: nil, building: nil, barcode: shipment[:location]).first
+      
       return { status: valid, message: error}   if @configuration.Yard_Management == 'f'
 
       # Validating Location       
       case
 
       when @location_master.nil?
-        error << "Location #{shipment[:location]} not found"
+        error << Message.get_message(shipment[:client], 'RCV0001', [shipment[:location]]) 
         valid = false
       
       when @location_master.location_type != 'Pending' 
-        error << 'Can not receive to a non pending Location'
+        error << Message.get_message(shipment[:client], 'RCV0002', [shipment[:location]]) 
         valid = false
 
       when @location_master.record_status != 'Empty'
-           @shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
-          if !@shipment_header.nil? && @shipment_header.first_recieve_dock_door != shipment[:location]  
-              error << "Dock Door occupied by another shipment"
-              valid = false
-          else
-             valid = true 
-          end
+        error << Message.get_message(shipment[:client], 'RCV0003', [shipment[:location]]) 
+        valid = false
     
       end
       { status: valid, message: error}         
@@ -52,15 +48,15 @@ module ReceiveValidation
       case 
         
       when @shipment_header.nil?
-        error << "Shipment #{shipment[:shipment_nbr]} not found"
+        error << Message.get_message(shipment[:client], 'RCV0004', [shipment[:shipment_nbr]]) 
         valid = false
         
       when shipment[:location] !=  @shipment_header.first_recieve_dock_door
-        error << "Shipment #{shipment[:shipment_nbr]} not assigned to this Dock Door"
+        error << Message.get_message(shipment[:client], 'RCV0005', [shipment[:shipment_nbr]]) 
         valid = false
         
       when @shipment_header.record_status!= 'Initiated'
-        error << 'Invalid Shipment status'
+        error << Message.get_message(shipment[:client], 'RCV0006', [shipment[:shipment_nbr]]) 
         valid = false
       else
 
@@ -75,28 +71,28 @@ module ReceiveValidation
       error =[]
       
       @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: 'RECEIVING')
-      @case = CaseHeader.where(client: shipment[:client], case_id: shipment[:case_id]).first
+      @case_header = CaseHeader.where(client: shipment[:client], case_id: shipment[:case_id]).first
       
       #checking whether case exist or not
       case
         
       when shipment[:case_id].nil? || shipment[:case_id].blank?
-        error << "Enter Case"
+        error << Message.get_message(shipment[:client], 'RCV0007', [shipment[:case_id]]) 
         valid = false
         
-      when  @configuration.Receiving_Type == "SKU" && !@case.nil? 
+      when  @configuration.Receiving_Type == "SKU" && !@case_header.nil? 
         
-        error << "Case #{shipment[:case_id]} already exists"
+        error << Message.get_message(shipment[:client], 'RCV0008', [shipment[:case_id]]) 
         valid = false
         
-       when  @configuration.Receiving_Type == "Case" && @case.nil? 
+      when  @configuration.Receiving_Type == "Case" && @case_header.nil? 
         
-        error << "Case #{shipment[:case_id]} does not exist"
+        error << Message.get_message(shipment[:client], 'RCV0009', [shipment[:case_id]])
         valid = false
         
-       when  @configuration.Receiving_Type == "Case" && !@case.nil? && @case.record_status != 'Created' 
+      when  @configuration.Receiving_Type == "Case" && !@case_header.nil? && @case_header.record_status != 'Created' 
         
-        error << "Case #{shipment[:case_id]} already received"
+        error << Message.get_message(shipment[:client], 'RCV0010', [shipment[:case_id]])
         valid = false
         
       end
@@ -110,7 +106,7 @@ module ReceiveValidation
       error =[]
       
      @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, module: 'RECEIVING')
-     item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
+     @item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
      @case_detail = CaseDetail.where(client: shipment[:client], warehouse: shipment[:warehouse],
                                     channel: nil, building: nil, case_id: shipment[:case_id], item: shipment[:item]).first
      @shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], 
@@ -119,15 +115,15 @@ module ReceiveValidation
      #validating item
      
      case
-     when item_master.nil? 
-       error << "Item #{shipment[:item]} does not exist in Itemmaster"
+     when @item_master.nil? 
+       error << Message.get_message(shipment[:client], 'RCV0010', [shipment[:item]])
        valid = false
      
      when @shipment_details.nil?
         error << "Item #{shipment[:item]} not found in this shipment"
         valid = false
        
-     when @configuration.Receiving_Type == 'Case' && !item_master.nil?  && @case_detail.nil?      
+     when @configuration.Receiving_Type == 'Case' && !@item_master.nil?  && @case_detail.nil?      
        error <<  "Item #{shipment[:item]} is not associated to this Case"
        valid = false
     
@@ -163,10 +159,6 @@ module ReceiveValidation
          
       end
        { status: valid, message: error}  
-       
-      rescue => error
-      { status: false, message: [error.to_s] }
-
     end
  end    
 end

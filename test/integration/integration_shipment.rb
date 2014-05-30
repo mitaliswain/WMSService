@@ -32,6 +32,7 @@ fixtures :item_inner_packs
   end  
 
   def test_location_not_found_if_yard_managment_is_true
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/location/validate'
     post url, 
     
@@ -48,37 +49,33 @@ fixtures :item_inner_packs
         } 
        expected_message = '' 
        message =  JSON.parse(response.body)
-       if @configuration.Yard_Management == "t"
-         expected_message = 'Location Locationx not found' 
-       else
-          expected_message = nil    
-       end   
-       assert_equal expected_message , message["message"][0],  "Location not found"
-    
+       expected_message = 'Location Locationx not found'          
+       assert_equal expected_message , message["message"][0],  "Location not found" 
   end
   
-   def test_validate_dock_door
-    url  = '/shipment/location/validate'
-    post url,
+  def test_location_not_found_if_yard_managment_is_false
+    GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))
+    url = '/shipment/location/validate'
+    post url, 
     
-      shipment: { 
+    shipment: {
         client: @client,
         warehouse: @warehouse,
         channel: @channel,
         building:@building,
-        shipment_nbr: asn_headers(:two).shipment_nbr ,
-        location: location_masters(:four).barcode,
+        shipment_nbr: asn_headers(:one).shipment_nbr,
+        location: 'Locationx',
         case_id: @case_id,
         item: @item,
         quantity: @quantity
-      }
+        } 
        message =  JSON.parse(response.body)
-       expected_message = true
-       assert_equal expected_message , message["status"],  "Validate Non Empty dock door"
-    
+       expected_message = nil      
+       assert_equal expected_message , message["message"][0],  "Location not found"    
   end
-  
-  def test_record_status_of_dock_door
+
+  def test_validate_location_type
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/location/validate'
     post url,
       
@@ -94,15 +91,31 @@ fixtures :item_inner_packs
         quantity: @quantity
       }
       message =  JSON.parse(response.body)
-        if @configuration.Yard_Management == "t"
-             expected_message = 'Dock Door occupied by another shipment'
-        else
-            expected_message = nil
-        end
-        assert_equal expected_message , message["message"][0],  "Non Empty Location"
-       
+      expected_message = "Location #{location_masters(:two).barcode} is not valid receiving location"
+      assert_equal expected_message , message["message"][0],  "Non receiving Location"      
   end
-
+  
+  def test_validate_dock_door_status
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
+    url  = '/shipment/location/validate'
+    post url,
+    
+      shipment: { 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: asn_headers(:two).shipment_nbr ,
+        location: location_masters(:four).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      }
+       message =  JSON.parse(response.body)
+       expected_message = 'Dock Door occupied by another shipment'
+       assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door"   
+  end
+  
   
   def test_validate_shipment_number_and_dock_door
     
@@ -189,43 +202,14 @@ fixtures :item_inner_packs
         quantity: @quantity
      } 
        message =  JSON.parse(response.body)
-       expected_message =  'Invalid Shipment status'
+       expected_message =  "Shipment #{asn_headers(:three).shipment_nbr} not initiated"
        assert_equal expected_message , message["message"][0],  "Validate shipment record status"
     
   end
   
-    
-  def test_duplicate_case_SKU
-      update_old = {value: @configuration.Receiving_Type} 
-      GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
-      url = '/shipment/case/validate'
-    
-      post url,
-      
-      shipment: {
-         client: @client,
-         warehouse: @warehouse,
-         channel: @channel,
-         building: @building,
-         shipment_nbr: @shipment_nbr,
-         location: @location,
-         quantity: @quantity,
-         case_id: case_headers(:one).case_id,
-         item: @item
-      }  
-      message = JSON.parse(response.body)
-      expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
-      assert_equal expected_message , message["message"][0], "Case  not found" 
-      GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
-    
-  end
-  
-   def test_case_not_received_case
+  def test_case_case_not_entered
     
       url = '/shipment/case/validate'
-      update_old = {value: @configuration.Receiving_Type} 
-      GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
- 
       
       post url,
        
@@ -237,14 +221,35 @@ fixtures :item_inner_packs
          shipment_nbr: @shipment_nbr,
          location: @location,
          quantity: @quantity,
-         case_id: '@Case1x',
+         case_id:  nil,
          item: @item
       }  
          message = JSON.parse(response.body)
-       if @configuration.Receiving_Type == 'Case'
-         expected_message = 'Case @Case1x does not exist' 
-         assert_equal expected_message , message["message"][0], "Case not found" 
-       end   
+         expected_message = 'Enter Case' 
+         assert_equal expected_message , message["message"][0], "Case not Entered" 
+  end
+  
+  def test_case_not_received_case
+    
+      url = '/shipment/case/validate'
+      update_old = {value: @configuration.Receiving_Type} 
+      GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+      
+      post url,       
+      shipment: { 
+         client: @client,
+         warehouse: @warehouse,
+         channel: @channel,
+         building: @building,
+         shipment_nbr: @shipment_nbr,
+         location: @location,
+         quantity: @quantity,
+         case_id: '@Case1x',
+         item: @item
+      }  
+       message = JSON.parse(response.body)
+       expected_message = 'Case @Case1x does not exist' 
+       assert_equal expected_message , message["message"][0], "Case not found" 
        GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
   end
@@ -254,8 +259,6 @@ fixtures :item_inner_packs
       url = '/shipment/case/validate'
       update_old = {value: @configuration.Receiving_Type} 
       GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
- 
-      
       post url,
       
       shipment: { 
@@ -270,14 +273,36 @@ fixtures :item_inner_packs
          item: @item
        } 
        message = JSON.parse(response.body)
-       if @configuration.Receiving_Type == 'Case'
-         expected_message = "Case #{case_headers(:case_two).case_id} already received"
-         assert_equal expected_message , message["message"][0], "Case  already received" 
-       end   
+       expected_message = "Case #{case_headers(:case_two).case_id} already received"
+       assert_equal expected_message , message["message"][0], "Case already received"  
        GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
   end  
   
+  def test_duplicate_case_SKU
+    update_old = {value: @configuration.Receiving_Type} 
+    GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+    url = '/shipment/case/validate'
+  
+    post url,
+    
+    shipment: {
+       client: @client,
+       warehouse: @warehouse,
+       channel: @channel,
+       building: @building,
+       shipment_nbr: @shipment_nbr,
+       location: @location,
+       quantity: @quantity,
+       case_id: case_headers(:one).case_id,
+       item: @item
+    }  
+    message = JSON.parse(response.body)
+    expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
+    assert_equal expected_message , message["message"][0], "Case  not found" 
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+    
+  end
   
   def test_validate_item_not_in_itemmaster
     

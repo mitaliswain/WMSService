@@ -28,7 +28,7 @@ class ShipmentController < ApplicationController
       'item' => 'valid_item?',
       'shipment_nbr' => 'valid_shipment?',
       'quantity' => 'valid_received_quantity?',
-      'inner_pack' => 'valid_inner_pack?'
+      #'inner_pack' => 'valid_inner_pack?'
     }
     
       if valid_table.key?(params[:to_valiadte])
