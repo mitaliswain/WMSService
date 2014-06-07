@@ -25,10 +25,11 @@ class GlobalConfigurationTest < ActiveSupport::TestCase
  
  test "condition not found throw exception for setting configuration" do
    condition = {client: 'WMX', warehouse: 'WHX', building: nil , channels: nil, module:'RECEIVING'}
+   setup = {value: 'Case'}
    exception = assert_raise(ArgumentError) do 
-     GlobalConfiguration.set_configuration({value: 'Case'}, condition=condition.merge({key: 'Receiving_Type'}))
+     GlobalConfiguration.set_configuration(setup, condition=condition.merge({key: 'Receiving_Type'}))
    end
-   assert_equal "Invalid Argument #{condition}" , exception.message, "Validate the Arguments"
+   assert_equal "Invalid Argument #{condition} or config value #{setup}" , exception.message, "Validate the Arguments"
  end
 
  test "setup criteria not valid" do
@@ -37,7 +38,7 @@ class GlobalConfigurationTest < ActiveSupport::TestCase
    exception = assert_raise(ArgumentError) do 
      GlobalConfiguration.set_configuration(setup, condition=condition.merge({key: 'Receiving_Type'}))
    end
-   assert_equal "Invalid setup #{setup}" , exception.message, "Validate the update"
+   assert_equal "Invalid Argument #{condition} or config value #{setup}" , exception.message, "Validate the update"
  end
 
  

@@ -17,10 +17,10 @@ module ReceiveProcessing
   end
   
   def create_case_header(shipment)
-    location = LocationMaster.where(client: shipment[:client], warehouse: shipment[:warehouse],
-                                    channel: nil, building: nil, barcode: shipment[:location]).first
-    asnheader = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse],
-                                channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+    location = LocationMaster.where(default_key shipment)
+                             .where(barcode: shipment[:location]).first
+    asnheader = AsnHeader.where(default_key shipment)
+                         .where(shipment_nbr: shipment[:shipment_nbr]).first
 
     case_header = CaseHeader.new
     case_header.client = shipment[:client]
@@ -52,14 +52,13 @@ module ReceiveProcessing
     case_header.inner_pack_qty = shipment[:inner_pack_qty]
     # case_detail.coveyable = item_master.coveyable
     case_header.save!
-    return case_header
   end
   
   def create_case_detail(shipment , case_header)
     
     item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
-    asn_detail = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], 
-                                         channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+    asn_detail = AsnDetail.where(default_key shipment)
+                          .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
     case_detail = CaseDetail.new 
     case_detail.client = shipment[:client]
     case_detail.warehouse = shipment[:warehouse]
@@ -96,8 +95,7 @@ module ReceiveProcessing
     case_detail.unit_volume = item_master.unit_vol
     
     case_detail.save!
-   
-    return case_detail
+
   end
     
   def update_shipment(shipment)
@@ -113,7 +111,8 @@ module ReceiveProcessing
     
   def update_asnheader(shipment)
     
-    shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr]).first
+    shipment_header = AsnHeader.where(default_key shipment)
+                               .where(shipment_nbr: shipment[:shipment_nbr]).first
     shipment_header.units_rcvd +=  shipment[:quantity].to_i
     shipment_header.cases_rcvd +=  1
     shipment_header.receiving_started_by = shipment[:user_id] unless shipment[:user_id].nil?
@@ -123,28 +122,24 @@ module ReceiveProcessing
     shipment_header.record_status = 'Receiving in Progress'
     
     shipment_header.save!
-    return shipment_header
     
   end
    
   def update_asndetails(shipment, shipment_header)
-    shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], 
-                                         channel: nil, building: nil, shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
-
+    shipment_details = AsnDetail.where(default_key shipment)
+                                .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
     shipment_details.received_qty += shipment[:quantity].to_i
     shipment_details.cases_rcvd += 1
     shipment_details.record_status = 'Receiving in Progress'
     shipment_details.receiver_comments = shipment[:comments] unless shipment[:comments].nil?
     shipment_details.save!      
-    return shipment_details 
     
    end
 
    def update_location(shipment)
 
-    location_master = LocationMaster.where(
-                                        client: shipment[:client], warehouse: shipment[:warehouse],
-                                        channel: nil, building: nil, barcode: shipment[:location]).first
+    location_master = LocationMaster.where(default_key shipment)
+                                    .where(barcode: shipment[:location]).first
 
     location_master.record_status = "Occupied"
     location_master.save!
@@ -159,25 +154,30 @@ module ReceiveProcessing
    def update_innerpack_quantity(shipment)
 
     item_innerpacks = ItemInnerPack.where(client: shipment[:client], item: shipment[:item])
-
-      if (lambda do
-          item_innerpacks.each do |item_innerpack| 
-              if item_innerpack.innerpack_qty.to_i == shipment[:innerpack_qty].to_i                
-                  return true
-              end    
-          end
-          return false
-         end).call == false
-        
-               new_item_innerpack = ItemInnerPack.create({client: shipment[:client], item: shipment[:item], innerpack_qty: shipment[:innerpack_qty].to_i }) 
-       else
-
-       end     
+    
+      ItemInnerPack.create(client: shipment[:client], 
+                           item: shipment[:item], 
+                           innerpack_qty: shipment[:innerpack_qty].to_i) unless innerpack_exists? item_innerpacks , shipment
 
     { status: true, message: [] }
 
     rescue => error
     { status: false, message: [error.to_s] }
    end
-
+   
+   private    
+   def innerpack_exists? item_innerpacks , shipment
+     item_innerpacks.each do |item_innerpack| 
+          return true if item_innerpack.innerpack_qty.to_i == shipment[:innerpack_qty].to_i 
+     end
+     false                        
+   end
+   
+   def default_key shipment
+      { client:    shipment[:client],
+        warehouse: shipment[:warehouse],
+        building: (shipment[:building].to_s.empty? ? nil : shipment[:building]),
+        channel:  (shipment[:channel].to_s.empty?  ? nil : shipment[:channel]) }
+   end
+ 
 end

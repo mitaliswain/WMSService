@@ -16,17 +16,13 @@ class GlobalConfiguration < ActiveRecord::Base
 
   def self.set_configuration(update, condition)
     self.where(condition).where(enable: true).each do|configuration|
-      begin
         configuration.update_attributes(update) 
-      rescue
-        raise ArgumentError, "Invalid Argument for setting configuration #{update}" 
-      end
     end
      
     self.get_configuration(condition)     
   
-    rescue
-      raise ArgumentError, "Invalid Argument #{condition}"
+    rescue => ex
+         raise ArgumentError, "Invalid Argument #{condition} or config value #{update}"  
   end
 
 

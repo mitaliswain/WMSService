@@ -115,10 +115,31 @@ fixtures :item_inner_packs
        expected_message = 'Dock Door occupied by another shipment'
        assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door"   
   end
+
+  def test_no_validaiton_for_no_Yard_Management
+    GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))
+    url  = '/shipment/location/validate'
+    post url,
+    
+      shipment: { 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: asn_headers(:two).shipment_nbr ,
+        location: location_masters(:four).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      }
+       message =  JSON.parse(response.body)
+       expected_message = nil
+       assert_equal expected_message , message["message"][0],  "No validation of shipment for no yard management"   
+  end
   
   
   def test_validate_shipment_number_and_dock_door
-    
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/shipment_nbr/validate'
     post url, 
     
@@ -127,7 +148,7 @@ fixtures :item_inner_packs
         warehouse: @warehouse,
         channel: @channel,
         building: @building,
-        location: location_masters(:one).barcode,
+        location: location_masters(:four).barcode,
         shipment_nbr: asn_headers(:two).shipment_nbr ,
         case_id: @case_id,
         item: @item,

@@ -183,7 +183,7 @@ two:
   receiving_ended_by: MyString
   first_recieving_date: 2014-04-19 21:06:51
   first_recieving_by: MyString
-  first_recieve_dock_door: Location4
+  first_recieve_dock_door: Location1
   area: MyString
   shipment_verified: MyString
   shipment_verified_date: 2014-04-19 21:06:51
@@ -194,7 +194,7 @@ two:
   alert_buyer: MyString
   override_qa_plan: MyString
   overided_plan: MyString
-  record_status: MyString
+  record_status: Initiated
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString

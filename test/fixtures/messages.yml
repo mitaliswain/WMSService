@@ -279,3 +279,84 @@ RCV0011:
   update_date: 2014-05-29 22:20:42
   updated_user: MyString
   updated_prc: MyString    
+
+
+RCV0012:
+  client: WM
+  message_id: RCV0012
+  message_description: 'Item #{message_param[0]} not found in this shipment'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString    
+ 
+RCV0013:
+  client: WM
+  message_id: RCV0013
+  message_description: 'Item #{message_param[0]} is not associated to this Case'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString  
+  
+RCV0014:
+  client: WM
+  message_id: RCV0014
+  message_description: 'Quantity entered does not match with the qty on the case'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString     
+  
+RCV0015:
+  client: WM
+  message_id: RCV0015
+  message_description: 'Quantity received exceeds shipped quantity'
+  message_type: MyString
+  message_severity: 1
+  attribute1: MyString
+  attribute2: MyString
+  attribute3: MyString
+  attribute4: MyString
+  attribute5: MyString
+  attribute6: MyString
+  attribute7: MyString
+  attribute8: MyString
+  attribute9: MyString
+  attribute10: MyString
+  update_date: 2014-05-29 22:20:42
+  updated_user: MyString
+  updated_prc: MyString  
