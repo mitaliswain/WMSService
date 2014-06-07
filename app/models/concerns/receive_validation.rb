@@ -18,9 +18,11 @@ module ReceiveValidation
       case
       when !@location_master
         error << Message.get_message(shipment[:client], 'RCV0001', [shipment[:location]]) 
-      when @location_master.location_type != 'Pending' 
+      
+      when @location_master.location_type != 'Pending'         
         error << Message.get_message(shipment[:client], 'RCV0002', [shipment[:location]]) 
-      when @location_master.record_status != 'Empty'
+      
+      when @location_master.record_status != 'Empty' && !shipment[:shipment_nbr].blank? 
         error << Message.get_message(shipment[:client], 'RCV0003', [shipment[:location]]) 
       end
       { status: (error.size > 0 ? false : true), message: error }         

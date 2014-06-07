@@ -116,6 +116,27 @@ fixtures :item_inner_packs
        assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door"   
   end
 
+  def test_validate_dock_door_status_when_shipment_is_not_givens
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
+    url  = '/shipment/location/validate'
+    post url,
+    
+      shipment: { 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: nil ,
+        location: location_masters(:four).barcode,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      }
+       message =  JSON.parse(response.body)
+       expected_message = nil
+       assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door when shipment not entered"   
+  end
+
   def test_no_validaiton_for_no_Yard_Management
     GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))
     url  = '/shipment/location/validate'
@@ -226,6 +247,27 @@ fixtures :item_inner_packs
        expected_message =  "Shipment #{asn_headers(:three).shipment_nbr} not initiated"
        assert_equal expected_message , message["message"][0],  "Validate shipment record status"
     
+  end
+  
+  def test_validate_if_the_shipment_is_received_to_pre_define_dock_door
+    url  = '/shipment/shipment_nbr/validate'
+    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
+    post url,
+    
+      shipment: { 
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        shipment_nbr: asn_headers(:two).shipment_nbr ,
+        location: nil,
+        case_id: @case_id,
+        item: @item,
+        quantity: @quantity
+      }
+       message =  JSON.parse(response.body)
+       expected_message = 'Shipment Shipment2 not assigned to this Dock Door'
+       assert_equal expected_message , message["message"][0],  "Shipment not received at incorrect Location"       
   end
   
   def test_case_case_not_entered
