@@ -51,8 +51,19 @@ class GlobalConfigurationTest < ActiveSupport::TestCase
  test "condition not found throw exception new API" do
    condition = {client: 'WM', warehouse: 'WHX', building: nil , channel: nil}
    configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING')
-   exception = assert_raise(ArgumentError) { configuration.Receiving_Type}
+   exception = assert_raise(ArgumentError) { configuration.get.Receiving_Type}
    assert_equal "Invalid Argument #{condition.merge(module:'RECEIVING')}" , exception.message, "Validate the message"
  end
+ 
+  test "set the correct configuration new API" do
+   condition = {client: 'WM', warehouse: 'WH1', building: nil , channel: nil}
+   configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING').get
+   configuration.Receiving_Type = 'Case'
+   configuraiton.post
+   new_configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING').get
+   expected_value = 'Case'  
+   assert_equal expected_value, new_configuration.Receiving_Type, "Get correct configuration for API"
+ end
+
  
 end

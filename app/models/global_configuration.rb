@@ -64,11 +64,19 @@ class GlobalConfiguration < ActiveRecord::Base
      if configuration_hash.empty?
        raise ArgumentError, "Invalid Argument #{self.option}"
      else
-        return OpenStruct.new(configuration_hash.symbolize_keys)
+        return Configs.new(configuration_hash.merge(option: self.option))
      end
       
    rescue
      raise ArgumentError, "Invalid Argument #{self.option}"
   end
+  
 
+
+end
+
+class Configs < OpenStruct
+   
+  def save   
+  end
 end
