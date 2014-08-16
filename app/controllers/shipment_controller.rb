@@ -21,6 +21,19 @@ class ShipmentController < ApplicationController
     render json: shipment_hash
   end
 
+  def update
+    shipment = params[:shipment]
+    field_to_update = params[:field_to_update]
+    shipment_hash = AsnHeader.where(client: shipment[:client],
+                                   warehouse: shipment[:warehouse],
+                                   channel: shipment[:channel],
+                                   building: shipment[:building],
+                                   shipment_nbr: params[:shipment_nbr]).first                    
+    shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
+    shipment_hash.save
+    render json: shipment_hash
+  end
+
   def validate
      valid_table = {
       'location' => 'valid_location?',

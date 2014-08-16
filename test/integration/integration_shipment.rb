@@ -503,8 +503,8 @@ fixtures :item_inner_packs
     } 
     assert_equal 200, status , 'message in service'
     message =  JSON.parse(response.body)
-     
-    assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
+    
+    assert_equal 'Shipment received successfully' , message["message"][0],  "Shipment received successfully"
     
     asn_header = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
@@ -593,5 +593,22 @@ fixtures :item_inner_packs
   
     end
  
+  def test_the_update_of_single_field
+    url = '/shipment/Shipment1/update'
+    post url, 
+    shipment: {
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+    },
+    field_to_update: {
+        column: 'door_door',
+        value: 'Location2',
+        } 
+
+    assert_response :success        
+  end
+
  
   end

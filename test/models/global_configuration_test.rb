@@ -20,7 +20,7 @@ class GlobalConfigurationTest < ActiveSupport::TestCase
    condition = {client: 'WM', warehouse: 'WH1', building: nil , channel: nil, module:'RECEIVING'}
    configuration = GlobalConfiguration.set_configuration({value: 'Case'}, condition.merge({key: 'Receiving_Type'}))
    expected_value = 'Case'    
-   assert_equal expected_value, configuration.Receiving_Type, "Get correct configuration"
+   assert_equal expected_value, configuration.Receiving_Type, "Set correct configuration"
  end
  
  test "condition not found throw exception for setting configuration" do
@@ -51,8 +51,22 @@ class GlobalConfigurationTest < ActiveSupport::TestCase
  test "condition not found throw exception new API" do
    condition = {client: 'WM', warehouse: 'WHX', building: nil , channel: nil}
    configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING')
-   exception = assert_raise(ArgumentError) { configuration.Receiving_Type}
+   exception = assert_raise(ArgumentError) { configuration.get.Receiving_Type}
    assert_equal "Invalid Argument #{condition.merge(module:'RECEIVING')}" , exception.message, "Validate the message"
  end
  
+ test "set the correct configuration new API" do
+   condition = {client: 'WM', warehouse: 'WH1', building: nil , channel: nil, module:'RECEIVING'}
+   configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING').get
+   
+   new_type =  (configuration.Receiving_Type == 'Case' ? 'SKU' : 'Case')  
+   puts "To be: #{new_type}"
+   configuration.Receiving_Type = new_type
+   configuration.set
+
+    
+   expected_value = new_type      
+   configuration = GlobalConfiguration.options(condition).options(module:'RECEIVING').get
+   assert_equal expected_value, configuration.Receiving_Type, "Set correct configuration for new API"
+ end
 end
