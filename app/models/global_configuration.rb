@@ -70,6 +70,8 @@ class GlobalConfiguration < ActiveRecord::Base
        config_set
      end
   end
+  
+
 
   def set update_hash
     
@@ -99,5 +101,5 @@ class ConfigSet < OpenStruct
     diff_hash
     
   end
-  
-end
+ 
+end  
