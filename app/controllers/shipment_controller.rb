@@ -1,9 +1,7 @@
 class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
-    message = {}
-    message[:message] = 'under constuction'
-    render json: message
+    render json: (Shipment.all(params[:client], params[:warehouse]))
   end
 
   def receive
@@ -21,7 +19,8 @@ class ShipmentController < ApplicationController
     render json: shipment_hash
   end
 
-  def update
+  def update_shipment_header
+
     shipment = params[:shipment]
     field_to_update = params[:field_to_update]
     shipment_hash = AsnHeader.where(client: shipment[:client],
@@ -33,6 +32,21 @@ class ShipmentController < ApplicationController
     shipment_hash.save
     render json: shipment_hash
   end
+
+  def update_shipment_detail
+    shipment = params[:shipment]
+    field_to_update = params[:field_to_update]
+    shipment_hash = AsnDetail.where(client: shipment[:client],
+                                   warehouse: shipment[:warehouse],
+                                   channel: shipment[:channel],
+                                   building: shipment[:building],
+                                   shipment_nbr: params[:shipment_nbr]).first                    
+    shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
+    shipment_hash.save
+    render json: shipment_hash
+  end
+
+
 
   def validate
      valid_table = {

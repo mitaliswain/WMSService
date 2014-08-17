@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   get 'shipment/:shipment_nbr' => 'shipment#show' 
 
+  get 'shipment' => 'shipment#index' 
+
   post 'shipment/:to_valiadte/validate' => 'shipment#validate' 
   
 
