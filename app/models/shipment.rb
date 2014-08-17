@@ -47,7 +47,11 @@ class Shipment
              house_keeping:  []
             }    
   end  
-     
+  
+  def self.all(client, warehouse, channel=nil, building=nil) 
+    AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 
+  end
+    
   def where(shipment)
      
 
