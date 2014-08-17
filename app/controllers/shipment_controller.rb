@@ -19,7 +19,7 @@ class ShipmentController < ApplicationController
     render json: shipment_hash
   end
 
-  def update_shipment_header
+  def update_header
 
     shipment = params[:shipment]
     field_to_update = params[:field_to_update]
@@ -29,7 +29,7 @@ class ShipmentController < ApplicationController
     render json: shipment_hash
   end
 
-  def update_shipment_detail
+  def update_detail
     shipment = params[:shipment]
     field_to_update = params[:field_to_update]
     shipment_hash = AsnDetail.find(params[:id])                
