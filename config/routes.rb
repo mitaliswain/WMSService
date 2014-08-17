@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   
   
   post 'shipment/:shipment_nbr/receive' => 'shipment#receive' 
-  post 'shipment/:shipment_nbr/update' => 'shipment#update' 
+  post 'shipment/:id/update_header' => 'shipment#update_header'
+  post 'shipment/:id/update_detail' => 'shipment#update_detail' 
   
   get 'shipment/:shipment_nbr' => 'shipment#show' 
 

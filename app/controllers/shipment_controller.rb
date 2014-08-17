@@ -23,11 +23,7 @@ class ShipmentController < ApplicationController
 
     shipment = params[:shipment]
     field_to_update = params[:field_to_update]
-    shipment_hash = AsnHeader.where(client: shipment[:client],
-                                   warehouse: shipment[:warehouse],
-                                   channel: shipment[:channel],
-                                   building: shipment[:building],
-                                   shipment_nbr: params[:shipment_nbr]).first                    
+    shipment_hash = AsnHeader.find(params[:id])                 
     shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
     shipment_hash.save
     render json: shipment_hash
@@ -36,11 +32,7 @@ class ShipmentController < ApplicationController
   def update_shipment_detail
     shipment = params[:shipment]
     field_to_update = params[:field_to_update]
-    shipment_hash = AsnDetail.where(client: shipment[:client],
-                                   warehouse: shipment[:warehouse],
-                                   channel: shipment[:channel],
-                                   building: shipment[:building],
-                                   shipment_nbr: params[:shipment_nbr]).first                    
+    shipment_hash = AsnDetail.find(params[:id])                
     shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
     shipment_hash.save
     render json: shipment_hash
