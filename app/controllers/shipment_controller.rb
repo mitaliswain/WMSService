@@ -20,13 +20,15 @@ class ShipmentController < ApplicationController
   end
 
   def update_header
-
-    shipment = params[:shipment]
-    field_to_update = params[:field_to_update]
-    shipment_hash = AsnHeader.find(params[:id])                 
-    shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
-    shipment_hash.save
-    render json: shipment_hash
+    asn = AsnHeader.new
+    render json: asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
+    
+  end
+  
+  def add_header
+    asn = AsnHeader.new
+    render json: asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
+    
   end
 
   def update_detail
