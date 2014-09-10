@@ -1,15 +1,13 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
   
-  
-  
-  post 'shipment/:shipment_nbr/receive' => 'shipment#receive' 
-  post 'shipment/:id/update_header' => 'shipment#update_header'
-  post 'shipment/:id/update_detail' => 'shipment#update_detail' 
-  
+  get 'shipment/' => 'shipment#index' 
   get 'shipment/:shipment_nbr' => 'shipment#show' 
 
-  get 'shipment' => 'shipment#index' 
-
+  post 'shipment/add_header' => 'shipment#add_header'
+  post 'shipment/:id/update_header' => 'shipment#update_header'
+  post 'shipment/:id/update_detail' => 'shipment#update_detail' 
+    
+  post 'shipment/:shipment_nbr/receive' => 'shipment#receive' 
   post 'shipment/:to_valiadte/validate' => 'shipment#validate' 
   
 
