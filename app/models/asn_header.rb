@@ -1,3 +1,5 @@
+include Utility
+
 class AsnHeader < ActiveRecord::Base
   validates_uniqueness_of :shipment_nbr, scope: :client
   validates_presence_of  :client, :warehouse, :shipment_nbr
@@ -29,24 +31,8 @@ class AsnHeader < ActiveRecord::Base
   end
 
   
-  def valid_app_parameters?(app_parameters)
-    return set_invalid_message(:client)    if !app_parameters.has_key?(:client) || app_parameters [:client].nil? 
-    return set_invalid_message(:warehouse) if !app_parameters.has_key?(:warehouse) || app_parameters [:warehouse].nil?     
-    return set_invalid_message(:channel)   if !app_parameters.has_key?(:channel)
-    return set_invalid_message(:building)  if !app_parameters.has_key?(:building)        
-    set_valid_message
-  end
-  
   def valid_data?(fields_to_update)
     true
   end 
    
-  def set_invalid_message(invalid_field)
-    @message = { status: false, message: ["Invalid field: #{invalid_field}"] }
-  end
-  
-  def set_valid_message(message=nil)
-    @message = { status: true, message: ["validation pass: #{message}"] }
-  end
-  
 end
