@@ -32,12 +32,8 @@ class ShipmentController < ApplicationController
   end
 
   def update_detail
-    shipment = params[:shipment]
-    field_to_update = params[:field_to_update]
-    shipment_hash = AsnDetail.find(params[:id])                
-    shipment_hash.attributes =  {field_to_update[:column] => field_to_update[:value]}  
-    shipment_hash.save
-    render json: shipment_hash
+    asn = AsnDetail.new
+    render json: asn.update_shipment_detail(params[:app_parameters], params[:id], params[:fields_to_update])
   end
 
 
