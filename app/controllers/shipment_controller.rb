@@ -22,13 +22,15 @@ class ShipmentController < ApplicationController
   def update_header
     asn = AsnHeader.new
     render json: asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
-    
+  rescue Exception => e
+    render asn.set_error_message(e.message)    
   end
   
   def add_header
     asn = AsnHeader.new
     render json: asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
-    
+  rescue Exception => e
+    render json: asn.set_error_message(e.message).to_json
   end
 
   def update_detail

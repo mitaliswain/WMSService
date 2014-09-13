@@ -83,12 +83,12 @@ class AsnHeaderTest < ActiveSupport::TestCase
      
      fields_to_update = {purchase_order_nbr: asn_headers(:one).shipment_nbr + 'New',
                          appointment_nbr: '12345',
-                         asn_type: asn_headers(:one).asn_type.to_s + 'New'   }
+                         asn_type: asn_headers(:one).asn_type.to_s  }
      asn.update_shipment_header(app_parameters, old_asn.id, fields_to_update)
      new_asn = AsnHeader.find_by_shipment_nbr(asn_headers(:one).shipment_nbr)
      assert_equal(asn_headers(:one).shipment_nbr + 'New', new_asn.purchase_order_nbr, 'Update single field for asn header')
      assert_equal('12345', new_asn.appointment_nbr, ' Check appointment number')
-     assert_equal(asn_headers(:one).asn_type.to_s + 'New', new_asn.asn_type, 'Check ASN Type')
+     assert_equal(asn_headers(:one).asn_type.to_s, new_asn.asn_type, 'Check ASN Type')
      
    end
    
@@ -115,20 +115,50 @@ class AsnHeaderTest < ActiveSupport::TestCase
      fields_to_add = {   shipment_nbr: 'shipmentx',
                          purchase_order_nbr: asn_headers(:one).shipment_nbr + 'New',
                          appointment_nbr: '12345',
-                         asn_type: asn_headers(:one).asn_type.to_s + 'New'   }
+                         asn_type: asn_headers(:one).asn_type.to_s   }
      asn.add_shipment_header(app_parameters, fields_to_add)
      new_asn = AsnHeader.find_by_shipment_nbr('shipmentx')
      assert_equal(asn_headers(:one).shipment_nbr + 'New', new_asn.purchase_order_nbr, 'check purchase_order_nbr')
      assert_equal('12345', new_asn.appointment_nbr, ' Check appointment number')
-     assert_equal(asn_headers(:one).asn_type.to_s + 'New', new_asn.asn_type, 'Check ASN Type')
+     assert_equal(asn_headers(:one).asn_type.to_s , new_asn.asn_type, 'Check ASN Type')
      
    end
-   
 
-end
+   test "add asn header with invalid data" do
+     app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
+     
+     fields_to_add = {   shipment_nbr: 'shipment_invalid_field',
+                         purchase_order_nbr: asn_headers(:one).shipment_nbr + 'New',
+                         appointment_nbr: '12345',
+                         asn_type: 'Invalid asn'   }
+     message =asn.add_shipment_header(app_parameters, fields_to_add)
+     new_asn = AsnHeader.find_by_shipment_nbr('shipment_invalid_field')
+     assert_equal(nil, new_asn, 'Shipment not added')
+     assert_equal(false, message[:status], 'Can not add header with invalid field')     
+   end
 
-class AsnHeader
-  def valid_data?(param)
-    true
+
+  test "validate data with incorrect asn type" do   
+    fields_to_update = {asn_type: 'incorrect asn type'}
+    assert_equal(false, asn.valid_data?(fields_to_update), "Incorrect asn type")
   end
+
+  test "validate data with incorrect multiple fields" do   
+    fields_to_update = {asn_type: 'incorrect asn type', purchase_order_number: ""}
+    assert_equal(false, asn.valid_data?(fields_to_update), "validate data with incorrect multiple fields")
+  end   
+ 
+   test "validate data with correct single field" do   
+    fields_to_update = {asn_type: 'PO'}
+    assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type ")
+  end 
+   
+  test "validate data with correct multiple fields" do   
+    fields_to_update = {asn_type: 'PO', purchase_order_number: "1234"}
+    assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type")
+  end   
+
+
 end
+
+

@@ -5,7 +5,7 @@ one:
   warehouse: WH1
   channel: 
   building: 
-  asn_type: 
+  asn_type: PO
   purchase_order_nbr: MyString
   shipment_nbr: Shipment1
   source: MyString
@@ -121,7 +121,7 @@ two:
   warehouse: WH1
   channel: 
   building: 
-  asn_type: 
+  asn_type: PO
   purchase_order_nbr: MyString
   shipment_nbr: Shipment2
   source: MyString
@@ -237,7 +237,7 @@ three:
   warehouse: WH1
   channel: 
   building: 
-  asn_type: 
+  asn_type: PO
   purchase_order_nbr: MyString
   shipment_nbr: Shipment3
   source: MyString
@@ -353,7 +353,7 @@ four:
   warehouse: WH1
   channel: 
   building: 
-  asn_type: 
+  asn_type: PO
   purchase_order_nbr: MyString
   shipment_nbr: Shipment3_WM2
   source: MyString
