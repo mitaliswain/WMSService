@@ -8,22 +8,21 @@ module Utility
     end
   
    def set_error_message(custom_message=nil)
-      message = @message.nil? ? []: @message[:message] 
+      message = @message.nil? ? [] : @message[:message] 
       message << {error: custom_message}
       @message = { status: false, message: message} 
       @message  
    end
    
    def set_invalid_message(invalid_field, custom_message=nil)
-      message = @message.nil? ? []: @message[:message] 
+      message = @message.nil? ? [] : @message[:message]
       message << {field: invalid_field, msg: "Invalid field: #{custom_message}"}
-      @message = { status: false, message: message} 
+      @message = { status: false, message: message, validation_failure: message} 
       @message
     end
-   
   
     def set_valid_message(message=nil)
-      @message = { status: true, message: [] }
+      @message = { status: true, message: [], validation_failure: [] }
     end
   
 

@@ -1,6 +1,8 @@
 include Utility
 
 class AsnHeader < ActiveRecord::Base
+  attr_reader :message
+  
   validates_uniqueness_of :shipment_nbr, scope: :client
   validates_presence_of  :client, :warehouse, :shipment_nbr
   validates_presence_of  :building, :channel,  :allow_nil => true
@@ -34,9 +36,8 @@ class AsnHeader < ActiveRecord::Base
   def valid_data?(fields_to_update)
     is_valid = true
     fields_to_update.each do |field, value|
-        method ="valid_#{field.to_s}?" 
-        is_valid = is_valid &&  
-                   (respond_to?(method) ? send(method, value)[:status] : true)
+        method ="valid_#{field.to_s}?"
+        is_valid = (respond_to?(method) ? send(method, value)[:status] : true)  && is_valid                  
     end   
     is_valid
   end 
@@ -51,10 +52,10 @@ class AsnHeader < ActiveRecord::Base
   end  
 
   def valid_purchase_order_nbr?(po)
-    if (po.nil? || po.blank?) 
-      set_invalid_message(:po, "Please enter the PO")          
+    if (po.nil? || po.blank? || po == '12') 
+      set_invalid_message(:purchase_order_nbr, "Please enter the PO")          
     else
-       set_valid_message(:po)   
+       set_valid_message(:purchase_order_nbr)   
     end
   end  
    

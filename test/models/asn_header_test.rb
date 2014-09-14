@@ -7,7 +7,7 @@ class AsnHeaderTest < ActiveSupport::TestCase
   fixtures :asn_headers
   
   asn = AsnHeader.new
-  
+ 
   test "with valid data" do
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
@@ -143,18 +143,23 @@ class AsnHeaderTest < ActiveSupport::TestCase
     assert_equal(false, asn.valid_data?(fields_to_update), "Incorrect asn type")
   end
 
-  test "validate data with incorrect multiple fields" do   
-    fields_to_update = {asn_type: 'incorrect asn type', purchase_order_number: ""}
+  test "validate data with incorrect multiple fields" do 
+    asn = AsnHeader.new  
+    fields_to_update = { asn_type: 'invalid',  purchase_order_nbr: '12'}
     assert_equal(false, asn.valid_data?(fields_to_update), "validate data with incorrect multiple fields")
+    assert_equal(:po, asn.message[:message][1][:field], "validate data with incorrect multiple fields")
+    assert_equal(:asn_type, asn.message[:message][0][:field], "validate data with incorrect multiple fields")
+
   end   
  
+
    test "validate data with correct single field" do   
     fields_to_update = {asn_type: 'PO'}
     assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type ")
   end 
    
   test "validate data with correct multiple fields" do   
-    fields_to_update = {asn_type: 'PO', purchase_order_number: "1234"}
+    fields_to_update = {asn_type: 'PO', purchase_order_nbr: "1234"}
     assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type")
   end   
 
