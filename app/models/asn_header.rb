@@ -1,4 +1,5 @@
 include Utility
+include Response
 
 class AsnHeader < ActiveRecord::Base
   attr_reader :message
@@ -14,8 +15,9 @@ class AsnHeader < ActiveRecord::Base
             shipment_hash.attributes =  {field => data} 
          end   
          shipment_hash.save!
+         resource_updated_successfully("Shipment #{id}") 
         end  
-        @message 
+        message 
   end
 
   def add_shipment_header(app_parameters, fields_to_add)
@@ -27,9 +29,10 @@ class AsnHeader < ActiveRecord::Base
          fields_to_add.each do |field, data|
             shipment_hash.attributes =  {field => data} 
          end   
-         shipment_hash.save!          
-      end        
-      return @message
+         shipment_hash.save!    
+         resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.id}")                 
+       end        
+       message  
   end
 
   
@@ -37,7 +40,7 @@ class AsnHeader < ActiveRecord::Base
     is_valid = true
     fields_to_update.each do |field, value|
         method ="valid_#{field.to_s}?"
-        is_valid = (respond_to?(method) ? send(method, value)[:status] : true)  && is_valid                  
+        is_valid = (respond_to?(method) ? send(method, value) : true)  && is_valid                 
     end   
     is_valid
   end 
@@ -45,17 +48,19 @@ class AsnHeader < ActiveRecord::Base
   def valid_asn_type?(asn_type)
     valid_asn_type=['PO', 'Inbound', 'Warehouse Transfer']
     if valid_asn_type.include? asn_type 
-       set_valid_message(:asn_type)      
+       true    
     else
-       set_invalid_message(:asn_type, "Not a valid asn type") 
+       validation_failed('422', :asn_type, 'Invalid ASN Type')
+       false
     end
   end  
 
   def valid_purchase_order_nbr?(po)
-    if (po.nil? || po.blank? || po == '12') 
-      set_invalid_message(:purchase_order_nbr, "Please enter the PO")          
+    if (po.nil? || po.blank?) 
+      validation_failed('422', :purchase_order_nbr, 'Invalid purchase order')      
+      false
     else
-       set_valid_message(:purchase_order_nbr)   
+       true
     end
   end  
    
