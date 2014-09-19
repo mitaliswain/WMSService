@@ -1,7 +1,16 @@
 class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
-    render json: (Shipment.all(params[:client], params[:warehouse]))
+     shipment_hash = []
+     (Shipment.all(params[:client], params[:warehouse])).each do |shipment|
+       shipment_hash << 
+       Shipment.new.where(client: shipment.client,
+                                   warehouse: shipment.warehouse,
+                                   channel: shipment.channel,
+                                   building: shipment.building,
+                                   shipment_nbr: shipment.shipment_nbr)
+     end
+     render json: shipment_hash
   end
 
   def receive
@@ -21,18 +30,18 @@ class ShipmentController < ApplicationController
 
   def update_header
     asn = AsnHeader.new
-    render json: asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update]), 
-           status: message[:status]
-  rescue Exception => e
-    render asn.set_error_message(e.message)    
+    message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
+    render json: message, status: message[:status]
+  #rescue Exception => e
+    #render json: asn.fatal_error(e.message), status: '500'    
   end
   
   def add_header
     asn = AsnHeader.new
     message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
-   #rescue Exception => e
-    #render json: asn.set_error_message(e.message).to_json, status: '500'
+   rescue Exception => e
+    render json: asn.fatal_error(e.message).to_json, status: '500'
   end
 
   def update_detail

@@ -50,26 +50,29 @@ module Response
 
  def resource_not_found(resource)
    @message = {status:  '404',
-    message: "#{resource} not found",
+    message: "#{resource} not found"
     }
  end   
 
+ def fatal_error(message)
+   @message = {status:  '500',
+    message: message
+    }
+ end   
+
+
  def validation_failed(status_code, field_name, message)
-  errors = @message.nil? ? []:  @message[:errors]
+  errors = @message.nil? || @message[:errors].nil? ? []:  @message[:errors]
   errors << {code: status_code,
              field: field_name,
              message: message
             }
-   @message = { status: '422' ,
+    @message = { status: '422' ,
     message: 'Validation Failed' ,
-    errors: errors
-    
+    errors: errors    
  } 
- end
  
- def message
-   @message
- end
+end
 
 private
 def get_content(resource_link)

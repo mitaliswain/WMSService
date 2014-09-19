@@ -1,12 +1,66 @@
 module Utility
+    INVALID_FIELD = '422'
     def valid_app_parameters?(app_parameters)
-      return set_invalid_message(:client)    if !app_parameters.has_key?(:client) || app_parameters [:client].nil? 
-      return set_invalid_message(:warehouse) if !app_parameters.has_key?(:warehouse) || app_parameters [:warehouse].nil?     
-      return set_invalid_message(:channel)   if !app_parameters.has_key?(:channel)
-      return set_invalid_message(:building)  if !app_parameters.has_key?(:building)        
-      set_valid_message
+      if     (valid_client?(app_parameters) ||
+              valid_warehouse?(app_parameters) ||
+              valid_channel?(app_parameters) ||
+              valid_building?(app_parameters) 
+            )         
+         true
+      else
+         false
+      end   
     end
+    
+    def valid_client?(app_parameters)
+       case 
+         when !app_parameters.has_key?(:client) 
+          validation_failed(INVALID_FIELD, :client, 'Client is missing')
+          false
+         when app_parameters[:client].nil?  
+          validation_failed(INVALID_FIELD, :client, 'Client key has no value')
+          false
+         when app_parameters[:client] != 'WM' 
+           validation_failed(INVALID_FIELD, :client, "#{app_parameters[:client]} : No such client exists")
+           false
+        else
+          true   
+       end  
+    end
+   
+   def valid_warehouse?(app_parameters)
+       case 
+         when !app_parameters.has_key?(:warehouse) 
+          validation_failed(INVALID_FIELD, :warehouse, 'Warehouse missing')
+          false
+         when app_parameters[:client].nil?  
+          validation_failed(INVALID_FIELD, :warehouse, 'Warehouse has no value')
+        else
+          true   
+       end  
+    end 
+   
+   def valid_channel?(app_parameters)
+     if !app_parameters.has_key?(:channel)
+       validation_failed(INVALID_FIELD, :channel, 'Channel missing')
+       false
+     else
+       true  
+     end
+   end
+   
+   def valid_building?(app_parameters)
+     if !app_parameters.has_key?(:channel)
+       validation_failed(:channel, 'Channel missing')
+       false
+     else
+       true
+     end  
+   end
   
+     
+    
+=begin  
    def set_error_message(custom_message=nil)
       message = @message.nil? ? [] : @message[:message] 
       message << {error: custom_message}
@@ -25,6 +79,6 @@ module Utility
       @message = { status: true, message: [], validation_failure: [] }
     end
   
-
+=end
   
 end
