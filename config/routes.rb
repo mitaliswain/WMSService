@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'shipment/' => 'shipment#index' 
   get 'shipment/:shipment_nbr' => 'shipment#show' 
 
+  post 'shipment/add_detail'        => 'shipment#add_detail' 
   post 'shipment/add_header' => 'shipment#add_header'
   post 'shipment/:id/update_header' => 'shipment#update_header'
   post 'shipment/:id/update_detail' => 'shipment#update_detail' 
