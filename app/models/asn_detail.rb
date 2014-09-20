@@ -18,6 +18,7 @@ class AsnDetail < ActiveRecord::Base
         message 
   end
   
+  
   def add_shipment_detail(app_parameters, fields_to_add)
        if valid_data?(fields_to_add)
          shipment_hash = AsnDetail.new 
