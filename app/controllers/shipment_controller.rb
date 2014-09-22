@@ -20,20 +20,16 @@ class ShipmentController < ApplicationController
 
   def show
     shipment = Shipment.new
-    shipment_hash = shipment.where(client: params[:client],
-                                   warehouse: params[:warehouse],
-                                   channel: params[:channel],
-                                   building: params[:building],
-                                   shipment_nbr: params[:shipment_nbr])
+    shipment_hash = shipment.where(id: params[:id])
     render json: shipment_hash
   end
 
   def update_header
     asn = AsnHeader.new
     message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
-    render json: message, status: message[:status]
-  rescue Exception => e
-    render json: asn.fatal_error(e.message), status: '500'    
+    render json: message.to_json, status: message[:status]
+   rescue Exception => e
+    render json: asn.fatal_error(e.message).to_json, status: '500'
   end
   
   def add_header
@@ -57,12 +53,11 @@ class ShipmentController < ApplicationController
     asn = AsnDetail.new
     message = asn.update_shipment_detail(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
-   rescue Exception => e
-    render json: asn.fatal_error(e.message).to_json, status: '500'
+   #rescue Exception => e
+    #logger.debug(e.message)
+    #render json: asn.fatal_error(e.message).to_json, status: '500'
  
   end
-
-
 
   def validate
      valid_table = {
