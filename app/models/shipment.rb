@@ -82,11 +82,11 @@ class Shipment
     AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 
   end
     
-  def where(shipment)
+  def where(shipment_query)
      
-
-    shipment_header = AsnHeader.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr]).first
-    shipment_details = AsnDetail.where(client: shipment[:client], warehouse: shipment[:warehouse], channel: shipment[:channel], building: shipment[:building], shipment_nbr: shipment[:shipment_nbr])
+    p shipment_query
+    shipment_header = AsnHeader.where(shipment_query).first
+    shipment_details = AsnDetail.where(asn_header_id: shipment_header.id)
     shipment_hash = { shipment_header:  shipment_header , shipment_detail: shipment_details }
   
     shipment_hash

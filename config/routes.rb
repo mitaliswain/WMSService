@@ -1,15 +1,21 @@
 Rails.application.routes.draw do 
   
-  get 'shipment/' => 'shipment#index' 
-  get 'shipment/:shipment_nbr' => 'shipment#show' 
 
-  post 'shipment/add_detail'        => 'shipment#add_detail' 
-  post 'shipment/add_header' => 'shipment#add_header'
-  post 'shipment/:id/update_header' => 'shipment#update_header'
-  post 'shipment/:id/update_detail' => 'shipment#update_detail' 
     
-  post 'shipment/:shipment_nbr/receive' => 'shipment#receive' 
-  post 'shipment/:to_valiadte/validate' => 'shipment#validate' 
+    namespace :shipment do
+        get '' ,  action: 'index'
+        get ':id', action: 'show' 
+        
+        post 'add_detail', action: 'add_detail'
+        post 'add_header', action: 'add_header'
+        
+        post ':id/update_header',  action: 'update_header'
+        post ':id/update_detail',  action: 'update_detail'
+        
+        post ':shipment_nbr/receive',  action: 'receive'
+        post ':shipment_nbr/validate',  action: 'validate'
+
+  end
   
 
   # The priority is based upon order of creation: first created -> highest priority.

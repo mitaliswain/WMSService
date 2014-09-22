@@ -1,11 +1,11 @@
 module Utility
     INVALID_FIELD = '422'
     def valid_app_parameters?(app_parameters)
-      if     (valid_client?(app_parameters) ||
-              valid_warehouse?(app_parameters) ||
-              valid_channel?(app_parameters) ||
-              valid_building?(app_parameters) 
-            )         
+      app_parameters = app_parameters.symbolize_keys
+      if     (valid_client?(app_parameters)     ||
+              valid_warehouse?(app_parameters)  ||
+              valid_channel?(app_parameters)    ||
+              valid_building?(app_parameters) )         
          true
       else
          false
@@ -51,7 +51,7 @@ module Utility
    
    def valid_building?(app_parameters)
      if !app_parameters.has_key?(:channel)
-       validation_failed(:channel, 'Channel missing')
+       validation_failed(INVALID_FIELD, :channel, 'Channel missing')
        false
      else
        true
@@ -59,26 +59,13 @@ module Utility
    end
   
      
-    
-=begin  
-   def set_error_message(custom_message=nil)
-      message = @message.nil? ? [] : @message[:message] 
-      message << {error: custom_message}
-      @message = { status: false, message: message} 
-      @message  
-   end
-   
-   def set_invalid_message(invalid_field, custom_message=nil)
-      message = @message.nil? ? [] : @message[:message]
-      message << {field: invalid_field, msg: "Invalid field: #{custom_message}"}
-      @message = { status: false, message: message, validation_failure: message} 
-      @message
-    end
-  
-    def set_valid_message(message=nil)
-      @message = { status: true, message: [], validation_failure: [] }
-    end
-  
-=end
+class ::Hash
+
+  def method_missing(name)
+    return self[name] if key? name
+    self.each { |k,v| return v if k.to_s.to_sym == name }
+    super.method_missing name
+  end
+end
   
 end
