@@ -30,7 +30,7 @@ fixtures :item_inner_packs
     @condition = { client: @client, warehouse: @warehouse, building: @building, channel: @channel, module: 'RECEIVING' }
     @configuration = GlobalConfiguration.get_configuration(@condition)
   end  
-
+ 
   def test_location_not_found_if_yard_managment_is_true
     GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/location/validate'
@@ -50,7 +50,7 @@ fixtures :item_inner_packs
        expected_message = '' 
        message =  JSON.parse(response.body)
        expected_message = 'Location Locationx not found'          
-       assert_equal expected_message , message["message"][0],  "Location not found" 
+       assert_equal expected_message , message.errors[0].message,  "Location not found" 
   end
   
   def test_location_not_found_if_yard_managment_is_false
@@ -70,8 +70,8 @@ fixtures :item_inner_packs
         quantity: @quantity
         } 
        message =  JSON.parse(response.body)
-       expected_message = nil      
-       assert_equal expected_message , message["message"][0],  "Location not found"    
+       expected_status = '200'      
+       assert_equal expected_status , message.status,  "Location not found"    
   end
 
   def test_validate_location_type
@@ -92,7 +92,7 @@ fixtures :item_inner_packs
       }
       message =  JSON.parse(response.body)
       expected_message = "Location #{location_masters(:two).barcode} is not valid receiving location"
-      assert_equal expected_message , message["message"][0],  "Non receiving Location"      
+      assert_equal expected_message , message.errors[0].message,  "Non receiving Location"      
   end
   
   def test_validate_dock_door_status
@@ -113,7 +113,7 @@ fixtures :item_inner_packs
       }
        message =  JSON.parse(response.body)
        expected_message = 'Dock Door occupied by another shipment'
-       assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door"   
+       assert_equal expected_message , message.errors[0].message,  "Validate Non Empty dock door"   
   end
 
   def test_validate_dock_door_status_when_shipment_is_not_givens
@@ -133,8 +133,8 @@ fixtures :item_inner_packs
         quantity: @quantity
       }
        message =  JSON.parse(response.body)
-       expected_message = nil
-       assert_equal expected_message , message["message"][0],  "Validate Non Empty dock door when shipment not entered"   
+       expected_status = '200'
+       assert_equal expected_status , message.status,  "Validate Non Empty dock door when shipment not entered"   
   end
 
   def test_no_validaiton_for_no_Yard_Management
@@ -154,8 +154,8 @@ fixtures :item_inner_packs
         quantity: @quantity
       }
        message =  JSON.parse(response.body)
-       expected_message = nil
-       assert_equal expected_message , message["message"][0],  "No validation of shipment for no yard management"   
+       expected_status = '200'
+       assert_equal expected_status , message.status,  "No validation of shipment for no yard management"   
   end
   
   
@@ -177,7 +177,7 @@ fixtures :item_inner_packs
     }
        message =  JSON.parse(response.body)
        expected_message = 'Shipment ' + asn_headers(:two).shipment_nbr + ' not assigned to this Dock Door'
-       assert_equal expected_message , message["message"][0],  "Validate Shipment to the assigned dock door"
+       assert_equal expected_message , message.errors[0].message,  "Validate Shipment to the assigned dock door"
     
   end
   
@@ -199,10 +199,12 @@ fixtures :item_inner_packs
         message =  JSON.parse(response.body)
         if @configuration.Yard_Management == "t"
             expected_message = 'Can not receive to a non pending Location'
+             assert_equal expected_message , message.status, "Pending location"
         else    
-            expected_message = nil   
+            expected_status = '200'   
+             assert_equal expected_status , message.status, "Pending location"
         end
-        assert_equal expected_message , message["message"][0], "Pending location"
+       
   end
   
 
@@ -224,7 +226,7 @@ fixtures :item_inner_packs
       }
         message =  JSON.parse(response.body)
         expected_message = 'Shipment Shipment2x not found'
-        assert_equal expected_message , message["message"][0],  "Shipment not found"
+        assert_equal expected_message , message.errors[0].message,  "Shipment not found"
        
   end
   
@@ -245,7 +247,7 @@ fixtures :item_inner_packs
      } 
        message =  JSON.parse(response.body)
        expected_message =  "Shipment #{asn_headers(:three).shipment_nbr} not initiated"
-       assert_equal expected_message , message["message"][0],  "Validate shipment record status"
+       assert_equal expected_message , message.errors[0].message,  "Validate shipment record status"
     
   end
   
@@ -267,7 +269,7 @@ fixtures :item_inner_packs
       }
        message =  JSON.parse(response.body)
        expected_message = 'Shipment Shipment2 not assigned to this Dock Door'
-       assert_equal expected_message , message["message"][0],  "Shipment not received at incorrect Location"       
+       assert_equal expected_message , message.errors[0].message,  "Shipment not received at incorrect Location"       
   end
   
   def test_case_case_not_entered
@@ -289,7 +291,7 @@ fixtures :item_inner_packs
       }  
          message = JSON.parse(response.body)
          expected_message = 'Enter Case' 
-         assert_equal expected_message , message["message"][0], "Case not Entered" 
+         assert_equal expected_message , message.errors[0].message, "Case not Entered" 
   end
   
   def test_case_not_received_case
@@ -312,7 +314,7 @@ fixtures :item_inner_packs
       }  
        message = JSON.parse(response.body)
        expected_message = 'Case @Case1x does not exist' 
-       assert_equal expected_message , message["message"][0], "Case not found" 
+       assert_equal expected_message , message.errors[0].message, "Case not found" 
        GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
   end
@@ -337,7 +339,7 @@ fixtures :item_inner_packs
        } 
        message = JSON.parse(response.body)
        expected_message = "Case #{case_headers(:case_two).case_id} already received"
-       assert_equal expected_message , message["message"][0], "Case already received"  
+       assert_equal expected_message , message.errors[0].message, "Case already received"  
        GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
   end  
@@ -362,7 +364,7 @@ fixtures :item_inner_packs
     }  
     message = JSON.parse(response.body)
     expected_message = 'Case '+  case_headers(:one).case_id + ' already exists' 
-    assert_equal expected_message , message["message"][0], "Case  not found" 
+    assert_equal expected_message , message.errors[0].message, "Case  not found" 
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
     
   end
@@ -384,7 +386,7 @@ fixtures :item_inner_packs
     }  
         message =  JSON.parse(response.body)
         expected_message = 'Item abcd does not exist in Itemmaster'
-        assert_equal expected_message , message["message"][0],  "Item not found"
+        assert_equal expected_message , message.errors[0].message,  "Item not found"
   end
   
  def test_validate_item_not_in_shipment
@@ -406,7 +408,7 @@ fixtures :item_inner_packs
         
         message = JSON.parse(response.body)
         expected_message = 'Item 123467 not found in this shipment' 
-        assert_equal expected_message , message["message"][0], "Item not found"
+        assert_equal expected_message , message.errors[0].message, "Item not found"
   end
 
   def test_validate_item_in_case
@@ -430,7 +432,7 @@ fixtures :item_inner_packs
     }  
         message =  JSON.parse(response.body)
         expected_message = 'Item 1234678 is not associated to this Case'
-        assert_equal expected_message , message["message"][0],  "Item not found in Case"
+        assert_equal expected_message , message.errors[0].message,  "Item not found in Case"
   end
  
  def test_validate_quantity_in_case
@@ -453,7 +455,7 @@ fixtures :item_inner_packs
     }          
         message =  JSON.parse(response.body)
         expected_message = 'Quantity entered does not match with the qty on the case'
-        assert_equal expected_message , message["message"][0],  "Quantity mismatch"
+        assert_equal expected_message , message.errors[0].message,  "Quantity mismatch"
   end
   
   def test_validate_quantity_for_SKU_receiving
@@ -477,9 +479,8 @@ fixtures :item_inner_packs
      }         
         message =  JSON.parse(response.body)
         expected_message = 'Quantity received exceeds shipped quantity'
-        assert_equal expected_message , message["message"][0],  "Quantity mismatch in SKU"
+        assert_equal expected_message , message.errors[0].message,  "Quantity mismatch in SKU"
   end
-
 
   def test_receive_shipment_SKU
 
@@ -504,7 +505,7 @@ fixtures :item_inner_packs
     assert_equal 200, status , 'message in service'
     message =  JSON.parse(response.body)
     
-    assert_equal 'Shipment received successfully' , message["message"][0],  "Shipment received successfully"
+    assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
     
     asn_header = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
     asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
@@ -528,7 +529,7 @@ fixtures :item_inner_packs
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
-  
+
   def test_item_innerpack_exists_SKU
 
      #puts asn_details(:one).received_qty
@@ -550,10 +551,10 @@ fixtures :item_inner_packs
       quantity: @quantity,
       innerpack_qty: @innerpack_qty
      }
-    assert_equal 200, status , 'Error in service'
+    assert_equal 200, status , 'success message'
     message =  JSON.parse(response.body)
      
-    assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
+    assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
     item_inner_packs = ItemInnerPack.where(client: @client, item: @item)
     assert_equal  1, item_inner_packs.length , "Received with existing innerpack"
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
@@ -584,7 +585,7 @@ fixtures :item_inner_packs
     assert_equal 200, status , 'Error in service'
     message =  JSON.parse(response.body)
      
-    assert_equal 'Shipment received successfully' , message["message"][0],  "Service did not work"
+    assert_equal 'Shipment1 Received Successfully' , message.message,  "Service did not work"
     item_inner_packs = ItemInnerPack.where(client: @client, item: asn_details(:two).item).order(:id)
     assert_equal  2, item_inner_packs.length , "Received with non existing innerpack"
     assert_equal  @innerpack_qty + 10, item_inner_packs[1].innerpack_qty , "New innerpack "
@@ -594,21 +595,19 @@ fixtures :item_inner_packs
     end
  
   def test_the_update_of_single_field
-    url = '/shipment/Shipment1/update'
-    post url, 
-    shipment: {
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building:@building,
-    },
-    field_to_update: {
-        column: 'door_door',
-        value: 'Location2',
-        } 
-
-    assert_response :success        
+    shipment = AsnHeader.where(shipment_nbr: asn_headers(:two).shipment_nbr).first
+    url = "/shipment/#{shipment.id}/update_header"
+    message = post(url, 
+    app_parameters:{
+      client:'WM', warehouse: 'WH1', building: '', channel: ''
+    },  
+    fields_to_update: {
+        door_door: shipment.door_door + 'x'
+        }) 
+    shipment_updated = AsnHeader.where(shipment_nbr: asn_headers(:two).shipment_nbr).first
+    assert_equal 204, status, 'Updated shipment status'
+    assert_equal shipment.door_door + 'x', shipment_updated.door_door, 'Updated shipment data'
+    
   end
 
- 
   end

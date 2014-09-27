@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         post ':id/update_detail',  action: 'update_detail'
         
         post ':shipment_nbr/receive',  action: 'receive'
-        post ':shipment_nbr/validate',  action: 'validate'
+        post ':to_validate/validate',  action: 'validate'
 
   end
   

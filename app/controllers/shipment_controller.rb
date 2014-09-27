@@ -14,8 +14,9 @@ class ShipmentController < ApplicationController
   end
 
   def receive
-    message = Shipment.new.receive_shipment(params[:shipment])
-    render json: message
+    shipment = Shipment.new 
+    shipment.receive_shipment(params[:shipment])
+    render json: shipment.message
   end
 
   def show
@@ -29,6 +30,7 @@ class ShipmentController < ApplicationController
     message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
+    logger.debug(e.message) 
     render json: asn.fatal_error(e.message).to_json, status: '500'
   end
   
@@ -37,6 +39,7 @@ class ShipmentController < ApplicationController
     message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
+    logger.debug(e.message)
     render json: asn.fatal_error(e.message).to_json, status: '500'
   end
 
@@ -45,6 +48,7 @@ class ShipmentController < ApplicationController
     message = asn.add_shipment_detail(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
+    logger.debug(e.message)
     render json: asn.fatal_error(e.message).to_json, status: '500'
   end
 
@@ -53,29 +57,16 @@ class ShipmentController < ApplicationController
     asn = AsnDetail.new
     message = asn.update_shipment_detail(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
-   #rescue Exception => e
-    #logger.debug(e.message)
-    #render json: asn.fatal_error(e.message).to_json, status: '500'
+   rescue Exception => e
+    logger.debug(e.message)
+    render json: asn.fatal_error(e.message).to_json, status: '500'
  
   end
 
   def validate
-     valid_table = {
-      'location' => 'valid_location?',
-      'case' => 'valid_case?',
-      'item' => 'valid_item?',
-      'shipment_nbr' => 'valid_shipment?',
-      'quantity' => 'valid_received_quantity?',
-      #'inner_pack' => 'valid_inner_pack?'
-    }
-    
-      if valid_table.key?(params[:to_valiadte])
-          message = Shipment.send(valid_table[params[:to_valiadte]], params[:shipment]) 
-      else  
-          message = { status: false, message: ['Invalid validation requested'] }
-      end
-
-   render json: message
+   shipment = Shipment.new  
+   shipment.is_valid_receive_data?(params[:to_validate], params[:shipment])
+   render json: shipment.message
   end
    
 end

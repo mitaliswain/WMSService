@@ -51,14 +51,12 @@ class AsnHeader < ActiveRecord::Base
        true    
     else
        validation_failed('422', :asn_type, 'Invalid ASN Type')
-       false
     end
   end  
 
   def valid_purchase_order_nbr?(po)
     if (po.nil? || po.blank?) 
       validation_failed('422', :purchase_order_nbr, 'Invalid purchase order')      
-      false
     else
        true
     end

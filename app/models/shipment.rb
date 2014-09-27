@@ -21,15 +21,6 @@ class Shipment
 
   end  
   
-  def process_workflow shipment
-    workflow.each do |process, methods|
-      methods.each do |method|
-        self.message = Shipment.send(method[:method], shipment)
-        return self.message unless message[:status] 
-      end
-    end
-    self.message = { status: true, message: ['Shipment received successfully'] } 
-  end
   
   def workflow
     workflow = 
@@ -51,13 +42,14 @@ class Shipment
   end  
   
   def process_workflow shipment
+    shipment_receive = Shipment.new
     workflow.each do |process, methods|
       methods.each do |method|
-        self.message = Shipment.send(method[:method], shipment)
-        return self.message unless message[:status] 
+        response = shipment_receive.send(method[:method], shipment)
+        return shipment_receive.message unless response 
       end
     end
-    self.message = { status: true, message: ['Shipment received successfully'] } 
+     resource_processed_successfully(shipment[:shipment_nbr], "Received Successfully")
   end
   
   def workflow
@@ -84,7 +76,6 @@ class Shipment
     
   def where(shipment_query)
      
-    p shipment_query
     shipment_header = AsnHeader.where(shipment_query).first
     shipment_details = AsnDetail.where(asn_header_id: shipment_header.id)
     shipment_hash = { shipment_header:  shipment_header , shipment_detail: shipment_details }

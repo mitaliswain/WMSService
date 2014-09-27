@@ -3,13 +3,15 @@ require 'response'
 
 
 class ResponseValue
+  attr_reader :message
   include Response
 end
 
 class ResponseValueTest < ActiveSupport::TestCase
 
   test "test the invalid valid message for creation" do
-    message = ResponseValue.new.resource_added_successfully('Shipment', '/shipment/21')
+    rs = ResponseValue.new
+    ms = rs.resource_added_successfully('Shipment', '/shipment/21')
     expected_message = 
        { status: '201' ,
         message: 'Shipment Created Successfully' ,
@@ -18,29 +20,32 @@ class ResponseValueTest < ActiveSupport::TestCase
            link: '/shipment/21'}
           ]
         }
-    assert_equal(expected_message, message, 'Shipment Created successfully' )
+    assert_equal(expected_message, rs.message, 'Shipment Created successfully' )
    end
 
   test "test the invalid valid message for deletion" do
-    message = ResponseValue.new.resource_deleted_successfully('Shipment')
+    rs = ResponseValue.new
+    ms = rs.resource_deleted_successfully('Shipment')
     expected_message = 
        { status: '204' ,
         message: 'Shipment Deleted Successfully' ,
         }
-    assert_equal(expected_message, message, 'Shipment Deleted successfully' )
+    assert_equal(expected_message, rs.message, 'Shipment Deleted successfully' )
    end
 
   test "test reource not found" do
-    message = ResponseValue.new.resource_not_found('Shipment')
+    rs = ResponseValue.new
+    ms = rs.resource_not_found('Shipment')
     expected_message = 
        { status: '404' ,
         message: 'Shipment not found' ,
         }
-    assert_equal(expected_message, message, 'Shipment not found' )
+    assert_equal(expected_message, rs.message, 'Shipment not found' )
    end
 
   test "validation failure" do
-    message = ResponseValue.new.validation_failed('100','shipment_nbr','Shipment already exists')
+    rs = ResponseValue.new
+    ms = rs.validation_failed('100','shipment_nbr','Shipment already exists')
     expected_message =
      
        { status: '422' ,
@@ -53,14 +58,14 @@ class ResponseValueTest < ActiveSupport::TestCase
          }
         ]
        }
-    assert_equal(expected_message, message, 'Validation Failed' )
+    assert_equal(expected_message, rs.message, 'Validation Failed' )
    end
 
 
 test "multiiple validation failure" do
     responsevalue = ResponseValue.new  
-    message = responsevalue.validation_failed('100','shipment_nbr','Shipment already exists')
-    message = responsevalue.validation_failed('404' ,'ship_via','Ship via not found')
+    ms = responsevalue.validation_failed('100','shipment_nbr','Shipment already exists')
+    ms = responsevalue.validation_failed('404' ,'ship_via','Ship via not found')
     expected_message =  
        { status: '422' ,
          message: 'Validation Failed' ,
@@ -77,7 +82,24 @@ test "multiiple validation failure" do
          }
         ]      
        }
-    assert_equal(expected_message, message, 'Validation Failed' )
+    assert_equal(expected_message, responsevalue.message, 'Validation Failed' )
    end
+  
+  test "invalid request" do
+    responsevalue = ResponseValue.new  
+    ms = responsevalue.invalid_request('xxx', 'Invalid validation requested')
+    expected_message =  
+       { status: '415' ,
+         message: 'Invalid request',
+         errors: [{
+           code: '415',
+           field: 'xxx',
+           message: 'Invalid validation requested'
+          }
+         ]
+       }  
+    assert_equal(expected_message, responsevalue.message, 'Invalid request' )   
+  end
+  
 
 end

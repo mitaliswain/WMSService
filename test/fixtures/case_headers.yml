@@ -97,7 +97,7 @@ one:
   comments: MyString
   on_hold: MyString
   hold_code: MyString
-  record_status: MyString
+  record_status: Created
   attribute1: MyString
   attribute2: MyString
   attribute3: MyString

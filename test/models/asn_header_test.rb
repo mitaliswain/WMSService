@@ -6,68 +6,77 @@ class AsnHeaderTest < ActiveSupport::TestCase
   # end
   fixtures :asn_headers
   
-  asn = AsnHeader.new
- 
+
   test "with valid data" do
+    asn = AsnHeader.new
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(true, response[:status], 'testing with valid parameter')
+    assert_equal(true, response, 'testing with valid parameter')
     
   end
-  
-  test "with invalid client" do
+
+  test "with nil client" do
+    asn = AsnHeader.new
     app_parameters = {client: nil, warehouse: nil, channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing with nil client')    
+    assert_equal('422', asn.message[:status], 'testing with nil client')    
   end
 
   test "with no client" do
-    app_parameters = {warehouse: nil, channel: 'RTL', building: 'DIST1'}
+    asn = AsnHeader.new    
+    app_parameters = {warehouse: 'WH1', channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing with no client')    
+    assert_equal('422', asn.message[:status], 'testing with no client')    
   end
 
-  test "with invalid warehouse" do
+
+  test "with nil warehouse" do
+    asn = AsnHeader.new    
     app_parameters = {client: 'WM', warehouse: nil, channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing with nil warehouse') 
+    assert_equal('422', asn.message[:status], 'testing with nil warehouse') 
   end
 
   test "with without warehouse" do
+    asn = AsnHeader.new    
     app_parameters = {client:'WM', channel: 'RTL', building: 'DIST1'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing with no client')    
+    assert_equal('422', asn.message[:status], 'testing with no warehouse')    
   end
 
-
   test "with nil channel" do
+    asn = AsnHeader.new    
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: 'DISTx'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(true, response[:status], 'testing with nil channel')
+    assert_equal(true, response, 'testing with nil channel')
   end
 
   test "without channel" do
+    asn = AsnHeader.new    
     app_parameters = {client: 'WM', warehouse: 'WH1',  building: 'DIST'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing without channel')
+    assert_equal('422', asn.message[:status], 'testing without channel')
   end
   
  
   test "with nil building" do
+    asn = AsnHeader.new    
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: 'RTL', building: nil}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(true, response[:status], 'testing with nil building')
+    assert_equal(true, response, 'testing with nil building')
     
   end
   
    test "without building" do
+    asn = AsnHeader.new
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: 'RTL'}
     response = asn.valid_app_parameters?(app_parameters)
-    assert_equal(false, response[:status], 'testing without building')
+    assert_equal('422', asn.message[:status], 'testing without building')
     end
 
-   
+
    test "update header with single column" do
+     asn = AsnHeader.new     
      old_asn = AsnHeader.find_by_shipment_nbr(asn_headers(:one).shipment_nbr)
      app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
      fields_to_update = {purchase_order_nbr: asn_headers(:one).shipment_nbr + 'New'}
@@ -78,6 +87,7 @@ class AsnHeaderTest < ActiveSupport::TestCase
    end
 
    test "update header with multiple columns" do
+     asn = AsnHeader.new     
      old_asn = AsnHeader.find_by_shipment_nbr(asn_headers(:one).shipment_nbr)
      app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
      
@@ -92,7 +102,8 @@ class AsnHeaderTest < ActiveSupport::TestCase
      
    end
    
-  test "unique shipment number for a client" do   
+  test "unique shipment number for a client" do
+    asn = AsnHeader.new       
     old_asn = AsnHeader.find_by_shipment_nbr(asn_headers(:one).shipment_nbr)
     app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
     fields_to_update = {shipment_nbr: asn_headers(:two).shipment_nbr}
@@ -102,7 +113,8 @@ class AsnHeaderTest < ActiveSupport::TestCase
     end  
   end
 
-  test "unique shipment number for different client" do   
+  test "unique shipment number for different client" do 
+    asn = AsnHeader.new      
     old_asn = AsnHeader.find_by_shipment_nbr(asn_headers(:four).shipment_nbr)
     app_parameters = {client: 'WM2', warehouse: 'WH1', channel: nil, building: nil}
     fields_to_update = {shipment_nbr: asn_headers(:two).shipment_nbr}
@@ -110,6 +122,7 @@ class AsnHeaderTest < ActiveSupport::TestCase
   end
   
    test "add asn header" do
+     asn = AsnHeader.new     
      app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
      
      fields_to_add = {   shipment_nbr: 'shipmentx',
@@ -125,6 +138,7 @@ class AsnHeaderTest < ActiveSupport::TestCase
    end
 
    test "add asn header with invalid data" do
+     asn = AsnHeader.new     
      app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
      
      fields_to_add = {   shipment_nbr: 'shipment_invalid_field',
@@ -134,34 +148,38 @@ class AsnHeaderTest < ActiveSupport::TestCase
      message =asn.add_shipment_header(app_parameters, fields_to_add)
      new_asn = AsnHeader.find_by_shipment_nbr('shipment_invalid_field')
      assert_equal(nil, new_asn, 'Shipment not added')
-     assert_equal(false, message[:status], 'Can not add header with invalid field')     
+     assert_equal('422', message[:status], 'Can not add header with invalid field')     
    end
 
 
-  test "validate data with incorrect asn type" do   
+  test "validate data with incorrect asn type" do
+    asn = AsnHeader.new       
     fields_to_update = {asn_type: 'incorrect asn type'}
     assert_equal(false, asn.valid_data?(fields_to_update), "Incorrect asn type")
   end
 
   test "validate data with incorrect multiple fields" do 
     asn = AsnHeader.new  
-    fields_to_update = { asn_type: 'invalid',  purchase_order_nbr: '12'}
+    fields_to_update = { asn_type: 'invalid',  purchase_order_nbr: ' '}
     assert_equal(false, asn.valid_data?(fields_to_update), "validate data with incorrect multiple fields")
-    assert_equal(:po, asn.message[:message][1][:field], "validate data with incorrect multiple fields")
-    assert_equal(:asn_type, asn.message[:message][0][:field], "validate data with incorrect multiple fields")
+    assert_equal(:purchase_order_nbr, asn.message[:errors][1][:field], "validate data with incorrect multiple fields")
+    assert_equal(:asn_type, asn.message[:errors][0][:field], "validate data with incorrect multiple fields")
 
   end   
  
 
    test "validate data with correct single field" do   
+    asn = AsnHeader.new     
     fields_to_update = {asn_type: 'PO'}
     assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type ")
   end 
    
-  test "validate data with correct multiple fields" do   
+  test "validate data with correct multiple fields" do  
+    asn = AsnHeader.new     
     fields_to_update = {asn_type: 'PO', purchase_order_nbr: "1234"}
     assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type")
   end   
+
 
 
 end

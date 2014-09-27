@@ -174,7 +174,7 @@ case_receiving_one:
   purchase_order_nbr: MyString
   poline_nbr: 1
   shipment_nbr: Shipment1
-  sequence: 1
+  sequence: 3
   hot_item: MyString
   item: 1234678
   sku_attribute1: MyString

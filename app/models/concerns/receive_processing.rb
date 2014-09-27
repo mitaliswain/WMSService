@@ -2,15 +2,15 @@
 module ReceiveProcessing
   extend ActiveSupport::Concern
 
-  module ClassMethods
+
    def create_case(shipment)
       case_header = create_case_header(shipment)
       case_detail = create_case_detail(shipment , case_header)
   
-      { status: true, message: [] }
-  
+      true
+        
       rescue => error
-      { status: false, message: [error.to_s] }
+      fatal_error(error.to_s)
   
      end
     
@@ -50,6 +50,7 @@ module ReceiveProcessing
       case_header.inner_pack_qty = shipment[:inner_pack_qty]
       # case_detail.coveyable = item_master.coveyable
       case_header.save!
+      case_header
     end
     
     def create_case_detail(shipment , case_header)
@@ -100,10 +101,10 @@ module ReceiveProcessing
       shipment_header = update_asnheader(shipment)
       shipment_details = update_asndetails(shipment, shipment_header)
       
-      { status: true, message: [] }
+      true    
        
       rescue => error
-      { status: false, message: [error.to_s] }
+      fatal_error(error.to_s)
       
     end  
       
@@ -142,10 +143,10 @@ module ReceiveProcessing
       location_master.record_status = "Occupied"
       location_master.save!
       
-      { status: true, message: [] }
-  
+      true
+      
       rescue => error
-      { status: false, message: [error.to_s] }
+      fatal_error(error.to_s)
   
      end
   
@@ -153,14 +154,14 @@ module ReceiveProcessing
   
       item_innerpacks = ItemInnerPack.where(client: shipment[:client], item: shipment[:item])
       
-        ItemInnerPack.create(client: shipment[:client], 
+        item_innerpack = ItemInnerPack.create(client: shipment[:client], 
                              item: shipment[:item], 
                              innerpack_qty: shipment[:innerpack_qty].to_i) unless innerpack_exists? item_innerpacks , shipment
   
-      { status: true, message: [] }
-  
+      true  
+      
       rescue => error
-      { status: false, message: [error.to_s] }
+      fatal_error(error.to_s)
      end
      
      private    
@@ -177,6 +178,7 @@ module ReceiveProcessing
           building: (shipment[:building].to_s.empty? ? nil : shipment[:building]),
           channel:  (shipment[:channel].to_s.empty?  ? nil : shipment[:channel]) }
      end
-  
+     
+    module ClassMethods
     end 
 end

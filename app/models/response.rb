@@ -32,12 +32,21 @@ module Response
     message: "#{resource} Created Successfully",
     content: get_content(resource_link)
      }
+   false  
  end 
 
  def resource_updated_successfully(resource)
    @message = {status:  '204',
     message: "#{resource} Updated Successfully",
      }
+   true  
+ end 
+ 
+ def resource_processed_successfully(resource, message)
+   @message = {status:  '204',
+    message: "#{resource} #{message}",
+     }
+   true  
  end 
  
 
@@ -46,18 +55,21 @@ module Response
    @message = {status:  '204',
     message: "#{resource} Deleted Successfully",
     }
+   true 
  end   
 
  def resource_not_found(resource)
    @message = {status:  '404',
     message: "#{resource} not found"
     }
+   false 
  end   
 
  def fatal_error(message)
    @message = {status:  '500',
     message: message
     }
+   false
  end   
 
 
@@ -71,8 +83,34 @@ module Response
     message: 'Validation Failed' ,
     errors: errors    
  } 
+ false
  
 end
+
+def validation_success(field_name)
+   
+   @message = {status:  '200',
+    message: 'Validation Successful',
+    errors: [{
+              code: '200',
+              field: field_name,
+              message: 'Validation Successful'
+    }]
+    }   
+   true
+end
+
+ def invalid_request(field_name, message)
+     @message = {
+       status:  '415',
+       message: 'Invalid Request',
+       errors: [{
+              code: '415',
+              field: field_name,
+              message: message}]
+    }   
+   false
+ end
 
 private
 def get_content(resource_link)
