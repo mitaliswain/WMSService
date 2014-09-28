@@ -30,8 +30,8 @@ class ShipmentController < ApplicationController
     message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
-    logger.debug(e.message) 
-    render json: asn.fatal_error(e.message).to_json, status: '500'
+    asn.fatal_error(e.message)
+    render json: asn.message.to_json, status: '500'
   end
   
   def add_header
@@ -39,8 +39,8 @@ class ShipmentController < ApplicationController
     message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
-    logger.debug(e.message)
-    render json: asn.fatal_error(e.message).to_json, status: '500'
+    asn.fatal_error(e.message)
+    render json: asn.message.to_json, status: '500'
   end
 
   def add_detail
@@ -48,8 +48,8 @@ class ShipmentController < ApplicationController
     message = asn.add_shipment_detail(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
-    logger.debug(e.message)
-    render json: asn.fatal_error(e.message).to_json, status: '500'
+    asn.fatal_error(e.message)
+    render json: asn.message.to_json, status: '500'
   end
 
 
@@ -58,8 +58,8 @@ class ShipmentController < ApplicationController
     message = asn.update_shipment_detail(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
-    logger.debug(e.message)
-    render json: asn.fatal_error(e.message).to_json, status: '500'
+    asn.fatal_error(e.message)
+    render json: asn.message.to_json, status: '500'
  
   end
 
