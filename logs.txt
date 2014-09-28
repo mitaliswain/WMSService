@@ -1,0 +1,101 @@
+2014-09-22T01:46:07.402399+00:00 app[web.1]: I, [2014-09-22T00:41:31.359424 #2]  INFO -- : Started GET "/shipment/Shipment1?client=WM&warehouse=WH1" for 54.90.199.81 at 2014-09-22 00:41:31 +0000
+2014-09-22T01:46:07.402408+00:00 app[web.1]: I, [2014-09-22T00:41:36.080405 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-22T01:46:07.402407+00:00 app[web.1]: I, [2014-09-22T00:41:36.080353 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-22T01:46:07.402412+00:00 app[web.1]: I, [2014-09-22T00:41:37.962235 #2]  INFO -- : Started GET "/shipment/Shipment11?client=WM&warehouse=WH1" for 54.90.199.81 at 2014-09-22 00:41:37 +0000
+2014-09-22T01:46:07.402405+00:00 app[web.1]: I, [2014-09-22T00:41:36.078399 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.90.199.81 at 2014-09-22 00:41:36 +0000
+2014-09-22T01:46:07.402415+00:00 app[web.1]: I, [2014-09-22T00:41:37.964333 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1", "shipment_nbr"=>"Shipment11"}
+2014-09-22T01:46:07.402416+00:00 app[web.1]: I, [2014-09-22T00:41:38.031784 #2]  INFO -- : Completed 200 OK in 67ms (Views: 60.0ms | ActiveRecord: 5.0ms)
+2014-09-22T01:46:07.402413+00:00 app[web.1]: I, [2014-09-22T00:41:37.964275 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-22T01:46:07.402418+00:00 app[web.1]: I, [2014-09-22T00:41:55.884762 #2]  INFO -- : Started POST "/shipment/980190964/update_header" for 54.90.199.81 at 2014-09-22 00:41:55 +0000
+2014-09-22T01:46:07.402420+00:00 app[web.1]: I, [2014-09-22T00:41:55.887272 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"vendor_nbr"=>"Vnd001"}, "id"=>"980190964"}
+2014-09-22T01:46:07.402426+00:00 app[web.1]: I, [2014-09-22T00:42:09.173878 #2]  INFO -- : Processing by ShipmentController#update_header as XML
+2014-09-22T01:46:07.402419+00:00 app[web.1]: I, [2014-09-22T00:41:55.887205 #2]  INFO -- : Processing by ShipmentController#update_header as XML
+2014-09-22T01:46:07.402422+00:00 app[web.1]: W, [2014-09-22T00:41:55.887711 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-22T01:46:07.402424+00:00 app[web.1]: I, [2014-09-22T00:41:55.900049 #2]  INFO -- : Completed 204 No Content in 13ms (Views: 0.3ms | ActiveRecord: 6.8ms)
+2014-09-22T01:46:07.402440+00:00 app[web.1]: I, [2014-09-22T00:42:39.432516 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-22T01:46:07.402442+00:00 app[web.1]: I, [2014-09-22T00:42:39.432574 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-22T01:46:07.402428+00:00 app[web.1]: I, [2014-09-22T00:42:09.173948 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"dock_door"=>"Location1"}, "id"=>"980190964"}
+2014-09-22T01:46:07.402451+00:00 app[web.1]: W, [2014-09-22T00:43:17.141517 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-22T01:46:07.402453+00:00 app[web.1]: I, [2014-09-22T00:43:17.159450 #2]  INFO -- : Completed 201 Created in 18ms (Views: 0.3ms | ActiveRecord: 11.4ms)
+2014-09-22T01:46:07.402425+00:00 app[web.1]: I, [2014-09-22T00:42:09.171731 #2]  INFO -- : Started POST "/shipment/980190964/update_header" for 54.90.199.81 at 2014-09-22 00:42:09 +0000
+2014-09-22T01:46:07.402446+00:00 app[web.1]: I, [2014-09-22T00:43:17.138749 #2]  INFO -- : Started POST "/shipment/add_detail" for 54.90.199.81 at 2014-09-22 00:43:17 +0000
+2014-09-22T01:46:07.402429+00:00 app[web.1]: W, [2014-09-22T00:42:09.174331 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-22T01:46:07.402431+00:00 app[web.1]: I, [2014-09-22T00:42:09.178188 #2]  INFO -- : Completed 500 Internal Server Error in 4ms (Views: 0.2ms | ActiveRecord: 1.6ms)
+2014-09-22T01:46:07.402432+00:00 app[web.1]: I, [2014-09-22T00:42:39.428722 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.90.199.81 at 2014-09-22 00:42:39 +0000
+2014-09-22T01:46:07.402450+00:00 app[web.1]: I, [2014-09-22T00:43:17.141129 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1"}, "fields_to_update"=>{"item"=>"7890", "shipment_nbr"=>"Shipment11"}}
+2014-09-22T01:46:07.402443+00:00 app[web.1]: I, [2014-09-22T00:42:39.592581 #2]  INFO -- : Completed 200 OK in 160ms (Views: 53.9ms | ActiveRecord: 97.5ms)
+2014-09-22T01:46:07.402455+00:00 app[web.1]: I, [2014-09-22T00:43:19.886726 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.90.199.81 at 2014-09-22 00:43:19 +0000
+2014-09-22T01:46:07.402448+00:00 app[web.1]: I, [2014-09-22T00:43:17.141062 #2]  INFO -- : Processing by ShipmentController#add_detail as XML
+2014-09-22T01:46:07.402457+00:00 app[web.1]: I, [2014-09-22T00:43:19.888934 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-22T01:46:07.402458+00:00 app[web.1]: I, [2014-09-22T00:43:19.888985 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-22T01:46:07.402459+00:00 app[web.1]: I, [2014-09-22T00:43:19.931200 #2]  INFO -- : Completed 200 OK in 42ms (Views: 19.0ms | ActiveRecord: 16.5ms)
+2014-09-22T01:46:07.402461+00:00 app[web.1]: Exiting
+2014-09-22T01:46:08.451689+00:00 heroku[web.1]: Process exited with status 143
+2014-09-26T20:47:42.280892+00:00 heroku[web.1]: Unidling
+2014-09-26T20:47:42.281167+00:00 heroku[web.1]: State changed from down to starting
+2014-09-26T20:47:45.741664+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 9661 -e production`
+2014-09-26T20:47:48.948367+00:00 app[web.1]: [2014-09-26 20:47:48] INFO  WEBrick 1.3.1
+2014-09-26T20:47:48.948391+00:00 app[web.1]: [2014-09-26 20:47:48] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-26T20:47:48.948805+00:00 app[web.1]: [2014-09-26 20:47:48] INFO  WEBrick::HTTPServer#start: pid=2 port=9661
+2014-09-26T20:47:50.861910+00:00 heroku[router]: at=info method=GET path="/shipment/?client=WM&warehouse=WH1" host=wmsservice.herokuapp.com request_id=a7d9b229-8207-4982-9f59-42739f12b2fd fwd="54.82.115.27" dyno=web.1 connect=1ms service=530ms status=200 bytes=28061
+2014-09-26T20:48:35.725810+00:00 heroku[router]: at=info method=GET path="/shipment/?client=WM&warehouse=WH1" host=wmsservice.herokuapp.com request_id=1422fa18-2cab-43f8-be42-6a389cb0835f fwd="54.82.115.27" dyno=web.1 connect=1ms service=154ms status=200 bytes=28061
+2014-09-26T20:52:22.455554+00:00 heroku[router]: at=info method=GET path="/shipment/Shipment1?client=WM&warehouse=WH1" host=wmsservice.herokuapp.com request_id=25d79480-1353-493a-802b-35a3b9c5262c fwd="54.82.115.27" dyno=web.1 connect=2ms service=69ms status=200 bytes=9625
+2014-09-26T21:54:45.220177+00:00 heroku[web.1]: State changed from up to down
+2014-09-26T21:54:45.219707+00:00 heroku[web.1]: Idling
+2014-09-26T21:54:49.005444+00:00 app[web.1]: [2014-09-26 21:54:49] FATAL SignalException: SIGTERM
+2014-09-26T21:54:49.005451+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-26T21:54:49.005453+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-26T21:54:49.005456+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-26T21:54:49.005458+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-26T21:54:49.005463+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-26T21:54:49.005461+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-26T21:54:49.005464+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-26T21:54:49.005460+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-26T21:54:49.005455+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-26T21:54:49.046783+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-09-26T21:54:49.005466+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-26T21:54:49.005469+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-26T21:54:49.005471+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-26T21:54:49.005472+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-26T21:54:49.005474+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-26T21:54:49.005481+00:00 app[web.1]: [2014-09-26 21:54:49] INFO  going to shutdown ...
+2014-09-26T21:54:49.046773+00:00 app[web.1]: => Booting WEBrick
+2014-09-26T21:54:49.046780+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:9661
+2014-09-26T21:54:49.005482+00:00 app[web.1]: [2014-09-26 21:54:49] INFO  WEBrick::HTTPServer#start done.
+2014-09-26T21:54:48.254614+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-26T21:54:49.797506+00:00 heroku[web.1]: Process exited with status 143
+2014-09-26T21:54:49.046792+00:00 app[web.1]: I, [2014-09-26T20:47:50.449359 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-26T21:54:49.046794+00:00 app[web.1]: I, [2014-09-26T20:47:50.860593 #2]  INFO -- : Completed 200 OK in 411ms (Views: 140.0ms | ActiveRecord: 91.8ms)
+2014-09-26T21:54:49.046785+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-09-26T21:54:49.046787+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-09-26T21:54:49.046789+00:00 app[web.1]: I, [2014-09-26T20:47:50.341924 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.82.115.27 at 2014-09-26 20:47:50 +0000
+2014-09-26T21:54:49.046791+00:00 app[web.1]: I, [2014-09-26T20:47:50.449251 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-26T21:54:49.046797+00:00 app[web.1]: I, [2014-09-26T20:48:35.579711 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-26T21:54:49.046799+00:00 app[web.1]: I, [2014-09-26T20:48:35.579764 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-26T21:54:49.046801+00:00 app[web.1]: I, [2014-09-26T20:48:35.724905 #2]  INFO -- : Completed 200 OK in 145ms (Views: 24.9ms | ActiveRecord: 111.4ms)
+2014-09-26T21:54:49.046803+00:00 app[web.1]: I, [2014-09-26T20:52:22.391079 #2]  INFO -- : Started GET "/shipment/Shipment1?client=WM&warehouse=WH1" for 54.82.115.27 at 2014-09-26 20:52:22 +0000
+2014-09-26T21:54:49.046796+00:00 app[web.1]: I, [2014-09-26T20:48:35.577159 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.82.115.27 at 2014-09-26 20:48:35 +0000
+2014-09-26T21:54:49.046804+00:00 app[web.1]: I, [2014-09-26T20:52:22.393543 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-26T21:54:49.046806+00:00 app[web.1]: I, [2014-09-26T20:52:22.393596 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1", "shipment_nbr"=>"Shipment1"}
+2014-09-26T21:54:49.046809+00:00 app[web.1]: I, [2014-09-26T20:52:26.154389 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.82.115.27 at 2014-09-26 20:52:26 +0000
+2014-09-26T21:54:49.046810+00:00 app[web.1]: I, [2014-09-26T20:52:26.156843 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-26T21:54:49.046812+00:00 app[web.1]: I, [2014-09-26T20:52:26.156906 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-26T21:54:49.046813+00:00 app[web.1]: I, [2014-09-26T20:52:26.203836 #2]  INFO -- : Completed 200 OK in 47ms (Views: 22.6ms | ActiveRecord: 15.5ms)
+2014-09-26T21:54:49.046815+00:00 app[web.1]: Exiting
+2014-09-26T21:54:49.046807+00:00 app[web.1]: I, [2014-09-26T20:52:22.454423 #2]  INFO -- : Completed 200 OK in 61ms (Views: 55.4ms | ActiveRecord: 3.0ms)
+2014-09-28T08:16:45+00:00 heroku[slug-compiler]: Slug compilation started
+2014-09-28T08:17:08.755692+00:00 heroku[api]: Release v25 created by farooq.buvvaji@gmail.com
+2014-09-28T08:17:08.755619+00:00 heroku[api]: Deploy 5156e9b by farooq.buvvaji@gmail.com
+2014-09-28T08:17:08+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-09-28T08:20:46.915506+00:00 heroku[web.1]: State changed from down to starting
+2014-09-28T08:20:46.915506+00:00 heroku[web.1]: Unidling
+2014-09-28T08:20:49.801123+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 25281 -e production`
+2014-09-28T08:20:52.601882+00:00 heroku[web.1]: State changed from starting to up
+2014-09-28T08:20:52.523915+00:00 app[web.1]: [2014-09-28 08:20:52] INFO  WEBrick 1.3.1
+2014-09-28T08:20:52.523990+00:00 app[web.1]: [2014-09-28 08:20:52] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-28T08:20:52.524593+00:00 app[web.1]: [2014-09-28 08:20:52] INFO  WEBrick::HTTPServer#start: pid=2 port=25281
+2014-09-28T08:20:54.817225+00:00 heroku[router]: at=info method=GET path="/shipment/?client=WM&warehouse=WH1" host=wmsservice.herokuapp.com request_id=b1ae8b53-5ec6-4c1b-901e-88b74b105696 fwd="54.89.80.92" dyno=web.1 connect=1ms service=848ms status=200 bytes=14884
+2014-09-28T08:21:46.998557+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=f570fd20-4ad2-42ab-833d-d840bfb32e20 fwd="54.89.80.92" dyno=web.1 connect=0ms service=13ms status=500 bytes=406
+2014-09-28T08:21:52.005006+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=6733bc5a-8761-4f53-a353-73005129122f fwd="54.89.80.92" dyno=web.1 connect=0ms service=8ms status=500 bytes=406
+2014-09-28T08:21:55.718423+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=0ee3f01e-2740-4f79-85e1-94865f003e7a fwd="54.89.80.92" dyno=web.1 connect=0ms service=8ms status=500 bytes=406
+2014-09-28T08:22:08.468104+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=d90ddc93-c07d-4908-bade-9270ead5b818 fwd="54.89.80.92" dyno=web.1 connect=1ms service=13ms status=500 bytes=406
