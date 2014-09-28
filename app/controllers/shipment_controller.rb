@@ -16,7 +16,7 @@ class ShipmentController < ApplicationController
   def receive
     shipment = Shipment.new 
     shipment.receive_shipment(params[:shipment])
-    render json: shipment.message
+    render json: shipment.message.to_json, status: shipment.message[:status]
   end
 
   def show

@@ -4,10 +4,12 @@ include Response
 class AsnHeader < ActiveRecord::Base
   attr_reader :message
   
+  before_save :convert_blank_to_null_for_building_and_channel
   validates_uniqueness_of :shipment_nbr, scope: :client
   validates_presence_of  :client, :warehouse, :shipment_nbr
   validates_presence_of  :building, :channel,  :allow_nil => true
   
+   
   def update_shipment_header(app_parameters, id, fields_to_update)
        if valid_app_parameters?(app_parameters) && valid_data?(fields_to_update)
          shipment_hash = AsnHeader.find(id)   
@@ -21,7 +23,7 @@ class AsnHeader < ActiveRecord::Base
   end
 
   def add_shipment_header(app_parameters, fields_to_add)
-       if valid_data?(fields_to_add)
+       if valid_data?(fields_to_add) && valid_app_paramet
          shipment_hash = AsnHeader.new 
          app_parameters.each do |field, data|
            shipment_hash.attributes = {field => data}

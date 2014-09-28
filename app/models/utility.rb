@@ -1,7 +1,13 @@
 module Utility
     INVALID_FIELD = '422'
+
+     def convert_blank_to_null_for_building_and_channel
+        self.building = nil if self.building.blank?
+        self.channel = nil if self.channel.blank?
+     end
+    
     def valid_app_parameters?(app_parameters)
-      app_parameters = app_parameters.symbolize_keys
+      
       if     (valid_client?(app_parameters)     &&
               valid_warehouse?(app_parameters)  &&
               valid_channel?(app_parameters)    &&
@@ -13,6 +19,7 @@ module Utility
     end
     
     def valid_client?(app_parameters) 
+       app_parameters = app_parameters.symbolize_keys
        case 
          when !app_parameters.has_key?(:client) 
           validation_failed(INVALID_FIELD, :client, 'Client is missing')
@@ -26,6 +33,7 @@ module Utility
     end
    
    def valid_warehouse?(app_parameters)
+     app_parameters = app_parameters.symbolize_keys
        case 
          when !app_parameters.has_key?(:warehouse) 
           validation_failed(INVALID_FIELD, :warehouse, 'Warehouse missing')
@@ -37,6 +45,7 @@ module Utility
     end 
    
    def valid_channel?(app_parameters)
+     app_parameters = app_parameters.symbolize_keys
      if !app_parameters.has_key?(:channel)
        validation_failed(INVALID_FIELD, :channel, 'Channel missing')
      else
@@ -45,6 +54,7 @@ module Utility
    end
    
    def valid_building?(app_parameters)
+     app_parameters = app_parameters.symbolize_keys
      if !app_parameters.has_key?(:building)
        validation_failed(INVALID_FIELD, :building, 'Building missing')
      else

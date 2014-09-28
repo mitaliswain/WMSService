@@ -4,6 +4,8 @@ class Shipment
   
   include ReceiveProcessing
   include ReceiveValidation
+  include Response
+  include Utility
  
   attr_accessor :message, :error
   FAILED_TO_PROCESS = 'false'
@@ -42,33 +44,14 @@ class Shipment
   end  
   
   def process_workflow shipment
-    shipment_receive = Shipment.new
     workflow.each do |process, methods|
       methods.each do |method|
-        response = shipment_receive.send(method[:method], shipment)
-        return shipment_receive.message unless response 
+        response = self.send(method[:method], shipment)
+        return self.message unless response 
       end
     end
      resource_processed_successfully(shipment[:shipment_nbr], "Received Successfully")
-  end
-  
-  def workflow
-    workflow = 
-           { validate: [{ method: 'valid_location?' }, 
-                       { method: 'valid_shipment?' },
-                       { method: 'valid_case?' },
-                       { method: 'valid_item?' },
-                       { method: 'valid_received_quantity?' }
-                      ],
-             process:  [{ method: 'create_case' },
-                       { method: 'update_shipment' },
-                       { method: 'update_location' },
-                       { method: 'update_innerpack_quantity'}
-                      ],
-             trigger:  [],
-             house_keeping:  []
-            }    
-  end  
+  end 
   
   def self.all(client, warehouse, channel=nil, building=nil) 
     AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 

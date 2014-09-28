@@ -3,10 +3,21 @@ require 'utility'
 
 
 class UtilityValue
+  attr_accessor :building, :channel
   include Utility
 end
 
 class ResponseValueTest < ActiveSupport::TestCase
+
+  test "test the if the bulding and channels are getting conveted to null" do
+    ut = UtilityValue.new
+    ut.building = ' '
+    ut.channel = ' '
+    ut.convert_blank_to_null_for_building_and_channel    
+    assert_equal(nil, ut.building, 'Convert blank building to null')   
+    assert_equal(nil, ut.channel, 'Convert blank channel to null')   
+
+  end
 
   test "test the valid client" do
    

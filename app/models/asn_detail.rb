@@ -3,9 +3,11 @@ include Response
 
 class AsnDetail < ActiveRecord::Base
   attr_accessor :message
+  
   validates_uniqueness_of :sequence, scope: [:client, :shipment_nbr]
   validates_presence_of  :client, :warehouse, :shipment_nbr, :sequence, :item, :asn_header_id
   validates_presence_of  :building, :channel,  :allow_nil => true
+  before_validation :convert_blank_to_null_for_building_and_channel
   
   def update_shipment_detail(app_parameters, id, fields_to_update)
        input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash
@@ -70,8 +72,7 @@ class AsnDetail < ActiveRecord::Base
 
   
    def valid_asn_header_id?(fields_to_update)
-   
-     if fields_to_update.has_key?('asn_header_id')
+     if !fields_to_update.has_key?("asn_header_id")
        validation_failed('422', :asn_header_id, 'Asn Header ID is blank')
      else
        true
@@ -79,7 +80,7 @@ class AsnDetail < ActiveRecord::Base
   end  
   
   def valid_item?(fields_to_update) 
-     if fields_to_update.has_key?('item')
+     if !fields_to_update.has_key?('item')
        validation_failed('422', :item, 'Please enter the item')
      else
         @item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      

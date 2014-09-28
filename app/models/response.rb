@@ -43,7 +43,7 @@ module Response
  end 
  
  def resource_processed_successfully(resource, message)
-   @message = {status:  '204',
+   @message = {status:  '201',
     message: "#{resource} #{message}",
      }
    true  
@@ -69,6 +69,7 @@ module Response
    @message = {status:  '500',
     message: message
     }
+  Rails.logger.fatal("Critical: #{message}")  
    false
  end   
 
@@ -83,6 +84,7 @@ module Response
     message: 'Validation Failed' ,
     errors: errors    
  } 
+ Rails.logger.warn("Warning: #{errors}")  
  false
  
 end

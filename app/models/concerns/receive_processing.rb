@@ -4,6 +4,7 @@ module ReceiveProcessing
 
 
    def create_case(shipment)
+     
       case_header = create_case_header(shipment)
       case_detail = create_case_detail(shipment , case_header)
   
@@ -31,14 +32,16 @@ module ReceiveProcessing
       case_header.on_hold = 'Yes'
       case_header.hold_code = 'Received'
       case_header.barcode = shipment[:location]
-      case_header.Location_type = location.location_type
-      case_header.area = location.area
-      case_header.zone = location.zone
-      case_header.aisle = location.aisle
-      case_header.bay = location.bay
-      case_header.level = location.level
-      case_header.position = location.position
-  
+      if location
+        case_header.Location_type = location.location_type
+        case_header.area = location.area
+        case_header.zone = location.zone
+        case_header.aisle = location.aisle
+        case_header.bay = location.bay
+        case_header.level = location.level
+        case_header.position = location.position
+      end
+        
       # case_detail.total_weight = shipment[:quantity].to_i * item_master.unit_wgt
       # case_detail.total_volume = shipment[:quantity].to_i * item_master.unit_vol
   
@@ -112,8 +115,8 @@ module ReceiveProcessing
       
       shipment_header = AsnHeader.where(default_key shipment)
                                  .where(shipment_nbr: shipment[:shipment_nbr]).first
-      shipment_header.units_rcvd +=  shipment[:quantity].to_i
-      shipment_header.cases_rcvd +=  1
+      shipment_header.units_rcvd =  shipment_header.units_rcvd.to_i + shipment[:quantity].to_i
+      shipment_header.cases_rcvd =  shipment_header.cases_rcvd.to_i + 1
       shipment_header.receiving_started_by = shipment[:user_id] unless shipment[:user_id].nil?
       shipment_header.receiving_started_date = Time.now if shipment_header.receiving_started_date.nil?
       shipment_header.first_recieve_dock_door ||= shipment[:location]
@@ -127,8 +130,8 @@ module ReceiveProcessing
     def update_asndetails(shipment, shipment_header)
       shipment_details = AsnDetail.where(default_key shipment)
                                   .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
-      shipment_details.received_qty += shipment[:quantity].to_i
-      shipment_details.cases_rcvd += 1
+      shipment_details.received_qty = shipment_details.received_qty.to_i + shipment[:quantity].to_i
+      shipment_details.cases_rcvd = shipment_details.cases_rcvd.to_i + 1
       shipment_details.record_status = 'Receiving in Progress'
       shipment_details.receiver_comments = shipment[:comments] unless shipment[:comments].nil?
       shipment_details.save!      
@@ -136,7 +139,8 @@ module ReceiveProcessing
      end
   
      def update_location(shipment)
-  
+      return true if !yard_management_enabled?(shipment)
+      
       location_master = LocationMaster.where(default_key shipment)
                                       .where(barcode: shipment[:location]).first
   

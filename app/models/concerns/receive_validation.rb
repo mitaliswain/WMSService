@@ -1,3 +1,4 @@
+require 'yaml'
 require 'active_support/concern'
 module ReceiveValidation
   extend ActiveSupport::Concern
@@ -64,7 +65,7 @@ module ReceiveValidation
         shipment[:location] !=  @shipment_header.first_recieve_dock_door
         validation_failed('422', :shipment_nbr, Message.get_message(shipment[:client], 'RCV0005', [shipment[:shipment_nbr]])) 
 
-      when @shipment_header.record_status!= 'Initiated'
+      when @shipment_header.record_status!= 'Initiated' && @shipment_header.record_status!= 'Receiving in Progress'  
         validation_failed('422', :shipment_nbr, Message.get_message(shipment[:client], 'RCV0006', [shipment[:shipment_nbr]])) 
       else
         true
@@ -150,7 +151,7 @@ module ReceiveValidation
    def is_received_quantity_greater_with_shipped? shipment_detail, shipment   
       shipment_detail && 
       SKU_receiving_enabled?(shipment) &&          
-      shipment_detail.shipped_quantity < (shipment_detail.received_qty + shipment[:quantity].to_i)
+      shipment_detail.shipped_quantity.to_i < (shipment_detail.received_qty.to_i + shipment[:quantity].to_i)
    end
 
    def yard_management_enabled? shipment    

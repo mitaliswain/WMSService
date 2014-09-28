@@ -11,10 +11,9 @@ class GlobalConfiguration < ActiveRecord::Base
     
      configuration_hash = {}
      self.where(condition).where(enable: true).each do |configuration|
-    
-       configuration_hash.store(configuration.key, configuration.value)
-       
+       configuration_hash.store(configuration.key, configuration.value)    
      end
+     
      
      if configuration_hash.empty?
        raise raise ArgumentError, "Invalid Argument #{condition}"
