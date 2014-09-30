@@ -39,11 +39,11 @@ module ReceiveValidation
       when !@location_master
         validation_failed('422', :location, Message.get_message(shipment[:client], 'RCV0001', [shipment[:location]]))
         
-      when @location_master.location_type != 'Pending'         
+      when @location_master.location_type != 'Receiving'         
         validation_failed('422', :location, Message.get_message(shipment[:client], 'RCV0002', [shipment[:location]])) 
       
-      when @location_master.record_status != 'Empty' && !shipment[:shipment_nbr].blank? 
-        validation_failed('422', :location, Message.get_message(shipment[:client], 'RCV0003', [shipment[:location]])) 
+      #when @location_master.record_status != 'Empty' && !shipment[:shipment_nbr].blank? 
+        #validation_failed('422', :location, Message.get_message(shipment[:client], 'RCV0003', [shipment[:location]])) 
       else
         true  
       end
@@ -62,7 +62,7 @@ module ReceiveValidation
         validation_failed('422', :shipment_nbr, Message.get_message(shipment[:client], 'RCV0004', [shipment[:shipment_nbr]])) 
 
       when yard_management_enabled?(shipment) &&
-        shipment[:location] !=  @shipment_header.first_recieve_dock_door
+        shipment[:location] !=  @shipment_header.door_door
         validation_failed('422', :shipment_nbr, Message.get_message(shipment[:client], 'RCV0005', [shipment[:shipment_nbr]])) 
 
       when @shipment_header.record_status!= 'Initiated' && @shipment_header.record_status!= 'Receiving in Progress'  
