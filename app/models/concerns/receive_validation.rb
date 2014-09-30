@@ -15,7 +15,7 @@ module ReceiveValidation
       'item' => 'valid_item?',
       'shipment_nbr' => 'valid_shipment?',
       'quantity' => 'valid_received_quantity?',
-      #'inner_pack' => 'valid_inner_pack?'
+      'inner_pack' => 'valid_inner_pack?'
       }
       
       
@@ -142,6 +142,10 @@ module ReceiveValidation
       end
     end
 
+   def valid_inner_pack?(shipment)
+      true     
+   end
+
    private    
    def is_received_quantity_matches_with_asn? case_detail, shipment    
       Case_receiving_enabled?(shipment) &&
@@ -172,6 +176,7 @@ module ReceiveValidation
         building: (shipment[:building].to_s.empty? ? nil : shipment[:building]),
         channel:  (shipment[:channel].to_s.empty?  ? nil : shipment[:channel]) }
    end
+   
 
    def receive_configuration shipment
       GlobalConfiguration.get_configuration((default_key shipment).merge({module: 'RECEIVING'}))
