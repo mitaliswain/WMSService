@@ -1,6 +1,6 @@
 require 'concerns/receive_processing'
 #require 'concerns/receive_validation'
-class Shipment
+class Shipment 
   
   include ReceiveProcessing
   include ReceiveValidation
@@ -57,12 +57,24 @@ class Shipment
     AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 
   end
     
-  def where(shipment_query)
-     
-    shipment_header = AsnHeader.where(shipment_query).first
-    shipment_details = AsnDetail.where(asn_header_id: shipment_header.id)
-    shipment_hash = { shipment_header:  shipment_header , shipment_detail: shipment_details }
-  
+  def get_shipments(basic_parameters, filter_conditions, expand=nil)
+
+    if expand.nil?
+      shipment_header_data = '*'
+      shipment_detail_data = '*'
+    else
+      shipment_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]  
+      shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
+    end
+
+    shipment_headers = AsnHeader.select(shipment_header_data).where(basic_parameters).where(filter_conditions)
+    shipment_hash = []
+    shipment_headers.each do |shipment_header|
+      shipment_details = AsnDetail.select(shipment_detail_data).where(asn_header_id: shipment_header.id)    
+      shipment_hash << { shipment_header:  shipment_header , shipment_detail: shipment_details }
+    end
+    
     shipment_hash
   end
+  
 end

@@ -9,6 +9,8 @@ end
 
 class ResponseValueTest < ActiveSupport::TestCase
 
+fixtures :global_configurations
+
   test "test the if the bulding and channels are getting conveted to null" do
     ut = UtilityValue.new
     ut.building = ' '
@@ -35,8 +37,18 @@ class ResponseValueTest < ActiveSupport::TestCase
     assert_equal(false, message, 'Invalid client' )
    end
    
+   test "test the  valid app parameters bu" do
+    message = valid_warehouse?({client: 'WM', warehouse: 'WH1', channel: nil, building: nil})
+    assert_equal(true, message, 'Valid Parameters' )
+   end 
+
+   test "test the  valid app parameters cha" do
+    message = valid_building?({client: 'WM', warehouse: 'WH1', channel: nil, building: nil})
+    assert_equal(true, message, 'Valid Parameters' )
+   end 
+
    test "test the  valid app parameters" do
-    message = valid_app_parameters?({client: 'WM', warehouse: 'WH1', channel: '', building: ''})
+    message = valid_channel?({client: 'WM', warehouse: 'WH1', channel: nil, building: nil})
     assert_equal(true, message, 'Valid Parameters' )
    end 
 
@@ -49,5 +61,15 @@ class ResponseValueTest < ActiveSupport::TestCase
     message = valid_app_parameters?(input_object)
     assert_equal(true, message, 'Valid Parameters' )
    end 
+   
+   test "one up number" do
+     num = get_next_one_up_number({client: 'WM', warehouse: 'WH1', building: nil, channel: nil }, 'SHIPMENT')
+     assert_equal(2, num, "one up number increased")
+     
+     num = get_next_one_up_number({client: 'WM', warehouse: 'WH1', building: nil, channel: nil }, 'SHIPMENT')
+     assert_equal(3, num, "one up number increased")
+
+   end
+   
    
 end

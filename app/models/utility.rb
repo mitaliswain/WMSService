@@ -47,9 +47,9 @@ module Utility
    def valid_channel?(app_parameters)
      app_parameters = app_parameters.symbolize_keys
      if !app_parameters.has_key?(:channel)
-       validation_failed(INVALID_FIELD, :channel, 'Channel missing')
+      validation_failed(INVALID_FIELD, :channel, 'Channel missing')
      else
-       true  
+        true  
      end
    end
    
@@ -60,7 +60,16 @@ module Utility
      else
        true
      end  
-   end
+   end 
+
+   def get_next_one_up_number(basic_parameter, module_name)
+         configuration = GlobalConfiguration.options(basic_parameter).options(module: module_name).get
+         configuration.one_up_number = configuration.one_up_number.to_i + 1
+         configuration.set
+         configuration.one_up_number
+   end  
+   
+ end
   
      
 class ::Hash
@@ -72,4 +81,3 @@ class ::Hash
   end
 end
   
-end

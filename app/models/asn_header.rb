@@ -25,19 +25,20 @@ class AsnHeader < ActiveRecord::Base
   def add_shipment_header(app_parameters, fields_to_add)
        input_obj = app_parameters.merge(fields_to_add).merge(id: id).to_hash
        if valid_data?(input_obj) && valid_app_parameters?(input_obj)
-         shipment_hash = AsnHeader.new 
-         app_parameters.each do |field, data|
-           shipment_hash.attributes = {field => data}
-         end
-         fields_to_add.each do |field, data|
-            shipment_hash.attributes =  {field => data} 
-         end   
+          shipment_hash = AsnHeader.new(input_obj)  
+          shipment_hash = add_derived_data(shipment_hash.clone)
          shipment_hash.save!    
          resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.id}")                 
        end        
        message  
   end
 
+  def add_derived_data(asn_header)
+    basic_parameters = {client: asn_header.client, warehouse: asn_header.warehouse, channel: nil, building: nil}
+    asn_header.shipment_nbr= get_next_one_up_number(basic_parameters, 'SHIPMENT') if (asn_header.shipment_nbr.nil? or asn_header.shipment_nbr.blank?)   
+    asn_header.record_status = 'Created' if asn_header.record_status.nil? or asn_header.record_status.blank?
+    asn_header  
+  end
   
   def valid_data?(fields_to_update)
     is_valid = true
