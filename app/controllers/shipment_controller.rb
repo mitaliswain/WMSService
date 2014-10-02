@@ -1,15 +1,9 @@
 class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
-     shipment_hash = []
-     (Shipment.all(params[:client], params[:warehouse])).each do |shipment|
-       shipment_hash << 
-       Shipment.new.where(client: shipment.client,
-                                   warehouse: shipment.warehouse,
-                                   channel: shipment.channel,
-                                   building: shipment.building,
-                                   shipment_nbr: shipment.shipment_nbr)
-     end
+     basic_parameters = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
+     filter_conditions = params[:filter_conditions]
+     shipment_hash = Shipment.new.get_shipments(basic_parameters, filter_conditions, params[:expand])
      render json: shipment_hash
   end
 
@@ -21,7 +15,9 @@ class ShipmentController < ApplicationController
 
   def show
     shipment = Shipment.new
-    shipment_hash = shipment.where(id: params[:id])
+    basic_parameters = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
+    filter_conditions = {id: params[:id]}
+    shipment_hash = (shipment.get_shipments(basic_parameters, filter_conditions, true)).first
     render json: shipment_hash
   end
 
