@@ -99,3 +99,416 @@
 2014-09-28T08:21:52.005006+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=6733bc5a-8761-4f53-a353-73005129122f fwd="54.89.80.92" dyno=web.1 connect=0ms service=8ms status=500 bytes=406
 2014-09-28T08:21:55.718423+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=0ee3f01e-2740-4f79-85e1-94865f003e7a fwd="54.89.80.92" dyno=web.1 connect=0ms service=8ms status=500 bytes=406
 2014-09-28T08:22:08.468104+00:00 heroku[router]: at=info method=POST path="/shipment/add_header" host=wmsservice.herokuapp.com request_id=d90ddc93-c07d-4908-bade-9270ead5b818 fwd="54.89.80.92" dyno=web.1 connect=1ms service=13ms status=500 bytes=406
+2014-09-28T16:44:53.495672+00:00 app[web.1]: I, [2014-09-28T16:43:04.848842 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "building"=>"", "channel"=>""}, "fields_to_update"=>{"item"=>"12345", "po_qty"=>"10", "shipped_quantity"=>"10", "asn_header_id"=>"980190965"}}
+2014-09-28T16:44:53.495673+00:00 app[web.1]: W, [2014-09-28T16:43:04.849233 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495679+00:00 app[web.1]: I, [2014-09-28T16:43:08.959641 #2]  INFO -- : Completed 200 OK in 59ms (Views: 13.8ms | ActiveRecord: 35.9ms)
+2014-09-28T16:44:53.495675+00:00 app[web.1]: I, [2014-09-28T16:43:08.897110 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.166.240.144 at 2014-09-28 16:43:08 +0000
+2014-09-28T16:44:53.495690+00:00 app[web.1]: W, [2014-09-28T16:43:38.064247 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495670+00:00 app[web.1]: I, [2014-09-28T16:43:04.848747 #2]  INFO -- : Processing by ShipmentController#add_detail as XML
+2014-09-28T16:44:53.495677+00:00 app[web.1]: I, [2014-09-28T16:43:08.900770 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-28T16:44:53.495738+00:00 app[web.1]: W, [2014-09-28T16:44:43.058823 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495678+00:00 app[web.1]: I, [2014-09-28T16:43:08.900844 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-28T16:44:53.495737+00:00 app[web.1]: I, [2014-09-28T16:44:43.058484 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"record_status"=>"Initiated"}, "id"=>"980190965"}
+2014-09-28T17:14:08.212104+00:00 heroku[router]: at=info method=GET path="/shipment/undefined?client=undefined&warehouse=undefined" host=wmsservice.herokuapp.com re
+quest_id=f81315f1-297a-47f6-ac41-2fb934c525c9 fwd="54.166.240.144" dyno=web.1 connect=5ms service=25ms status=500 bytes=398
+2014-09-28T18:15:36.919366+00:00 heroku[web.1]: State changed from up to down
+2014-09-28T18:15:36.918865+00:00 heroku[web.1]: Idling
+2014-09-28T18:15:40.249515+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-28T18:15:40.988109+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-28T18:15:40.988111+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-28T18:15:40.988107+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-28T18:15:40.988113+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-28T18:15:40.988116+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-28T18:15:40.988114+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-28T18:15:40.988112+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-28T18:15:40.988118+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-28T18:15:40.988119+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-28T18:15:40.988101+00:00 app[web.1]: [2014-09-28 18:15:40] FATAL SignalException: SIGTERM
+2014-09-28T18:15:40.988120+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-28T18:15:40.988122+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-28T18:15:40.988125+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-28T18:15:40.988127+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  going to shutdown ...
+2014-09-28T18:15:40.988128+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  WEBrick::HTTPServer#start done.
+2014-09-28T18:15:40.988123+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-28T18:15:40.988126+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-28T18:15:41.428160+00:00 app[web.1]: W, [2014-09-28T16:44:53.511308 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-28T18:15:41.428139+00:00 app[web.1]: W, [2014-09-28T16:44:53.495922 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T18:15:41.428165+00:00 app[web.1]: I, [2014-09-28T17:14:08.194893 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-28T18:15:41.428164+00:00 app[web.1]: I, [2014-09-28T17:14:08.191028 #2]  INFO -- : Started GET "/shipment/undefined?client=undefined&warehouse=undefined" for 54.166.240.144 at 2014-09-28 17:14:08 +0000
+2014-09-28T18:15:41.428162+00:00 app[web.1]: I, [2014-09-28T16:44:53.512008 #2]  INFO -- : Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 9.9ms)
+2014-09-28T18:15:41.428172+00:00 app[web.1]:   app/models/shipment.rb:63:in `where'
+2014-09-28T18:15:41.428168+00:00 app[web.1]: I, [2014-09-28T17:14:08.199174 #2]  INFO -- : Completed 500 Internal Server Error in 4ms
+2014-09-28T18:15:41.428166+00:00 app[web.1]: I, [2014-09-28T17:14:08.194964 #2]  INFO -- :   Parameters: {"client"=>"undefined", "warehouse"=>"undefined", "id"=>"undefined"}
+2014-09-28T18:15:41.428173+00:00 app[web.1]:   app/controllers/shipment_controller.rb:24:in `show'
+2014-09-28T18:15:41.428174+00:00 app[web.1]: 
+2014-09-28T18:15:41.428176+00:00 app[web.1]: Exiting
+2014-09-28T18:15:41.428170+00:00 app[web.1]: NoMethodError (undefined method `id' for nil:NilClass):
+2014-09-28T18:15:41.428169+00:00 app[web.1]: F, [2014-09-28T17:14:08.200082 #2] FATAL -- : 
+2014-09-28T18:15:41.428175+00:00 app[web.1]: 
+2014-09-28T18:15:43.121383+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:44:06.922280+00:00 heroku[web.1]: Unidling
+2014-09-30T05:44:06.922605+00:00 heroku[web.1]: State changed from down to starting
+2014-09-30T05:44:09.911627+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 37942 -e production`
+2014-09-30T05:44:12.926446+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick::HTTPServer#start: pid=2 port=37942
+2014-09-30T05:44:12.926005+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick 1.3.1
+2014-09-30T05:44:12.926039+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:44:13.294256+00:00 heroku[web.1]: State changed from starting to up
+2014-09-30T05:44:14.319493+00:00 heroku[router]: at=info method=POST path="/shipment/location/validate" host=wmsservice.herokuapp.com request_id=b3c34f3c-c731-4f64-a2f1-e9cfc6e495ca fwd="54.197.74.233" dyno=web.1 connect=1ms service=355ms status=200 bytes=582
+2014-09-30T05:44:20.385352+00:00 heroku[router]: at=info method=POST path="/shipment/shipment_nbr/validate" host=wmsservice.herokuapp.com request_id=f39e7f0b-2ec9-46ce-a26f-c02130223cd8 fwd="54.197.74.233" dyno=web.1 connect=1ms service=226ms status=200 bytes=611
+2014-09-30T05:44:44+00:00 heroku[slug-compiler]: Slug compilation started
+2014-09-30T05:45:05+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-09-30T05:45:05.704237+00:00 heroku[api]: Deploy aa26c53 by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.704290+00:00 heroku[api]: Release v28 created by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.847464+00:00 heroku[web.1]: State changed from up to starting
+2014-09-30T05:45:08.197395+00:00 app[web.1]: [2014-09-30 05:45:08] FATAL SignalException: SIGTERM
+2014-09-30T05:45:08.197412+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-30T05:45:08.197402+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-30T05:45:08.197408+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-30T05:45:08.197405+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-30T05:45:08.197404+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-30T05:45:08.197407+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-30T05:45:08.197409+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-30T05:45:08.197411+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-30T05:45:08.197487+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  going to shutdown ...
+2014-09-30T05:45:08.197422+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-30T05:45:08.197418+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-30T05:45:08.197415+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-30T05:45:08.197416+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-30T05:45:08.197414+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-30T05:45:08.197421+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-30T05:45:08.259960+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-09-30T05:45:08.259963+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-09-30T05:45:08.259965+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-09-30T05:45:08.259967+00:00 app[web.1]: I, [2014-09-30T05:44:13.975115 #2]  INFO -- : Started POST "/shipment/location/validate" for 54.197.74.233 at 2014-09-30 05:44:13 +0000
+2014-09-30T05:45:08.259968+00:00 app[web.1]: I, [2014-09-30T05:44:14.060807 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259969+00:00 app[web.1]: I, [2014-09-30T05:44:14.060947 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"location"}
+2014-09-30T05:45:08.197571+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  WEBrick::HTTPServer#start done.
+2014-09-30T05:45:08.259958+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:37942
+2014-09-30T05:45:08.259949+00:00 app[web.1]: => Booting WEBrick
+2014-09-30T05:45:08.259981+00:00 app[web.1]: I, [2014-09-30T05:44:20.384309 #2]  INFO -- : Completed 200 OK in 217ms (Views: 0.5ms | ActiveRecord: 26.4ms)
+2014-09-30T05:45:08.259976+00:00 app[web.1]: I, [2014-09-30T05:44:20.166896 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"Shipment12", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"shipment_nbr"}
+2014-09-30T05:45:08.259978+00:00 app[web.1]: W, [2014-09-30T05:44:20.167334 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:08.259980+00:00 app[web.1]: W, [2014-09-30T05:44:20.383394 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-30T05:45:08.259983+00:00 app[web.1]: Exiting
+2014-09-30T05:45:08.259972+00:00 app[web.1]: I, [2014-09-30T05:44:14.319077 #2]  INFO -- : Completed 200 OK in 258ms (Views: 0.4ms | ActiveRecord: 82.3ms)
+2014-09-30T05:45:08.259974+00:00 app[web.1]: I, [2014-09-30T05:44:20.163977 #2]  INFO -- : Started POST "/shipment/shipment_nbr/validate" for 54.197.74.233 at 2014-09-30 05:44:20 +0000
+2014-09-30T05:45:08.259975+00:00 app[web.1]: I, [2014-09-30T05:44:20.166799 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259971+00:00 app[web.1]: W, [2014-09-30T05:44:14.079520 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:07.756107+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-30T05:45:09.201288+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:45:09.742129+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 4037 -e production`
+2014-09-30T05:45:14.342678+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick 1.3.1
+2014-09-30T05:45:14.342748+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:45:14.343238+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick::HTTPServer#start: pid=2 port=4037
+2014-09-30T05:45:14.570671+00:00 heroku[web.1]: State changed from starting to up
+2014-09-28T16:44:53.495672+00:00 app[web.1]: I, [2014-09-28T16:43:04.848842 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "building"=>"", "channel"=>""}, "fields_to_update"=>{"item"=>"12345", "po_qty"=>"10", "shipped_quantity"=>"10", "asn_header_id"=>"980190965"}}
+2014-09-28T16:44:53.495673+00:00 app[web.1]: W, [2014-09-28T16:43:04.849233 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495679+00:00 app[web.1]: I, [2014-09-28T16:43:08.959641 #2]  INFO -- : Completed 200 OK in 59ms (Views: 13.8ms | ActiveRecord: 35.9ms)
+2014-09-28T16:44:53.495675+00:00 app[web.1]: I, [2014-09-28T16:43:08.897110 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.166.240.144 at 2014-09-28 16:43:08 +0000
+2014-09-28T16:44:53.495690+00:00 app[web.1]: W, [2014-09-28T16:43:38.064247 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495670+00:00 app[web.1]: I, [2014-09-28T16:43:04.848747 #2]  INFO -- : Processing by ShipmentController#add_detail as XML
+2014-09-28T16:44:53.495677+00:00 app[web.1]: I, [2014-09-28T16:43:08.900770 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-28T16:44:53.495738+00:00 app[web.1]: W, [2014-09-28T16:44:43.058823 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495678+00:00 app[web.1]: I, [2014-09-28T16:43:08.900844 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-28T16:44:53.495737+00:00 app[web.1]: I, [2014-09-28T16:44:43.058484 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"record_status"=>"Initiated"}, "id"=>"980190965"}
+2014-09-28T17:14:08.212104+00:00 heroku[router]: at=info method=GET path="/shipment/undefined?client=undefined&warehouse=undefined" host=wmsservice.herokuapp.com re
+quest_id=f81315f1-297a-47f6-ac41-2fb934c525c9 fwd="54.166.240.144" dyno=web.1 connect=5ms service=25ms status=500 bytes=398
+2014-09-28T18:15:36.919366+00:00 heroku[web.1]: State changed from up to down
+2014-09-28T18:15:36.918865+00:00 heroku[web.1]: Idling
+2014-09-28T18:15:40.249515+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-28T18:15:40.988109+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-28T18:15:40.988111+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-28T18:15:40.988107+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-28T18:15:40.988113+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-28T18:15:40.988116+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-28T18:15:40.988114+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-28T18:15:40.988112+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-28T18:15:40.988118+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-28T18:15:40.988119+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-28T18:15:40.988101+00:00 app[web.1]: [2014-09-28 18:15:40] FATAL SignalException: SIGTERM
+2014-09-28T18:15:40.988120+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-28T18:15:40.988122+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-28T18:15:40.988125+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-28T18:15:40.988127+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  going to shutdown ...
+2014-09-28T18:15:40.988128+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  WEBrick::HTTPServer#start done.
+2014-09-28T18:15:40.988123+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-28T18:15:40.988126+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-28T18:15:41.428160+00:00 app[web.1]: W, [2014-09-28T16:44:53.511308 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-28T18:15:41.428139+00:00 app[web.1]: W, [2014-09-28T16:44:53.495922 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T18:15:41.428165+00:00 app[web.1]: I, [2014-09-28T17:14:08.194893 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-28T18:15:41.428164+00:00 app[web.1]: I, [2014-09-28T17:14:08.191028 #2]  INFO -- : Started GET "/shipment/undefined?client=undefined&warehouse=undefined" for 54.166.240.144 at 2014-09-28 17:14:08 +0000
+2014-09-28T18:15:41.428162+00:00 app[web.1]: I, [2014-09-28T16:44:53.512008 #2]  INFO -- : Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 9.9ms)
+2014-09-28T18:15:41.428172+00:00 app[web.1]:   app/models/shipment.rb:63:in `where'
+2014-09-28T18:15:41.428168+00:00 app[web.1]: I, [2014-09-28T17:14:08.199174 #2]  INFO -- : Completed 500 Internal Server Error in 4ms
+2014-09-28T18:15:41.428166+00:00 app[web.1]: I, [2014-09-28T17:14:08.194964 #2]  INFO -- :   Parameters: {"client"=>"undefined", "warehouse"=>"undefined", "id"=>"undefined"}
+2014-09-28T18:15:41.428173+00:00 app[web.1]:   app/controllers/shipment_controller.rb:24:in `show'
+2014-09-28T18:15:41.428174+00:00 app[web.1]: 
+2014-09-28T18:15:41.428176+00:00 app[web.1]: Exiting
+2014-09-28T18:15:41.428170+00:00 app[web.1]: NoMethodError (undefined method `id' for nil:NilClass):
+2014-09-28T18:15:41.428169+00:00 app[web.1]: F, [2014-09-28T17:14:08.200082 #2] FATAL -- : 
+2014-09-28T18:15:41.428175+00:00 app[web.1]: 
+2014-09-28T18:15:43.121383+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:44:06.922280+00:00 heroku[web.1]: Unidling
+2014-09-30T05:44:06.922605+00:00 heroku[web.1]: State changed from down to starting
+2014-09-30T05:44:09.911627+00:00 her
+oku[web.1]: Starting process with command `bin/rails server -p 37942 -e production`
+2014-09-30T05:44:12.926446+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick::HTTPServer#start: pid=2 port=37942
+2014-09-30T05:44:12.926005+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick 1.3.1
+2014-09-30T05:44:12.926039+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:44:13.294256+00:00 heroku[web.1]: State changed from starting to up
+2014-09-30T05:44:14.319493+00:00 heroku[router]: at=info method=POST path="/shipment/location/validate" host=wmsservice.herokuapp.com request_id=b3c34f3c-c731-4f64-a2f1-e9cfc6e495ca fwd="54.197.74.233" dyno=web.1 connect=1ms service=355ms status=200 bytes=582
+2014-09-30T05:44:20.385352+00:00 heroku[router]: at=info method=POST path="/shipment/shipment_nbr/validate" host=wmsservice.herokuapp.com request_id=f39e7f0b-2ec9-46ce-a26f-c02130223cd8 fwd="54.197.74.233" dyno=web.1 connect=1ms service=226ms status=200 bytes=611
+2014-09-30T05:44:44+00:00 heroku[slug-compiler]: Slug compilation started
+2014-09-30T05:45:05+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-09-30T05:45:05.704237+00:00 heroku[api]: Deploy aa26c53 by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.704290+00:00 heroku[api]: Release v28 created by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.847464+00:00 heroku[web.1]: State changed from up to starting
+2014-09-30T05:45:08.197395+00:00 app[web.1]: [2014-09-30 05:45:08] FATAL SignalException: SIGTERM
+2014-09-30T05:45:08.197412+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-30T05:45:08.197402+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-30T05:45:08.197408+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-30T05:45:08.197405+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-30T05:45:08.197404+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-30T05:45:08.197407+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-30T05:45:08.197409+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-30T05:45:08.197411+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-30T05:45:08.197487+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  going to shutdown ...
+2014-09-30T05:45:08.197422+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-30T05:45:08.197418+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-30T05:45:08.197415+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-30T05:45:08.197416+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-30T05:45:08.197414+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-30T05:45:08.197421+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-30T05:45:08.259960+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-09-30T05:45:08.259963+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-09-30T05:45:08.259965+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-09-30T05:45:08.259967+00:00 app[web.1]: I, [2014-09-30T05:44:13.975115 #2]  INFO -- : Started POST "/shipment/location/validate" for 54.197.74.233 at 2014-09-30 05:44:13 +0000
+2014-09-30T05:45:08.259968+00:00 app[web.1]: I, [2014-09-30T05:44:14.060807 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259969+00:00 app[web.1]: I, [2014-09-30T05:44:14.060947 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"location"}
+2014-09-30T05:45:08.197571+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  WEBrick::HTTPServer#start done.
+2014-09-30T05:45:08.259958+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:37942
+2014-09-30T05:45:08.259949+00:00 app[web.1]: => Booting WEBrick
+2014-09-30T05:45:08.259981+00:00 app[web.1]: I, [2014-09-30T05:44:20.384309 #2]  INFO -- : Completed 200 OK in 217ms (Views: 0.5ms | ActiveRecord: 26.4ms)
+2014-09-30T05:45:08.259976+00:00 app[web.1]
+: I, [2014-09-30T05:44:20.166896 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"Shipment12", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"shipment_nbr"}
+2014-09-30T05:45:08.259978+00:00 app[web.1]: W, [2014-09-30T05:44:20.167334 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:08.259980+00:00 app[web.1]: W, [2014-09-30T05:44:20.383394 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-30T05:45:08.259983+00:00 app[web.1]: Exiting
+2014-09-30T05:45:08.259972+00:00 app[web.1]: I, [2014-09-30T05:44:14.319077 #2]  INFO -- : Completed 200 OK in 258ms (Views: 0.4ms | ActiveRecord: 82.3ms)
+2014-09-30T05:45:08.259974+00:00 app[web.1]: I, [2014-09-30T05:44:20.163977 #2]  INFO -- : Started POST "/shipment/shipment_nbr/validate" for 54.197.74.233 at 2014-09-30 05:44:20 +0000
+2014-09-30T05:45:08.259975+00:00 app[web.1]: I, [2014-09-30T05:44:20.166799 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259971+00:00 app[web.1]: W, [2014-09-30T05:44:14.079520 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:07.756107+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-30T05:45:09.201288+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:45:09.742129+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 4037 -e production`
+2014-09-30T05:45:14.342678+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick 1.3.1
+2014-09-30T05:45:14.342748+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:45:14.343238+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick::HTTPServer#start: pid=2 port=4037
+2014-09-30T05:45:14.570671+00:00 heroku[web.1]: State changed from starting to up
+2014-09-28T16:44:53.495672+00:00 app[web.1]: I, [2014-09-28T16:43:04.848842 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "building"=>"", "channel"=>""}, "fields_to_update"=>{"item"=>"12345", "po_qty"=>"10", "shipped_quantity"=>"10", "asn_header_id"=>"980190965"}}
+2014-09-28T16:44:53.495673+00:00 app[web.1]: W, [2014-09-28T16:43:04.849233 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495679+00:00 app[web.1]: I, [2014-09-28T16:43:08.959641 #2]  INFO -- : Completed 200 OK in 59ms (Views: 13.8ms | ActiveRecord: 35.9ms)
+2014-09-28T16:44:53.495675+00:00 app[web.1]: I, [2014-09-28T16:43:08.897110 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.166.240.144 at 2014-09-28 16:43:08 +0000
+2014-09-28T16:44:53.495690+00:00 app[web.1]: W, [2014-09-28T16:43:38.064247 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495670+00:00 app[web.1]: I, [2014-09-28T16:43:04.848747 #2]  INFO -- : Processing by ShipmentController#add_detail as XML
+2014-09-28T16:44:53.495677+00:00 app[web.1]: I, [2014-09-28T16:43:08.900770 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-28T16:44:53.495738+00:00 app[web.1]: W, [2014-09-28T16:44:43.058823 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495678+00:00 app[web.1]: I, [2014-09-28T16:43:08.900844 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-28T16:44:53.495737+00:00 app[web.1]: I, [2014-09-28T16:44:43.058484 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"record_status"=>"Initiated"}, "id"=>"980190965"}
+2014-09-28T17:14:08.212104+00:00 heroku[router]: at=info method=GET path="/shipment/undefined?client=undefined&warehouse=undefined" host=wmsservice.herokuapp.com request_id=f81315f1-297a-47f6-ac41-2fb934c525c9 fwd="54.166.240.144" dyno=web.1 connect=5ms service=25ms status=500 bytes=398
+2014-09-28T18:15:36.919366+00:00 heroku[web.1]: State changed from up to down
+2014-09-28T18:15:36.918865+00:00 heroku[web.1]: Idling
+2014-09-28T18:15:40.249515+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-28T18:15:40.988109+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-28T18:15:40.988111+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-28T18:15:40.988107+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-28T18:15:40.988113+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-28T18:15:40.988116+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-28T18:15:40.988114+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-28T18:15:40.988112+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-28T18:15:40.988118+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-28T18:15:40.988119+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-28T18:15:40.988101+00:00 app[web.1]: [2014-09-28 18:15:40] FATAL SignalException: SIGTERM
+2014-09-28T18:15:40.988120+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-28T18:15:40.988122+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-28T18:15:40.988125+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-28T18:15:40.988127+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  going to shutdown ...
+2014-09-28T18:15:40.988128+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  WEBrick::HTTPServer#start done.
+2014-09-28T18:15:40.988123+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-28T18:15:40.988126+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-28T18:15:41.428160+00:00 app[web.1]: W, [2014-09-28T16:44:53.511308 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-28T18:15:41.428139+00:00 app[web.1]: W, [2014-09-28T16:44:53.495922 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T18:15:41.428165+00:00 app[web.1]: I, [2014-09-28T17:14:08.194893 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-28T18:15:41.428164+00:00 app[web.1]: I, [2014-09-28T17:14:08.191028 #2]  INFO -- : Started GET "/shipment/undefined?client=undefined&warehouse=undefined" for 54.166.240.144 at 2014-09-28 17:14:08 +0000
+2014-09-28T18:15:41.428162+00:00 app[web.1]: I, [2014-09-28T16:44:53.512008 #2]  INFO -- : Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 9.9ms)
+2014-09-28T18:15:41.428172+00:00 app[web.1]:   app/models/shipment.rb:63:in `where'
+2014-09-28T18:15:41.428168+00:00 app[web.1]: I, [2014-09-28T17:14:08.199174 #2]  INFO -- : Completed 500 Internal Server Error in 4ms
+2014-09-28T18:15:41.428166+00:00 app[web.1]: I, [2014-09-28T17:14:08.194964 #2]  INFO -- :   Parameters: {"client"=>"undefined", "warehouse"=>"undefined", "id"=>"undefined"}
+2014-09-28T18:15:41.428173+00:00 app[web.1]:   app/controllers/shipment_controller.rb:24:in `show'
+2014-09-28T18:15:41.428174+00:00 app[web.1]: 
+2014-09-28T18:15:41.428176+00:00 app[web.1]: Exiting
+2014-09-28T18:15:41.428170+00:00 app[web.1]: NoMethodError (undefined method `id' for nil:NilClass):
+2014-09-28T18:15:41.428169+00:00 app[web.1]: F, [2014-09-28T17:14:08.200082 #2] FATAL -- : 
+2014-09-28T18:15:41.428175+00:00 app[web.1]: 
+2014-09-28T18:15:43.121383+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:44:06.922280+00:00 heroku[web.1]: Unidling
+2014-09-30T05:44:06.922605+00:00 heroku[web.1]: State changed from down to starting
+2014-09-30T05:44:09.911627+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 37942 -e production`
+2014-09-30T05:44:12.926446+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick::HTTPServer#start: pid=2 port=37942
+2014-09-30T05:44:12.926005+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick 1.3.1
+2014-09-30T05:44:12.926039+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:44:13.294256+00:00 heroku[web.1]: State changed from starting to up
+2014-09-30T05:44:14.319493+00:00 heroku[router]: at=info method=POST path="/shipment/location/validate" host=wmsservice.herokuapp.com request_id=b3c34f3c-c731-4f64-a2f1-e9cfc6e495ca fwd="54.197.74.233" dyno=web.1 connect=1ms service=355ms status=200 bytes=582
+2014-09-30T05:44:20.385352+00:00 heroku[router]: at=info method=POST path="/shipment/shipment_nbr/validate" host=wmsservice.herokuapp.com request_id=f39e7f0b-2ec9-46ce-a26f-c02130223cd8 fwd="54.197.74.233" dyno=web.1 connect=1ms service=226ms status=200 bytes=611
+2014-09-30T05:44:44+00:00 heroku[slug-compiler]: Slug compilation started
+2014-09-30T05:45:05+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-09-30T05:45:05.704237+00:00 heroku[api]: Deploy aa26c53 by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.704290+00:00 heroku[api]: Release v28 created by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.847464+00:00 heroku[web.1]: State changed from up to starting
+2014-09-30T05:45:08.197395+00:00 app[web.1]: [2014-09-30 05:45:08] FATAL SignalException: SIGTERM
+2014-09-30T05:45:08.197412+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-30T05:45:08.197402+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-30T05:45:08.197408+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-30T05:45:08.197405+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-30T05:45:08.197404+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-30T05:45:08.197407+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-30T05:45:08.197409+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-30T05:45:08.197411+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-30T05:45:08.197487+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  going to shutdown ...
+2014-09-30T05:45:08.197422+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-30T05:45:08.197418+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-30T05:45:08.197415+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-30T05:45:08.197416+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-30T05:45:08.197414+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-30T05:45:08.197421+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-30T05:45:08.259960+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-09-30T05:45:08.259963+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-09-30T05:45:08.259965+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-09-30T05:45:08.259967+00:00 app[web.1]: I, [2014-09-30T05:44:13.975115 #2]  INFO -- : Started POST "/shipment/location/validate" for 54.197.74.233 at 2014-09-30 05:44:13 +0000
+2014-09-30T05:45:08.259968+00:00 app[web.1]: I, [2014-09-30T05:44:14.060807 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259969+00:00 app[web.1]: I, [2014-09-30T05:44:14.060947 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"location"}
+2014-09-30T05:45:08.197571+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  WEBrick::HTTPServer#start done.
+2014-09-30T05:45:08.259958+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:37942
+2014-09-30T05:45:08.259949+00:00 app[web.1]: => Booting WEBrick
+2014-09-30T05:45:08.259981+00:00 app[web.1]: I, [2014-09-30T05:44:20.384309 #2]  INFO -- : Completed 200 OK in 217ms (Views: 0.5ms | ActiveRecord: 26.4ms)
+2014-09-30T05:45:08.259976+00:00 app[web.1]: I, [2014-09-30T05:44:20.166896 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"Shipment12", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"shipment_nbr"}
+2014-09-30T05:45:08.259978+00:00 app[web.1]: W, [2014-09-30T05:44:20.167334 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:08.259980+00:00 app[web.1]: W, [2014-09-30T05:44:20.383394 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-30T05:45:08.259983+00:00 app[web.1]: Exiting
+2014-09-30T05:45:08.259972+00:00 app[web.1]: I, [2014-09-30T05:44:14.319077 #2]  INFO -- : Completed 200 OK in 258ms (Views: 0.4ms | ActiveRecord: 82.3ms)
+2014-09-30T05:45:08.259974+00:00 app[web.1]: I, [2014-09-30T05:44:20.163977 #2]  INFO -- : Started POST "/shipment/shipment_nbr/validate" for 54.197.74.233 at 2014-09-30 05:44:20 +0000
+2014-09-30T05:45:08.259975+00:00 app[web.1]: I, [2014-09-30T05:44:20.166799 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259971+00:00 app[web.1]: W, [2014-09-30T05:44:14.079520 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:07.756107+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-30T05:45:09.201288+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:45:09.742129+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 4037 -e production`
+2014-09-30T05:45:14.342678+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick 1.3.1
+2014-09-30T05:45:14.342748+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:45:14.343238+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick::HTTPServer#start: pid=2 port=4037
+2014-09-30T05:45:14.570671+00:00 heroku[web.1]: State changed from starting to up
+2014-09-28T16:44:53.495672+00:00 app[web.1]: I, [2014-09-28T16:43:04.848842 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "building"=>"", "channel"=>""}, "fields_to_update"=>{"item"=>"12345", "po_qty"=>"10", "shipped_quantity"=>"10", "asn_header_id"=>"980190965"}}
+2014-09-28T16:44:53.495673+00:00 app[web.1]: W, [2014-09-28T16:43:04.849233 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495679+00:00 app[web.1]: I, [2014-09-28T16:43:08.959641 #2]  INFO -- : Completed 200 OK in 59ms (Views: 13.8ms | ActiveRecord: 35.9ms)
+2014-09-28T16:44:53.495675+00:00 app[web.1]: I, [2014-09-28T16:43:08.897110 #2]  INFO -- : Started GET "/shipment/?client=WM&warehouse=WH1" for 54.166.240.144 at 2014-09-28 16:43:08 +0000
+2014-09-28T16:44:53.495690+00:00 app[web.1]: W, [2014-09-28T16:43:38.064247 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495670+00:00 app[web.1]: I, [2014-09-28T16:43:04.848747 #2]  INFO -- : Processing by ShipmentController#add_detail as XML
+2014-09-28T16:44:53.495677+00:00 app[web.1]: I, [2014-09-28T16:43:08.900770 #2]  INFO -- : Processing by ShipmentController#index as XML
+2014-09-28T16:44:53.495738+00:00 app[web.1]: W, [2014-09-28T16:44:43.058823 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T16:44:53.495678+00:00 app[web.1]: I, [2014-09-28T16:43:08.900844 #2]  INFO -- :   Parameters: {"client"=>"WM", "warehouse"=>"WH1"}
+2014-09-28T16:44:53.495737+00:00 app[web.1]: I, [2014-09-28T16:44:43.058484 #2]  INFO -- :   Parameters: {"app_parameters"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>""}, "fields_to_update"=>{"record_status"=>"Initiated"}, "id"=>"980190965"}
+2014-09-28T17:14:08.212104+00:00 heroku[router]: at=info method=GET path="/shipment/undefined?client=undefined&warehouse=undefined" host=wmsservice.herokuapp.com re
+quest_id=f81315f1-297a-47f6-ac41-2fb934c525c9 fwd="54.166.240.144" dyno=web.1 connect=5ms service=25ms status=500 bytes=398
+2014-09-28T18:15:36.919366+00:00 heroku[web.1]: State changed from up to down
+2014-09-28T18:15:36.918865+00:00 heroku[web.1]: Idling
+2014-09-28T18:15:40.249515+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-28T18:15:40.988109+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-28T18:15:40.988111+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-28T18:15:40.988107+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-28T18:15:40.988113+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-28T18:15:40.988116+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-28T18:15:40.988114+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-28T18:15:40.988112+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-28T18:15:40.988118+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-28T18:15:40.988119+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/
+gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-28T18:15:40.988101+00:00 app[web.1]: [2014-09-28 18:15:40] FATAL SignalException: SIGTERM
+2014-09-28T18:15:40.988120+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-28T18:15:40.988122+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-28T18:15:40.988125+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-28T18:15:40.988127+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  going to shutdown ...
+2014-09-28T18:15:40.988128+00:00 app[web.1]: [2014-09-28 18:15:40] INFO  WEBrick::HTTPServer#start done.
+2014-09-28T18:15:40.988123+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-28T18:15:40.988126+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-28T18:15:41.428160+00:00 app[web.1]: W, [2014-09-28T16:44:53.511308 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-28T18:15:41.428139+00:00 app[web.1]: W, [2014-09-28T16:44:53.495922 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-28T18:15:41.428165+00:00 app[web.1]: I, [2014-09-28T17:14:08.194893 #2]  INFO -- : Processing by ShipmentController#show as XML
+2014-09-28T18:15:41.428164+00:00 app[web.1]: I, [2014-09-28T17:14:08.191028 #2]  INFO -- : Started GET "/shipment/undefined?client=undefined&warehouse=undefined" for 54.166.240.144 at 2014-09-28 17:14:08 +0000
+2014-09-28T18:15:41.428162+00:00 app[web.1]: I, [2014-09-28T16:44:53.512008 #2]  INFO -- : Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 9.9ms)
+2014-09-28T18:15:41.428172+00:00 app[web.1]:   app/models/shipment.rb:63:in `where'
+2014-09-28T18:15:41.428168+00:00 app[web.1]: I, [2014-09-28T17:14:08.199174 #2]  INFO -- : Completed 500 Internal Server Error in 4ms
+2014-09-28T18:15:41.428166+00:00 app[web.1]: I, [2014-09-28T17:14:08.194964 #2]  INFO -- :   Parameters: {"client"=>"undefined", "warehouse"=>"undefined", "id"=>"undefined"}
+2014-09-28T18:15:41.428173+00:00 app[web.1]:   app/controllers/shipment_controller.rb:24:in `show'
+2014-09-28T18:15:41.428174+00:00 app[web.1]: 
+2014-09-28T18:15:41.428176+00:00 app[web.1]: Exiting
+2014-09-28T18:15:41.428170+00:00 app[web.1]: NoMethodError (undefined method `id' for nil:NilClass):
+2014-09-28T18:15:41.428169+00:00 app[web.1]: F, [2014-09-28T17:14:08.200082 #2] FATAL -- : 
+2014-09-28T18:15:41.428175+00:00 app[web.1]: 
+2014-09-28T18:15:43.121383+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:44:06.922280+00:00 heroku[web.1]: Unidling
+2014-09-30T05:44:06.922605+00:00 heroku[web.1]: State changed from down to starting
+2014-09-30T05:44:09.911627+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 37942 -e production`
+2014-09-30T05:44:12.926446+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick::HTTPServer#start: pid=2 port=37942
+2014-09-30T05:44:12.926005+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  WEBrick 1.3.1
+2014-09-30T05:44:12.926039+00:00 app[web.1]: [2014-09-30 05:44:12] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:44:13.294256+00:00 heroku[web.1]: State changed from starting to up
+2014-09-30T05:44:14.319493+00:00 heroku[router]: at=info method=POST path="/shipment/location/validate" host=wmsservice.herokuapp.com request_id=b3c34f3c-c731-4f64-a2f1-e9cfc6e495ca fwd="54.197.74.233" dyno=web.1 connect=1ms service=355ms status=200 bytes=582
+2014-09-30T05
+:44:20.385352+00:00 heroku[router]: at=info method=POST path="/shipment/shipment_nbr/validate" host=wmsservice.herokuapp.com request_id=f39e7f0b-2ec9-46ce-a26f-c02130223cd8 fwd="54.197.74.233" dyno=web.1 connect=1ms service=226ms status=200 bytes=611
+2014-09-30T05:44:44+00:00 heroku[slug-compiler]: Slug compilation started
+2014-09-30T05:45:05+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-09-30T05:45:05.704237+00:00 heroku[api]: Deploy aa26c53 by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.704290+00:00 heroku[api]: Release v28 created by farooq.buvvaji@gmail.com
+2014-09-30T05:45:05.847464+00:00 heroku[web.1]: State changed from up to starting
+2014-09-30T05:45:08.197395+00:00 app[web.1]: [2014-09-30 05:45:08] FATAL SignalException: SIGTERM
+2014-09-30T05:45:08.197412+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-09-30T05:45:08.197402+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-09-30T05:45:08.197408+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-09-30T05:45:08.197405+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-09-30T05:45:08.197404+00:00 app[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-09-30T05:45:08.197407+00:00 app
+[web.1]: 	/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-09-30T05:45:08.197409+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-09-30T05:45:08.197411+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-09-30T05:45:08.197487+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  going to shutdown ...
+2014-09-30T05:45:08.197422+00:00 app[web.1]: 	bin/rails:4:in `<main>'
+2014-09-30T05:45:08.197418+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-09-30T05:45:08.197415+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-09-30T05:45:08.197416+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-09-30T05:45:08.197414+00:00 app[web.1]: 	/app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-09-30T05:45:08.197421+00:00 app[web.1]: 	bin/rails:4:in `require'
+2014-09-30T05:45:08.259960+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-09-30T05:45:08.259963+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-09-30T05:45:08.259965+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-09-30T05:45:08.259967+00:00 app[web.1]: I, [2014-09-30T05:44:13.975115 #2]  INFO -- : Started POST "/shipment/location/validate" for 54.197.74.233 at 2014-09-30 05:44:13 +0000
+2014-09-30T05:45:08.259968+00:00 app[web.1]: I, [2014-09-30T05:44:14.060807 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259969+00:00 app[web.1]: I, [2014-09-30T05:44:14.060947 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"location"}
+2014-09-30T05:45:08.197571+00:00 app[web.1]: [2014-09-30 05:45:08] INFO  WEBrick::HTTPServer#start done.
+2014-09-30T05:45:08.259958+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:37942
+2014-09-30T05:45:08.259949+00:00 app[web.1]: => Booting WEBrick
+2014-09-30T05:45:08.259981+00:00 app[web.1]: I, [2014-09-30T05:44:20.384309 #2]  INFO -- : Completed 200 OK in 217ms (Views: 0.5ms | ActiveRecord: 26.4ms)
+2014-09-30T05:45:08.259976+00:00 app[web.1]: I, [2014-09-30T05:44:20.166896 #2]  INFO -- :   Parameters: {"shipment"=>{"client"=>"WM", "warehouse"=>"WH1", "channel"=>"", "building"=>"", "shipment_nbr"=>"Shipment12", "location"=>"Location1", "case_id"=>"", "item"=>"", "quantity"=>"", "innerpack_qty"=>""}, "to_validate"=>"shipment_nbr"}
+2014-09-30T05:45:08.259978+00:00 app[web.1]: W, [2014-09-30T05:44:20.167334 #2]  WARN -- : Can't verify CSRF token authenticity
+2014-09-30T05:45:08.259980+00:00 app[web.1]: W, [2014-09-30T05:44:20.383394 #2]  WARN -- : Warning: [{:code=>"422", :field=>:shipment_nbr, :message=>"Shipment Shipment12 not assigned to this Dock Door"}]
+2014-09-30T05:45:08.259983+00:00 app[web.1]: Exiting
+2014-09-30T05:45:08.259972+00:00 app[web.1]: I, [2014-09-30T05:44:14.319077 #2]  INFO -- : Completed 200 OK in 258ms (Views: 0.4ms | ActiveRecord: 82.3ms)
+2014-09-30T05:45:08.259974+00:00 app[web.1]: I, [2014-09-30T05:44:20.163977 #2]  INFO -- : Started POST "/shipment/shipment_nbr/validate" for 54.197.74.233 at 2014-09-30 05:44:20 +0000
+2014-09-30T05:45:08.259975+00:00 app[web.1]: I, [2014-09-30T05:44:20.166799 #2]  INFO -- : Processing by ShipmentController#validate as XML
+2014-09-30T05:45:08.259971+00:00 app[web.1]: W, [2014-09-30T05:44:14.079520 #2]  WARN -- : 
+Can't verify CSRF token authenticity
+2014-09-30T05:45:07.756107+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-09-30T05:45:09.201288+00:00 heroku[web.1]: Process exited with status 143
+2014-09-30T05:45:09.742129+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 4037 -e production`
+2014-09-30T05:45:14.342678+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick 1.3.1
+2014-09-30T05:45:14.342748+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  ruby 2.0.0 (2014-09-19) [x86_64-linux]
+2014-09-30T05:45:14.343238+00:00 app[web.1]: [2014-09-30 05:45:14] INFO  WEBrick::HTTPServer#start: pid=2 port=4037
+2014-09-30T05:45:14.570671+00:00 heroku[web.1]: State changed from starting to up
