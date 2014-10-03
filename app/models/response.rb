@@ -36,7 +36,7 @@ module Response
  end 
 
  def resource_updated_successfully(resource)
-   @message = {status:  '204',
+   @message = {status:  '201',
     message: "#{resource} Updated Successfully",
      }
    true  
