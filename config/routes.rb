@@ -4,13 +4,15 @@ Rails.application.routes.draw do
     
     namespace :shipment do
         get '' ,  action: 'index'
-        get ':id', action: 'show' 
+        get  ':id', action: 'show' 
         
         post 'add_detail', action: 'add_detail'
         post 'add_header', action: 'add_header'
         
         post ':id/update_header',  action: 'update_header'
         post ':id/update_detail',  action: 'update_detail'
+
+        post ':id', action: 'show' 
         
         post ':shipment_nbr/receive',  action: 'receive'
         post ':to_validate/validate',  action: 'validate'

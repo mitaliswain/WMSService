@@ -2,6 +2,13 @@ require 'test_helper'
 
 class GlobalConfigurationTest < ActiveSupport::TestCase
  
+ test "inserting data using regular active record" do
+   configuration = GlobalConfiguration.new
+   configuration.client = 'WM'
+   configuration.warehouse = 'WH1'
+   configuration.save
+ end
+ 
  test "get the correct configuration" do
    condition = {client: 'WM', warehouse: 'WH1', building: nil , channel: nil, module:'RECEIVING'}
    configuration = GlobalConfiguration.get_configuration(condition)

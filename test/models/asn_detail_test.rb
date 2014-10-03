@@ -44,6 +44,7 @@ class AsnDetailTest < ActiveSupport::TestCase
                         received_qty: '20',
                         verified_qty: '20' }
      response = asn.add_shipment_detail(app_parameters, fields_to_add)
+     assert_equal('201', response.status, "shipment detail added successfully")
      new_asn = AsnDetail.where(shipment_nbr:  asn_details(:two).shipment_nbr).order(:sequence).last
      assert_equal(40, new_asn.shipped_quantity, ' Check shipment quantity')
      assert_equal(20, new_asn.received_qty, 'Check received quantity')
@@ -51,7 +52,24 @@ class AsnDetailTest < ActiveSupport::TestCase
      
    end
    
-
+   test "add asn detail with non symbolize keys" do
+     app_parameters = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil}
+     asn_header = AsnHeader.find_by_shipment_nbr(asn_details(:two).shipment_nbr)
+     fields_to_add = {  'asn_header_id' => asn_header.id,
+                        'item' => '123467',
+                        'shipment_nbr'=> asn_details(:two).shipment_nbr,
+                        'sequence'=> 4, 
+                        'shipped_quantity'=> '40',
+                        'received_qty'=> '20',
+                        'verified_qty'=> '20' }
+     response = asn.add_shipment_detail(app_parameters, fields_to_add)
+     assert_equal('201', response.status, "shipment detail added successfully")
+     new_asn = AsnDetail.where(shipment_nbr:  asn_details(:two).shipment_nbr).order(:sequence).last
+     assert_equal(40, new_asn.shipped_quantity, ' Check shipment quantity')
+     assert_equal(20, new_asn.received_qty, 'Check received quantity')
+     assert_equal(20, new_asn.verified_qty, 'Check verified quantity')
+     
+   end
 end
 
 

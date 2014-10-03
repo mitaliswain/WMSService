@@ -18,7 +18,7 @@ class ShipmentController < ApplicationController
     basic_parameters = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
     filter_conditions = {id: params[:id]}
     shipment_hash = (shipment.get_shipments(basic_parameters, filter_conditions, true)).first
-    render json: shipment_hash
+    render json: shipment_hash.to_json
   end
 
   def update_header

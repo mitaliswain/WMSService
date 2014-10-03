@@ -1,14 +1,14 @@
 class GlobalConfiguration < ActiveRecord::Base
   
-  attr_accessor :config_
-  
-  def initialize option_data
-    self.option = option_data
+  def initialize option_data={}
+    super
+    self.option = option_data 
   end
   
+  
+  
   def self.get_configuration(condition)
-    
-    
+
      configuration_hash = {}
      self.where(condition).where(enable: true).each do |configuration|
        configuration_hash.store(configuration.key, configuration.value)    

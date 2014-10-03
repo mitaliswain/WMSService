@@ -27,19 +27,20 @@ class AsnDetail < ActiveRecord::Base
   
   def add_shipment_detail(app_parameters, fields_to_add)
        input_obj = app_parameters.merge(fields_to_add).merge(id: id).to_hash
-       if valid_app_parameters?(input_obj) && 
-          valid_mandatory_fields?(input_obj) &&
-          valid_data?(input_obj)    
+       if valid_input?(input_obj) 
           shipment_hash = AsnDetail.new(input_obj)  
           shipment_hash = add_derived_data(shipment_hash.clone)
-         
-
-         shipment_hash.save!    
-         
-         resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.id}")                 
+          shipment_hash.save!    
+          resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.id}")                 
        end        
        message  
   end 
+  
+  def valid_input?(input_obj)      
+      (valid_app_parameters?(input_obj) && 
+       valid_mandatory_fields?(input_obj) &&
+       valid_data?(input_obj))  ? true : false    
+  end
   
   def add_derived_data(asn_detail_clone)
     asn_detail = asn_detail_clone
@@ -72,7 +73,7 @@ class AsnDetail < ActiveRecord::Base
 
   
    def valid_asn_header_id?(fields_to_update)
-     if !fields_to_update.has_key?("asn_header_id")
+     if !fields_to_update.symbolize_keys.has_key?(:asn_header_id)
        validation_failed('422', :asn_header_id, 'Asn Header ID is blank')
      else
        true
@@ -80,11 +81,11 @@ class AsnDetail < ActiveRecord::Base
   end  
   
   def valid_item?(fields_to_update) 
-     if !fields_to_update.has_key?('item')
+     if !fields_to_update.symbolize_keys.has_key?(:item)
        validation_failed('422', :item, 'Please enter the item')
      else
-        @item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      
-        @item_master.nil? ? validation_failed('422', :item, 'Item not in item master') : true
+        item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      
+        item_master.nil? ? validation_failed('422', :item, 'Item not in item master') : true
     end
   end
     

@@ -59,7 +59,7 @@ class AsnHeader < ActiveRecord::Base
   end  
 
   def valid_purchase_order_nbr?(fields_to_update)
-    if (fields_to_update.purchase_order_nbr.nil? || fields_to_update.purchase_order_nbr.blank?) 
+    if !fields_to_update.purchase_order_nbr.present? 
       validation_failed('422', :purchase_order_nbr, 'Invalid purchase order')      
     else
        true

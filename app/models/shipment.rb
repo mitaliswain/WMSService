@@ -60,13 +60,18 @@ class Shipment
   def get_shipments(basic_parameters, filter_conditions, expand=nil)
 
     if expand.nil?
-      shipment_header_data = '*'
-      shipment_detail_data = '*'
-    else
       shipment_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]  
       shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
+    else
+      shipment_header_data = '*'
+      shipment_detail_data = '*'
     end
+    
+    basic_parameters[:building] =  basic_parameters[:building].blank? ? nil : basic_parameters[:building]
+    basic_parameters[:channel] =  basic_parameters[:channel].blank? ? nil : basic_parameters[:channel] 
 
+    p basic_parameters
+      
     shipment_headers = AsnHeader.select(shipment_header_data).where(basic_parameters).where(filter_conditions)
     shipment_hash = []
     shipment_headers.each do |shipment_header|
