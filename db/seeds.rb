@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 GlobalConfiguration.create({
-  client:'WM', warehouse: 'WH1', sequence: 1, module: 'SHIPMENT', key: 'one_up_number', value: 1, enable: 't')
+  client:'WM', warehouse: 'WH1', sequence: 1, module: 'SHIPMENT', key: 'one_up_number', value: 1, enable: 't'
 })
