@@ -46,6 +46,7 @@ class AsnDetail < ActiveRecord::Base
     asn_detail = asn_detail_clone
     asn_detail.shipment_nbr = AsnHeader.find(asn_detail.asn_header_id).shipment_nbr
     asn_detail.sequence = get_next_sequence(asn_detail.clone)
+    asn_detail.poline_nbr = asn_detail.sequence
     asn_detail
   end
   
@@ -75,6 +76,15 @@ class AsnDetail < ActiveRecord::Base
    def valid_asn_header_id?(fields_to_update)
      if !fields_to_update.symbolize_keys.has_key?(:asn_header_id)
        validation_failed('422', :asn_header_id, 'Asn Header ID is blank')
+     else
+       true
+    end
+  end  
+  
+  def valid_hot_item?(fields_to_update)
+    p fields_to_update.hot_item
+     if fields_to_update.hot_item != "true" &&  fields_to_update.hot_item != "false"
+       validation_failed('422', :hot_item, 'Invalid Hot Item')
      else
        true
     end

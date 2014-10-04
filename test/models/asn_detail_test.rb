@@ -70,6 +70,24 @@ class AsnDetailTest < ActiveSupport::TestCase
      assert_equal(20, new_asn.verified_qty, 'Check verified quantity')
      
    end
+
+  test "Invalid hot item" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: ""}
+  response = asn.valid_hot_item?(input_obj) 
+   assert_equal(false, response, 'Invalid Hot item' )    
+  end
+   
+
+  test "Valid hot item" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "true"}
+  response = asn.valid_hot_item?(input_obj) 
+   assert_equal(true, response, 'Valid Hot item for true' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "false"}
+  response = asn.valid_hot_item?(input_obj) 
+   assert_equal(true, response, 'Valid Hot item for false' )    
+  end
 end
 
 
