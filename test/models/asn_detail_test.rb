@@ -78,15 +78,66 @@ class AsnDetailTest < ActiveSupport::TestCase
    assert_equal(false, response, 'Invalid Hot item' )    
   end
    
-
+  test "blank or nill item" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, item: ""}
+  response = asn.valid_item?(input_obj) 
+  assert_equal(false, response, 'blank item' )   
+  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, item: nil}
+  response = asn.valid_item?(input_obj) 
+  assert_equal(false, response, 'nill item' )    
+  end
+  
+  
   test "Valid hot item" do
   asn = AsnDetail.new  
-  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "true"}
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "Y"}
   response = asn.valid_hot_item?(input_obj) 
    assert_equal(true, response, 'Valid Hot item for true' )    
-  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "false"}
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item: "N"}
   response = asn.valid_hot_item?(input_obj) 
    assert_equal(true, response, 'Valid Hot item for false' )    
+  end
+  
+  test "Valid lot control" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "Y"}
+  response = asn.valid_track_lot_control?(input_obj) 
+   assert_equal(true, response, 'Valid Lot control for true' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "N"}
+  response = asn.valid_track_lot_control?(input_obj) 
+   assert_equal(false, response, 'Valid Lot control for false' )    
+  end
+  
+  test "Valid serial number" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_serial_nbr: "Y"}
+  response = asn.valid_track_serial_nbr?(input_obj) 
+   assert_equal(true, response, 'Valid Serial number for true' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_serial_nbr: "N"}
+  response = asn.valid_track_serial_nbr?(input_obj) 
+   assert_equal(true, response, 'Valid Serial number for false' )    
+  end
+  
+  test "Valid Country of origin" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_coo: "Y"}
+  response = asn.valid_track_coo?(input_obj) 
+   assert_equal(true, response, 'Valid coo for true' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_coo: "N"}
+  response = asn.valid_track_coo?(input_obj) 
+   assert_equal(true, response, 'Valid coo for false' )    
+  end
+  
+   test "Valid Priority" do
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, priority: "Y"}
+  response = asn.valid_priority?(input_obj) 
+   assert_equal(true, response, 'Valid priority true' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, priority: "N"}
+  response = asn.valid_priority?(input_obj) 
+   assert_equal(true, response, 'Valid priority false' )    
   end
 end
 

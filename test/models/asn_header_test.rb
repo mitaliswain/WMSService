@@ -180,7 +180,47 @@ class AsnHeaderTest < ActiveSupport::TestCase
     assert_equal(true, asn.valid_data?(fields_to_update), "correct asn type")
   end   
 
-
+  test "Valid hot item po" do
+   asn = AsnHeader.new  
+   fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item_po: "Y"}
+   response = asn.valid_hot_item_po?(fields_to_update) 
+   assert_equal(true, response, 'Valid Hot item po for true' )    
+   fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, hot_item_po: "N"}
+   response = asn.valid_hot_item_po?(fields_to_update) 
+   assert_equal(true, response, 'Valid Hot item po for false' )    
+  end
+  
+  test "Valid purchase order nbr blank or nill " do
+  asn = AsnHeader.new  
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, purchase_order_nbr: ""}
+  response = asn.valid_purchase_order_nbr?(fields_to_update) 
+  assert_equal(false, response, 'blank purchase order number' )   
+  
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, purchase_order_nbr: nil}
+  response = asn.valid_purchase_order_nbr?(fields_to_update) 
+  assert_equal(false, response, 'nill purchase order nbr' )    
+  end
+  
+   test "Valid vendor nbr blank or nill " do
+  asn = AsnHeader.new  
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, vendor_nbr: ""}
+  response = asn.valid_vendor_nbr?(fields_to_update) 
+  assert_equal(false, response, 'blank vendor number' )   
+  
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, vendor_nbr: nil}
+  response = asn.valid_vendor_nbr?(fields_to_update) 
+  assert_equal(false, response, 'nill vendor number' )    
+  end
+  
+   test "Valid lot control" do
+  asn = AsnHeader.new  
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "Y"}
+  response = asn.valid_track_lot_control?(fields_to_update) 
+   assert_equal(true, response, 'Valid Lot control for true' )    
+  fields_to_update = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "N"}
+  response = asn.valid_track_lot_control?(fields_to_update) 
+   assert_equal(true, response, 'Valid Lot control for false' )    
+  end
 
 end
 

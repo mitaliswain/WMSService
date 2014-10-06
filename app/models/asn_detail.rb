@@ -44,11 +44,27 @@ class AsnDetail < ActiveRecord::Base
   
   def add_derived_data(asn_detail_clone)
     asn_detail = asn_detail_clone
-    asn_detail.shipment_nbr = AsnHeader.find(asn_detail.asn_header_id).shipment_nbr
+    asn_header = AsnHeader.find(asn_detail.asn_header_id)
+    asn_detail.shipment_nbr = asn_header.shipment_nbr
+    asn_detail.purchase_order_nbr = asn_header.purchase_order_nbr
+    asn_detail.vendor_factory = asn_header.vendor_factory
+    asn_detail.coo = asn_header.coo
+    asn_detail.asn_type = asn_header.asn_type
     asn_detail.sequence = get_next_sequence(asn_detail.clone)
     asn_detail.poline_nbr = asn_detail.sequence
+    asn_detail.description = @item_master.description
+    asn_detail.short_desc = @item_master.short_desc
+    asn_detail.barcode = @item_master.barcode
+    asn_detail.inventory_type = @item_master.inventory_type
+    asn_detail.unit_cost = @item_master.unit_cost
+    #asn_detail.landing_cost = @item_master.landing_cost
+    asn_detail.retail_price = @item_master.retail_price
+    asn_detail.uom = @item_master.uom
+    asn_detail.unit_wgt = @item_master.unit_wgt
+    #asn_detail.unit_vol = @item_master.unit_vol
     asn_detail
   end
+  
   
   def get_next_sequence(shipment_hash)
     shipment_detail = AsnDetail.where(client: shipment_hash.client, shipment_nbr: shipment_hash.shipment_nbr).order(:sequence).last
@@ -68,6 +84,7 @@ class AsnDetail < ActiveRecord::Base
   def valid_mandatory_fields?(fields_to_update)
     is_valid = true
     is_valid = valid_asn_header_id?(fields_to_update) && is_valid 
+    is_valid = valid_item?(fields_to_update) && is_valid 
      
     is_valid   
   end 
@@ -82,8 +99,8 @@ class AsnDetail < ActiveRecord::Base
   end  
   
   def valid_hot_item?(fields_to_update)
-    p fields_to_update.hot_item
-     if fields_to_update.hot_item != "true" &&  fields_to_update.hot_item != "false"
+    
+     if fields_to_update.hot_item != "Y" &&  fields_to_update.hot_item != "N"
        validation_failed('422', :hot_item, 'Invalid Hot Item')
      else
        true
@@ -91,12 +108,48 @@ class AsnDetail < ActiveRecord::Base
   end  
   
   def valid_item?(fields_to_update) 
-     if !fields_to_update.symbolize_keys.has_key?(:item)
+    case     
+     when !fields_to_update.symbolize_keys.has_key?(:item)
        validation_failed('422', :item, 'Please enter the item')
-     else
-        item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      
-        item_master.nil? ? validation_failed('422', :item, 'Item not in item master') : true
+       
+     when !fields_to_update.item.present?
+       validation_failed('422', :item, 'Item can not be nill or blank!')
+     when
+        @item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      
+        @item_master.nil? ? validation_failed('422', :item, 'Item not in item master') : true
     end
   end
-    
+  
+  def valid_track_lot_control?(fields_to_update)
+    if fields_to_update.track_lotcontrol != "Y" &&  fields_to_update.track_lotcontrol != "N"
+       validation_failed('422', :track_lotcontrol, 'Invalid lot control')
+     else
+       true
+    end
+  end
+   
+  def valid_track_serial_nbr?(fields_to_update)
+    if fields_to_update.track_serial_nbr != "Y" &&  fields_to_update.track_serial_nbr != "N"
+       validation_failed('422', :track_serial_nbr, 'Invalid Serial Number')
+     else
+       true
+    end
+  end 
+  
+   def valid_track_coo?(fields_to_update)
+    if fields_to_update.track_coo != "Y" &&  fields_to_update.track_coo != "N"
+       validation_failed('422', :track_coo, 'Invalid Country of origins')
+     else
+       true
+    end
+  end 
+  
+  def valid_priority?(fields_to_update)
+    if fields_to_update.priority != "Y" &&  fields_to_update.priority != "N"
+       validation_failed('422', :priority, 'Invalid Priority')
+     else
+       true
+    end
+  end 
+  
 end

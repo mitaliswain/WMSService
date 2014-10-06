@@ -57,6 +57,15 @@ class AsnHeader < ActiveRecord::Base
        validation_failed('422', :asn_type, 'Invalid ASN Type')
     end
   end  
+  
+  def valid_hot_item_po?(fields_to_update)
+    
+     if fields_to_update.hot_item_po != "Y" &&  fields_to_update.hot_item_po != "N"
+       validation_failed('422', :hot_item_po, 'Invalid Hot Item  PO')
+     else
+       true
+    end
+  end  
 
   def valid_purchase_order_nbr?(fields_to_update)
     if !fields_to_update.purchase_order_nbr.present? 
@@ -65,6 +74,23 @@ class AsnHeader < ActiveRecord::Base
        true
     end
   end  
-   
+  
+  def valid_vendor_nbr?(fields_to_update)
+    if !fields_to_update.vendor_nbr.present? 
+      validation_failed('422', :vendor_nbr, 'Invalid vendor number')      
+    else
+       true
+    end
+    
+  end 
+  
+  def valid_track_lot_control?(fields_to_update)
+    
+     if fields_to_update.track_lotcontrol != "Y" &&  fields_to_update.track_lotcontrol != "N"
+       validation_failed('422', :track_lotcontrol, 'Invalid lot control')
+     else
+       true
+    end
+  end  
    
 end
