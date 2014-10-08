@@ -114,7 +114,7 @@ class AsnDetail < ActiveRecord::Base
        
      when !fields_to_update.item.present?
        validation_failed('422', :item, 'Item can not be nill or blank!')
-     when
+     else
         @item_master = ItemMaster.where(client: fields_to_update.client, item: fields_to_update.item).first                      
         @item_master.nil? ? validation_failed('422', :item, 'Item not in item master') : true
     end
