@@ -89,6 +89,19 @@ class AsnDetailTest < ActiveSupport::TestCase
   assert_equal(false, response, 'nill item' )    
   end
   
+  test "item in item master" do
+  item = ItemMaster.all.first
+  asn = AsnDetail.new  
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, item: item.item}
+  response = asn.valid_item?(input_obj) 
+  assert_equal(true, response, 'valid item' )   
+  
+  item.destroy
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, item: item.item}
+  response = asn.valid_item?(input_obj) 
+  assert_equal(false, response, 'Item not found in item master' )    
+  end
+  
   
   test "Valid hot item" do
   asn = AsnDetail.new  
@@ -104,10 +117,14 @@ class AsnDetailTest < ActiveSupport::TestCase
   asn = AsnDetail.new  
   input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "Y"}
   response = asn.valid_track_lot_control?(input_obj) 
-   assert_equal(true, response, 'Valid Lot control for true' )    
+   assert_equal(true, response, 'Valid Lot control for Y' )    
   input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "N"}
   response = asn.valid_track_lot_control?(input_obj) 
-   assert_equal(false, response, 'Valid Lot control for false' )    
+   assert_equal(true, response, 'Valid Lot control for N' )    
+  input_obj = {client: 'WM', warehouse: 'WH1', channel: nil, building: nil, track_lotcontrol: "K"}
+  response = asn.valid_track_lot_control?(input_obj) 
+   assert_equal(false, response, 'Valid Lot control for anything else Y or N' )    
+
   end
   
   test "Valid serial number" do
