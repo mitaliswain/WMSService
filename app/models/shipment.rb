@@ -60,8 +60,10 @@ class Shipment
   def get_shipments(basic_parameters, filter_conditions, expand=nil)
 
     if expand.nil?
-      shipment_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]  
-      shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
+      #shipment_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]  
+      #shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
+      shipment_header_data = '*'
+      shipment_detail_data = '*'
     else
       shipment_header_data = '*'
       shipment_detail_data = '*'
