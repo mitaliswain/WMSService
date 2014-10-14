@@ -115,8 +115,8 @@ module ReceiveProcessing
       
       shipment_header = AsnHeader.where(default_key shipment)
                                  .where(shipment_nbr: shipment[:shipment_nbr]).first
-      shipment_header.units_rcvd =  shipment_header.units_rcvd.to_i + shipment[:quantity].to_i
-      shipment_header.cases_rcvd =  shipment_header.cases_rcvd.to_i + 1
+      #shipment_header.units_rcvd =  shipment_header.units_rcvd.to_i + shipment[:quantity].to_i
+      #shipment_header.cases_rcvd =  shipment_header.cases_rcvd.to_i + 1
       shipment_header.receiving_started_by = shipment[:user_id] unless shipment[:user_id].nil?
       shipment_header.receiving_started_date = Time.now if shipment_header.receiving_started_date.nil?
       shipment_header.first_recieve_dock_door ||= shipment[:location]
