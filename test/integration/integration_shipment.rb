@@ -502,7 +502,7 @@ fixtures :item_inner_packs
       item: @item,
       quantity: @quantity
     } 
-    assert_equal 200, status , 'message in service'
+    assert_equal 201, status , 'message in service'
     message =  JSON.parse(response.body)
     
     assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
@@ -551,7 +551,7 @@ fixtures :item_inner_packs
       quantity: @quantity,
       innerpack_qty: @innerpack_qty
      }
-    assert_equal 200, status , 'success message'
+    assert_equal 201, status , 'success message'
     message =  JSON.parse(response.body)
      
     assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
@@ -582,7 +582,7 @@ fixtures :item_inner_packs
       quantity: @quantity,
       innerpack_qty: @innerpack_qty + 10
     } 
-    assert_equal 200, status , 'Error in service'
+    assert_equal 201, status , 'Successfully Created'
     message =  JSON.parse(response.body)
      
     assert_equal 'Shipment1 Received Successfully' , message.message,  "Service did not work"
@@ -605,7 +605,7 @@ fixtures :item_inner_packs
         door_door: shipment.door_door + 'x'
         }) 
     shipment_updated = AsnHeader.where(shipment_nbr: asn_headers(:two).shipment_nbr).first
-    assert_equal 204, status, 'Updated shipment status'
+    assert_equal 201, status, 'Updated shipment status'
     assert_equal shipment.door_door + 'x', shipment_updated.door_door, 'Updated shipment data'
     
   end

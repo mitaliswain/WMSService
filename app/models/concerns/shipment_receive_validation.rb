@@ -1,6 +1,6 @@
 require 'yaml'
 require 'active_support/concern'
-module ReceiveValidation
+module ShipmentReceiveValidation
   extend ActiveSupport::Concern
 
     

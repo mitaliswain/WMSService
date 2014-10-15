@@ -1,3 +1,6 @@
+require 'utilities/utility'
+require 'utilities/response'
+
 include Utility
 include Response
 
@@ -41,7 +44,7 @@ class AsnDetail < ActiveRecord::Base
           shipment_hash = AsnDetail.new(input_obj)  
           shipment_hash = add_derived_data(shipment_hash.clone)
           shipment_hash.save!    
-          resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.id}")                 
+          resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.asn_header_id}/#{shipment_hash.id}")                 
        end        
        message  
   end 

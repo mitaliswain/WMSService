@@ -1,9 +1,16 @@
 
-module ReceiveProcessing
+module ShipmentReceiveProcessing
   extend ActiveSupport::Concern
 
+  def receive_shipment(shipment)
+   
+    @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: 'RECEIVING')
+    # workflow = WorkFlow.get_workflow('RECEIVING')
+     process_workflow(shipment)      
+  end  
+   
 
-   def create_case(shipment)
+  def create_case(shipment)
      
       case_header = create_case_header(shipment)
       case_detail = create_case_detail(shipment , case_header)
@@ -13,9 +20,9 @@ module ReceiveProcessing
       rescue => error
       fatal_error(error.to_s)
   
-     end
+   end
     
-     def create_case_header(shipment)
+   def create_case_header(shipment)
       location = LocationMaster.where(default_key shipment)
                                .where(barcode: shipment[:location]).first
       asnheader = AsnHeader.where(default_key shipment)
@@ -54,9 +61,9 @@ module ReceiveProcessing
       # case_detail.coveyable = item_master.coveyable
       case_header.save!
       case_header
-    end
+  end
     
-    def create_case_detail(shipment , case_header)
+  def create_case_detail(shipment , case_header)
       
       item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
       asn_detail = AsnDetail.where(default_key shipment)
@@ -98,9 +105,9 @@ module ReceiveProcessing
       
       case_detail.save!
   
-    end
+  end
       
-    def update_shipment(shipment)
+  def update_shipment(shipment)
       shipment_header = update_asnheader(shipment)
       shipment_details = update_asndetails(shipment, shipment_header)
       
@@ -109,9 +116,9 @@ module ReceiveProcessing
       rescue => error
       fatal_error(error.to_s)
       
-    end  
+  end  
       
-    def update_asnheader(shipment)
+  def update_asnheader(shipment)
       
       shipment_header = AsnHeader.where(default_key shipment)
                                  .where(shipment_nbr: shipment[:shipment_nbr]).first
@@ -125,9 +132,9 @@ module ReceiveProcessing
       
       shipment_header.save!
       
-    end
+  end
      
-    def update_asndetails(shipment, shipment_header)
+  def update_asndetails(shipment, shipment_header)
       shipment_details = AsnDetail.where(default_key shipment)
                                   .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
       shipment_details.received_qty = shipment_details.received_qty.to_i + shipment[:quantity].to_i
@@ -136,9 +143,9 @@ module ReceiveProcessing
       shipment_details.receiver_comments = shipment[:comments] unless shipment[:comments].nil?
       shipment_details.save!      
       
-     end
+   end
   
-     def update_location(shipment)
+   def update_location(shipment)
       return true if !yard_management_enabled?(shipment)
       
       location_master = LocationMaster.where(default_key shipment)
@@ -152,9 +159,9 @@ module ReceiveProcessing
       rescue => error
       fatal_error(error.to_s)
   
-     end
+   end
   
-     def update_innerpack_quantity(shipment)
+   def update_innerpack_quantity(shipment)
   
       item_innerpacks = ItemInnerPack.where(client: shipment[:client], item: shipment[:item])
       
@@ -166,23 +173,51 @@ module ReceiveProcessing
       
       rescue => error
       fatal_error(error.to_s)
-     end
+   end
      
-     private    
-     def innerpack_exists? item_innerpacks , shipment
+   private    
+   def workflow
+    workflow = 
+           { validate: [{ method: 'valid_location?' }, 
+                       { method: 'valid_shipment?' },
+                       { method: 'valid_case?' },
+                       { method: 'valid_item?' },
+                       { method: 'valid_received_quantity?' }
+                      ],
+             process:  [{ method: 'create_case' },
+                       { method: 'update_shipment' },
+                       { method: 'update_location' },
+                       { method: 'update_innerpack_quantity'}
+                      ],
+             trigger:  [],
+             house_keeping:  []
+            }    
+  end  
+  
+  def process_workflow shipment
+    workflow.each do |process, methods|
+      methods.each do |method|
+        response = self.send(method[:method], shipment)
+        return self.message unless response 
+      end
+    end
+     resource_processed_successfully(shipment[:shipment_nbr], "Received Successfully")
+  end 
+   
+  def innerpack_exists? item_innerpacks , shipment
        item_innerpacks.each do |item_innerpack| 
             return true if item_innerpack.innerpack_qty.to_i == shipment[:innerpack_qty].to_i 
        end
        false                        
      end
      
-     def default_key shipment
+   def default_key shipment
         { client:    shipment[:client],
           warehouse: shipment[:warehouse],
           building: (shipment[:building].to_s.empty? ? nil : shipment[:building]),
           channel:  (shipment[:channel].to_s.empty?  ? nil : shipment[:channel]) }
-     end
+   end
      
-    module ClassMethods
-    end 
+   module ClassMethods
+   end 
 end
