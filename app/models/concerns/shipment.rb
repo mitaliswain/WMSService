@@ -1,10 +1,10 @@
 require 'utilities/utility'
-#require 'concerns/receive_processing'
-#require 'concerns/receive_validation'
+require 'utilities/response'
+
 class Shipment 
   
-  include ReceiveProcessing
-  include ReceiveValidation
+  include ShipmentReceiveProcessing
+  include ShipmentReceiveValidation
   include Response
   include Utility
  
@@ -15,44 +15,6 @@ class Shipment
     @message = {}
     @error = []
   end
-  
-  def receive_shipment(shipment)
-   
-    @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: 'RECEIVING')
-    # workflow = WorkFlow.get_workflow('RECEIVING')
-      process_workflow(shipment)      
-
-  end  
-  
-  
-  def workflow
-    workflow = 
-           { validate: [{ method: 'valid_location?' }, 
-                       { method: 'valid_shipment?' },
-                       { method: 'valid_case?' },
-                       { method: 'valid_item?' },
-                       { method: 'valid_received_quantity?' }
-                      ],
-             process:  [{ method: 'create_case' },
-                       { method: 'update_shipment' },
-                       { method: 'update_location' },
-                       { method: 'update_innerpack_quantity'}
-                      ],
-             trigger:  [],
-             house_keeping:  []
-            }    
-
-  end  
-  
-  def process_workflow shipment
-    workflow.each do |process, methods|
-      methods.each do |method|
-        response = self.send(method[:method], shipment)
-        return self.message unless response 
-      end
-    end
-     resource_processed_successfully(shipment[:shipment_nbr], "Received Successfully")
-  end 
   
   def self.all(client, warehouse, channel=nil, building=nil) 
     AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 
@@ -72,8 +34,6 @@ class Shipment
     
     basic_parameters[:building] =  basic_parameters[:building].blank? ? nil : basic_parameters[:building]
     basic_parameters[:channel] =  basic_parameters[:channel].blank? ? nil : basic_parameters[:channel] 
-
-    p basic_parameters
       
     shipment_headers = AsnHeader.select(shipment_header_data).where(basic_parameters).where(filter_conditions)
     shipment_hash = []

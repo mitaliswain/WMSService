@@ -1,26 +1,37 @@
 
-module ReceiveProcessing
+module ShipmentReceiveProcessing
   extend ActiveSupport::Concern
 
+  def receive_shipment(shipment)
+   
+    @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: 'RECEIVING')
+    # workflow = WorkFlow.get_workflow('RECEIVING')
+     process_workflow(shipment)      
+  end  
+   
 
-   def create_case(shipment)
-     
+  def create_case(shipment)
+     if Case_receiving_enabled?(shipment)
+       case_header = update_case_header(shipment)
+       case_detail = update_case_detail(shipment , case_header)
+     else
       case_header = create_case_header(shipment)
       case_detail = create_case_detail(shipment , case_header)
-  
-      true
+     end
+     true
         
       rescue => error
       fatal_error(error.to_s)
   
-     end
+   end
+   def update_case_header(shipment)
+     case_header = CaseHeader.where(default_key shipment)
+                             .where(case_id: shipment[:case_id]).first
+     case_header = get_case_header_detail(case_header.dup, shipment)    
+     case_header.save!                                                 
+   end
     
-     def create_case_header(shipment)
-      location = LocationMaster.where(default_key shipment)
-                               .where(barcode: shipment[:location]).first
-      asnheader = AsnHeader.where(default_key shipment)
-                           .where(shipment_nbr: shipment[:shipment_nbr]).first
-  
+   def create_case_header(shipment)
       case_header = CaseHeader.new
       case_header.client = shipment[:client]
       case_header.warehouse = shipment[:warehouse]
@@ -28,9 +39,18 @@ module ReceiveProcessing
       case_header.building = shipment[:building]
       case_header.case_id = shipment[:case_id]
       case_header.shipment_nbr = shipment[:shipment_nbr]
-      case_header.status = 'created'
+      case_header = get_case_header_detail(case_header.dup, shipment)
+      case_header.save!
+   end
+   
+   def get_case_header_detail(case_header, shipment)  
+      location = LocationMaster.where(default_key shipment)
+                               .where(barcode: shipment[:location]).first
+      asnheader = AsnHeader.where(default_key shipment)
+                           .where(shipment_nbr: shipment[:shipment_nbr]).first
+      case_header.status = 'Created'
       case_header.on_hold = 'Yes'
-      case_header.hold_code = 'Received'
+      case_header.hold_code = 'Putaway Required'
       case_header.barcode = shipment[:location]
       if location
         case_header.Location_type = location.location_type
@@ -52,11 +72,10 @@ module ReceiveProcessing
       case_header.multi_sku = shipment[:multi_sku] unless shipment[:multi_sku].nil?
       case_header.inner_pack_qty = shipment[:inner_pack_qty]
       # case_detail.coveyable = item_master.coveyable
-      case_header.save!
       case_header
-    end
+  end
     
-    def create_case_detail(shipment , case_header)
+  def create_case_detail(shipment , case_header)
       
       item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
       asn_detail = AsnDetail.where(default_key shipment)
@@ -68,6 +87,7 @@ module ReceiveProcessing
       case_detail.building = shipment[:building]
       case_detail.case_id = shipment[:case_id]   
       case_detail.item = shipment[:item]
+      case_detail.case_header_id = case_header.id
       case_detail.quantity = shipment[:quantity].to_i
       case_detail.sku_attribute1 = item_master.sku_attribute1
       case_detail.sku_attribute2 =item_master.sku_attribute2
@@ -98,9 +118,9 @@ module ReceiveProcessing
       
       case_detail.save!
   
-    end
+  end
       
-    def update_shipment(shipment)
+  def update_shipment(shipment)
       shipment_header = update_asnheader(shipment)
       shipment_details = update_asndetails(shipment, shipment_header)
       
@@ -109,14 +129,14 @@ module ReceiveProcessing
       rescue => error
       fatal_error(error.to_s)
       
-    end  
+  end  
       
-    def update_asnheader(shipment)
+  def update_asnheader(shipment)
       
       shipment_header = AsnHeader.where(default_key shipment)
                                  .where(shipment_nbr: shipment[:shipment_nbr]).first
-      shipment_header.units_rcvd =  shipment_header.units_rcvd.to_i + shipment[:quantity].to_i
-      shipment_header.cases_rcvd =  shipment_header.cases_rcvd.to_i + 1
+      #shipment_header.units_rcvd =  shipment_header.units_rcvd.to_i + shipment[:quantity].to_i
+      #shipment_header.cases_rcvd =  shipment_header.cases_rcvd.to_i + 1
       shipment_header.receiving_started_by = shipment[:user_id] unless shipment[:user_id].nil?
       shipment_header.receiving_started_date = Time.now if shipment_header.receiving_started_date.nil?
       shipment_header.first_recieve_dock_door ||= shipment[:location]
@@ -125,9 +145,9 @@ module ReceiveProcessing
       
       shipment_header.save!
       
-    end
+  end
      
-    def update_asndetails(shipment, shipment_header)
+  def update_asndetails(shipment, shipment_header)
       shipment_details = AsnDetail.where(default_key shipment)
                                   .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
       shipment_details.received_qty = shipment_details.received_qty.to_i + shipment[:quantity].to_i
@@ -136,9 +156,9 @@ module ReceiveProcessing
       shipment_details.receiver_comments = shipment[:comments] unless shipment[:comments].nil?
       shipment_details.save!      
       
-     end
+   end
   
-     def update_location(shipment)
+   def update_location(shipment)
       return true if !yard_management_enabled?(shipment)
       
       location_master = LocationMaster.where(default_key shipment)
@@ -152,9 +172,9 @@ module ReceiveProcessing
       rescue => error
       fatal_error(error.to_s)
   
-     end
+   end
   
-     def update_innerpack_quantity(shipment)
+   def update_innerpack_quantity(shipment)
   
       item_innerpacks = ItemInnerPack.where(client: shipment[:client], item: shipment[:item])
       
@@ -166,23 +186,51 @@ module ReceiveProcessing
       
       rescue => error
       fatal_error(error.to_s)
-     end
+   end
      
-     private    
-     def innerpack_exists? item_innerpacks , shipment
+   private    
+   def workflow
+    workflow = 
+           { validate: [{ method: 'valid_location?' }, 
+                       { method: 'valid_shipment?' },
+                       { method: 'valid_case?' },
+                       { method: 'valid_item?' },
+                       { method: 'valid_received_quantity?' }
+                      ],
+             process:  [{ method: 'create_case' },
+                       { method: 'update_shipment' },
+                       { method: 'update_location' },
+                       { method: 'update_innerpack_quantity'}
+                      ],
+             trigger:  [],
+             house_keeping:  []
+            }    
+  end  
+  
+  def process_workflow shipment
+    workflow.each do |process, methods|
+      methods.each do |method|
+        response = self.send(method[:method], shipment)
+        return self.message unless response 
+      end
+    end
+     resource_processed_successfully(shipment[:shipment_nbr], "Received Successfully")
+  end 
+   
+  def innerpack_exists? item_innerpacks , shipment
        item_innerpacks.each do |item_innerpack| 
             return true if item_innerpack.innerpack_qty.to_i == shipment[:innerpack_qty].to_i 
        end
        false                        
      end
      
-     def default_key shipment
+   def default_key shipment
         { client:    shipment[:client],
           warehouse: shipment[:warehouse],
           building: (shipment[:building].to_s.empty? ? nil : shipment[:building]),
           channel:  (shipment[:channel].to_s.empty?  ? nil : shipment[:channel]) }
-     end
+   end
      
-    module ClassMethods
-    end 
+   module ClassMethods
+   end 
 end

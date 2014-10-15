@@ -1,6 +1,6 @@
 require 'yaml'
 require 'active_support/concern'
-module ReceiveValidation
+module ShipmentReceiveValidation
   extend ActiveSupport::Concern
 
     
@@ -101,7 +101,7 @@ module ReceiveValidation
    def valid_item?(shipment)
 
      @item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
-     @case_detail = CaseDetail.where(default_key shipment).where(item: shipment[:item]).first
+     @case_detail = CaseDetail.where(default_key shipment).where(case_id: shipment[:case_id], item: shipment[:item]).first
      @shipment_detail = AsnDetail.where(default_key shipment)
                                  .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
      
@@ -114,7 +114,8 @@ module ReceiveValidation
      when !@shipment_detail
         validation_failed('422', :item, Message.get_message(shipment[:client], 'RCV0012', [shipment[:item]]))
 
-     when  Case_receiving_enabled?(shipment) && !@case_detail      
+     when  Case_receiving_enabled?(shipment)  && !@case_detail    
+
        validation_failed('422', :item, Message.get_message(shipment[:client], 'RCV0013', [shipment[:item]]))
 
      else
@@ -128,7 +129,7 @@ module ReceiveValidation
       if valid_item?(shipment)
         case 
    
-        when is_received_quantity_matches_with_asn?(@case_detail, shipment)
+        when is_received_quantity_matches_with_case?(@case_detail, shipment)
            validation_failed('422', :item, Message.get_message(shipment[:client], 'RCV0014'))
 
         when is_received_quantity_greater_with_shipped?(@shipment_detail, shipment)
@@ -147,7 +148,7 @@ module ReceiveValidation
    end
 
    private    
-   def is_received_quantity_matches_with_asn? case_detail, shipment    
+   def is_received_quantity_matches_with_case? case_detail, shipment    
       Case_receiving_enabled?(shipment) &&
       case_detail.quantity != shipment[:quantity].to_i     
    end

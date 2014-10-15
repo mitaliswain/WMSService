@@ -1,7 +1,6 @@
 class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
-     basic_parameters = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
      filter_conditions = params[:filter_conditions]
      shipment_hash = Shipment.new.get_shipments(basic_parameters, filter_conditions, params[:expand])
      render json: shipment_hash
@@ -15,7 +14,6 @@ class ShipmentController < ApplicationController
 
   def show
     shipment = Shipment.new
-    basic_parameters = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
     filter_conditions = {id: params[:id]}
     shipment_hash = (shipment.get_shipments(basic_parameters, filter_conditions, true)).first
     render json: shipment_hash.to_json
@@ -63,6 +61,10 @@ class ShipmentController < ApplicationController
    shipment = Shipment.new  
    shipment.is_valid_receive_data?(params[:to_validate], params[:shipment])
    render json: shipment.message
+  end
+  
+  def basic_parameters
+    {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
   end
    
 end

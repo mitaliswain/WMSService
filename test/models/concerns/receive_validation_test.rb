@@ -1,15 +1,15 @@
 require 'test_helper'
-require 'utility'
+require 'utilities/utility'
 
-class ReceiveValidations
+class ShipmentReceiveValidations
   attr_reader :message
   
-  include ReceiveValidation
+  include ShipmentReceiveValidation
   include Utility
 
 end
 
-class ReceiveValidationTest < ActiveSupport::TestCase
+class ShipmentReceiveValidationTest < ActiveSupport::TestCase
 
 
   # test "the truth" do

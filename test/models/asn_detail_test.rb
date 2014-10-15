@@ -156,6 +156,28 @@ class AsnDetailTest < ActiveSupport::TestCase
   response = asn.valid_priority?(input_obj) 
    assert_equal(true, response, 'Valid priority false' )    
   end
+  
+  test "update AsnHeader received quantitty" do
+    
+     old_asn = AsnDetail.where(shipment_nbr: asn_details(:two).shipment_nbr, sequence: asn_details(:two).sequence).first
+     old_asn.received_qty = old_asn.received_qty.to_i + 10
+     asn_header = AsnHeader.find(old_asn.asn_header_id)
+     before_received_qty = asn_header.units_rcvd
+     old_asn.save
+     asn_header = AsnHeader.find(old_asn.asn_header_id)
+     assert_equal(asn_header.units_rcvd, before_received_qty+10, 'update asn received quantity')
+  end
+  
+  test "update AsnHeader case received" do
+    
+     old_asn = AsnDetail.where(shipment_nbr: asn_details(:two).shipment_nbr, sequence: asn_details(:two).sequence).first
+     old_asn.cases_rcvd = old_asn.cases_rcvd.to_i + 10
+     asn_header = AsnHeader.find(old_asn.asn_header_id)
+     before_case_received = asn_header.cases_rcvd
+     old_asn.save
+     asn_header = AsnHeader.find(old_asn.asn_header_id)
+     assert_equal(asn_header.cases_rcvd, before_case_received+10, 'update asn case received')
+  end
 end
 
 

@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'utility'
+require 'utilities/utility'
 
 
 class UtilityValue
