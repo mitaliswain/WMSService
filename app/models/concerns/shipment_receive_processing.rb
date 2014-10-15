@@ -11,23 +11,27 @@ module ShipmentReceiveProcessing
    
 
   def create_case(shipment)
-     
+     if Case_receiving_enabled?(shipment)
+       case_header = update_case_header(shipment)
+       case_detail = update_case_detail(shipment , case_header)
+     else
       case_header = create_case_header(shipment)
       case_detail = create_case_detail(shipment , case_header)
-  
-      true
+     end
+     true
         
       rescue => error
       fatal_error(error.to_s)
   
    end
+   def update_case_header(shipment)
+     case_header = CaseHeader.where(default_key shipment)
+                             .where(case_id: shipment[:case_id]).first
+     case_header = get_case_header_detail(case_header.dup, shipment)    
+     case_header.save!                                                 
+   end
     
    def create_case_header(shipment)
-      location = LocationMaster.where(default_key shipment)
-                               .where(barcode: shipment[:location]).first
-      asnheader = AsnHeader.where(default_key shipment)
-                           .where(shipment_nbr: shipment[:shipment_nbr]).first
-  
       case_header = CaseHeader.new
       case_header.client = shipment[:client]
       case_header.warehouse = shipment[:warehouse]
@@ -35,9 +39,18 @@ module ShipmentReceiveProcessing
       case_header.building = shipment[:building]
       case_header.case_id = shipment[:case_id]
       case_header.shipment_nbr = shipment[:shipment_nbr]
-      case_header.status = 'created'
+      case_header = get_case_header_detail(case_header.dup, shipment)
+      case_header.save!
+   end
+   
+   def get_case_header_detail(case_header, shipment)  
+      location = LocationMaster.where(default_key shipment)
+                               .where(barcode: shipment[:location]).first
+      asnheader = AsnHeader.where(default_key shipment)
+                           .where(shipment_nbr: shipment[:shipment_nbr]).first
+      case_header.status = 'Created'
       case_header.on_hold = 'Yes'
-      case_header.hold_code = 'Received'
+      case_header.hold_code = 'Putaway Required'
       case_header.barcode = shipment[:location]
       if location
         case_header.Location_type = location.location_type
@@ -59,7 +72,6 @@ module ShipmentReceiveProcessing
       case_header.multi_sku = shipment[:multi_sku] unless shipment[:multi_sku].nil?
       case_header.inner_pack_qty = shipment[:inner_pack_qty]
       # case_detail.coveyable = item_master.coveyable
-      case_header.save!
       case_header
   end
     
@@ -75,6 +87,7 @@ module ShipmentReceiveProcessing
       case_detail.building = shipment[:building]
       case_detail.case_id = shipment[:case_id]   
       case_detail.item = shipment[:item]
+      case_detail.case_header_id = case_header.id
       case_detail.quantity = shipment[:quantity].to_i
       case_detail.sku_attribute1 = item_master.sku_attribute1
       case_detail.sku_attribute2 =item_master.sku_attribute2

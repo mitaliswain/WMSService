@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'response'
+require 'utilities/response'
 
 
 class ResponseValue
