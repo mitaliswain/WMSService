@@ -530,6 +530,7 @@ fixtures :item_inner_packs
 
   end
 
+
   def test_receive_shipment_Case
 
     update_old = {value: @configuration.Receiving_Type} 
@@ -571,13 +572,14 @@ fixtures :item_inner_packs
     assert_equal  asn_detail_old.received_qty+ 10, asn_detail.received_qty , "ASN Detail received quantity mismatch"
 
     #Case
-    assert_equal  10, case_detail.quantity , "Case quantity mismatch"
-    
-    assert_equal  case_headers(:case_four).case_id, case_header.case_id , "Case Updated"
+    assert_equal  'Received', case_header.record_status , "Case received"        
     assert_equal  'Yes' , case_header.on_hold , "Case put on hold"
     assert_equal  'Putaway Required' , case_header.hold_code , "On Hold Code for Case"
+    assert_equal  'Received' , case_detail.record_status , "Case detail udated"
    
-    assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
+   
+   
+    #assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
  
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
@@ -664,4 +666,5 @@ fixtures :item_inner_packs
     
   end
 
-  end
+
+end

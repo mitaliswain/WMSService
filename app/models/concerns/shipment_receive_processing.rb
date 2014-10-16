@@ -11,6 +11,7 @@ module ShipmentReceiveProcessing
    
 
   def create_case(shipment)
+    
      if Case_receiving_enabled?(shipment)
        case_header = update_case_header(shipment)
        case_detail = update_case_detail(shipment , case_header)
@@ -28,7 +29,7 @@ module ShipmentReceiveProcessing
    def update_case_header(shipment)
      case_header = CaseHeader.where(default_key shipment)
                              .where(case_id: shipment[:case_id]).first
-     case_header = get_case_header_info(case_header.dup, shipment)    
+     case_header = get_case_header_info(case_header, shipment)    
      case_header.save!  
      case_header                                               
    end
@@ -41,7 +42,7 @@ module ShipmentReceiveProcessing
       case_header.building = shipment[:building]
       case_header.case_id = shipment[:case_id]
       case_header.shipment_nbr = shipment[:shipment_nbr]
-      case_header = get_case_header_info(case_header.dup, shipment)
+      case_header = get_case_header_info(case_header, shipment)
       case_header.save!
       case_header
    end
@@ -51,7 +52,7 @@ module ShipmentReceiveProcessing
                                .where(barcode: shipment[:location]).first
       asnheader = AsnHeader.where(default_key shipment)
                            .where(shipment_nbr: shipment[:shipment_nbr]).first
-      case_header.status = 'Created'
+      case_header.record_status = 'Received'
       case_header.on_hold = 'Yes'
       case_header.hold_code = 'Putaway Required'
       case_header.barcode = shipment[:location]
@@ -82,7 +83,7 @@ module ShipmentReceiveProcessing
   def update_case_detail(shipment, case_header)
     case_detail = CaseDetail.where(default_key shipment)
                              .where(case_id: case_header.case_id, item: shipment[:item]).first
-    case_detail = get_case_detail_info(case_detail.dup, shipment)   
+    case_detail = get_case_detail_info(case_detail, shipment)   
     case_detail.save!
     case_detail                             
   end
@@ -98,7 +99,7 @@ module ShipmentReceiveProcessing
       case_detail.item = shipment[:item]
       case_detail.case_header_id = case_header.id
       case_detail.quantity = shipment[:quantity].to_i
-      case_detail = get_case_detail_info(case_detail.dup, shipment)   
+      case_detail = get_case_detail_info(case_detail, shipment)   
       case_detail.save!   
       case_detail
   end   
@@ -130,7 +131,7 @@ module ShipmentReceiveProcessing
      # case_detail.climate_control = item_master.climate_control 
      # case_detail.perishable = item_master.perishable
      # case_detail.special_handling = item_master.special_handling 
-     
+      case_detail.record_status = 'Received'
       case_detail.unit_weight =  item_master.unit_wgt
       case_detail.unit_volume = item_master.unit_vol  
       case_detail
