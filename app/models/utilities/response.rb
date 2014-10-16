@@ -70,6 +70,7 @@ module Response
     message: message
     }
   Rails.logger.fatal("Critical: #{message}")  
+  p message
    false
  end   
 

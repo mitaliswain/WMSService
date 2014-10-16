@@ -522,13 +522,67 @@ fixtures :item_inner_packs
     
     assert_equal  @case_id, case_header.case_id , "Case created"
     assert_equal  'Yes' , case_header.on_hold , "Case put on hold"
-    assert_equal  'Received' , case_header.hold_code , "On Hold Code for Case"
+    assert_equal  'Putaway Required' , case_header.hold_code , "On Hold Code for Case"
    
     assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
  
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
+
+  def test_receive_shipment_Case
+
+    update_old = {value: @configuration.Receiving_Type} 
+    GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+
+    asn_header_old = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
+    asn_detail_old = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
+    case_header_old = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id).first
+    case_detail_old = CaseDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: @case_id, item: @item).first
+
+
+    # Check the valida shipment
+    post @url, 
+      
+    shipment: {  
+      client: @client,
+      warehouse: @warehouse,
+      channel: @channel,
+      building:@building,
+      location: @location,
+      shipment_nbr: @shipment_nbr,
+      case_id: case_headers(:case_four).case_id,
+      item: case_details(:case_four).item,
+      quantity: case_details(:case_four).quantity
+    } 
+    message =  JSON.parse(response.body)
+
+    assert_equal 201, status , 'message in service'
+    assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
+    
+    asn_header = AsnHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr).first
+    asn_detail = AsnDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, shipment_nbr: @shipment_nbr, item: @item).first
+    case_header = CaseHeader.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: case_headers(:case_four).case_id).first
+    case_detail = CaseDetail.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, case_id: case_headers(:case_four).case_id, item: case_details(:case_four).item).first
+    location_master = LocationMaster.where(client: @client, warehouse: @warehouse , channel: @channel, building: @building, barcode: @location).first
+
+    #Shipment
+    assert_equal  asn_header_old.units_rcvd + 10 , asn_header.units_rcvd , "ASN Header received quantity mismatch"
+    assert_equal  asn_detail_old.received_qty+ 10, asn_detail.received_qty , "ASN Detail received quantity mismatch"
+
+    #Case
+    assert_equal  10, case_detail.quantity , "Case quantity mismatch"
+    
+    assert_equal  case_headers(:case_four).case_id, case_header.case_id , "Case Updated"
+    assert_equal  'Yes' , case_header.on_hold , "Case put on hold"
+    assert_equal  'Putaway Required' , case_header.hold_code , "On Hold Code for Case"
+   
+    assert_equal  'Occupied', location_master.record_status , "Location not getting updated"
+ 
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+
+  end
+  
 
   def test_item_innerpack_exists_SKU
 
@@ -585,7 +639,7 @@ fixtures :item_inner_packs
     assert_equal 201, status , 'Successfully Created'
     message =  JSON.parse(response.body)
      
-    assert_equal 'Shipment1 Received Successfully' , message.message,  "Service did not work"
+    assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
     item_inner_packs = ItemInnerPack.where(client: @client, item: asn_details(:two).item).order(:id)
     assert_equal  2, item_inner_packs.length , "Received with non existing innerpack"
     assert_equal  @innerpack_qty + 10, item_inner_packs[1].innerpack_qty , "New innerpack "

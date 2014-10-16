@@ -20,15 +20,17 @@ module ShipmentReceiveProcessing
      end
      true
         
-      rescue => error
-      fatal_error(error.to_s)
+      #rescue => error
+      #fatal_error(error.to_s)
   
    end
+   
    def update_case_header(shipment)
      case_header = CaseHeader.where(default_key shipment)
                              .where(case_id: shipment[:case_id]).first
-     case_header = get_case_header_detail(case_header.dup, shipment)    
-     case_header.save!                                                 
+     case_header = get_case_header_info(case_header.dup, shipment)    
+     case_header.save!  
+     case_header                                               
    end
     
    def create_case_header(shipment)
@@ -39,11 +41,12 @@ module ShipmentReceiveProcessing
       case_header.building = shipment[:building]
       case_header.case_id = shipment[:case_id]
       case_header.shipment_nbr = shipment[:shipment_nbr]
-      case_header = get_case_header_detail(case_header.dup, shipment)
+      case_header = get_case_header_info(case_header.dup, shipment)
       case_header.save!
+      case_header
    end
    
-   def get_case_header_detail(case_header, shipment)  
+   def get_case_header_info(case_header, shipment)  
       location = LocationMaster.where(default_key shipment)
                                .where(barcode: shipment[:location]).first
       asnheader = AsnHeader.where(default_key shipment)
@@ -73,14 +76,20 @@ module ShipmentReceiveProcessing
       case_header.inner_pack_qty = shipment[:inner_pack_qty]
       # case_detail.coveyable = item_master.coveyable
       case_header
+      
+  end
+  
+  def update_case_detail(shipment, case_header)
+    case_detail = CaseDetail.where(default_key shipment)
+                             .where(case_id: case_header.case_id, item: shipment[:item]).first
+    case_detail = get_case_detail_info(case_detail.dup, shipment)   
+    case_detail.save!
+    case_detail                             
   end
     
-  def create_case_detail(shipment , case_header)
-      
-      item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
-      asn_detail = AsnDetail.where(default_key shipment)
-                            .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
+  def create_case_detail(shipment, case_header) 
       case_detail = CaseDetail.new 
+      
       case_detail.client = shipment[:client]
       case_detail.warehouse = shipment[:warehouse]
       case_detail.channel = shipment[:channel]
@@ -89,6 +98,15 @@ module ShipmentReceiveProcessing
       case_detail.item = shipment[:item]
       case_detail.case_header_id = case_header.id
       case_detail.quantity = shipment[:quantity].to_i
+      case_detail = get_case_detail_info(case_detail.dup, shipment)   
+      case_detail.save!   
+      case_detail
+  end   
+    
+  def get_case_detail_info(case_detail, shipment)    
+      item_master = ItemMaster.where(client: shipment[:client], item: shipment[:item]).first
+      asn_detail = AsnDetail.where(default_key shipment)
+                            .where(shipment_nbr: shipment[:shipment_nbr], item: shipment[:item]).first
       case_detail.sku_attribute1 = item_master.sku_attribute1
       case_detail.sku_attribute2 =item_master.sku_attribute2
       case_detail.sku_attribute3 = item_master.sku_attribute3
@@ -114,10 +132,8 @@ module ShipmentReceiveProcessing
      # case_detail.special_handling = item_master.special_handling 
      
       case_detail.unit_weight =  item_master.unit_wgt
-      case_detail.unit_volume = item_master.unit_vol
-      
-      case_detail.save!
-  
+      case_detail.unit_volume = item_master.unit_vol  
+      case_detail
   end
       
   def update_shipment(shipment)
