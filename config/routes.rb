@@ -18,7 +18,11 @@ Rails.application.routes.draw do
         post ':shipment_nbr/receive',  action: 'receive'
         post ':to_validate/validate',  action: 'validate'
 
-  end
+   end
+  
+   namespace :configuration do
+        get '', action: 'index'
+   end
   
   resources :location
   
