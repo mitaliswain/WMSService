@@ -14,6 +14,7 @@ module ShipmentReceiveValidation
       'case' => 'valid_case?',
       'item' => 'valid_item?',
       'shipment_nbr' => 'valid_shipment?',
+      'purchase_order_nbr' => 'valid_purchase_order_nbr?',
       'quantity' => 'valid_received_quantity?',
       'inner_pack' => 'valid_inner_pack?'
       }
@@ -144,6 +145,10 @@ module ShipmentReceiveValidation
     end
 
    def valid_inner_pack?(shipment)
+      true     
+   end
+
+   def valid_purchase_order_nbr?(shipment)
       true     
    end
 
