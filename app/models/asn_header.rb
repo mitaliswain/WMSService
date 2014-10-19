@@ -1,3 +1,5 @@
+require 'utilities/utility'
+require 'utilities/response'
 
 class AsnHeader < ActiveRecord::Base
   attr_reader :message
