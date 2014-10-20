@@ -9,7 +9,6 @@ class LocationController < ApplicationController
   end
   
   def update
-    p params[:fields_to_update]
     location = LocationMaster.find(params[:id])
     location.attributes(params[:fields_to_update])
     location.save

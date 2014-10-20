@@ -1,4 +1,4 @@
-module Configuration
+module WMSConfiguration
   
   class ConfigurationMaintenance
     
@@ -18,10 +18,14 @@ module Configuration
          fields_to_update.each do |field, data|
             configuration.attributes =  {field => data} 
          end   
-         shipment_hash.save!
+         configuration.save!
          resource_updated_successfully("Configuration #{id}") 
         end  
         message 
+    end
+    
+    def valid_data?(input_obj)
+      true
     end
       
   end

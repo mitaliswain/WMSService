@@ -16,7 +16,7 @@ fixtures :item_inner_packs
   # end
 
   def setup
-    @url = '/shipment/' + asn_headers(:one).shipment_nbr + '/' + 'receive'
+    @url = '/shipment/' + global_configurations(:one).id + '/' 
     @client = 'WM'
     @warehouse = 'WH1'
     @building = nil

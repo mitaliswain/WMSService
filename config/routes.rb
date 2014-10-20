@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   
    namespace :configuration do
         get '', action: 'index'
+        put '/:id', action: 'update'
    end
   
   resources :location

@@ -25,12 +25,12 @@ module ShipmentMaintenanceDetail
   
   
   def add_shipment_detail(app_parameters, fields_to_add)
-       input_obj = app_parameters.merge(fields_to_add).merge(id: id).to_hash
+       input_obj = app_parameters.merge(fields_to_add).to_hash
        if valid_input?(input_obj) 
           shipment_hash = AsnDetail.new(input_obj)  
           shipment_hash = add_shipment_detail_derived_data(shipment_hash.clone)
           shipment_hash.save!    
-          resource_added_successfully("Shipment #{id}", "/shipment/#{shipment_hash.asn_header_id}/#{shipment_hash.id}")                 
+          resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.asn_header_id}/#{shipment_hash.id}")                 
        end        
        message  
   end 
