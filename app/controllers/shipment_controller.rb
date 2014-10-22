@@ -1,4 +1,5 @@
 class ShipmentController < ApplicationController
+
   protect_from_forgery except: :index
   def index
      filter_conditions = params[:filter_conditions]

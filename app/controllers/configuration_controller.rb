@@ -1,6 +1,3 @@
-require 'json'
-require 'WMSconfiguration/configuration_maintenance'
-
 class ConfigurationController < ApplicationController
   protect_from_forgery except: :index  
   def index
@@ -8,7 +5,7 @@ class ConfigurationController < ApplicationController
   end
   
   def update
-    configuration = WMSConfiguration::ConfigurationMaintenance.new
+    configuration = WmsConfiguration::ConfigurationMaintenance.new
     message = configuration.update_configuration(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
