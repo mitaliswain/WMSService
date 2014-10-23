@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ConfigurationControllerTest < ActionDispatch::IntegrationTest
+class ConfigurationMaintenanceTest < ActionDispatch::IntegrationTest
   def setup
     @url = '/configuration/' + global_configurations(:one).id.to_s
     @client = 'WM'
