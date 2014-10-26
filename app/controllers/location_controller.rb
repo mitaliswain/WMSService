@@ -6,6 +6,7 @@ class LocationController < ApplicationController
   
   def create
     
+    
   end
   
   def update
