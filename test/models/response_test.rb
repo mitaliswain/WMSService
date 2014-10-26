@@ -61,6 +61,22 @@ class ResponseValueTest < ActiveSupport::TestCase
     assert_equal(expected_message, rs.message, 'Validation Failed' )
    end
 
+test "validation success with additional info" do
+  rs = ResponseValue.new
+  case_detail = {purchase_order_nbr: 'PO1', item: '1234', quantity: 10, inner_pack: 5 }
+  ms = rs.validation_success(:case, case_detail)
+  expected_message = 
+     @message = {status:  '200',
+    message: 'Validation Successful',
+    errors: [{
+              code: '200',
+              field: :case,
+              message: 'Validation Successful'
+    }],
+    additional_info: {purchase_order_nbr: 'PO1', item: '1234', quantity: 10, inner_pack: 5 }
+    } 
+end
+
 
 test "multiiple validation failure" do
     responsevalue = ResponseValue.new  

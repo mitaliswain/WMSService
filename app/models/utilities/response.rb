@@ -90,7 +90,7 @@ module Response
  
 end
 
-def validation_success(field_name)
+def validation_success(field_name, *additional_info)
    
    @message = {status:  '200',
     message: 'Validation Successful',
@@ -98,7 +98,8 @@ def validation_success(field_name)
               code: '200',
               field: field_name,
               message: 'Validation Successful'
-    }]
+    }],
+    additional_info: additional_info
     }   
    true
 end

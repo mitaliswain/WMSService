@@ -9,12 +9,13 @@ module Shipment
     include Response
     include Utility
    
-    attr_accessor :message, :error
+    attr_accessor :message, :error, :shipment
     FAILED_TO_PROCESS = 'false'
     
-    def initialize
+    def initialize(shipment)
       @message = {}
       @error = []
+      @shipment = shipment
     end
         
   end
