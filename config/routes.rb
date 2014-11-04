@@ -19,6 +19,13 @@ Rails.application.routes.draw do
         post ':to_validate/validate',  action: 'validate'
 
    end
+   
+   namespace :case do
+        get '' ,  action: 'index'
+        
+        post ':id/update_header', action:'update_header'
+        
+   end
   
    namespace :configuration do
         get '', action: 'index'

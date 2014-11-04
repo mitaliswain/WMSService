@@ -55,7 +55,7 @@ module Shipment
         case_header.record_status = 'Received'
         case_header.on_hold = 'Yes'
         case_header.hold_code = 'Putaway Required'
-        case_header.barcode = self.shipment.location
+        case_header.barcode = self.shipment.item
         if location
           case_header.Location_type = location.location_type
           case_header.area = location.area

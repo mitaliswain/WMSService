@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   client: WM
   warehouse: WH1
   channel:  
@@ -198,7 +199,7 @@ two:
   conveyable: MyString
   inner_pack_qty: 1
   case_pack_qty: 1
-  perishble: MyString
+  perishble: Yes
   special_handling: MyString
   qa_auditted: MyString
   audit_nbr: MyString
