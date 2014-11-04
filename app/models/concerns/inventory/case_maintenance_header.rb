@@ -20,14 +20,18 @@ module Inventory
           end  
           message 
       end
-    def update_header
-    asn = Shipment::ShipmentMaintenance.new
-    message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
-    render json: message.to_json, status: message[:status]
-   rescue Exception => e
-    asn.fatal_error(e.message)
-    render json: asn.message.to_json, status: '500'
-  end
+      
+    def add_case_header(app_parameters, fields_to_add)
+         input_obj = app_parameters.merge(fields_to_add).to_hash
+         if valid_data?(input_obj) && valid_app_parameters?(input_obj)
+            case_hash = CaseHeader.new(input_obj)  
+            shipment_hash = add_derived_data(shipment_hash.clone)
+           shipment_hash.save!    
+           resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.id}")                 
+         end        
+         message  
+    end
+  
   
   def valid_data?(fields_to_update)
       is_valid = true
