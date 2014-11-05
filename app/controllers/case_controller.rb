@@ -16,8 +16,8 @@ class CaseController < ApplicationController
     message = case_obj.update_case_header(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
-    asn.fatal_error(e.message)
-    render json: asn.message.to_json, status: '500'
+     case_obj.fatal_error(e.message)
+    render json: case_obj.message.to_json, status: '500'
   end
   
    def add_header
@@ -26,7 +26,7 @@ class CaseController < ApplicationController
     render json: message.to_json, status: message[:status]
    rescue Exception => e
     case_obj.fatal_error(e.message)
-    render json: asn.message.to_json, status: '500'
+    render json: case_obj.message.to_json, status: '500'
   end
 
 end

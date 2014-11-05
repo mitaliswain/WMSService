@@ -107,7 +107,6 @@ fixtures :item_inner_packs
       innerpack_qty: @innerpack_qty
     } 
     message =  JSON.parse(response.body)
-
     assert_equal 201, status , 'message in service'
     assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
     

@@ -22,7 +22,9 @@ Rails.application.routes.draw do
    
    namespace :case do
         get '' ,  action: 'index'
-        
+
+        post 'add_header', action: 'add_header'
+
         post ':id/update_header', action:'update_header'
         
    end

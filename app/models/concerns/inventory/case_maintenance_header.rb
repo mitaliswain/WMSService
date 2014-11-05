@@ -25,12 +25,19 @@ module Inventory
          input_obj = app_parameters.merge(fields_to_add).to_hash
          if valid_data?(input_obj) && valid_app_parameters?(input_obj)
             case_hash = CaseHeader.new(input_obj)  
-            shipment_hash = add_derived_data(shipment_hash.clone)
-           shipment_hash.save!    
-           resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.id}")                 
+            case_hash = add_derived_data(case_hash.clone)
+           case_hash.save!
+           resource_added_successfully("case #{case_hash.id}", "/case/#{case_hash.id}")
          end        
          message  
     end
+
+       def add_derived_data(case_header)
+         basic_parameters = {client: case_header.client, warehouse: case_header.warehouse, channel: nil, building: nil}
+         case_header.case_id= get_next_one_up_number(basic_parameters, 'CASE') if (case_header.case_id.nil? or case_header.case_id.blank?)
+         case_header.record_status = 'Created' if case_header.record_status.nil? or case_header.record_status.blank?
+         case_header
+       end
   
   
   def valid_data?(fields_to_update)
