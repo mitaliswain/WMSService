@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
         post 'add_header', action: 'add_header'
         post 'add_detail', action: 'add_detail'
+        post ':id', action: 'show' 
 
         post ':id/update_header', action:'update_header'
         
