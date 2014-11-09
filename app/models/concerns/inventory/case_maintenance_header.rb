@@ -32,12 +32,12 @@ module Inventory
          message  
     end
 
-       def add_derived_data(case_header)
-         basic_parameters = {client: case_header.client, warehouse: case_header.warehouse, channel: nil, building: nil}
-         case_header.case_id= get_next_one_up_number(basic_parameters, 'CASE') if (case_header.case_id.nil? or case_header.case_id.blank?)
-         case_header.record_status = 'Created' if case_header.record_status.nil? or case_header.record_status.blank?
-         case_header
-       end
+   def add_derived_data(case_header)
+     basic_parameters = {client: case_header.client, warehouse: case_header.warehouse, channel: nil, building: nil}
+     case_header.case_id= get_next_one_up_number(basic_parameters, 'CASE') if (case_header.case_id.nil? or case_header.case_id.blank?)
+     case_header.record_status = 'Created' if case_header.record_status.nil? or case_header.record_status.blank?
+     case_header
+   end
   
   
   def valid_data?(fields_to_update)

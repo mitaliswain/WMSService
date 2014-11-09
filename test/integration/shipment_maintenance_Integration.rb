@@ -29,5 +29,17 @@ fixtures :item_inner_packs
   end
 
 
+def test_the_add_shipment_header
 
+    url = '/shipment/add_header'
+    post(url,
+         app_parameters:{
+             client:'WM', warehouse: 'WH1', building: '', channel: ''
+         },
+         fields_to_update: {
+             shipment_nbr: 'Shipment20'
+         } )
+    shipment_header = AsnHeader.find_by_shipment_nbr('Shipment20')
+    assert_not_nil shipment_header, 'added shipment header'
+  end
 end

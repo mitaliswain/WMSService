@@ -2,7 +2,7 @@ module Inventory
   
   class CaseMaintenance
     include CaseMaintenanceHeader
-    include CaseMaintenanceHeader
+    include CaseMaintenanceDetail
     include Response
     include Utility
     attr_accessor :message, :error

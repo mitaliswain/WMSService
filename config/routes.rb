@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         get '' ,  action: 'index'
 
         post 'add_header', action: 'add_header'
+        post 'add_detail', action: 'add_detail'
 
         post ':id/update_header', action:'update_header'
         

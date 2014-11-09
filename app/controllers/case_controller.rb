@@ -27,6 +27,15 @@ class CaseController < ApplicationController
    rescue Exception => e
     case_obj.fatal_error(e.message)
     render json: case_obj.message.to_json, status: '500'
+   end
+
+  def add_detail
+    case_obj = Inventory::CaseMaintenance.new
+    message = case_obj.add_case_detail(params[:app_parameters], params[:fields_to_update])
+    render json: message.to_json, status: message[:status]
+  rescue Exception => e
+    case_obj.fatal_error(e.message)
+    render json: case_obj.message.to_json, status: '500'
   end
 
 end

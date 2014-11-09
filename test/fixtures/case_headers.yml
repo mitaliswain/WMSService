@@ -132,11 +132,11 @@ one:
   updated_prc: MyString
 
 two:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
-  case_id: MyString
+  client: WM
+  warehouse: WH1
+  channel:
+  building:
+  case_id: CASE2
   pallet_id: MyString
   status: MyString
   item: MyString

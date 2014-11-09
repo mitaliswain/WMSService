@@ -6,6 +6,7 @@ class CaseReceiveIntegrationTest < ActionDispatch::IntegrationTest
 
 fixtures :case_headers
 fixtures :case_details
+fixtures :item_masters
 fixtures :global_configurations
 
 
@@ -37,7 +38,7 @@ fixtures :global_configurations
     
   end
 
-  def test_the_add_details_with_no_parameter
+  def test_the_add_case_header
 
     url = '/case/add_header'
     post(url,
@@ -51,5 +52,24 @@ fixtures :global_configurations
     assert_not_nil case_header, 'added case header'
   end
 
+  def test_the_add_case_detail
+    case_header = CaseHeader.where(case_id: case_headers(:two).case_id).first
+    case_detail = CaseDetail.where(client: case_header.client, case_id: case_header.case_id)
+    initial_records = case_detail.size
+    url = '/case/add_detail'
+    post(url,
+         app_parameters:{
+             client:'WM', warehouse: 'WH1', building: '', channel: ''
+         },
+         fields_to_update: {
+             case_id: case_header.case_id,
+             case_header_id: case_header.id,
+             item: item_masters(:one).item,
+             quantity: '10',
+             record_status: 'Created'
+         } )
+    case_detail_new = CaseDetail.where(client: case_header.client, case_id: case_header.case_id)
+    assert_equal initial_records + 1, case_detail_new.size, 'details added successfully'
+  end
 
 end

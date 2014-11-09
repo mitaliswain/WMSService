@@ -73,12 +73,12 @@ one:
   updated_prc: MyString
 
 two:
-  client: MyString
-  warehouse: MyString
-  channel: MyString
-  building: MyString
+  client: WM
+  warehouse: WH1
+  channel:
+  building:
   case_header_id: 1
-  case_id: MyString
+  case_id: CASE2
   sequence: 1
   pallet_id: MyString
   status: MyString
