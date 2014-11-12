@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         post ':id', action: 'show' 
 
         post ':id/update_header', action:'update_header'
+        post ':id/update_detail', action:'update_detail'
         
    end
   

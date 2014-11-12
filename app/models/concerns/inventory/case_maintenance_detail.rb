@@ -9,23 +9,22 @@ module Inventory
     extend ActiveSupport::Concern
 
 
-=begin
 
-    def update_shipment_detail(app_parameters, id, fields_to_update)
+    def update_case_detail(app_parameters, id, fields_to_update)
       input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash
       if valid_app_parameters?(input_obj) &&
           valid_data?(input_obj)
 
-        shipment_hash = AsnDetail.find(id)
+        case_hash = CaseDetail.find(id)
         fields_to_update.each do |field, data|
-          shipment_hash.attributes =  {field => data}
+          case_hash.attributes =  {field => data}
         end
-        shipment_hash.save!
+        case_hash.save!
         resource_updated_successfully("Shipment Detail #{id}")
       end
       message
     end
-=end
+
 
     def add_case_detail(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash
