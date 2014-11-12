@@ -34,7 +34,7 @@ module Shipment
         @location_master = LocationMaster.where(default_key self.shipment)
                                          .where(barcode: self.shipment.location).first
                                                                           
-        return validation_success(:location)    unless yard_management_enabled?(self.shipment)
+        #return validation_success(:location)    unless yard_management_enabled?(self.shipment)
         # Validating Location       
         
         case

@@ -8,18 +8,6 @@ module Shipment
   module ShipmentMaintenanceHeader 
        extend ActiveSupport::Concern
        
-   def update_shipment_header(app_parameters, id, fields_to_update)
-         input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash
-         if valid_app_parameters?(input_obj) && valid_data?(input_obj)
-           shipment_hash = AsnHeader.find(id)   
-           fields_to_update.each do |field, data|
-              shipment_hash.attributes =  {field => data} 
-           end   
-           shipment_hash.save!
-           resource_updated_successfully("Shipment #{id}") 
-          end  
-          message 
-    end
   
     def add_shipment_header(app_parameters, fields_to_add)
          input_obj = app_parameters.merge(fields_to_add).to_hash
@@ -30,6 +18,19 @@ module Shipment
            resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.id}")                 
          end        
          message  
+    end
+    
+    def update_shipment_header(app_parameters, id, fields_to_update)
+         input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash
+         if valid_app_parameters?(input_obj) && valid_data?(input_obj)
+           shipment_hash = AsnHeader.find(id)   
+           fields_to_update.each do |field, data|
+              shipment_hash.attributes =  {field => data} 
+           end   
+           shipment_hash.save!
+           resource_updated_successfully("Shipment #{id}") 
+          end  
+          message 
     end
   
     def add_derived_data(asn_header)

@@ -14,18 +14,18 @@ class ShipmentController < ApplicationController
     render json: shipment_hash.to_json
   end
 
-  def update_header
+  def add_header
     asn = Shipment::ShipmentMaintenance.new
-    message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
+    message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
     asn.fatal_error(e.message)
     render json: asn.message.to_json, status: '500'
   end
-  
-  def add_header
+
+  def update_header
     asn = Shipment::ShipmentMaintenance.new
-    message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
+    message = asn.update_shipment_header(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
    rescue Exception => e
     asn.fatal_error(e.message)
@@ -40,7 +40,6 @@ class ShipmentController < ApplicationController
     asn.fatal_error(e.message)
     render json: asn.message.to_json, status: '500'
   end
-
 
   def update_detail
     asn = asn = Shipment::ShipmentMaintenance.new
