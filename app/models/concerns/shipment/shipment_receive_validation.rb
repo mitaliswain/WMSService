@@ -36,12 +36,11 @@ module Shipment
                                                                           
         #return validation_success(:location)    unless yard_management_enabled?(self.shipment)
         # Validating Location       
-        
         case
         when !@location_master
           validation_failed('422', :location, Message.get_message(self.shipment.client, 'RCV0001', [self.shipment.location]))
           
-        when @location_master.location_type != 'Receiving'         
+        when @location_master.location_type != 'Receiving'       
           validation_failed('422', :location, Message.get_message(self.shipment.client, 'RCV0002', [self.shipment.location])) 
         
         #when @location_master.record_status != 'Empty' && !shipment[:shipment_nbr].blank? 
@@ -104,7 +103,7 @@ module Shipment
   
        @item_master = ItemMaster.where(client: self.shipment.client, item: self.shipment.item).first
        @case_detail = CaseDetail.where(default_key self.shipment).where(case_id: self.shipment.case_id, item: self.shipment.item).first
-       @shipment_detail = AsnDetail.where(default_key self.shipment)
+       shipment_detail = AsnDetail.where(default_key self.shipment)
                                    .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item).first
        
        #validating item
@@ -113,7 +112,7 @@ module Shipment
        when !@item_master
          validation_failed('422', :item, Message.get_message(self.shipment.client, 'RCV0011', [self.shipment.item]))
   
-       when !@shipment_detail
+       when !shipment_detail
           validation_failed('422', :item, Message.get_message(self.shipment.client, 'RCV0012', [self.shipment.item]))
   
        when  Case_receiving_enabled?(self.shipment)  && !@case_detail    
@@ -130,13 +129,16 @@ module Shipment
         
         if valid_item?(self.shipment)
           @message = {}
+          shipment_details = AsnDetail.where(default_key self.shipment)
+                            .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item)
+
           case 
      
           when Case_receiving_enabled?(self.shipment) && 
                is_received_quantity_not_matches_with_case?(@case_detail, shipment)
               validation_failed('422', :quantity, Message.get_message(self.shipment.client, 'RCV0014'))
   
-          when is_received_quantity_greater_than_shipped?(@shipment_detail, shipment)
+          when is_received_quantity_greater_than_shipped?(shipment_details, shipment)
               validation_failed('422', :quantity, Message.get_message(self.shipment.client, 'RCV0015'))
           else
               validation_success(:quantity)    
@@ -160,9 +162,14 @@ module Shipment
         case_detail.quantity != self.shipment.quantity.to_i     
      end
      
-     def is_received_quantity_greater_than_shipped? shipment_detail, shipment   
-        shipment_detail &&         
-        shipment_detail.shipped_quantity.to_i < (shipment_detail.received_qty.to_i + self.shipment.quantity.to_i)
+     def is_received_quantity_greater_than_shipped? shipment_details, shipment    
+        received_quantity = 0
+        shipped_quantity = 0
+        shipment_details.each do |shipment_detail|
+          received_quantity +=  shipment_detail.received_qty.to_i
+          shipped_quantity += shipment_detail.shipped_quantity.to_i
+        end     
+        shipped_quantity < (received_quantity.to_i + self.shipment.quantity.to_i)
      end
   
      def yard_management_enabled? shipment    

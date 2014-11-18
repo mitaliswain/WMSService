@@ -83,7 +83,7 @@ RCV0001:
 RCV0002:
   client: WM
   message_id: RCV0002
-  message_description: 'Location #{message_id} is not valid receiving location'
+  message_description: 'Location #{message_param[0]} is not valid receiving location'
   message_type: MyString
   message_severity: 1
   attribute1: MyString

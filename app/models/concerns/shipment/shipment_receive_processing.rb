@@ -106,8 +106,7 @@ module Shipment
       
     def get_case_detail_info(case_detail, shipment)    
         item_master = ItemMaster.where(client: self.shipment.client, item: self.shipment.item).first
-        asn_detail = AsnDetail.where(default_key self.shipment)
-                              .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item).first
+        asn_detail = get_asn_detail_for_the_current_case
         case_detail.sku_attribute1 = item_master.sku_attribute1
         case_detail.sku_attribute2 =item_master.sku_attribute2
         case_detail.sku_attribute3 = item_master.sku_attribute3
@@ -133,9 +132,10 @@ module Shipment
        # case_detail.special_handling = item_master.special_handling 
         case_detail.record_status = 'Received'
         case_detail.unit_weight =  item_master.unit_wgt
-        case_detail.unit_volume = item_master.unit_vol  
+        case_detail.unit_volume = item_master.unit_vol
         case_detail
     end
+  
         
     def update_shipment(shipment)
         shipment_header = update_asnheader(self.shipment)
@@ -165,14 +165,12 @@ module Shipment
     end
        
     def update_asndetails(shipment, shipment_header)
-        shipment_details = AsnDetail.where(default_key self.shipment)
-                                    .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item).first
-        shipment_details.received_qty = shipment_details.received_qty.to_i + shipment[:quantity].to_i
-        shipment_details.cases_rcvd = shipment_details.cases_rcvd.to_i + 1
-        shipment_details.record_status = 'Receiving in Progress'
-        shipment_details.receiver_comments = self.shipment.comments unless self.shipment[:comments].nil?
-        shipment_details.save!      
-        
+             shipment_detail = get_asn_detail_for_the_current_case
+             shipment_detail.received_qty = shipment_detail.received_qty.to_i + shipment[:quantity].to_i
+             shipment_detail.cases_rcvd = shipment_detail.cases_rcvd.to_i + 1
+             shipment_detail.record_status = 'Receiving in Progress'
+             shipment_detail.receiver_comments = self.shipment.comments unless self.shipment[:comments].nil?
+             shipment_detail.save!  
      end
     
      def update_location(shipment)
@@ -223,6 +221,18 @@ module Shipment
                house_keeping:  []
               }    
     end  
+    
+      
+    def get_asn_detail_for_the_current_case
+       shipment_details = AsnDetail.where(default_key self.shipment)
+                                    .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item)
+                                    .order(:sequence)
+       shipment_details.each do |shipment_detail|
+          if shipment_detail.shipped_quantity.to_i > shipment_detail.received_qty.to_i
+           return shipment_detail
+          end
+       end
+    end
     
     def process_workflow shipment
       workflow.each do |process, methods|

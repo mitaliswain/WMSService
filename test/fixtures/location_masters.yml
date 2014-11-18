@@ -5,7 +5,7 @@ one:
   warehouse: WH1
   channel: 
   building: 
-  location_type: Pending
+  location_type: Receiving
   area: MyString
   zone: MyString
   aisle: MyString
@@ -73,7 +73,7 @@ two:
   warehouse: WH1
   channel: 
   building: 
-  location_type: Non_Pending
+  location_type: Non_receiving
   area: MyString
   zone: MyString
   aisle: MyString

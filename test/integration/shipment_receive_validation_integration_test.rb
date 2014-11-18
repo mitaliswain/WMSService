@@ -31,7 +31,6 @@ fixtures :item_inner_packs
     @configuration = GlobalConfiguration.get_configuration(@condition)
   end  
 
-=begin temporarily not tested
   def test_location_not_found_if_yard_managment_is_true
     GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/location/validate'
@@ -54,8 +53,7 @@ fixtures :item_inner_packs
        assert_equal expected_message , message.errors[0].message,  "Location not found" 
   end
   
-  def test_location_not_found_if_yard_managment_is_false
-    GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))
+  def test_location_not_found
     url = '/shipment/location/validate'
     post url, 
     
@@ -71,12 +69,11 @@ fixtures :item_inner_packs
         quantity: @quantity
         } 
        message =  JSON.parse(response.body)
-       expected_status = '200'      
+       expected_status = '422'    
        assert_equal expected_status , message.status,  "Location not found"    
   end
 
   def test_validate_location_type
-    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     url = '/shipment/location/validate'
     post url,
       
@@ -95,94 +92,7 @@ fixtures :item_inner_packs
       expected_message = "Location #{location_masters(:two).barcode} is not valid receiving location"
       assert_equal expected_message , message.errors[0].message,  "Non receiving Location"      
   end
-  
-  def test_validate_dock_door_status
-    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
-    url  = '/shipment/location/validate'
-    post url,
-    
-      shipment: { 
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building:@building,
-        shipment_nbr: asn_headers(:two).shipment_nbr ,
-        location: location_masters(:four).barcode,
-        case_id: @case_id,
-        item: @item,
-        quantity: @quantity
-      }
-       message =  JSON.parse(response.body)
-       expected_message = 'Dock Door occupied by another shipment'
-       assert_equal expected_message , message.errors[0].message,  "Validate Non Empty dock door"   
-  end
-
-  def test_validate_dock_door_status_when_shipment_is_not_givens
-    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
-    url  = '/shipment/location/validate'
-    post url,
-    
-      shipment: { 
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building:@building,
-        shipment_nbr: nil ,
-        location: location_masters(:four).barcode,
-        case_id: @case_id,
-        item: @item,
-        quantity: @quantity
-      }
-       message =  JSON.parse(response.body)
-       expected_status = '200'
-       assert_equal expected_status , message.status,  "Validate Non Empty dock door when shipment not entered"   
-  end
-
-  def test_no_validaiton_for_no_Yard_Management
-    GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))
-    url  = '/shipment/location/validate'
-    post url,
-    
-      shipment: { 
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building:@building,
-        shipment_nbr: asn_headers(:two).shipment_nbr ,
-        location: location_masters(:four).barcode,
-        case_id: @case_id,
-        item: @item,
-        quantity: @quantity
-      }
-       message =  JSON.parse(response.body)
-       expected_status = '200'
-       assert_equal expected_status , message.status,  "No validation of shipment for no yard management"   
-  end
-  
-  
-  def test_validate_shipment_number_and_dock_door
-    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
-    url = '/shipment/shipment_nbr/validate'
-    post url, 
-    
-    shipment: {    
-        client: @client,
-        warehouse: @warehouse,
-        channel: @channel,
-        building: @building,
-        location: location_masters(:four).barcode,
-        shipment_nbr: asn_headers(:two).shipment_nbr ,
-        case_id: @case_id,
-        item: @item,
-        quantity: @quantity
-    }
-       message =  JSON.parse(response.body)
-       expected_message = 'Shipment ' + asn_headers(:two).shipment_nbr + ' not assigned to this Dock Door'
-       assert_equal expected_message , message.errors[0].message,  "Validate Shipment to the assigned dock door"
-    
-  end
-  
-  
+   
   def test_validate_location_type
     url = '/shipment/location/validate'
     post url, 
@@ -198,17 +108,12 @@ fixtures :item_inner_packs
         quantity: @quantity
      } 
         message =  JSON.parse(response.body)
-        if @configuration.Yard_Management == "t"
-            expected_message = 'Can not receive to a non pending Location'
-             assert_equal expected_message , message.status, "Pending location"
-        else    
-            expected_status = '200'   
-             assert_equal expected_status , message.status, "Pending location"
-        end
+        expected_message = "Location #{location_masters(:three).barcode} is not valid receiving location"
+        assert_equal expected_message , message.errors[0].message, "Pending location"
        
   end
   
-=end
+
   def test_validate_shipment_exist
     
       url = '/shipment/shipment_nbr/validate'
@@ -506,5 +411,47 @@ fixtures :item_inner_packs
         expected_message = 'Quantity received exceeds shipped quantity'
         assert_equal expected_message , message.errors[0].message,  "Quantity mismatch in SKU"
   end
+
+  def test_validation_for_duplicate_po_item_in_same_shipment
+    
+    GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
+    
+    url = "/shipment/#{asn_headers(:duplicate_line).shipment_nbr}/receive"
+    post url, 
+  #first receiving with all quantity in first line 
+    shipment: {
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        shipment_nbr: asn_headers(:duplicate_line).shipment_nbr,
+        case_id: '@case2',
+        item: asn_details(:duplicate_line_1).item,
+        quantity: asn_details(:duplicate_line_1).shipped_quantity,
+        innerpack_qty: @innerpack_qty
+     }    
+     
+    url = "/shipment/quantity/validate" 
+    post url, 
+    shipment: {
+        client: @client,
+        warehouse: @warehouse,
+        channel: @channel,
+        building:@building,
+        location: @location,
+        shipment_nbr: asn_headers(:duplicate_line).shipment_nbr,
+        case_id: '@case3',
+        item: asn_details(:duplicate_line_2).item,
+        quantity: asn_details(:duplicate_line_2).shipped_quantity.to_i + 1
+     }         
+    
+
+
+        message =  JSON.parse(response.body)
+        expected_status = 422
+        assert_equal expected_status , status,  "Received successfully for duplicate po item"
+  end
+
  
 end

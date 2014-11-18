@@ -87,6 +87,9 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    seed_dump (3.2.0)
+      activerecord (~> 4)
+      activesupport (~> 4)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -131,6 +134,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  seed_dump
   simplecov
   sqlite3
   turbolinks
