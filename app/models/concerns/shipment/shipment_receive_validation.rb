@@ -29,7 +29,7 @@ module Shipment
       end
       
       
-      def valid_location?(shipment)
+      def valid_location?(shipment=nil)
   
         @location_master = LocationMaster.where(default_key self.shipment)
                                          .where(barcode: self.shipment.location).first
@@ -53,7 +53,7 @@ module Shipment
        
   
         
-     def valid_shipment?(shipment) 
+     def valid_shipment?(shipment=nil)
         @shipment_header = AsnHeader.where(default_key self.shipment)
                                     .where(shipment_nbr: self.shipment.shipment_nbr).first
         # validating shipment information
@@ -74,7 +74,7 @@ module Shipment
                  
      end
      
-     def valid_case?(shipment)
+     def valid_case?(shipment=nil)
   
   
         @case_header = CaseHeader.where(client: self.shipment.client, case_id: self.shipment.case_id).first
@@ -99,7 +99,7 @@ module Shipment
         
      end
       
-     def valid_item?(shipment)
+     def valid_item?(shipment=nil)
   
        @item_master = ItemMaster.where(client: self.shipment.client, item: self.shipment.item).first
        @case_detail = CaseDetail.where(default_key self.shipment).where(case_id: self.shipment.case_id, item: self.shipment.item).first
@@ -125,7 +125,7 @@ module Shipment
   
       end
   
-      def valid_received_quantity?(shipment)
+      def valid_received_quantity?(shipment=nil)
         
         if valid_item?(self.shipment)
           @message = {}
@@ -149,11 +149,11 @@ module Shipment
         end
       end
   
-     def valid_inner_pack?(shipment)
+     def valid_inner_pack?(shipment=nil)
         validation_success(:inner_pack)     
      end
   
-     def valid_purchase_order_nbr?(shipment)
+     def valid_purchase_order_nbr?(shipment=nil)
         validation_success(:purchase_order_nbr)     
      end
   

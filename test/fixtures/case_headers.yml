@@ -9,21 +9,6 @@ one:
   case_id: CASE1
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -84,11 +69,7 @@ one:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString
@@ -139,21 +120,6 @@ two:
   case_id: CASE2
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -214,11 +180,7 @@ two:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString
@@ -269,21 +231,6 @@ case_one:
   case_id: CASE_case1
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -344,11 +291,7 @@ case_one:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString
@@ -399,21 +342,6 @@ case_two:
   case_id: CASE_case2
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -474,11 +402,7 @@ case_two:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString
@@ -530,21 +454,6 @@ case_three:
   case_id: CASE_case3
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -605,11 +514,7 @@ case_three:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString
@@ -660,21 +565,6 @@ case_four:
   case_id: CASE_case4
   pallet_id: MyString
   status: MyString
-  item: MyString
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
-  sku_attribute8: MyString
-  sku_attribute9: MyString
-  sku_attribute10: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
   inventory_type: MyString
   Location_type: MyString
   area: MyString
@@ -735,11 +625,7 @@ case_four:
   lable_type: MyString
   transfer: MyString
   transfer_from: MyString
-  form_co: MyString
-  from_div: MyString
   transfer_to: MyString
-  to_co: MyString
-  to_div: MyString
   cross_dock: MyString
   received_date: 2014-04-20 17:12:31
   received_by: MyString

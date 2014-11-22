@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530032042) do
+ActiveRecord::Schema.define(version: 20141122041441) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -224,8 +224,6 @@ ActiveRecord::Schema.define(version: 20140530032042) do
     t.integer  "case_header_id"
     t.string   "case_id"
     t.integer  "sequence"
-    t.string   "pallet_id"
-    t.string   "status"
     t.string   "item"
     t.string   "sku_attribute1"
     t.string   "sku_attribute2"
@@ -241,18 +239,10 @@ ActiveRecord::Schema.define(version: 20140530032042) do
     t.string   "description"
     t.string   "short_desc"
     t.string   "barcode"
-    t.string   "inventory_type"
     t.integer  "quantity"
     t.integer  "allocated_qty"
     t.string   "purchase_order_nbr"
     t.integer  "poline_nbr"
-    t.string   "shipment_nbr"
-    t.integer  "shipment_line_nbr"
-    t.string   "vendor_nbr"
-    t.string   "vendor_factory"
-    t.string   "coo"
-    t.string   "lot_control_nbr"
-    t.string   "serial_nbr"
     t.integer  "unit_weight"
     t.integer  "unit_volume"
     t.string   "record_status"
@@ -299,21 +289,6 @@ ActiveRecord::Schema.define(version: 20140530032042) do
     t.string   "case_id"
     t.string   "pallet_id"
     t.string   "status"
-    t.string   "item"
-    t.string   "sku_attribute1"
-    t.string   "sku_attribute2"
-    t.string   "sku_attribute3"
-    t.string   "sku_attribute4"
-    t.string   "sku_attribute5"
-    t.string   "sku_attribute6"
-    t.string   "sku_attribute7"
-    t.string   "sku_attribute8"
-    t.string   "sku_attribute9"
-    t.string   "sku_attribute10"
-    t.string   "concept"
-    t.string   "description"
-    t.string   "short_desc"
-    t.string   "barcode"
     t.string   "inventory_type"
     t.string   "Location_type"
     t.string   "area"
@@ -375,10 +350,7 @@ ActiveRecord::Schema.define(version: 20140530032042) do
     t.string   "transfer"
     t.string   "transfer_from"
     t.string   "form_co"
-    t.string   "from_div"
     t.string   "transfer_to"
-    t.string   "to_co"
-    t.string   "to_div"
     t.string   "cross_dock"
     t.datetime "received_date"
     t.string   "received_by"
@@ -422,6 +394,10 @@ ActiveRecord::Schema.define(version: 20140530032042) do
     t.string   "updated_prc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "from_channel"
+    t.string   "from_building"
+    t.string   "to_channel"
+    t.string   "to_building"
   end
 
   create_table "global_configurations", force: true do |t|

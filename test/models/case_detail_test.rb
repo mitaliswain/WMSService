@@ -16,7 +16,8 @@ class CaseDetailTest < ActiveSupport::TestCase
   end
   test "update channel and building to null for blank input" do
     
-     CaseDetail.create!(client: case_details(:one).client, warehouse: case_details(:one).warehouse, 
+     CaseHeader.create
+     CaseDetail.create!(client: case_details(:one).client, warehouse: case_details(:one).warehouse,
                         case_id: '_' + case_details(:one).case_id,item: case_details(:one).item, building: "", channel: "")
      case_detail = CaseDetail.where(client: case_details(:one).client, warehouse: case_details(:one).warehouse, 
                         case_id: '_' + case_details(:one).case_id, item: case_details(:one).item).first

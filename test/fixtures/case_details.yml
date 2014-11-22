@@ -8,8 +8,6 @@ one:
   case_header_id: 1
   case_id: CASE1
   sequence: 1
-  pallet_id: MyString
-  status: Created
   item: 1234
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -25,18 +23,10 @@ one:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 10
   allocated_qty: 10
   purchase_order_nbr: PO1
   poline_nbr: 1
-  shipment_nbr: MyString
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: Created
@@ -80,8 +70,6 @@ two:
   case_header_id: 1
   case_id: CASE2
   sequence: 1
-  pallet_id: MyString
-  status: MyString
   item: MyString
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -97,18 +85,10 @@ two:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: MyString
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: MyString
@@ -152,8 +132,6 @@ case_one:
   case_header_id: 1
   case_id: CASE_case1
   sequence: 1
-  pallet_id: MyString
-  status: MyString
   item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -169,18 +147,10 @@ case_one:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: Shipment1
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: Created
@@ -224,8 +194,6 @@ case_two:
   case_header_id: 1
   case_id: CASE_case2
   sequence: 1
-  pallet_id: MyString
-  status: MyString
   item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -241,18 +209,10 @@ case_two:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: Shipment1
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: Received
@@ -296,8 +256,6 @@ case_three:
   case_header_id: 1
   case_id: CASE_case3
   sequence: 1
-  pallet_id: MyString
-  status: MyString
   item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -313,18 +271,10 @@ case_three:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 10
   allocated_qty: 1
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: Shipment1
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: Received
@@ -368,8 +318,6 @@ case_four:
   case_header_id: 1
   case_id: CASE_case4
   sequence: 1
-  pallet_id: MyString
-  status: MyString
   item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
@@ -385,18 +333,10 @@ case_four:
   description: MyString
   short_desc: MyString
   barcode: MyString
-  inventory_type: MyString
   quantity: 10
   allocated_qty: 1
   purchase_order_nbr: MyString
   poline_nbr: 1
-  shipment_nbr: Shipment1
-  shipment_line_nbr: 1
-  vendor_nbr: MyString
-  vendor_factory: MyString
-  coo: MyString
-  lot_control_nbr: MyString
-  serial_nbr: MyString
   unit_weight: 1
   unit_volume: 1
   record_status: Created

@@ -41,7 +41,7 @@ fixtures :item_inner_packs
 
   test "with blank location and yard management true" do
     GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
-    response = Shipment::ShipmentReceive.new.valid_location?(shipment)
+    response = Shipment::ShipmentReceive.new(shipment).valid_location?
     assert_equal(false, response, 'Blank Location with yard management true')
     GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))    
   end
@@ -53,8 +53,8 @@ fixtures :item_inner_packs
     location.save!    
     
     shipment_h = shipment(location: location_masters(:one).barcode)
-    rcv = Shipment::ShipmentReceive.new
-    response = rcv.valid_location?(shipment_h)    
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
+    response = rcv.valid_location?
     
     assert_equal(true, response, 'Pending location with yard management')
     GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))    
@@ -71,9 +71,9 @@ fixtures :item_inner_packs
     
     shipment_h = shipment(location: location_masters(:one).barcode)
     
-    rcv = Shipment::ShipmentReceive.new
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
     
-    response = rcv.valid_location?(shipment_h)    
+    response = rcv.valid_location?
         
     assert_equal(false, response, 'Pending location with yard management')    
     GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))    
@@ -85,8 +85,8 @@ fixtures :item_inner_packs
   test "with valid shipment number" do
 
     shipment_h = shipment(shipment_nbr: asn_headers(:one).shipment_nbr)
-    rcv = Shipment::ShipmentReceive.new
-    response = rcv.valid_location?(shipment_h)
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
+    response = rcv.valid_location?
     
     assert_equal(true, response, 'Pending location with yard management')
   end
@@ -95,8 +95,8 @@ fixtures :item_inner_packs
     
     AsnHeader.where(shipment_nbr: asn_headers(:one).shipment_nbr).first.destroy
     shipment_h = shipment(shipment_nbr: asn_headers(:one).shipment_nbr)
-    rcv = Shipment::ShipmentReceive.new
-    response = rcv.valid_shipment?(shipment_h)
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
+    response = rcv.valid_shipment?
     assert_equal(Message.get_message(shipment_h.client, 'RCV0004', [shipment_h.shipment_nbr]), rcv.message.errors[0].message, 'Pending location with yard management')    
     assert_equal(false, response, 'Invalid shipment')
   end
@@ -104,8 +104,8 @@ fixtures :item_inner_packs
   test "with valid case id " do
     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
     shipment_h = shipment(case_id: case_headers(:one).case_id)
-    rcv = Shipment::ShipmentReceive.new
-    response = rcv.valid_case?(shipment_h)
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
+    response = rcv.valid_case?
     assert_equal(true, response, 'Valid Case Id')
   end
 
@@ -116,8 +116,8 @@ fixtures :item_inner_packs
       case_id.destroy
     end
     shipment_h = shipment(case_id: case_headers(:one).case_id)
-    rcv = Shipment::ShipmentReceive.new
-    response = rcv.valid_case?(shipment_h)
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
+    response = rcv.valid_case?
     assert_equal(Message.get_message(shipment_h.client, 'RCV0009', [shipment_h.case_id]), rcv.message.errors[0].message, 'Pending location with yard management')    
     assert_equal(false, response, 'Invalid Case id')
   end
@@ -125,7 +125,7 @@ fixtures :item_inner_packs
   test "check valid data" do
     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
     shipment_h = shipment(case_id: case_headers(:one).case_id)
-    rcv = Shipment::ShipmentReceive.new
+    rcv = Shipment::ShipmentReceive.new(shipment_h)
     response = rcv.is_valid_receive_data?('case', shipment_h)
     assert_equal(true, response, 'Valid Case Id')
     
