@@ -36,7 +36,10 @@ fixtures :item_inner_packs
     puts asn_details(:one).received_qty
     update_old = {value: @configuration.Receiving_Type} 
     GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
-    
+
+    cs = CaseHeader.all
+    p cs.size
+
     case_id = Time.now.getutc.to_s 
     # Check the valida shipment
     post "#{@url}receive", 
@@ -53,7 +56,11 @@ fixtures :item_inner_packs
       item: @item,
       quantity: @quantity,
       innerpack_qty: @innerpack_qty
-    } 
+    }
+
+    cs = CaseHeader.all
+    p cs.size
+
     assert_equal 201, status , 'message in service'
     message =  JSON.parse(response.body)
     assert_equal 'Shipment1 Received Successfully' , message.message,  "Shipment received successfully"
@@ -80,7 +87,7 @@ fixtures :item_inner_packs
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
-
+=begin
   def test_receive_shipment_Case
 
     update_old = {value: @configuration.Receiving_Type} 
@@ -251,7 +258,7 @@ fixtures :item_inner_packs
      assert_equal  asn_details(:duplicate_line_2).poline_nbr, case_detail.poline_nbr, "Received against correct po line number"
   end
 
-
+=end
     
  end
  

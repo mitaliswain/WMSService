@@ -20,9 +20,6 @@ module Shipment
         case_detail = create_case_detail(self.shipment , case_header)
        end
        true
-          
-        rescue => error
-        fatal_error(error.to_s)
     
      end
      
@@ -55,7 +52,6 @@ module Shipment
         case_header.record_status = 'Received'
         case_header.on_hold = 'Yes'
         case_header.hold_code = 'Putaway Required'
-        case_header.barcode = self.shipment.item
         if location
           case_header.Location_type = location.location_type
           case_header.area = location.area
@@ -120,10 +116,9 @@ module Shipment
         case_detail.concept = item_master.concept
         case_detail.description = item_master.description
         case_detail.short_desc = item_master.short_desc
+        case_detail.shipment_nbr = '1234'
         case_detail.barcode = self.shipment.location
-        case_detail.inventory_type = item_master.inventory_type
         case_detail.poline_nbr = asn_detail.poline_nbr
-        case_detail.shipment_nbr = self.shipment.shipment_nbr
         case_detail.coo = self.shipment.coo  unless self.shipment[:coo].nil?
         case_detail.serial_nbr = self.shipment.serial_nbr unless self.shipment[:serial_nbr].nil?
         
@@ -141,10 +136,7 @@ module Shipment
         shipment_header = update_asnheader(self.shipment)
         shipment_details = update_asndetails(self.shipment, shipment_header)
         
-        true    
-         
-        rescue => error
-        fatal_error(error.to_s)
+        true
         
     end  
         
@@ -183,10 +175,7 @@ module Shipment
         location_master.save!
         
         true
-        
-        rescue => error
-        fatal_error(error.to_s)
-    
+
      end
     
      def update_innerpack_quantity(shipment)
@@ -198,9 +187,7 @@ module Shipment
                                innerpack_qty: self.shipment.innerpack_qty.to_i) unless innerpack_exists? item_innerpacks , self.shipment
     
         true  
-        
-        rescue => error
-        fatal_error(error.to_s)
+
      end
        
      private    
@@ -235,10 +222,18 @@ module Shipment
     end
     
     def process_workflow shipment
-      workflow.each do |process, methods|
-        methods.each do |method|
-          response = self.send(method[:method], self.shipment)
-          return self.message unless response 
+      ActiveRecord::Base.transaction do
+        begin
+          workflow.each do |process, methods|
+            methods.each do |method|
+              response = self.send(method[:method], self.shipment)
+              return self.message unless response
+            end
+          end
+        rescue
+          raise ActiveRecord::Rollback
+          fatal_error(error.to_s)
+          return self.message
         end
       end
        resource_processed_successfully(self.shipment.shipment_nbr, "Received Successfully")
