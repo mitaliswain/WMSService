@@ -47,17 +47,15 @@ fixtures :item_inner_packs
   end
   
   test "with pending location and yard management true" do
-    GlobalConfiguration.set_configuration({value: 't'}, @condition.merge({key: 'Yard_Management'}))
     location = LocationMaster.where(client: shipment.client, warehouse: shipment.warehouse, barcode: location_masters(:one).barcode).first
-    location.location_type = 'Pending'
+    location.location_type = 'Receiving'
     location.save!    
     
     shipment_h = shipment(location: location_masters(:one).barcode)
     rcv = Shipment::ShipmentReceive.new(shipment_h)
     response = rcv.valid_location?
-    
+    p rcv.message
     assert_equal(true, response, 'Pending location with yard management')
-    GlobalConfiguration.set_configuration({value: 'f'}, @condition.merge({key: 'Yard_Management'}))    
 
     location.location_type =  location_masters(:one).location_type
     location.save!
@@ -86,8 +84,7 @@ fixtures :item_inner_packs
 
     shipment_h = shipment(shipment_nbr: asn_headers(:one).shipment_nbr)
     rcv = Shipment::ShipmentReceive.new(shipment_h)
-    response = rcv.valid_location?
-    
+    response = rcv.valid_shipment?
     assert_equal(true, response, 'Pending location with yard management')
   end
 

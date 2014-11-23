@@ -87,7 +87,7 @@ fixtures :item_inner_packs
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
-=begin
+
   def test_receive_shipment_Case
 
     update_old = {value: @configuration.Receiving_Type} 
@@ -258,7 +258,6 @@ fixtures :item_inner_packs
      assert_equal  asn_details(:duplicate_line_2).poline_nbr, case_detail.poline_nbr, "Received against correct po line number"
   end
 
-=end
     
  end
  

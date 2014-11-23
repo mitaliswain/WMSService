@@ -6,7 +6,15 @@ module Shipment
      
       @configuration =  GlobalConfiguration.get_configuration(client: shipment[:client], warehouse: shipment[:warehouse], channel:  nil, building: nil, module: 'RECEIVING')
       # workflow = WorkFlow.get_workflow('RECEIVING')
-       process_workflow(shipment)      
+      ActiveRecord::Base.transaction do
+        begin
+          process_workflow(shipment)
+        rescue
+          fatal_error(error.to_s)
+          raise ActiveRecord::Rollback
+          return self.message
+        end
+      end
     end  
      
   
@@ -116,7 +124,6 @@ module Shipment
         case_detail.concept = item_master.concept
         case_detail.description = item_master.description
         case_detail.short_desc = item_master.short_desc
-        case_detail.shipment_nbr = '1234'
         case_detail.barcode = self.shipment.location
         case_detail.poline_nbr = asn_detail.poline_nbr
         case_detail.coo = self.shipment.coo  unless self.shipment[:coo].nil?
@@ -222,19 +229,11 @@ module Shipment
     end
     
     def process_workflow shipment
-      ActiveRecord::Base.transaction do
-        begin
           workflow.each do |process, methods|
             methods.each do |method|
               response = self.send(method[:method], self.shipment)
               return self.message unless response
             end
-          end
-        rescue
-          raise ActiveRecord::Rollback
-          fatal_error(error.to_s)
-          return self.message
-        end
       end
        resource_processed_successfully(self.shipment.shipment_nbr, "Received Successfully")
     end 

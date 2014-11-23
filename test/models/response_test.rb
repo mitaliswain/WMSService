@@ -106,7 +106,7 @@ test "multiiple validation failure" do
     ms = responsevalue.invalid_request('xxx', 'Invalid validation requested')
     expected_message =  
        { status: '415' ,
-         message: 'Invalid request',
+         message: 'Invalid Request',
          errors: [{
            code: '415',
            field: 'xxx',
@@ -114,7 +114,7 @@ test "multiiple validation failure" do
           }
          ]
        }  
-    assert_equal(expected_message, responsevalue.message, 'Invalid request' )   
+    assert_equal(expected_message, responsevalue.message, 'Invalid request' )
   end
   
 

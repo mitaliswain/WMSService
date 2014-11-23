@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/WMSService.iml" filepath="$PROJECT_DIR$/.idea/WMSService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WMSUI/.idea/WMSUI.iml" filepath="$PROJECT_DIR$/../WMSUI/.idea/WMSUI.iml" />
     </modules>
   </component>
 </project>
-
