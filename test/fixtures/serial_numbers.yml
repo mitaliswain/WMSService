@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: WM
+  warehouse: WH1
+  channel:
+  building:
+  case_id: MyString
+  serial_nbr: 100
+  purchase_order_nbr: MyString
+  poline_nbr: 1
+  lot_nbr: MyString
+  shipment_nbr: MyString
+  item_barcode: MyString
+  vendor_nbr: MyString
+  vendor_factory: MyString
+  coo: MyString
+  order_nbr: MyString
+  order_type: MyString
+  carton_nbr: MyString
+  total_units: 1
+  comments: MyString
+  status: MyString
+  hold_code: MyString
+  record_status: MyString
+  created_date: 2014-11-24 22:10:41
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-11-24 22:10:41
+  updated_user: MyString
+  updated_prc: MyString
+
+two:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  case_id: MyString
+  serial_nbr: MyString
+  purchase_order_nbr: MyString
+  poline_nbr: 1
+  lot_nbr: MyString
+  shipment_nbr: MyString
+  item_barcode: MyString
+  vendor_nbr: MyString
+  vendor_factory: MyString
+  coo: MyString
+  order_nbr: MyString
+  order_type: MyString
+  carton_nbr: MyString
+  total_units: 1
+  comments: MyString
+  status: MyString
+  hold_code: MyString
+  record_status: MyString
+  created_date: 2014-11-24 22:10:41
+  created_user: MyString
+  created_prc: MyString
+  update_date: 2014-11-24 22:10:41
+  updated_user: MyString
+  updated_prc: MyString
