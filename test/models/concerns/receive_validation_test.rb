@@ -123,7 +123,7 @@ fixtures :item_inner_packs
     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
     shipment_h = shipment(case_id: case_headers(:one).case_id)
     rcv = Shipment::ShipmentReceive.new(shipment_h)
-    response = rcv.is_valid_receive_data?('case', shipment_h)
+    response = rcv.is_valid_receive_data?('case')
     assert_equal(true, response, 'Valid Case Id')
     
     

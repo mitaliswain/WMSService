@@ -53,13 +53,13 @@ class ShipmentController < ApplicationController
 
   def validate
    shipment = Shipment::ShipmentReceive.new(params[:shipment])  
-   shipment.is_valid_receive_data?(params[:to_validate], params[:shipment])
+   shipment.is_valid_receive_data?(params[:to_validate])
    render json: shipment.message.to_json, status: shipment.message[:status]
   end
   
   def receive
     shipment = Shipment::ShipmentReceive.new(params[:shipment])
-    shipment.receive_shipment(params[:shipment])
+    shipment.receive_shipment
     render json: shipment.message.to_json, status: shipment.message[:status]
   end
   
