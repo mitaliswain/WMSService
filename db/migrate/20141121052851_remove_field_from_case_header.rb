@@ -15,10 +15,10 @@ class RemoveFieldFromCaseHeader < ActiveRecord::Migration
     remove_column :case_headers, :description, :string
     remove_column :case_headers, :short_desc, :string
     remove_column :case_headers, :concept, :string
-    remove_column :case_headers, :from_co, :string
-    remove_column :case_headers, :from_div, :string
-    remove_column :case_headers, :to_co, :string
-    remove_column :case_headers, :to_div, :string
+   # remove_column :case_headers, :from_co, :string
+   # remove_column :case_headers, :from_div, :string
+   # remove_column :case_headers, :to_co, :string
+   # remove_column :case_headers, :to_div, :string
 
   end
 
