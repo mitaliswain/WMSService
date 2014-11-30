@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :shipment do
         get '' ,  action: 'index'
         get  ':id', action: 'show' 
-        get  ':id/detail/:detail_id', action: 'show' 
+        get  ':id/detail/:detail_id', action: 'show_detail'
         
         post 'add_detail', action: 'add_detail'
         post 'add_header', action: 'add_header'

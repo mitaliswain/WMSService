@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="772978316">
+  <component name="DataSourceManagerImpl" format="xml" hash="2447965088">
     <data-source source="LOCAL" name="Rails WMSService: production" uuid="4bd5b5bc-af80-400c-84f7-2584ce873a7e">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
@@ -17,6 +17,13 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails WMSUI: development" uuid="002b1f72-753b-4889-84ff-a6865d1180cc">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../WMSUI/db/development.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>
