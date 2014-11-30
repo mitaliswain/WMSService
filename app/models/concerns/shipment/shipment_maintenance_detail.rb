@@ -30,7 +30,7 @@ module ShipmentMaintenanceDetail
           shipment_hash = AsnDetail.new(input_obj)  
           shipment_hash = add_shipment_detail_derived_data(shipment_hash.clone)
           shipment_hash.save!    
-          resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.asn_header_id}/#{shipment_hash.id}")                 
+          resource_added_successfully("Shipment #{shipment_hash.id}", "/shipment/#{shipment_hash.asn_header_id}/detail/#{shipment_hash.id}")
        end        
        message  
   end 

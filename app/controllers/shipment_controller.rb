@@ -3,14 +3,22 @@ class ShipmentController < ApplicationController
   protect_from_forgery except: :index
   def index
      filter_conditions = params[:filter_conditions]
-     shipment_hash = Shipment::ShipmentMaintenance.new.get_shipments(basic_parameters, filter_conditions, params[:expand])
+     shipment_hash = Shipment::ShipmentMaintenance.new.get_shipments(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
      render json: shipment_hash
   end
 
   def show
     shipment = Shipment::ShipmentMaintenance.new
     filter_conditions = {id: params[:id]}
-    shipment_hash = (shipment.get_shipments(basic_parameters, filter_conditions, true)).first
+    shipment_hash = (shipment.get_shipments(filter_conditions: filter_conditions).first )
+    render json: shipment_hash.to_json
+  end
+
+  def show_detail
+    shipment = Shipment::ShipmentMaintenance.new
+    filter_conditions = {id: params[:id]}
+    detail_filter_conditions = {id: params[:detail_id]}
+    shipment_hash = (shipment.get_shipment_detail(filter_conditions: filter_conditions, detail_filter_conditions: detail_filter_conditions)  )
     render json: shipment_hash.to_json
   end
 
@@ -64,7 +72,10 @@ class ShipmentController < ApplicationController
   end
   
   def basic_parameters
-    {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
+    basic_parameter = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
+    basic_parameter[:building] =  basic_parameter[:building].blank? ? nil : basic_parameter[:building]
+    basic_parameter[:channel] =  basic_parameter[:channel].blank? ? nil : basic_parameter[:channel]
+    basic_parameter
   end
    
 end
