@@ -18,7 +18,8 @@ Rails.application.routes.draw do
         post ':shipment_nbr/receive',  action: 'receive'
         post ':to_validate/validate',  action: 'validate'
 
-   end
+    end
+
    
    namespace :case do
         get '' ,  action: 'index'
@@ -39,6 +40,11 @@ Rails.application.routes.draw do
         get '', action: 'index'
         put '/:id', action: 'update'
    end
+
+    namespace :putaway do
+      post ':case_id/putaway' , action: 'putaway'
+      post ':to_validate/validate' , action: 'validate'
+    end
   
   resources :location
   

@@ -50,7 +50,7 @@ module Inventory
       case_detail.description = @item_master.description
       case_detail.short_desc = @item_master.short_desc
       case_detail.barcode = @item_master.barcode
-      case_detail.inventory_type = @item_master.inventory_type
+      #case_detail.inventory_type = @item_master.inventory_type
       case_detail.unit_weight = @item_master.unit_wgt
       case_detail.unit_volume = @item_master.unit_vol
       case_detail

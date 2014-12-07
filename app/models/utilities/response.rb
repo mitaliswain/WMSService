@@ -65,12 +65,11 @@ module Response
    false 
  end   
 
- def fatal_error(message)
+ def fatal_error(message, error_location=nil)
    @message = {status:  '500',
     message: message
     }
-  Rails.logger.fatal("Critical: #{message}")  
-  p message
+  Rails.logger.fatal("Critical: #{message} at #{error_location}")
    false
  end   
 
