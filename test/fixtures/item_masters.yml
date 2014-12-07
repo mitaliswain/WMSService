@@ -286,7 +286,7 @@ three:
   barcode: MyString
   unit_putaway_type: MyString
   sku_location_type: MyString
-  case_putaway_type: MyString
+  case_putaway_type: BEVERAGE
   pallet_putaway_type: MyString
   suggested_zone: MyString
   suggested_act_zone: MyString
@@ -408,7 +408,7 @@ four:
   barcode: MyString
   unit_putaway_type: MyString
   sku_location_type: MyString
-  case_putaway_type: MyString
+  case_putaway_type: BEVERAGE
   pallet_putaway_type: MyString
   suggested_zone: MyString
   suggested_act_zone: MyString

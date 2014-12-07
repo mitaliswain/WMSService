@@ -1,6 +1,5 @@
 module Shipment
-  require 'yaml'
-  require 'active_support/concern'
+
   module ShipmentReceiveValidation
     extend ActiveSupport::Concern
 
@@ -40,7 +39,7 @@ module Shipment
       #return validation_success(:location)    unless yard_management_enabled?
       # Validating Location
       case
-        when !@location_master
+        when @location_master.nil?
           validation_failed('422', :location, Message.get_message(self.shipment.client, 'RCV0001', [self.shipment.location]))
 
         when @location_master.location_type != 'Receiving'
@@ -61,7 +60,7 @@ module Shipment
       # validating shipment information
 
       case
-        when !@shipment_header
+        when @shipment_header.nil?
           validation_failed('422', :shipment_nbr, Message.get_message(self.shipment.client, 'RCV0004', [self.shipment.shipment_nbr]))
 
         when yard_management_enabled? &&
@@ -90,7 +89,7 @@ module Shipment
         when SKU_receiving_enabled? && @case_header
           validation_failed('422', :case_id, Message.get_message(self.shipment.client, 'RCV0008', [self.shipment.case_id]))
 
-        when Case_receiving_enabled? && !@case_header
+        when Case_receiving_enabled? && @case_header.nil?
           validation_failed('422', :case_id, Message.get_message(self.shipment.client, 'RCV0009', [self.shipment.case_id]))
 
         when Case_receiving_enabled? && @case_header.record_status != 'Created'
@@ -111,13 +110,13 @@ module Shipment
       #validating item
 
       case
-        when !@item_master
+        when @item_master.nil?
           validation_failed('422', :item, Message.get_message(self.shipment.client, 'RCV0011', [self.shipment.item]))
 
-        when !shipment_detail
+        when shipment_detail.nil?
           validation_failed('422', :item, Message.get_message(self.shipment.client, 'RCV0012', [self.shipment.item]))
 
-        when Case_receiving_enabled? && !@case_detail
+        when Case_receiving_enabled? && @case_detail.nil?
 
           validation_failed('422', :item, Message.get_message(self.shipment.client, 'RCV0013', [self.shipment.item]))
 
@@ -183,7 +182,7 @@ module Shipment
 
     def is_duplicate_serial_number?
       serial_number = SerialNumber.where(client: shipment[:client], serial_nbr: shipment[:serial_nbr]).first
-      if !shipment[:serial_nbr].detect { |e| shipment[:serial_nbr].count(e) > 1 }.nil? || !serial_number.nil?
+      if serial_number.present? || shipment[:serial_nbr].detect { |e| shipment[:serial_nbr].count(e) > 1 }.present?
         validation_failed('422', :serial_number, 'Serial number already exists')
         true
       end

@@ -10,7 +10,7 @@ module Shipment
         begin
           process_workflow
         rescue => error
-          fatal_error(error.to_s)
+          fatal_error(error.to_s, error.backtrace[0])
           raise ActiveRecord::Rollback
           return self.message
         end
@@ -206,8 +206,9 @@ module Shipment
          serial_number.serial_nbr = serial
          serial_number.client = self.shipment.client
          serial_number.case_id = self.shipment.case_id
+         serial_number.item_barcode = self.shipment.item
          serial_number.purchase_order_nbr = self.shipment.purchase_order_nbr if self.shipment.has_key?(:purchase_order_nbr)
-         serial_number.lot_nbr = self.shipment.lot_nbr  if self.shipment.has_key?(:lot_nbr)
+         serial_number.lot_nbr = self.shipment.lot_number  if self.shipment.has_key?(:lot_number)
          serial_number.shipment_nbr = self.shipment.shipment_nbr
          serial_number.coo = self.shipment.coo if self.shipment.has_key?(:coo)
          serial_number.status = 'Received'
