@@ -281,6 +281,7 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
 
     post url, shipment: shipment_hash
     message = JSON.parse(response.body)
+    p message
     assert_equal 201, status, 'Receive shipment with serial number'
 
     serial = []

@@ -64,12 +64,7 @@ module Shipment
         case_header.hold_code = 'Putaway Required'
         if location
           case_header.Location_type = location.location_type
-          case_header.area = location.area
-          case_header.zone = location.zone
-          case_header.aisle = location.aisle
-          case_header.bay = location.bay
-          case_header.level = location.level
-          case_header.position = location.position
+          case_header.location = location.barcode
         end
           
         # case_detail.total_weight = shipment[:quantity].to_i * item_master.unit_wgt

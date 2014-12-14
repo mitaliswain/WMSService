@@ -10,20 +10,10 @@ one:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -121,20 +111,10 @@ two:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -231,21 +211,11 @@ case_one:
   case_id: CASE_case1
   pallet_id: MyString
   status: MyString
+  location: MyString
+  previous_location: MyString
   inventory_type: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -343,20 +313,10 @@ case_two:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -455,20 +415,10 @@ case_three:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -566,20 +516,10 @@ case_four:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -678,20 +618,10 @@ case_putaway_1:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
@@ -790,20 +720,10 @@ case_putaway_2:
   pallet_id: MyString
   status: MyString
   inventory_type: MyString
+  location: MyString
+  previous_location: MyString
   Location_type: MyString
-  area: MyString
-  zone: MyString
-  aisle: MyString
-  bay: MyString
-  level: MyString
-  position: MyString
   previous_locn_type: MyString
-  previous_area: MyString
-  previous_zone: MyString
-  previous_aisle: MyString
-  previous_bay: MyString
-  previous_level: MyString
-  previous_position: MyString
   quantity: 1
   allocated_qty: 1
   purchase_order_nbr: MyString
