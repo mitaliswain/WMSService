@@ -47,8 +47,9 @@ module Inventory
           is_valid = (respond_to?(method) ? send(method, fields_to_update) : true)  && is_valid                 
       end   
       is_valid
-    end     
-  
+    end
+
+
     def valid_shipment_nbr?(fields_to_update)
       shipment = AsnHeader.where(client: fields_to_update.client, warehouse: fields_to_update.warehouse)
                           .where(building: fields_to_update.building, channel: fields_to_update.channel)
@@ -58,8 +59,19 @@ module Inventory
       else
          validation_failed('422', :shipment_nbr, 'Invalid Shipment Number')
       end
-   end    
- 
- end
+   end
+
+   def valid_location?(fields_to_update)
+     location = LocationMaster.where(client: fields_to_update.client, warehouse: fields_to_update.warehouse)
+                    .where(building: fields_to_update.building, channel: fields_to_update.channel)
+                    .where(barcode: fields_to_update.location).first
+     if location
+       true
+     else
+       validation_failed('422', :shipment_nbr, 'Invalid Location')
+     end
+   end
+
+  end
   
 end
