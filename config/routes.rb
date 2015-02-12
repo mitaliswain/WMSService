@@ -45,8 +45,14 @@ Rails.application.routes.draw do
       post ':case_id/putaway' , action: 'putaway'
       post ':to_validate/validate' , action: 'validate'
     end
-  
-  resources :location
+
+    namespace :item_master do
+      get '', action: 'index'
+      put '/:id', action: 'update'
+    end
+
+
+    resources :location
   
 
   # The priority is based upon order of creation: first created -> highest priority.
