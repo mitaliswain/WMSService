@@ -41,18 +41,18 @@ Rails.application.routes.draw do
         put '/:id', action: 'update'
    end
 
+    namespace :item_master do
+      get '', action: 'index'
+      get '/:id', action: 'show'
+      put '/:id', action: 'update'
+    end
+
     namespace :putaway do
       post ':case_id/putaway' , action: 'putaway'
       post ':to_validate/validate' , action: 'validate'
     end
 
-    namespace :item_master do
-      get '', action: 'index'
-      put '/:id', action: 'update'
-    end
-
-
-    resources :location
+  resources :location
   
 
   # The priority is based upon order of creation: first created -> highest priority.

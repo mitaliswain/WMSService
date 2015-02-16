@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ItemMasterMaintenanceTest < ActionDispatch::IntegrationTest
-
+  fixtures :item_masters
   def setup
     @url = '/item_master/'
     @client = 'WM'
@@ -17,23 +17,23 @@ class ItemMasterMaintenanceTest < ActionDispatch::IntegrationTest
     assert_equal item_count, JSON.parse(response.body).count, 'Total items in ItemMaster'
 
   end
-=begin
+
   test 'update configuration value' do
 
-    configuration = GlobalConfiguration.find(global_configurations(:one).id )
+    item = ItemMaster.find(item_masters(:one).id )
 
-    message = put(@url,
+    message = put("#{@url}#{item_masters(:one).id}",
                   app_parameters:{
                       client:'WM', warehouse: 'WH1', building: '', channel: ''
                   },
                   fields_to_update: {
-                      value: 'new'
+                      description: "new_#{item.description}"
                   })
-    configuration_updated = GlobalConfiguration.find(global_configurations(:one).id )
-    assert_equal 201, status, 'Updated shipment status'
-    assert_equal 'new', configuration_updated.value, 'Updated configuration data'
+    item_updated = ItemMaster.find(item_masters(:one).id )
+    assert_equal 201, status, 'Updated item  status'
+    assert_equal "new_#{item.description}", item_updated.description, 'Updated Item description'
 
   end
-=end
+
 
 end

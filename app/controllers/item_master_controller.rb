@@ -13,16 +13,21 @@ class ItemMasterController < ApplicationController
     render json: @message.to_json, status: @message[:status]
   end
 
+
 end
 
-=begin
+  def show
+    item = ItemMaster.find(params[:id])
+    render json: item.to_json
+  end
+
   def update
-    configuration = WmsConfiguration::ConfigurationMaintenance.new
-    message = configuration.update_configuration(params[:app_parameters], params[:id], params[:fields_to_update])
+    item = Item::ItemMasterMaintenance.new
+    message = item.update_item_master(params[:app_parameters], params[:id], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
   rescue Exception => e
-    configuration.fatal_error(e.message)
-    render json: configuration.message.to_json, status: '500'
+    item.fatal_error(e.message)
+    render json: item.message.to_json, status: '500'
     end
-=end
+
 end
