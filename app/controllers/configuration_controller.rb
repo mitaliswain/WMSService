@@ -2,7 +2,7 @@ class ConfigurationController < ApplicationController
   protect_from_forgery except: :index  
   def index
     begin
-      render json: GlobalConfiguration.where(params[:selection]).to_json
+      render json: GlobalConfiguration.all #where(params[:selection]).to_json
     rescue ActiveRecord::StatementInvalid => e
       render json: {error: 'Invalid Request Parameters'}.to_json, status: '500'
     end
