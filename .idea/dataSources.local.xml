@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails WMSService: production" uuid="4bd5b5bc-af80-400c-84f7-2584ce873a7e" />
+    <data-source name="Rails WMSService: test" uuid="f16b0bac-6696-4fae-a325-59d50e4155e5" />
+    <data-source name="Rails WMSService: development" uuid="536802b3-5e42-4669-a2c0-e7de2057c6fe" />
+    <data-source name="Rails WMSUI: development" uuid="002b1f72-753b-4889-84ff-a6865d1180cc" />
+  </component>
+</project>
