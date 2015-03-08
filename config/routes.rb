@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       get '', action: 'index'
       get '/:id', action: 'show'
       put '/:id', action: 'update'
+      post '', action: 'create'
     end
 
     namespace :putaway do

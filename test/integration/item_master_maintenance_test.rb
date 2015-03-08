@@ -18,7 +18,7 @@ class ItemMasterMaintenanceTest < ActionDispatch::IntegrationTest
 
   end
 
-  test 'update configuration value' do
+  test 'update item master value' do
 
     item = ItemMaster.find(item_masters(:one).id )
 
@@ -33,6 +33,38 @@ class ItemMasterMaintenanceTest < ActionDispatch::IntegrationTest
     assert_equal 201, status, 'Updated item  status'
     assert_equal "new_#{item.description}", item_updated.description, 'Updated Item description'
 
+  end
+
+  def test_the_add_item_master
+
+
+    post(@url,
+         app_parameters:{
+             client:'WM', warehouse: 'WH1', building: '', channel: ''
+         },
+         fields_to_update: {
+             item: 'Item 1',
+             short_desc: 'This is item 1',
+             concept: 'PB'
+         } )
+
+    item = ItemMaster.find_by_item('Item 1')
+    assert_not_nil item, 'added item'
+    assert_equal 201, status, 'Item added message'
+
+    #Checking duplicate item
+
+    post(@url,
+         app_parameters:{
+             client:'WM', warehouse: 'WH1', building: '', channel: ''
+         },
+         fields_to_update: {
+             item: 'Item 1',
+             short_desc: 'This is item 1',
+             concept: 'PB'
+         } )
+
+    assert_equal 500, status, 'Duplicate item message'
   end
 
 
