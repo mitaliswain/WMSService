@@ -94,10 +94,20 @@ module Shipment
 
         when Case_receiving_enabled? && @case_header.record_status != 'Created'
           validation_failed('422', :case_id, Message.get_message(self.shipment.client, 'RCV0010', [self.shipment.case_id]))
+
+        when Case_receiving_enabled? && !valid_case_receiving_item?
+          validation_failed('422', self.shipment.item, 'Item in case not valid')
+
         else
           validation_success(:case_id, get_additional_info_for_case(case_detail))
       end
 
+    end
+
+    def valid_case_receiving_item?
+      @case_detail = CaseDetail.where(default_key).where(case_id: self.shipment.case_id).first
+      self.shipment[:item] = @case_detail.item
+      valid_item?
     end
 
     def valid_item?

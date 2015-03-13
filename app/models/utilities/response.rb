@@ -76,10 +76,11 @@ module Response
 
  def validation_failed(status_code, field_name, message)
   errors = @message.nil? || @message[:errors].nil? ? []:  @message[:errors]
-  errors << {code: status_code,
+
+  errors.unshift({code: status_code,
              field: field_name,
              message: message
-            }
+            })
     @message = { status: '422' ,
     message: 'Validation Failed' ,
     errors: errors    

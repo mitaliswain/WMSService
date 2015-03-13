@@ -33,7 +33,8 @@ Rails.application.routes.draw do
 
         post ':id/update_header', action:'update_header'
         post ':id/update_detail', action:'update_detail'
-        
+
+        post ':pallate_id/palletize', action: 'palletize'
    end
   
    namespace :configuration do

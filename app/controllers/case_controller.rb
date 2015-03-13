@@ -55,5 +55,10 @@ class CaseController < ApplicationController
     render json: case_obj.message.to_json, status: '500'
   end
 
+  def palletize
+    case_palletization = Inventory::CasePallatization.new(params[:app_parameters], params[:pallate_id], params[:cases_to_be_palletized])
+    case_palletization.palletize
+    render json: case_palletization.message.to_json, status: case_palletization.message[:status]
+  end
 
 end

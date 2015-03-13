@@ -14,4 +14,5 @@ class PutawayController < ApplicationController
     putaway.case_putaway
     render json: putaway.message.to_json, status: putaway.message[:status]
   end
+
 end
