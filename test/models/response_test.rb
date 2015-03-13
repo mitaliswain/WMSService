@@ -86,16 +86,16 @@ test "multiiple validation failure" do
        { status: '422' ,
          message: 'Validation Failed' ,
          errors: [
-         {
-          code: '100',
-          field: 'shipment_nbr',
-          message: 'Shipment already exists'
-         },
           {
           code: '404',
           field: 'ship_via',
           message: 'Ship via not found'
-         }
+         },
+          {
+              code: '100',
+              field: 'shipment_nbr',
+              message: 'Shipment already exists'
+          }
         ]      
        }
     assert_equal(expected_message, responsevalue.message, 'Validation Failed' )

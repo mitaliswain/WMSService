@@ -5,6 +5,7 @@ module Putaway
       extend ActiveSupport::Concern
 
       def case_putaway
+        update_case_header
         resource_processed_successfully(self.putaway.case_id, "putaway done successfully for the case")
       end
 
