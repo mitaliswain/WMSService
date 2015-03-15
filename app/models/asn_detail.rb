@@ -14,10 +14,11 @@ class AsnDetail < ActiveRecord::Base
   after_save :update_asn_header_quantity
 
   def update_asn_header_quantity
-    if self.received_qty_changed? or self.cases_rcvd_changed?
+    if self.received_qty_changed? or self.cases_rcvd_changed? or self.po_qty_changed?
       asn_header = AsnHeader.find(self.asn_header_id)
       asn_header.units_rcvd = asn_header.units_rcvd.to_i + (self.received_qty.to_i - self.received_qty_was.to_i)
       asn_header.cases_rcvd = asn_header.cases_rcvd.to_i + (self.cases_rcvd.to_i - self.cases_rcvd_was.to_i)
+      asn_header.unit_ordered = asn_header.unit_ordered.to_i + (self.po_qty.to_i - self.po_qty_was.to_i)
       asn_header.save!
     end
   end
