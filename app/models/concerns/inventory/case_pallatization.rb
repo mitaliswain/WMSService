@@ -1,6 +1,6 @@
 module Inventory
 
-  class CasePallatization
+  class   CasePallatization
     include Response
     include Utility
 
