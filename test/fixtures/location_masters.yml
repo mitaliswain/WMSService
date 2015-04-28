@@ -11,7 +11,7 @@ one:
   aisle: MyString
   bay: MyString
   level: MyString
-  position: MyString
+  position: P1
   barcode: Location1
   climate_control: MyString
   minimum_temp: MyString
@@ -79,7 +79,7 @@ two:
   aisle: MyString
   bay: MyString
   level: MyString
-  position: MyString
+  position: P2
   barcode: Location2
   climate_control: MyString
   minimum_temp: MyString
@@ -147,7 +147,7 @@ three:
   aisle: MyString
   bay: MyString
   level: MyString
-  position: MyString
+  position: P3
   barcode: Location3
   climate_control: MyString
   minimum_temp: MyString
@@ -283,7 +283,7 @@ putaway_one:
   aisle: MyString
   bay: MyString
   level: MyString
-  position: MyString
+  position: P4S
   barcode: Location_P
   climate_control: MyString
   minimum_temp: MyString

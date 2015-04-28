@@ -54,8 +54,22 @@ Rails.application.routes.draw do
       post ':to_validate/validate' , action: 'validate'
     end
 
-  resources :location
-  
+    namespace :location_master do
+      get '', action: 'index'
+      get '/:id', action: 'show'
+      put '/:id', action: 'update'
+      post '', action: 'create'
+
+    end
+
+    namespace :location_type do
+      get '', action: 'index'
+      get '/:id', action: 'show'
+      put '/:id', action: 'update'
+      post '', action: 'create'
+
+    end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
