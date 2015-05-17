@@ -27,7 +27,7 @@ class LocationMasterMaintenanceTest < ActionDispatch::IntegrationTest
                       client:'WM', warehouse: 'WH1', building: '', channel: ''
                   },
                   fields_to_update: {
-                      climate_contro: 'Freezer'
+                      climate_control: 'Freezer'
                   })
     location_updated = LocationMaster.find(location_masters(:one).id )
     assert_equal 201, status, 'Updated location master  status'
