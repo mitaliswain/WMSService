@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  location_type: Type1
+  description: MyString
+  notes: MyString
+  climate_control: MyString
+  minimum_temp: MyString
+  maximum_temp: MyString
+  lot_control_only: MyString
+  serial_nbr_only: MyString
+  single_sku_locn: MyString
+  default_putaway_type: MyString
+  secured_locn_type: MyString
+  maximum_wgt: 1
+  maximum_len: 1
+  maximum_hgt: 1
+  maximum_wdt: 1
+  created_date: 2015-04-20 15:50:00
+  created_by: MyString
+  created_prc: MyString
+  update_date: 2015-04-20 15:50:00
+  updated_by: MyString
+  updated_prc: MyString
+
+two:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  location_type: Type2
+  description: MyString
+  notes: MyString
+  climate_control: MyString
+  minimum_temp: MyString
+  maximum_temp: MyString
+  lot_control_only: MyString
+  serial_nbr_only: MyString
+  single_sku_locn: MyString
+  default_putaway_type: MyString
+  secured_locn_type: MyString
+  maximum_wgt: 1
+  maximum_len: 1
+  maximum_hgt: 1
+  maximum_wdt: 1
+  created_date: 2015-04-20 15:50:00
+  created_by: MyString
+  created_prc: MyString
+  update_date: 2015-04-20 15:50:00
+  updated_by: MyString
+  updated_prc: MyString

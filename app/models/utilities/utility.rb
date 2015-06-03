@@ -80,4 +80,10 @@ class ::Hash
     super.method_missing name
   end
 end
-  
+
+
+class String
+  def to_nil
+    self.present? ? self : nil
+  end
+end

@@ -14,13 +14,29 @@ module Item
       @error = []
     end
 
+    def get_items(basic_parameters:nil, filter_conditions:nil, expand:nil)
+
+      if expand.nil?
+        #item_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]
+        item_header_data = '*'
+      else
+        item_header_data = '*'
+      end
+
+      item_headers = ItemMaster.select(item_header_data).where(filter_conditions)
+      item_hash = {item_header: item_headers}
+      item_hash
+    end
+
+
+
     def add_item_master(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash
       if valid_data?(input_obj) && valid_app_parameters?(input_obj)
-        shipment_hash = ItemMaster.new(input_obj)
-        shipment_hash = add_derived_data(shipment_hash.clone)
-        shipment_hash.save!
-        resource_added_successfully("Item #{shipment_hash.id}", "/item_master/#{shipment_hash.id}")
+        item_master_hash = ItemMaster.new(input_obj)
+        item_master_hash = add_derived_data(item_master_hash.clone)
+        item_master_hash.save!
+        resource_added_successfully("Item #{item_master_hash.id}", "/item_master/#{item_master_hash.id}")
       end
       message
     end
@@ -42,8 +58,8 @@ module Item
       true
     end
 
-    def add_derived_data(shipment_hash)
-      shipment_hash
+    def add_derived_data(item_master_hash)
+      item_master_hash
     end
       
   end

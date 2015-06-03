@@ -49,6 +49,8 @@ class ItemMasterMaintenanceTest < ActionDispatch::IntegrationTest
          } )
 
     item = ItemMaster.find_by_item('Item 1')
+    message = JSON.parse(response.body)
+    p message
     assert_not_nil item, 'added item'
     assert_equal 201, status, 'Item added message'
 

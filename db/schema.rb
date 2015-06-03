@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211050221) do
+ActiveRecord::Schema.define(version: 20150420225000) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -766,6 +766,36 @@ ActiveRecord::Schema.define(version: 20141211050221) do
     t.string   "created_prc"
     t.datetime "update_date"
     t.string   "updated_user"
+    t.string   "updated_prc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "location_types", force: true do |t|
+    t.string   "client"
+    t.string   "warehouse"
+    t.string   "channel"
+    t.string   "building"
+    t.string   "location_type"
+    t.string   "description"
+    t.string   "notes"
+    t.string   "climate_control"
+    t.string   "minimum_temp"
+    t.string   "maximum_temp"
+    t.string   "lot_control_only"
+    t.string   "serial_nbr_only"
+    t.string   "single_sku_locn"
+    t.string   "default_putaway_type"
+    t.string   "secured_locn_type"
+    t.integer  "maximum_wgt"
+    t.integer  "maximum_len"
+    t.integer  "maximum_hgt"
+    t.integer  "maximum_wdt"
+    t.datetime "created_date"
+    t.string   "created_by"
+    t.string   "created_prc"
+    t.datetime "update_date"
+    t.string   "updated_by"
     t.string   "updated_prc"
     t.datetime "created_at"
     t.datetime "updated_at"

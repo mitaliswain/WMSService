@@ -52,7 +52,7 @@ module Inventory
 
     def valid_shipment_nbr?(fields_to_update)
       shipment = AsnHeader.where(client: fields_to_update.client, warehouse: fields_to_update.warehouse)
-                          .where(building: fields_to_update.building, channel: fields_to_update.channel)
+                          .where(building: fields_to_update.building.to_nil, channel: fields_to_update.channel.to_nil)
                           .where(shipment_nbr: fields_to_update.shipment_nbr).first                    
       if shipment
          true    
@@ -63,7 +63,7 @@ module Inventory
 
    def valid_location?(fields_to_update)
      location = LocationMaster.where(client: fields_to_update.client, warehouse: fields_to_update.warehouse)
-                    .where(building: fields_to_update.building, channel: fields_to_update.channel)
+                    .where(building: fields_to_update.building.to_nil, channel: fields_to_update.channel.to_nil)
                     .where(barcode: fields_to_update.location).first
      if location
        true
@@ -73,5 +73,5 @@ module Inventory
    end
 
   end
-  
+
 end
