@@ -23,8 +23,11 @@ module WmsConfiguration
         configuration_header_data = '*'
       end
 
+      configuration_hash = []
       configuration_headers = GlobalConfiguration.select(configuration_header_data).where(filter_conditions)
-      configuration_hash = {configuration_header: configuration_headers}
+      configuration_headers.each do |configuration_header|
+          configuration_hash << {configuration_header: configuration_header}
+      end
       configuration_hash
     end
 

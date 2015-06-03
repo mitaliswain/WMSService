@@ -14,6 +14,22 @@ module Item
       @error = []
     end
 
+    def get_items(basic_parameters:nil, filter_conditions:nil, expand:nil)
+
+      if expand.nil?
+        #item_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]
+        item_header_data = '*'
+      else
+        item_header_data = '*'
+      end
+
+      item_headers = ItemMaster.select(item_header_data).where(filter_conditions)
+      item_hash = {item_header: item_headers}
+      item_hash
+    end
+
+
+
     def add_item_master(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash
       if valid_data?(input_obj) && valid_app_parameters?(input_obj)
