@@ -11,7 +11,7 @@ module Putaway
 
       def update_case_header
         case_header = CaseHeader.where(client: putaway[:client], case_id: putaway[:case_id]).first
-        case_header.location = putaway[:location]
+        case_header.location=  putaway[:location]
         case_header.record_status = 'Ready'
         case_header.save!
         case_header

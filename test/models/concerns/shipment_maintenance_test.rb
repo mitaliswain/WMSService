@@ -162,8 +162,8 @@ fixtures :asn_details
     asn = Shipment::ShipmentMaintenance.new  
     fields_to_update = { asn_type: 'invalid',  purchase_order_nbr: ' '}
     assert_equal(false, asn.valid_data?(fields_to_update), "validate data with incorrect multiple fields")
-    assert_equal(:purchase_order_nbr, asn.message[:errors][1][:field], "validate data with incorrect multiple fields")
-    assert_equal(:asn_type, asn.message[:errors][0][:field], "validate data with incorrect multiple fields")
+    assert_equal(:purchase_order_nbr, asn.message[:errors][0][:field], "validate data with incorrect multiple fields")
+    assert_equal(:asn_type, asn.message[:errors][1][:field], "validate data with incorrect multiple fields")
 
   end   
  

@@ -38,7 +38,6 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
     GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
     cs = CaseHeader.all
-    p cs.size
 
     case_id = Time.now.getutc.to_s
     # Check the valida shipment
@@ -59,7 +58,6 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
          }
 
     cs = CaseHeader.all
-    p cs.size
 
     assert_equal 201, status, 'message in service'
     message = JSON.parse(response.body)
@@ -149,6 +147,8 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
     update_old = {value: @configuration.Receiving_Type}
     GlobalConfiguration.set_configuration({value: 'SKU'}, @condition.merge({key: 'Receiving_Type'}))
 
+    item_inner_packs_before = ItemInnerPack.where(client: @client, item: @item)
+    p item_inner_packs_before.length
     # Check the valida shipment
     post "#{@url}receive",
 
@@ -171,7 +171,7 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
 
     assert_equal 'Shipment1 Received Successfully', message.message, "Shipment received successfully"
     item_inner_packs = ItemInnerPack.where(client: @client, item: @item)
-    assert_equal 1, item_inner_packs.length, "Received with existing innerpack"
+    assert_equal item_inner_packs_before.length + 1, item_inner_packs.length, "Received with existing innerpack"
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
@@ -281,7 +281,6 @@ class ShipmentReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
 
     post url, shipment: shipment_hash
     message = JSON.parse(response.body)
-    p message
     assert_equal 201, status, 'Receive shipment with serial number'
 
     serial = []

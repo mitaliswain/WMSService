@@ -14,7 +14,7 @@ module WmsConfiguration
       @error = []
     end
 
-    def get_configuration(basic_parameters:nil, filter_conditions:nil, expand:nil)
+    def get_configurations(basic_parameters:nil, filter_conditions:nil, expand:nil)
 
       if expand.nil?
         #configuration_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]

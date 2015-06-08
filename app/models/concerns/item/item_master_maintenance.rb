@@ -23,8 +23,12 @@ module Item
         item_header_data = '*'
       end
 
+      item_hash = []
       item_headers = ItemMaster.select(item_header_data).where(filter_conditions)
-      item_hash = {item_header: item_headers}
+      item_headers.each { |item_header|
+        item_inner_pack = ItemInnerPack.where(client: item_header[:client], warehouse: item_header[:warehouse], building: item_header[:building], channel: item_header[:channel], item: item_header[:item])
+        item_hash << {item_header: item_header, item_inner_pack: (item_inner_pack || [])}
+      }
       item_hash
     end
 

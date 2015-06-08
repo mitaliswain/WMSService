@@ -487,8 +487,9 @@ class ShipmentReceiveValidationIntegrationTest < ActionDispatch::IntegrationTest
     shipment_hash[:serial_nbr] << '2'
     post url, shipment: shipment_hash
     message = JSON.parse(response.body)
+    p message
     expected_message = 'Serial number already exists'
-    assert_equal expected_message, message.errors[0].message, 'Scan the next serial number'
+    assert_equal expected_message, message.errors[0].message, 'Serial number already exists'
     shipment_hash[:serial_nbr].delete_at(2)
 
     shipment_hash[:serial_nbr] << '3'

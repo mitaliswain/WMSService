@@ -80,7 +80,8 @@ module Shipment
         # case_detail.coveyable = item_master.coveyable
         case_header
         
-    end
+     end
+
     
     def update_case_detail(case_header)
       case_detail = CaseDetail.where(default_key)
@@ -184,12 +185,23 @@ module Shipment
     
      def update_innerpack_quantity
     
-        item_innerpacks = ItemInnerPack.where(client: self.shipment.client, item: self.shipment.item)
-        
-          item_innerpack = ItemInnerPack.create(client: self.shipment.client, 
-                               item: self.shipment.item, 
-                               innerpack_qty: self.shipment.innerpack_qty.to_i) unless innerpack_exists? item_innerpacks
-    
+        item_inner_packs = ItemInnerPack.where(default_key)
+
+        if ! innerpack_exists? item_inner_packs
+
+          item_master = ItemMaster.where(client: self.shipment.client).where(item: self.shipment.item).first
+          item_inner_pack = ItemInnerPack.new
+          item_inner_pack.client = item_master.client
+          item_inner_pack.warehouse = item_master.warehouse
+          item_inner_pack.building = item_master.building
+          item_inner_pack.item = item_master.item
+          item_inner_pack.innerpack_qty = self.shipment.innerpack_qty.to_i
+          item_inner_pack.innerpack_wgt = self.shipment.innerpack_qty.to_i * item_master.unit_wgt
+          item_inner_pack.innerpack_vol = self.shipment.innerpack_qty.to_i * item_master.unit_wgt
+          item_inner_pack.innerpack_len = self.shipment.innerpack_qty.to_i * item_master.unit_len
+
+          item_inner_pack.save!
+        end
         true  
 
      end

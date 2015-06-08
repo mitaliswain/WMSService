@@ -28,6 +28,10 @@ class CasePutawayProcessingIntegrationTest < ActionDispatch::IntegrationTest
     url = '/putaway/2014120401/putaway'
     post url,
          putaway: {
+             client: @client,
+             warehouse: @warehouse,
+             building: @building,
+             channel: @channel,
              case_id:'2014120401',
              location: 'Location1'
 
