@@ -144,7 +144,6 @@ module Shipment
                                .where(shipment_nbr: self.shipment.shipment_nbr, item: self.shipment.item)
 
         case
-
           when Case_receiving_enabled? &&
               is_received_quantity_not_matches_with_case?(@case_detail)
             validation_failed('422', :quantity, Message.get_message(self.shipment.client, 'RCV0014'))
@@ -154,9 +153,6 @@ module Shipment
           else
             validation_success(:quantity)
         end
-
-      else
-        false
       end
     end
 
@@ -177,9 +173,7 @@ module Shipment
     end
 
     def valid_serial_nbr?
-      if is_duplicate_serial_number?
-        return false
-      else
+      if ! is_duplicate_serial_number?
         if shipment[:serial_nbr].size < shipment[:quantity].to_i
           validation_failed('424', :serial_nbr, 'Scan the next serial number')
         else

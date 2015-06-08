@@ -7,17 +7,19 @@ class ItemMasterController < ApplicationController
   protect_from_forgery except: :index
   def index
     begin
-      render json: ItemMaster.where(params[:selection]).to_json
+      filter_conditions = params[:filter_conditions]
+      item_hash = Item::ItemMasterMaintenance.new.get_items(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+      render json: item_hash
     rescue ActiveRecord::StatementInvalid => e
-      invalid_request('selection','Invalid Selection Parameters' )
-      render json: @message.to_json, status: @message[:status]
+      render json: {error: 'Invalid Request Parameters'}.to_json, status: '500'
     end
-
   end
 
   def show
-    item = ItemMaster.find(params[:id])
-    render json: item.to_json
+    item = Item::ItemMasterMaintenance.new
+    filter_conditions = {id: params[:id]}
+    item_hash = (item.get_items(filter_conditions: filter_conditions).first )
+    render json: item_hash.to_json
   end
 
   def update
@@ -37,4 +39,12 @@ class ItemMasterController < ApplicationController
     item.fatal_error(e.message)
     render json: item.message.to_json, status: '500'
   end
+
+  def basic_parameters
+    basic_parameter = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
+    basic_parameter[:building] =  basic_parameter[:building].blank? ? nil : basic_parameter[:building]
+    basic_parameter[:channel] =  basic_parameter[:channel].blank? ? nil : basic_parameter[:channel]
+    basic_parameter
+  end
+
 end

@@ -38,8 +38,10 @@ Rails.application.routes.draw do
    end
   
    namespace :configuration do
-        get '', action: 'index'
-        put '/:id', action: 'update'
+     get '', action: 'index'
+     get '/:id', action: 'show'
+     put '/:id', action: 'update'
+     post '', action: 'create'
    end
 
     namespace :item_master do

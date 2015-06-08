@@ -3,11 +3,18 @@ class ConfigurationController < ApplicationController
   def index
     begin
       filter_conditions = params[:filter_conditions]
-      configuration_hash = WmsConfiguration::ConfigurationMaintenance.new.get_configuration(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+      configuration_hash = WmsConfiguration::ConfigurationMaintenance.new.get_configurations(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
       render json: configuration_hash
     rescue ActiveRecord::StatementInvalid => e
       render json: {error: 'Invalid Request Parameters'}.to_json, status: '500'
     end
+  end
+
+  def show
+    configuration = WmsConfiguration::ConfigurationMaintenance.new
+    filter_conditions = {id: params[:id]}
+    configuration_hash = (configuration.get_configurations(filter_conditions: filter_conditions).first )
+    render json: configuration_hash.to_json
   end
   
   def update
