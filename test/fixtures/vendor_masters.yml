@@ -1,0 +1,119 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  vendor_nbr: MyString
+  type: 
+  vendor_name: MyString
+  address1: MyString
+  address2: MyString
+  address3: MyString
+  city: MyString
+  state: MyString
+  zip: 1
+  contact: MyString
+  contact_phone: 1
+  contact_email: MyString
+  primary_factory: MyString
+  tolerance_pct: MyString
+  po_rcv_tolerance: 1
+  poline_rcv_tolerance: 1
+  shipment_tolerance: 1
+  override_tolerance: 1
+  vasn_tolerance_pct: 1
+  vasn_tolerance_pct: 1
+  vasn_line_rcv_tolerance: 1
+  vasn_shipment_tolerance: 1
+  vasn_override_tolerance: 1
+  qa_pct: 1
+  qa_group: MyString
+  qa_rule: MyString
+  rtv_contact: MyString
+  rtv_name: MyString
+  rtv_address1: MyString
+  rtv_address2: MyString
+  rtv_address3: MyString
+  rtv_city: MyString
+  rtv_state: MyString
+  rtv_country: MyString
+  return_asn_reqd: MyString
+  communication: MyString
+  rtv_email_address: MyString
+  auto_crt_rtv: MyString
+  carrier1: MyString
+  Carrier_service1: MyString
+  carrier2: MyString
+  service2: MyString
+  carrier3: MyString
+  service3: MyString
+  carrier4: MyString
+  service4: MyString
+  status: MyString
+  created_date: 2015-06-08 16:56:16
+  created_by: MyString
+  created_proc: MyString
+  update_date: 2015-06-08 16:56:16
+  updated_by: MyString
+  updated_proc: MyString
+
+two:
+  client: MyString
+  warehouse: MyString
+  channel: MyString
+  building: MyString
+  vendor_nbr: MyString
+  type: 
+  vendor_name: MyString
+  address1: MyString
+  address2: MyString
+  address3: MyString
+  city: MyString
+  state: MyString
+  zip: 1
+  contact: MyString
+  contact_phone: 1
+  contact_email: MyString
+  primary_factory: MyString
+  tolerance_pct: MyString
+  po_rcv_tolerance: 1
+  poline_rcv_tolerance: 1
+  shipment_tolerance: 1
+  override_tolerance: 1
+  vasn_tolerance_pct: 1
+  vasn_tolerance_pct: 1
+  vasn_line_rcv_tolerance: 1
+  vasn_shipment_tolerance: 1
+  vasn_override_tolerance: 1
+  qa_pct: 1
+  qa_group: MyString
+  qa_rule: MyString
+  rtv_contact: MyString
+  rtv_name: MyString
+  rtv_address1: MyString
+  rtv_address2: MyString
+  rtv_address3: MyString
+  rtv_city: MyString
+  rtv_state: MyString
+  rtv_country: MyString
+  return_asn_reqd: MyString
+  communication: MyString
+  rtv_email_address: MyString
+  auto_crt_rtv: MyString
+  carrier1: MyString
+  Carrier_service1: MyString
+  carrier2: MyString
+  service2: MyString
+  carrier3: MyString
+  service3: MyString
+  carrier4: MyString
+  service4: MyString
+  status: MyString
+  created_date: 2015-06-08 16:56:16
+  created_by: MyString
+  created_proc: MyString
+  update_date: 2015-06-08 16:56:16
+  updated_by: MyString
+  updated_proc: MyString
