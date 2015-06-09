@@ -1,5 +1,4 @@
-class ItemMasterController < ApplicationController
-
+class VendorMasterController < ApplicationController
   require 'utilities/utility'
 
   include Utility
@@ -8,8 +7,8 @@ class ItemMasterController < ApplicationController
   def index
     begin
       filter_conditions = params[:filter_conditions]
-      item_hash = Item::ItemMasterMaintenance.new.get_items(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
-      render json: item_hash
+      vendor_hash = Vendor::VendorMasterMaintenance.new.get_items(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+      render json: vendor_hash
     rescue ActiveRecord::StatementInvalid => e
       render json: {error: 'Invalid Request Parameters'}.to_json, status: '500'
     end
@@ -29,15 +28,15 @@ class ItemMasterController < ApplicationController
   rescue Exception => e
     item.fatal_error(e.message)
     render json: item.message.to_json, status: '500'
-    end
+  end
 
   def create
     item = Item::ItemMasterMaintenance.new
     message = item.add_item_master(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
-  #rescue Exception => e
-   # item.fatal_error(e.message)
-    #render json: item.message.to_json, status: '500'
+  rescue Exception => e
+    item.fatal_error(e.message)
+    render json: item.message.to_json, status: '500'
   end
 
   def basic_parameters
@@ -48,3 +47,4 @@ class ItemMasterController < ApplicationController
   end
 
 end
+
