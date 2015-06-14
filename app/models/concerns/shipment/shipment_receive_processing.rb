@@ -194,6 +194,7 @@ module Shipment
           item_inner_pack.client = item_master.client
           item_inner_pack.warehouse = item_master.warehouse
           item_inner_pack.building = item_master.building
+          item_inner_pack.channel = item_master.channel
           item_inner_pack.item = item_master.item
           item_inner_pack.innerpack_qty = self.shipment.innerpack_qty.to_i
           item_inner_pack.innerpack_wgt = self.shipment.innerpack_qty.to_i * item_master.unit_wgt

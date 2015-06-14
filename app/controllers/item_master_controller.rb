@@ -35,9 +35,9 @@ class ItemMasterController < ApplicationController
     item = Item::ItemMasterMaintenance.new
     message = item.add_item_master(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
-  #rescue Exception => e
-   # item.fatal_error(e.message)
-    #render json: item.message.to_json, status: '500'
+  rescue Exception => e
+    item.fatal_error(e.message)
+    render json: item.message.to_json, status: '500'
   end
 
   def basic_parameters
