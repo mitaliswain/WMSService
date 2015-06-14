@@ -27,7 +27,7 @@ class GlobalConfiguration < ActiveRecord::Base
 
   def self.set_configuration(update, condition)
     self.where(condition).where(enable: true).each do|configuration|
-        configuration.update_attributes(update) 
+        configuration.update_attributes(update)
     end
      
     self.get_configuration(condition)     
