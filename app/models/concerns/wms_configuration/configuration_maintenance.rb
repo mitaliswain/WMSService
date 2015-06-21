@@ -44,7 +44,11 @@ module WmsConfiguration
         end  
         message 
     end
-    
+
+    def set_configuration(app_parameters,filter_conditions, key ,fields_to_update)
+      GlobalConfiguration.set_configuration({value: fields_to_update[:value]}, app_parameters.merge(filter_conditions).merge(key:key))
+    end
+
     def valid_data?(input_obj)
       true
     end

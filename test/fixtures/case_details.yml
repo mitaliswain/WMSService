@@ -8,7 +8,7 @@ one:
   case_header_id: 1
   case_id: CASE1
   sequence: 1
-  item: 1234
+  item: 12345
   sku_attribute1: MyString
   sku_attribute2: MyString
   sku_attribute3: MyString

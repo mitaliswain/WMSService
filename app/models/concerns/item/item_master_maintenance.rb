@@ -63,7 +63,7 @@ module Item
     end
 
     def add_derived_data(item_master_hash)
-      basic_parameters = {client: asn_header.client, warehouse: asn_header.warehouse, channel: nil, building: nil}
+      basic_parameters = {client: item_master_hash.client, warehouse: item_master_hash.warehouse, channel: nil, building: nil}
       item_master_hash
     end
       

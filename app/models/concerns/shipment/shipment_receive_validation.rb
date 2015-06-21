@@ -96,7 +96,7 @@ module Shipment
           validation_failed('422', :case_id, Message.get_message(self.shipment.client, 'RCV0010', [self.shipment.case_id]))
 
         when Case_receiving_enabled? && !valid_case_receiving_item?
-          validation_failed('422', self.shipment.item, 'Item in case not valid')
+          validation_failed('422', :item, 'Item in case not valid')
 
         else
           validation_success(:case_id, get_additional_info_for_case(case_detail))
