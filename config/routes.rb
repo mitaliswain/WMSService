@@ -40,6 +40,7 @@ Rails.application.routes.draw do
    namespace :configuration do
      get '', action: 'index'
      get '/:id', action: 'show'
+     put '/update_key/:key', action: 'update_key'
      put '/:id', action: 'update'
      post '', action: 'create'
    end

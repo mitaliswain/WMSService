@@ -1,5 +1,6 @@
+require 'test_helper'
 
-class ShipmentReceiveValidationTest < ActiveSupport::TestCase
+class ShipmentReceiveValidationTest< ActiveSupport::TestCase
 
 
   # test "the truth" do

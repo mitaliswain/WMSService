@@ -294,9 +294,9 @@ class ShipmentReceiveValidationIntegrationTest < ActionDispatch::IntegrationTest
              item: @item
          }
     message = JSON.parse(response.body)
-    expected_message = {case_id: case_details(:one).case_id, item: case_details(:one).item, quantity: case_details(:one).quantity}
+    expected_message = {'case_id' => case_details(:one).case_id, 'item' => case_details(:one).item, 'quantity' => case_details(:one).quantity}
     #expected_message = 'Enter Case'
-    assert_equal expected_message, message.additional_info[0].symbolize_keys, "Case not Entered"
+    assert_equal expected_message, message['additional_info'][0], "Case not Entered"
   end
 
   def test_validate_item_not_in_itemmaster
@@ -487,9 +487,8 @@ class ShipmentReceiveValidationIntegrationTest < ActionDispatch::IntegrationTest
     shipment_hash[:serial_nbr] << '2'
     post url, shipment: shipment_hash
     message = JSON.parse(response.body)
-    p message
-    expected_message = 'Serial number already exists'
-    assert_equal expected_message, message.errors[0].message, 'Serial number already exists'
+    assert_equal 'Scan the next serial number', message.errors[0].message, 'Scan the next serial number'
+    assert_equal 'Serial number already exists', message.errors[1].message, 'Serial number already exists'
     shipment_hash[:serial_nbr].delete_at(2)
 
     shipment_hash[:serial_nbr] << '3'
@@ -529,8 +528,8 @@ class ShipmentReceiveValidationIntegrationTest < ActionDispatch::IntegrationTest
     url = '/shipment/serial_nbr/validate'
     post url, shipment: shipment_hash
     message = JSON.parse(response.body)
-    expected_message = 'Serial number already exists'
-    assert_equal expected_message, message.errors[0].message, 'Duplicate Serial Number'
+    assert_equal 'Scan the next serial number', message.errors[0].message, 'Scan the next serial number'
+    assert_equal 'Serial number already exists', message.errors[1].message, 'Serial number already exists'
 
   end
 

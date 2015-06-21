@@ -27,4 +27,41 @@ class ConfigurationMaintenanceTest < ActionDispatch::IntegrationTest
 
   end
 
+
+  test 'update configuration value just with key and value' do
+
+    url = '/configuration/update_key/Receiving_Type'
+    message = put(url,
+                  app_parameters:{
+                      client:'WM', warehouse: 'WH1', building: '', channel: ''
+                  },
+                  filter_condition:{
+                      module:'RECEIVING',
+                  },
+                  fields_to_update: {
+                      value: 'Case'
+                  })
+    configuration_updated = GlobalConfiguration.find(global_configurations(:one).id )
+    assert_equal 200, status, 'Updated shipment status'
+    assert_equal 'Case', configuration_updated.value, 'Updated configuration data'
+
+    #reverse the setup
+    url = '/configuration/update_key/Receiving_Type'
+    message = put(url,
+                  app_parameters:{
+                      client:'WM', warehouse: 'WH1', building: '', channel: ''
+                  },
+                  filter_condition:{
+                      module:'RECEIVING'
+                  },
+                  fields_to_update: {
+                      value: 'SKU'
+                  })
+    configuration_updated = GlobalConfiguration.find(global_configurations(:one).id )
+    assert_equal 200, status, 'Updated shipment status'
+    assert_equal 'SKU', configuration_updated.value, 'Updated configuration data'
+
+
+  end
+
 end 
