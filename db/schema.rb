@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608235616) do
+ActiveRecord::Schema.define(version: 20150624040029) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20150608235616) do
     t.integer  "verified_qty"
     t.integer  "cases_rcvd"
     t.integer  "cases_verified"
-    t.integer  "unit_cost"
-    t.integer  "landing_cost"
-    t.integer  "retail_price"
+    t.decimal  "unit_cost"
+    t.decimal  "landing_cost"
+    t.decimal  "retail_price"
     t.string   "uom"
     t.integer  "unit_wgt"
     t.string   "track_lotcontrol"
