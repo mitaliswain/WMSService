@@ -5,8 +5,7 @@ module Shipment
   include Utility
   include Response
   
-  module ShipmentMaintenanceHeader 
-       extend ActiveSupport::Concern
+  module ShipmentMaintenanceHeader
        
     class HeaderMaintenance
       attr_accessor :message, :error

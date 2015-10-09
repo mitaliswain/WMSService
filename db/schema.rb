@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624040029) do
+ActiveRecord::Schema.define(version: 20151004094305) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -853,6 +853,20 @@ ActiveRecord::Schema.define(version: 20150624040029) do
     t.datetime "update_date"
     t.string   "updated_user"
     t.string   "updated_prc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_masters", force: true do |t|
+    t.string   "client"
+    t.string   "user_id"
+    t.string   "password"
+    t.string   "user_name"
+    t.string   "preferred_warehouse"
+    t.string   "preferred_landing_screen"
+    t.string   "avatar_url"
+    t.string   "authorized_warehouse"
+    t.string   "authorized_action"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

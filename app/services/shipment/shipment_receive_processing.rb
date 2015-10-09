@@ -1,6 +1,5 @@
 module Shipment
   module ShipmentReceiveProcessing
-    extend ActiveSupport::Concern
   
     def receive_shipment
      

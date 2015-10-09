@@ -6,7 +6,6 @@ include Utility
 include Response
 
 module ShipmentMaintenanceDetail
-      extend ActiveSupport::Concern
 
    class DetailMaintenance
 

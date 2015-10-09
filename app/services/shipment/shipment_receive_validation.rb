@@ -1,7 +1,6 @@
 module Shipment
 
   module ShipmentReceiveValidation
-    extend ActiveSupport::Concern
 
 
     SKU_RECEIVING = 'SKU'

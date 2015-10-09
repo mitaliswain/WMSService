@@ -1,7 +1,6 @@
 module Putaway
 
   module CasePutawayValidation
-    extend ActiveSupport::Concern
 
     def is_valid_putaway?(to_validate)
       method ="valid_#{to_validate.to_s}?"
