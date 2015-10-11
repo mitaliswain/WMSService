@@ -1,5 +1,6 @@
 class ConfigurationController < ApplicationController
-  protect_from_forgery except: :index  
+  protect_from_forgery except: :index
+  before_action :authenticate_token!
   def index
     begin
       filter_conditions = params[:filter_conditions]

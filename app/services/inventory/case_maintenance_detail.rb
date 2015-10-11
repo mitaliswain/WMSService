@@ -6,9 +6,6 @@ module Inventory
   include Response
 
   module CaseMaintenanceDetail
-    extend ActiveSupport::Concern
-
-
 
     def update_case_detail(app_parameters, id, fields_to_update)
       input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash

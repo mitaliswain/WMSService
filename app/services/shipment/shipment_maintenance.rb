@@ -12,11 +12,27 @@ module Shipment
       @message = {}
       @error = []
     end
-	  
-	  def self.all(client, warehouse, channel=nil, building=nil) 
+
+    def add_shipment_header(app_parameters, fields_to_add)
+      message=HeaderMaintenance.new.add_shipment_header(app_parameters, fields_to_add)
+    end
+
+    def update_shipment_header(app_parameters,id, fields_to_add)
+      message=HeaderMaintenance.new.update_shipment_header(app_parameters, id, fields_to_add)
+    end
+
+    def add_shipment_detail(app_parameters, fields_to_add)
+      message=DetailMaintenance.new.add_shipment_detail(app_parameters, fields_to_add)
+    end
+
+    def update_shipment_detail(app_parameters, id, fields_to_add)
+      message=DetailMaintenance.new.update_shipment_detail(app_parameters, id, fields_to_add)
+    end
+
+	  def self.all(client, warehouse, channel=nil, building=nil)
 	      AsnHeader.where(client: client, warehouse: warehouse, channel: channel) 
 	  end
-	      
+
 	  def get_shipments(basic_parameters:nil, filter_conditions:nil, expand:nil)
 
 	      if expand.nil?

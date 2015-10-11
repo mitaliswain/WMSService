@@ -2,7 +2,6 @@ module Putaway
 
 
     module CasePutawayProcessing
-      extend ActiveSupport::Concern
 
       def case_putaway
         update_case_header

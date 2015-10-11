@@ -52,6 +52,18 @@ Rails.application.routes.draw do
       post '', action: 'create'
     end
 
+    namespace :user_master do
+      get '', action: 'index'
+      get '/:id', action: 'show'
+      put '/:id', action: 'update'
+      post '', action: 'create'
+      get '/:id', action: 'show'
+    end
+
+    namespace :authenticate do
+      post 'signin', action: 'sign_in'
+    end
+
     namespace :putaway do
       post ':case_id/putaway' , action: 'putaway'
       post ':to_validate/validate' , action: 'validate'

@@ -1,4 +1,5 @@
 module Response
+  extend ActiveSupport::Concern
 =begin
  message structure for error
   { status: '422' ,

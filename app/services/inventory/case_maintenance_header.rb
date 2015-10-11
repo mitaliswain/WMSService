@@ -5,8 +5,7 @@ module Inventory
   include Utility
   include Response
   
-  module CaseMaintenanceHeader 
-       extend ActiveSupport::Concern
+  module CaseMaintenanceHeader
        
        def update_case_header(app_parameters, id, fields_to_update)
          input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash

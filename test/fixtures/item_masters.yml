@@ -6,13 +6,13 @@ one:
   channel: 
   building: 
   item: 12345
-  sku_attribute1: MyString
-  sku_attribute2: MyString
-  sku_attribute3: MyString
-  sku_attribute4: MyString
-  sku_attribute5: MyString
-  sku_attribute6: MyString
-  sku_attribute7: MyString
+  sku_attribute1: att1
+  sku_attribute2: att2
+  sku_attribute3: att3
+  sku_attribute4: att4
+  sku_attribute5: att5
+  sku_attribute6: att6
+  sku_attribute7: att7
   sku_attribute8: MyString
   sku_attribute9: MyString
   sku_attribute10: MyString
@@ -36,22 +36,22 @@ one:
   sku_attribute28: MyString
   sku_attribute29: MyString
   sku_attribute30: MyString
-  concept: MyString
-  description: MyString
-  short_desc: MyString
-  barcode: MyString
-  unit_putaway_type: MyString
-  sku_location_type: MyString
-  case_putaway_type: MyString
+  concept: Con1
+  description: White T Shirt
+  short_desc: Wht T Shrt
+  barcode: 12345
+  unit_putaway_type: PUTAWY1
+  sku_location_type: SKULOCN1
+  case_putaway_type: CASELOCN1
   pallet_putaway_type: MyString
   suggested_zone: MyString
   suggested_act_zone: MyString
   active_locn_cnt_factor: MyString
   reserve_locn_cnt_factor: MyString
   wave_proc_type: MyString
-  uom: MyString
-  selling_uom: MyString
-  stocking_uom: MyString
+  uom: lb
+  selling_uom: lb
+  stocking_uom: lb
   track_lotcontrol: MyString
   track_serial_nbr: MyString
   track_coo: MyString
@@ -89,14 +89,14 @@ one:
   product_life_inshelf: 1
   ship_alone: MyString
   case_consume_pty: MyString
-  unit_len: 9.99
-  unit_hgt: 9.99
-  unit_wdt: 9.99
-  unit_wgt: 9.99
-  unit_vol: 9.99
-  cavity_len: 9.99
-  cavity_wdt: 9.99
-  cavity_hgtt: 9.99
+  unit_len: 1.99
+  unit_hgt: 2.99
+  unit_wdt: 3.99
+  unit_wgt: 4.99
+  unit_vol: 5.99
+  cavity_len: 6.99
+  cavity_wdt: 7.99
+  cavity_hgtt: 8.99
   maximum_nest: 9.99
   vendor_nbr: MyString
   inventory_type: MyString

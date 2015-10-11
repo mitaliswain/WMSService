@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: WM
+  user_id: U1
+  password: password
+  user_name: User 1
+  preferred_warehouse: MyString
+  preferred_landing_screen: MyString
+  avatar_url: MyString
+  authorized_warehouse: MyString
+  authorized_action: MyString
+
+two:
+  client: WM
+  user_id: U2
+  password: MyString
+  user_name: MyString
+  preferred_warehouse: MyString
+  preferred_landing_screen: MyString
+  avatar_url: MyString
+  authorized_warehouse: MyString
+  authorized_action: MyString
