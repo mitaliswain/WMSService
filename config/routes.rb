@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       get '/:id', action: 'show'
       put '/:id', action: 'update'
       post '', action: 'create'
+      get '/:id', action: 'show'
     end
 
     namespace :authenticate do

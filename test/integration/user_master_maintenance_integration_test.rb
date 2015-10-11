@@ -13,7 +13,7 @@ class UserMasterMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
     user_count = UserMaster.count
     get(@url)
 
-    assert_equal user_count, JSON.parse(response.body).count, 'Total items in ItemMaster'
+    assert_equal user_count, JSON.parse(response.body).count, 'Total users in ItemMaster'
 
   end
 

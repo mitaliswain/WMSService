@@ -5,13 +5,15 @@ class ItemMasterController < ApplicationController
   include Utility
 
   protect_from_forgery except: :index
+    before_action :authenticate_token!
   def index
     begin
       filter_conditions = params[:filter_conditions]
-      item_hash = Item::ItemMasterMaintenance.new.get_items(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
-      render json: item_hash
-    rescue ActiveRecord::StatementInvalid => e
-      render json: {error: 'Invalid Request Parameters'}.to_json, status: '500'
+      item = Item::ItemMasterMaintenance.new.get_items(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+      render json: item
+    rescue Exception => e
+      item.fatal_error(e.message)
+      render json: item.message.to_json, status: '500'
     end
   end
 
