@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ConfigurationMaintenanceTest < ActionDispatch::IntegrationTest
+class ConfigurationMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   fixtures :global_configurations
   def setup
     @url = '/configuration/' + global_configurations(:one).id.to_s

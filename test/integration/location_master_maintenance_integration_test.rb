@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LocationMasterMaintenanceTest < ActionDispatch::IntegrationTest
+class LocationMasterMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   fixtures :location_masters
   def setup
     @url = '/location_master/'

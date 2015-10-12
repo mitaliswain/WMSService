@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShipmentReceiveExtensionTest < ActionDispatch::IntegrationTest
+class ShipmentReceiveExtensionIntegrationTest < ActionDispatch::IntegrationTest
  
 fixtures :asn_details
 fixtures :asn_headers

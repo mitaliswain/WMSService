@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'json'
 
-class CasePallatizationTest < ActionDispatch::IntegrationTest
+class CasePallatizationIntegrationTest < ActionDispatch::IntegrationTest
 
 
 fixtures :case_headers

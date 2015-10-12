@@ -1,7 +1,7 @@
 require 'test_helper'
 require '././lib/utilities/json_web_token'
 
-class UserMasterMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
+class AuthenticateMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   fixtures :user_masters
 
   def setup
