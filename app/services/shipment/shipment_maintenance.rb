@@ -36,16 +36,16 @@ module Shipment
 	  def get_shipments(basic_parameters:nil, filter_conditions:nil, expand:nil)
 
 	      if expand.nil?
-	        #shipment_header_data = [:id, :shipment_nbr, :asn_type, :ship_via, :record_status]  
-	        #shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
-	        shipment_header_data = '*'
-	        shipment_detail_data = '*'
+	        shipment_header_data = [:id, :shipment_nbr, :unit_ordered, :units_rcvd, :purchase_order_nbr, :record_status]  
+	        shipment_detail_data = [:id, :item, :shipped_quantity, :received_qty, :record_status]  
+	        #shipment_header_data = '*'
+	        #shipment_detail_data = '*'
 	      else
 	        shipment_header_data = '*'
 	        shipment_detail_data = '*'
 	      end
 
-	      shipment_headers = AsnHeader.select(shipment_header_data).where(basic_parameters).where(filter_conditions)
+	      shipment_headers = AsnHeader.select(shipment_header_data).where(basic_parameters).where(filter_conditions).order(:id)
 	      shipment_hash = []
 	      shipment_headers.each do |shipment_header|
 	        shipment_details = AsnDetail.select(shipment_detail_data).where(asn_header_id: shipment_header.id)    

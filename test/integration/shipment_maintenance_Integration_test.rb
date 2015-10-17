@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShipmentReceiveIntegrationTest < ActionDispatch::IntegrationTest
+class ShipmentMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
  
 fixtures :asn_details
 fixtures :asn_headers
@@ -10,6 +10,18 @@ fixtures :location_masters
 fixtures :item_masters
 fixtures :global_configurations
 fixtures :item_inner_packs
+
+  def setup
+     token_message = post("/authenticate/signin",
+                 user_details: {
+                     client: 'WM',
+                     user_id: 'U1',
+                     password: 'password'
+                 })
+                 p 'token'
+                 p token_message
+    @token = JSON.parse(response.body)["additional_info"][0]["token"]
+  end
 
 
   def test_the_add_shipment_header
@@ -21,7 +33,8 @@ fixtures :item_inner_packs
            },
            fields_to_update: {
                shipment_nbr: 'Shipment20'
-           } )
+           }, 
+           authorization: @token )
       shipment_header = AsnHeader.find_by_shipment_nbr('Shipment20')
       assert_not_nil shipment_header, 'added shipment header'
 
@@ -33,7 +46,8 @@ fixtures :item_inner_packs
            },
            fields_to_update: {
                shipment_nbr: 'Shipment20'
-           } )
+           },
+           authorization: @token  )
       assert_equal 'Validation failed: Shipment nbr has already been taken', JSON.parse(response.body)['message'], 'added shipment header'
 
   end
@@ -47,7 +61,8 @@ fixtures :item_inner_packs
                    },
                    fields_to_update: {
                        door_door: shipment.door_door + 'x'
-                   })
+                   },
+                   authorization: @token )
     shipment_updated = AsnHeader.where(shipment_nbr: asn_headers(:two).shipment_nbr).first
     assert_equal 201, status, 'Updated shipment status'
     assert_equal shipment.door_door + 'x', shipment_updated.door_door, 'Updated shipment data'
@@ -68,7 +83,8 @@ def test_the_add_shipment_detail
            item: item_masters(:one).item,
            shipped_quantity: 10,
            received_qty: 0
-       } )
+       },
+       authorization: @token  )
   number_of_shipment_detail_after_test = AsnDetail.where(shipment_nbr: asn_headers(:two).shipment_nbr).size
   assert_equal(number_of_shipment_detail_before_test + 1, number_of_shipment_detail_after_test, 'added shipment detail')
 end

@@ -1,7 +1,7 @@
 require 'test_helper'
-require '././lib/utilities/json_web_token'
 
 class JsonWebTokenTest < ActiveSupport::TestCase
+include JsonWebToken
 
   test "encode" do
 
@@ -11,8 +11,8 @@ class JsonWebTokenTest < ActiveSupport::TestCase
         password: 'Password'
     }
 
-    token = JsonWebToken.encode(payload)
-    decoded = JsonWebToken.decode(token)
+    token = JsonWebToken.new.encode(payload)
+    decoded = JsonWebToken.new.decode(token)
 
 
     assert_equal(payload[:user_name], decoded["user_name"], "Decoded")
@@ -27,9 +27,9 @@ class JsonWebTokenTest < ActiveSupport::TestCase
         password: 'Password'
     }
 
-    token = JsonWebToken.encode(payload)
+    token = JsonWebToken.new.encode(payload)
     sleep 3
-    decoded = JsonWebToken.decode(token)
+    decoded = JsonWebToken.new.decode(token)
 
 
     p decoded

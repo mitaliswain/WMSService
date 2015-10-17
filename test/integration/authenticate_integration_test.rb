@@ -1,8 +1,8 @@
 require 'test_helper'
-require '././lib/utilities/json_web_token'
 
 class AuthenticateMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   fixtures :user_masters
+  include JsonWebToken
 
   def setup
     @url = '/authenticate/'
@@ -19,7 +19,7 @@ class AuthenticateMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
                       password: 'password'
                   })
 
-    payload = JsonWebToken.decode(JSON.parse(response.body)["additional_info"][0]["token"])
+    payload = JsonWebToken.new.decode(JSON.parse(response.body)["additional_info"][0]["token"])
     assert_equal(payload["user_id"] , 'U1', "Same user id")
 
   end

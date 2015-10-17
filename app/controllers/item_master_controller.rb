@@ -18,10 +18,13 @@ class ItemMasterController < ApplicationController
   end
 
   def show
-    item = Item::ItemMasterMaintenance.new
+    
     filter_conditions = {id: params[:id]}
-    item_hash = (item.get_items(filter_conditions: filter_conditions).first )
-    render json: item_hash.to_json
+    item= Item::ItemMasterMaintenance.new.get_items(filter_conditions: filter_conditions).first 
+    render json: item.to_json
+    rescue Exception => e
+      item.fatal_error(e.message)
+      render json: item.message.to_json, status: '500'
   end
 
   def update

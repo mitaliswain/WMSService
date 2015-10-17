@@ -13,6 +13,22 @@ module Location
       @message = {}
       @error = []
     end
+    
+    def get_locations(basic_parameters:nil, filter_conditions:nil, expand:nil)
+
+      if expand.nil?
+        locaiton_header_data = '*'
+      else
+        location_header_data = '*'
+      end
+
+      location_hash = []
+      location_headers = LocationMaster.select(location_header_data).where(filter_conditions)
+      location_headers.each { |location_header|
+        location_hash << {location_header: location_header}
+      }
+      location_hash
+    end
 
     def add_location_master(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash

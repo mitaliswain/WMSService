@@ -1,10 +1,15 @@
 class ShipmentController < ApplicationController
 
   protect_from_forgery except: :index
+  before_action :authenticate_token!, :except => [:validate,:receive]
+  
   def index
      filter_conditions = params[:filter_conditions]
      shipment_hash = Shipment::ShipmentMaintenance.new.get_shipments(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
      render json: shipment_hash
+     rescue Exception => e
+       shipment_hash.fatal_error(e.message)
+       render json: shipment_hash.message.to_json, status: '500'
   end
 
   def show
