@@ -18,9 +18,13 @@ class LocationMasterController < ApplicationController
     
   end
 
-  def show
-   location = LocationMaster.find(params[:id])
+  def show   
+    filter_conditions = {id: params[:id]}
+    location= Location::LocationMasterMaintenance.new.get_locations(filter_conditions: filter_conditions).first 
     render json: location.to_json
+    rescue Exception => e
+      location.fatal_error(e.message)
+      render json: location.message.to_json, status: '500'
   end
 
   def update

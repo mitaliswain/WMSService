@@ -36,9 +36,10 @@ module Response
    false  
  end 
 
- def resource_updated_successfully(resource)
+ def resource_updated_successfully(resource, resource_link=nil)
    @message = {status:  '201',
     message: "#{resource} Updated Successfully",
+    content: get_content(resource_link)
      }
    true  
  end 

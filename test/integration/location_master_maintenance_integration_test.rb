@@ -50,7 +50,6 @@ class LocationMasterMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
               bay: 'B1',
               level: 'L1',
               position: 'P1',
-              barcode: 'A1Z1Al1B1L1P1',
               climate_control: 'Freezer',
               minimum_temp: 20,
               maximum_temp: 40,

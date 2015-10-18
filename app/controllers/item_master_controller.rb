@@ -3,9 +3,11 @@ class ItemMasterController < ApplicationController
   require 'utilities/utility'
 
   include Utility
+  include Parameters
 
   protect_from_forgery except: :index
     before_action :authenticate_token!
+    
   def index
     begin
       filter_conditions = params[:filter_conditions]
@@ -17,8 +19,7 @@ class ItemMasterController < ApplicationController
     end
   end
 
-  def show
-    
+  def show   
     filter_conditions = {id: params[:id]}
     item= Item::ItemMasterMaintenance.new.get_items(filter_conditions: filter_conditions).first 
     render json: item.to_json
@@ -43,13 +44,6 @@ class ItemMasterController < ApplicationController
   rescue Exception => e
     item.fatal_error(e.message)
     render json: item.message.to_json, status: '500'
-  end
-
-  def basic_parameters
-    basic_parameter = {client: params[:client], warehouse: params[:warehouse], channel: params[:channel], building: params[:building]}
-    basic_parameter[:building] =  basic_parameter[:building].blank? ? nil : basic_parameter[:building]
-    basic_parameter[:channel] =  basic_parameter[:channel].blank? ? nil : basic_parameter[:channel]
-    basic_parameter
   end
 
 end

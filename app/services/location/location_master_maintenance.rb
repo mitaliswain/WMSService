@@ -17,7 +17,7 @@ module Location
     def get_locations(basic_parameters:nil, filter_conditions:nil, expand:nil)
 
       if expand.nil?
-        locaiton_header_data = '*'
+        location_header_data = '*'
       else
         location_header_data = '*'
       end
@@ -49,7 +49,7 @@ module Location
           location.attributes =  {field => data}
         end
         location.save!
-        resource_updated_successfully("Location #{id}")
+        resource_updated_successfully("Location #{id}", "/location_master/#{location.id}")
       end
       message
     end
