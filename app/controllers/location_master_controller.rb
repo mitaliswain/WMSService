@@ -1,9 +1,11 @@
-class LocationMasterController < ApplicationController
-  require 'utilities/utility'
-  
+require 'utilities/response'
+require 'utilities/utility'
 
+class LocationMasterController < ApplicationController
+  
   include Utility
   include Parameters
+  include Response
 
   protect_from_forgery except: :index
   def index

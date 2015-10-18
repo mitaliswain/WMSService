@@ -43,6 +43,7 @@ Rails.application.routes.draw do
      put '/update_key/:key', action: 'update_key'
      put '/:id', action: 'update'
      post '', action: 'create'
+     post '/bulk_create', action: 'bulk_create'
    end
 
     namespace :item_master do

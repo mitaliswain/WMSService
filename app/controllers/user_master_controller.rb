@@ -1,8 +1,11 @@
+require 'utilities/response'
+require 'utilities/utility'
+
 class UserMasterController < ApplicationController
 
-  require 'utilities/utility'
-
   include Utility
+  include Parameters
+  include Response
 
   protect_from_forgery except: :index
   def index

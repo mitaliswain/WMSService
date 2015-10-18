@@ -1,6 +1,14 @@
+require 'utilities/response'
+require 'utilities/utility'
+  
 class CaseController < ApplicationController
   
   protect_from_forgery except: :index
+    
+  include Utility
+  include Parameters
+  include Response
+    
   def index
      filter_conditions = params[:filter_conditions]
      case_hash = Inventory::CaseMaintenance.new.get_cases(basic_parameters, filter_conditions, params[:expand])
@@ -14,11 +22,7 @@ class CaseController < ApplicationController
     render json: case_hash.to_json
   end
   
-  def basic_parameters
-    #{client: params[:app_parameters][:client], warehouse: params[:app_parameters][:warehouse], channel: params[:app_parameters][:channel], building: params[:app_parameters][:building]}
-    {client:'WM', warehouse: 'WH1', building: '', channel: ''}
-       
-  end
+
   def update_header
     case_obj = Inventory::CaseMaintenance.new
     message = case_obj.update_case_header(params[:app_parameters], params[:id], params[:fields_to_update])

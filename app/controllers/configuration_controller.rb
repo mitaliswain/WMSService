@@ -1,6 +1,16 @@
+require 'utilities/response'
+require 'utilities/utility'
+
 class ConfigurationController < ApplicationController
+  
+  include Utility
+  include Parameters
+  include Response
+  
   protect_from_forgery except: :index
   before_action :authenticate_token!
+  
+  
   def index
     begin
       filter_conditions = params[:filter_conditions]
@@ -18,6 +28,24 @@ class ConfigurationController < ApplicationController
     render json: configuration_hash.to_json
   end
   
+  def create
+    configuration = WmsConfiguration::ConfigurationMaintenance.new
+    message = configuration.add_configuration(params[:app_parameters], params[:fields_to_update])
+    render json: message.to_json, status: message[:status]
+  rescue Exception => e
+    configuration.fatal_error(e.message)
+    render json: configuration.message.to_json, status: '500'
+  end
+
+  def bulk_create
+    configuration = WmsConfiguration::ConfigurationMaintenance.new
+    message = configuration.bulk_add_of_configuration(params[:app_parameters], params[:configuration_headers])
+    render json: message.to_json, status: message[:status]
+  rescue Exception => e
+    configuration.fatal_error(e.message)
+    render json: configuration.message.to_json, status: '500'
+  end
+
   def update
     configuration = WmsConfiguration::ConfigurationMaintenance.new
     message = configuration.update_configuration(params[:app_parameters], params[:id], params[:fields_to_update])

@@ -31,6 +31,26 @@ module WmsConfiguration
       configuration_hash
     end
 
+    def add_configuration(app_parameters, fields_to_add)
+      input_obj = app_parameters.merge(fields_to_add).to_hash
+      if valid_data?(input_obj) && valid_app_parameters?(input_obj)
+        configuration_hash = GlobalConfiguration.new(input_obj)
+        configuration_hash = add_derived_data(configuration_hash.clone)
+        configuration_hash.save!
+        resource_added_successfully("Item #{configuration_hash.id}", "/item_master/#{configuration_hash.id}")
+      end
+      message
+    end
+    
+
+    def bulk_add_of_configuration(app_parameters, configuration_headers)
+       message = []
+       configuration_headers.each do |configuration|
+         messages << add_configuration(app_parameters, configuration.configuration_header)
+       end
+       messages
+    end
+    
 
     def update_configuration(app_parameters, id, fields_to_update)
        input_obj = app_parameters.merge(fields_to_update).merge(id: id).to_hash
@@ -51,6 +71,11 @@ module WmsConfiguration
 
     def valid_data?(input_obj)
       true
+    end
+    
+    def add_derived_data(item_master_hash)
+      basic_parameters = {client: item_master_hash.client, warehouse: item_master_hash.warehouse, channel: nil, building: nil}
+      item_master_hash
     end
       
   end
