@@ -37,18 +37,22 @@ module WmsConfiguration
         configuration_hash = GlobalConfiguration.new(input_obj)
         configuration_hash = add_derived_data(configuration_hash.clone)
         configuration_hash.save!
-        resource_added_successfully("Item #{configuration_hash.id}", "/item_master/#{configuration_hash.id}")
+        resource_added_successfully("configuration #{configuration_hash.id}", "/configuration/#{configuration_hash.id}")
       end
       message
     end
     
 
     def bulk_add_of_configuration(app_parameters, configuration_headers)
-       message = []
+       messages = []
+       status = '201'
        configuration_headers.each do |configuration|
-         messages << add_configuration(app_parameters, configuration.configuration_header)
+         response = add_configuration(app_parameters, configuration["configuration_header"])
+         messages << response
+         status = '202' if response[:status] != '201' 
        end
-       messages
+       status == '201' ? resource_added_successfully("Configuration", messages)   : operation_partial_successful("Configuration", messages) 
+       message
     end
     
 
@@ -69,9 +73,22 @@ module WmsConfiguration
       GlobalConfiguration.set_configuration({value: fields_to_update[:value]}, app_parameters.merge(filter_conditions).merge(key:key))
     end
 
-    def valid_data?(input_obj)
-      true
-    end
+def valid_data?(fields_to_update)
+          is_valid = true
+          fields_to_update.each do |field, value|
+              method ="valid_#{field.to_s}?"
+              is_valid = (respond_to?(method) ? send(method, fields_to_update) : true)  && is_valid
+          end
+          is_valid
+        end
+
+        def valid_warehouse?(fields_to_update)
+          if fields_to_update.warehouse.present?
+             true
+          else
+             validation_failed('422', :warehouse, 'Invalid Warehouse')
+          end
+        end
     
     def add_derived_data(item_master_hash)
       basic_parameters = {client: item_master_hash.client, warehouse: item_master_hash.warehouse, channel: nil, building: nil}

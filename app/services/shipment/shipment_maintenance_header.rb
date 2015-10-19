@@ -50,17 +50,12 @@ module Shipment
           is_valid = true
           fields_to_update.each do |field, value|
               method ="valid_#{field.to_s}?"
-              if (method == "valid_asn_type?")
-                p method
-                p respond_to?(method)
-              end
               is_valid = (respond_to?(method) ? send(method, fields_to_update) : true)  && is_valid
           end
           is_valid
         end
 
         def valid_asn_type?(fields_to_update)
-          p fields_to_update
           valid_asn_type=['PO', 'Inbound', 'Warehouse Transfer']
           if valid_asn_type.include? fields_to_update.asn_type
              true

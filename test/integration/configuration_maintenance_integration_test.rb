@@ -119,13 +119,10 @@ class ConfigurationMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   end
 
  test 'bulk add of configuration' do
-
+    count = GlobalConfiguration.all.count
     url = '/configuration'
-    message = post("#{url}/bulk_create",
-                  app_parameters:{
-                      client:'WM', warehouse: 'WH1', building: '', channel: ''
-                  },
-                  configuration_headers: [{
+    configuration_headers = 
+               [{"configuration_header" => {
                   "client"=> "WM",
                   "warehouse"=> "WH1",
                   "channel"=> nil,
@@ -153,9 +150,9 @@ class ConfigurationMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
                   "attribute8"=> "MyString",
                   "attribute9"=> "MyString",
                   "attribute10"=> "MyString",
-                  "enable"=> true
+                  "enable"=> true}
               },
-              
+                 {"configuration_header" =>
                  { "client"=> "WM",
                   "warehouse"=> "WH1",
                   "channel"=> nil,
@@ -183,9 +180,20 @@ class ConfigurationMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
                   "attribute8"=> "MyString",
                   "attribute9"=> "MyString",
                   "attribute10"=> "MyString",
-                  "enable"=> true}],
-                  authorization: @token)
-    configuration_updated = GlobalConfiguration.find(global_configurations(:one).id )
+                  "enable"=> true}
+                  }
+                  ]
+                  
+                  p configuration_headers
+    
+    message = post("#{url}/bulk_create",
+                  app_parameters:{
+                      client:'WM', warehouse: 'WH1', building: '', channel: ''
+                  },
+                  configuration_headers: [configuration_headers],
+                  authorization: @token)            
+    new_count_after_bulk_add = GlobalConfiguration.all.count
+    assert_equal new_count_after_bulk_add, count + 2, 'Added configuration status'  
     assert_equal 201, status, 'Added configuration status'
 
   end

@@ -36,6 +36,14 @@ module Response
    false  
  end 
 
+ def operation_partial_successful(resource, resource_link)
+   @message = {status:  '202',
+    message: "There are few errors in the operation, check the contents",
+    content: get_content(resource_link)
+     }
+   false  
+ end 
+
  def resource_updated_successfully(resource, resource_link=nil)
    @message = {status:  '201',
     message: "#{resource} Updated Successfully",
