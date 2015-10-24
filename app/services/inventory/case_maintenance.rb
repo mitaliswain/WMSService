@@ -11,7 +11,8 @@ module Inventory
       @message = {}
       @error = []
     end
-     def get_cases(basic_parameters, filter_conditions, expand=nil)
+    
+     def get_cases(basic_parameters:nil, filter_conditions:nil, expand:nil)
     
         if expand.nil?
           #case_header_data = [:id, :case_id, :quantity, :record_status]  
@@ -22,9 +23,6 @@ module Inventory
           case_header_data = '*'
           case_detail_data = '*'
         end
-        
-        basic_parameters[:building] =  basic_parameters[:building].blank? ? nil : basic_parameters[:building]
-        basic_parameters[:channel] =  basic_parameters[:channel].blank? ? nil : basic_parameters[:channel] 
           
         case_headers = CaseHeader.select(case_header_data).where(basic_parameters).where(filter_conditions).order(:id)
         case_hash = []

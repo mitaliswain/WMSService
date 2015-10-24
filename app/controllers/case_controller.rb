@@ -11,14 +11,14 @@ class CaseController < ApplicationController
     
   def index
      filter_conditions = params[:filter_conditions]
-     case_hash = Inventory::CaseMaintenance.new.get_cases(basic_parameters, filter_conditions, params[:expand])
+     case_hash = Inventory::CaseMaintenance.new.get_cases(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
      render json: case_hash.to_json, status: '200'
   end
   
   def show
     case_obj = Inventory::CaseMaintenance.new
     filter_conditions = {id: params[:id]}
-    case_hash = (case_obj.get_cases(basic_parameters, filter_conditions, true)).first
+    case_hash = (case_obj.get_cases(filter_conditions: filter_conditions).first )
     render json: case_hash.to_json
   end
   
