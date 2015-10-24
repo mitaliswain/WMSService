@@ -1,13 +1,11 @@
 class AddLocationToCaseHeader < ActiveRecord::Migration
 
-    def up
-      add_column :case_headers, :location, :string
-      add_column :case_headers, :previous_location, :string
-    end
-
-    def down
-      remove_column :case_headers, :location, :string
-      remove_column :case_headers, :previous_location, :string
-    end
+      t.string :status
+      t.datetime :created_date
+      t.string :created_by
+      t.string :created_proc
+      t.datetime :update_date
+      t.string :updated_by
+      t.string :updated_proc
 
 end
