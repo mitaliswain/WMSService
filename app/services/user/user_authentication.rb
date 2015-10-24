@@ -10,7 +10,7 @@ module User
     
   def sign_in(client, user_id, password)
    
-    user = UserMaster.where(client: client).where(user_id: user_id).where(password: password).first
+    user = UserMaster.where(user_id: user_id).where(password: password).first
 
     if !user.nil?
       user_payload = {client: user.client, user_id: user.user_id, user_name: user.user_name,
