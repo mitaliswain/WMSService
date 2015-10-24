@@ -22,7 +22,7 @@ class ShipmentController < ApplicationController
   def show
     shipment = Shipment::ShipmentMaintenance.new
     filter_conditions = {id: params[:id]}
-    shipment_hash = (shipment.get_shipments(filter_conditions: filter_conditions).first )
+    shipment_hash = (shipment.get_shipments(filter_conditions: filter_conditions, expand: params[:expand]).first )
     render json: shipment_hash.to_json
   end
 
