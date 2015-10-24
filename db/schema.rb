@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024081621) do
+ActiveRecord::Schema.define(version: 20151024194652) do
 
   create_table "asn_details", force: true do |t|
     t.string   "client"
@@ -290,7 +290,6 @@ ActiveRecord::Schema.define(version: 20151024081621) do
     t.string   "pallet_id"
     t.string   "status"
     t.string   "inventory_type"
-    t.string   "Location_type"
     t.string   "previous_locn_type"
     t.integer  "quantity"
     t.integer  "allocated_qty"
@@ -388,6 +387,7 @@ ActiveRecord::Schema.define(version: 20151024081621) do
     t.string   "to_building"
     t.string   "location"
     t.string   "previous_location"
+    t.string   "location_type"
   end
 
   create_table "global_configurations", force: true do |t|

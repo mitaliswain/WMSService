@@ -1,5 +1,12 @@
+require 'utilities/utility'
+require 'utilities/response'
+
+include Utility
+include Response
+
 class LocationMaster < ActiveRecord::Base
   validates_uniqueness_of :position, scope: [:client, :warehouse, :channel, :building, :area, :zone, :aisle, :bay, :level]
+  before_validation :convert_blank_to_null_for_building_and_channel
   
   before_save :default_barcode
   

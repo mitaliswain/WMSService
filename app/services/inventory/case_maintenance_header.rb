@@ -67,7 +67,7 @@ module Inventory
      if location
        true
      else
-       validation_failed('422', :shipment_nbr, 'Invalid Location')
+       validation_failed('422', location, 'Invalid Location')
      end
    end
 

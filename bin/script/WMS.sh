@@ -20,4 +20,5 @@
 #rails g migration ChangeAsnDetailColumnType
 
 #rails g model user_master client:string user_id:string password:string user_name:string preferred_warehouse:string preferred_landing_screen:string avatar_url:string authorized_warehouse:string authorized_action:string
-rails g migration AddTrackingToUserMaster
+#rails g migration AddTrackingToUserMaster
+rails g migration ChangeSpellingForLocationTypeToCaseHeader
