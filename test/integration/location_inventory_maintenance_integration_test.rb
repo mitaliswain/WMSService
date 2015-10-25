@@ -3,7 +3,7 @@ require 'test_helper'
 class LocationInventoryMaintenanceIntegrationTest < ActionDispatch::IntegrationTest
   fixtures :location_inventories
   def setup
-    @url = '/location_inventory/'
+    @url = '/location_inventory'
     @client = 'WM'
     @warehouse = 'WH1'
     @building = nil

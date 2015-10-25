@@ -10,6 +10,7 @@ class LocationInventoryController < ApplicationController
   protect_from_forgery except: :index
   def index
     begin
+
       filter_conditions = params[:filter_conditions]
       location_inventory = Inventory::LocationInventoryMaintenance.new.get_location_inventory(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
       render json: location_inventory
@@ -20,9 +21,9 @@ class LocationInventoryController < ApplicationController
     
   end
 
-  def show   
+  def show
     filter_conditions = {id: params[:id]}
-    location= Location::LocationMasterMaintenance.new.get_locations(filter_conditions: filter_conditions).first 
+    location= Location::LocationMasterMaintenance.new.get_locations(filter_conditions: filter_conditions).first
     render json: location.to_json
     rescue Exception => e
       location.fatal_error(e.message)

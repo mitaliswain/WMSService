@@ -25,7 +25,7 @@ module Inventory
       location_inventory_hash = []
       location_inventories = LocationInventory.select(location_inventory_data).where(filter_conditions)
       location_inventories.each { |location_inventory|
-        location_inventories << {location_inventory: location_inventory}
+        location_inventory_hash << {location_inventory: location_inventory}
       }
       location_inventory_hash
     end
