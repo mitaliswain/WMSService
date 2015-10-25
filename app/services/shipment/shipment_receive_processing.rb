@@ -62,7 +62,7 @@ module Shipment
         case_header.on_hold = 'Yes'
         case_header.hold_code = 'Putaway Required'
         if location
-          case_header.Location_type = location.location_type
+          case_header.location_type = location.location_type
           case_header.location = location.barcode
         end
           
