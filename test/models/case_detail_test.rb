@@ -50,7 +50,7 @@ class CaseDetailTest < ActiveSupport::TestCase
     case_detail.save!
 
     location_inventory = LocationInventory.where(barcode: 'Location1', item: '12345').first
-    assert_equal(location_inventory.quantity, case_detail.quantity , 'Location Inventory updated')
+    assert_equal(8, location_inventory.quantity, 'Location Inventory updated')
 
   end
 
