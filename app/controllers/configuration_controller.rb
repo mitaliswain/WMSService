@@ -39,7 +39,6 @@ class ConfigurationController < ApplicationController
 
   def bulk_create
     configuration = WmsConfiguration::ConfigurationMaintenance.new
-    p params[:configuration_headers]
     message = configuration.bulk_add_of_configuration(params[:app_parameters], params[:configuration_headers])
     render json: message.to_json, status: message[:status]
   rescue Exception => e

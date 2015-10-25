@@ -77,6 +77,14 @@ Rails.application.routes.draw do
       post '', action: 'create'
 
     end
+    
+ namespace :location_inventory do
+      get '', action: 'index'
+      get '/:id', action: 'show'
+      put '/:id', action: 'update'
+      post '', action: 'create'
+
+    end
 
     namespace :location_type do
       get '', action: 'index'

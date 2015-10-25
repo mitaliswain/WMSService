@@ -37,7 +37,6 @@ module User
     def add_user_master(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash
       if valid_data?(input_obj)
-        p input_obj
         user_master_hash = UserMaster.new(input_obj)
         user_master_hash = add_derived_data(user_master_hash.clone)
         user_master_hash.save!
