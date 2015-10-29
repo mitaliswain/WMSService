@@ -4,7 +4,7 @@ require 'utilities/utility'
 class ShipmentController < ApplicationController
 
   protect_from_forgery except: :index
-  before_action :authenticate_token!, :except => [:validate,:receive]
+  before_action :authenticate_token!, :except => [:index, :show, :validate,:receive]
   
   include Utility
   include Parameters
