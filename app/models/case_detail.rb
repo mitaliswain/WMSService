@@ -15,7 +15,7 @@ class CaseDetail < ActiveRecord::Base
   def update_location_inventory
 
     case_header = CaseHeader.find(self.case_header_id)
-    if case_header && case_header.status in       
+    if case_header
         LocationInventory.update_location_inventory(self.client, self.warehouse, self.building, self.channel, nil, case_header.location, self.item, ( self.quantity - self.quantity_was.to_i))
     end
 
