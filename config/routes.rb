@@ -1,10 +1,10 @@
-Rails.application.routes.draw do 
-  
+Rails.application.routes.draw do
 
-    
+
+    #match 'shipment', to: 'shipment', via: [:options]
     namespace :shipment do
-        get '' ,  action: 'index'
-        get  ':id', action: 'show' 
+        match '' ,  action: 'index' , via: [:option, :get]
+        match  ':id', action: 'show', via: [:option, :get]
         get  ':id/detail/:detail_id', action: 'show_detail'
         
         post 'add_detail', action: 'add_detail'
