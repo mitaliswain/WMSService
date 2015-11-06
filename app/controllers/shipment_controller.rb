@@ -1,10 +1,10 @@
 require 'utilities/response'
 require 'utilities/utility'
 
-class ShipmentController < BaseController
+class ShipmentController < ApplicationController
 
   protect_from_forgery except: :index
-  before_action :authenticate_token!, :except => [:index, :validate,:receive]
+  before_action :authenticate_token!, :except => [:validate,:receive]
   
   include Utility
   include Parameters
