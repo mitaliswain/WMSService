@@ -54,4 +54,7 @@ class CaseDetailTest < ActiveSupport::TestCase
 
   end
 
+  test "should add the quantity "
+
+
 end

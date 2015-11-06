@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_token!
-    token = request.headers['authorization'] || params[:authorization]
+    token = request.headers['Authorization'] || params[:Authorization]
     decode = JsonWebToken::JsonWebToken.new.decode(token)
   rescue Exception => e
       render json: invalid_token, status: '403'

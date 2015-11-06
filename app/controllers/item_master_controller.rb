@@ -8,7 +8,7 @@ class ItemMasterController < ApplicationController
   include Response
 
   protect_from_forgery except: :index
-    before_action :authenticate_token!
+    #before_action :authenticate_token!
     
   def index
     begin
