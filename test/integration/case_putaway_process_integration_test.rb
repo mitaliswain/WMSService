@@ -40,6 +40,8 @@ class CasePutawayProcessingIntegrationTest < ActionDispatch::IntegrationTest
     expected_message = 'Validation Successful'
     assert_equal  '2014120401 putaway done successfully for the case', message.message, "processing putaway"
 
+
+
   end
 
 end

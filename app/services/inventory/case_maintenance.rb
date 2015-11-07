@@ -32,6 +32,14 @@ module Inventory
         end
         case_hash
         
-      end
+     end
+
+    def get_case_detail(filter_conditions:nil, detail_filter_conditions:nil)
+      case_header = CaseHeader.where(filter_conditions).first
+      case_detail = CaseDetail.where(detail_filter_conditions).first
+      case_hash = { case_header:  case_header , case_detail: case_detail }
+      case_hash
+    end
+
    end
 end

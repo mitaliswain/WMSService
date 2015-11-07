@@ -29,7 +29,7 @@ module Inventory
         case_hash = CaseDetail.new(input_obj)
         case_hash = add_case_detail_derived_data(case_hash.clone)
         case_hash.save!
-        resource_added_successfully("Case #{case_hash.id}", "/case/#{case_hash.case_header_id}/#{case_hash.id}")
+        resource_added_successfully("Case #{case_hash.id}", "/case/#{case_hash.case_header_id}/detail/#{case_hash.id}")
       end
       message
     end

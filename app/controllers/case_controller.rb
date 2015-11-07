@@ -21,7 +21,15 @@ class CaseController < ApplicationController
     case_hash = (case_obj.get_cases(filter_conditions: filter_conditions).first )
     render json: case_hash.to_json
   end
-  
+
+
+  def show_detail
+    cases = Inventory::CaseMaintenance.new
+    filter_conditions = {id: params[:id]}
+    detail_filter_conditions = {id: params[:detail_id]}
+    cases_hash = (cases.get_case_detail(filter_conditions: filter_conditions, detail_filter_conditions: detail_filter_conditions)  )
+    render json: cases_hash.to_json
+  end
 
   def update_header
     case_obj = Inventory::CaseMaintenance.new

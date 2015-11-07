@@ -16,8 +16,5 @@ module Putaway
         case_header
       end
 
-      def update_location_inventory
-
-      end
     end
   end
