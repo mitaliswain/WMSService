@@ -24,6 +24,9 @@ module Putaway
     def valid_location?
       location = LocationMaster.where(client: putaway[:client], warehouse: putaway[:warehouse], channel: nil, building: nil, barcode:  putaway[:location] ).first
       case
+        when !location
+          validation_failed('422', :location, 'Lcoation does not exist')
+
         when location.location_type != 'RESERVE'
           validation_failed('422', :location, 'Location should be Reserved type')
 
@@ -36,16 +39,21 @@ module Putaway
 
     end
 
-  def is_matching_putaway_type?(location)
+    def is_matching_putaway_type?(location)
       CaseDetail.where(client: putaway[:client], case_id: putaway[:case_id] ).each do |case_item|
-        item = ItemMaster.where(client: putaway[:client], channel: nil, building: nil, item: case_item.item).first
-        if item.case_putaway_type != location.defalt_putaway_type
-          return false
-        end
+        item = ItemMaster.where(client: putaway[:client], item: case_item.item).first
+          case
+            when !item
+              validation_failed('422', :case, 'Items in case are not in item master')
+            when item.case_putaway_type != location.defalt_putaway_type
+              validation_failed('422', :case, 'Case not valid for this location')
+            else
+              validation_success(:location)
+          end
       end
-    true
+
+    end
+
   end
 
-
-  end
 end

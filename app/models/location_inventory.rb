@@ -9,7 +9,7 @@ class LocationInventory < ActiveRecord::Base
     location_inventory.channel = channel
     location_inventory.barcode = to_location
     location_inventory.item = item
-    location_inventory.case_id=case__id
+    location_inventory.case_id=case_id
     location_inventory.quantity = location_inventory.quantity.to_i + quantity
     location_inventory.save!
 
