@@ -18,6 +18,7 @@ module Location
 
       if expand.nil?
         location_header_data = '*'
+        location_inventory_data = '*'
       else
         location_header_data = '*'
       end
@@ -25,10 +26,12 @@ module Location
       location_hash = []
       location_headers = LocationMaster.select(location_header_data).where(filter_conditions)
       location_headers.each { |location_header|
-        location_hash << {location_header: location_header}
+        location_inventories = LocationInventory.select(location_inventory_data).where(barcode: location_header.barcode)
+        location_hash << {location_header: location_header, location_inventories: location_inventories}
       }
       location_hash
-    end
+      end
+
 
     def add_location_master(app_parameters, fields_to_add)
       input_obj = app_parameters.merge(fields_to_add).to_hash

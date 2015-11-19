@@ -23,5 +23,6 @@ class CaseHeaderTest < ActiveSupport::TestCase
                       
      assert_equal(nil, case_header.channel, 'update blank channel to null' )   
      assert_equal(nil, case_header.building, 'update blank building to null' )                
-  end
+   end
+
 end

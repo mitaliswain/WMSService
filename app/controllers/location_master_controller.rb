@@ -13,9 +13,9 @@ class LocationMasterController < ApplicationController
       filter_conditions = params[:filter_conditions]
       location = Location::LocationMasterMaintenance.new.get_locations(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
       render json: location
-    rescue Exception => e
-      location.fatal_error(e.message)
-      render json: location.message.to_json, status: '500'
+    #rescue Exception => e
+     # location.fatal_error(e.message)
+     # render json: location.message.to_json, status: '500'
     end
     
   end

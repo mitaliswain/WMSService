@@ -36,12 +36,13 @@ class CaseDetailTest < ActiveSupport::TestCase
 
     case_detail = CaseDetail.new
     case_detail.client = case_header.client
-    case_detail.case_id = case_header.case_id
+    case_detail.case_id = case_header.id
     case_detail.warehouse = case_header.warehouse
     case_detail.case_header_id = case_header.id
     case_detail.quantity = 10
     case_detail.item = '12345'
     case_detail.save!
+
 
     location_inventory = LocationInventory.where(barcode: 'Location1', item: '12345').first
     assert_equal(location_inventory.quantity, case_detail.quantity , 'Location Inventory added')
@@ -52,9 +53,66 @@ class CaseDetailTest < ActiveSupport::TestCase
     location_inventory = LocationInventory.where(barcode: 'Location1', item: '12345').first
     assert_equal(8, location_inventory.quantity, 'Location Inventory updated')
 
+    case_header.location = 'Location2'
+    case_header.save!
+
+    assert_equal(0, LocationInventory.where(barcode: 'Location1', item: '12345').first.quantity, 'From Location should have been 0')
+    assert_equal(8, LocationInventory.where(barcode: 'Location2', item: '12345').first.quantity, 'To Location should have been updated with from location inventory')
+
+
   end
 
-  test "should add the quantity "
+   test "check the inventory for multiple cases added to same location" do
+
+     case_header = CaseHeader.new
+     case_header.client = 'WM'
+     case_header.warehouse = 'WH1'
+     case_header.location = 'Location1'
+     case_header.case_id = 'CaseID001'
+     case_header.save!
+
+     case_detail = CaseDetail.new
+     case_detail.client = case_header.client
+     case_detail.case_id = case_header.id
+     case_detail.warehouse = case_header.warehouse
+     case_detail.case_header_id = case_header.id
+     case_detail.quantity = 10
+     case_detail.item = '12345'
+     case_detail.save!
+
+     case_header = CaseHeader.new
+     case_header.client = 'WM'
+     case_header.warehouse = 'WH1'
+     case_header.location = 'Location1'
+     case_header.case_id = 'CaseID002'
+     case_header.save!
+
+     case_detail = CaseDetail.new
+     case_detail.client = case_header.client
+     case_detail.case_id = case_header.id
+     case_detail.warehouse = case_header.warehouse
+     case_detail.case_header_id = case_header.id
+     case_detail.quantity = 14
+     case_detail.item = '12345'
+     case_detail.save!
+
+     location_inventory = LocationInventory.where(barcode: 'Location1', item: '12345').first
+     assert_equal(24, location_inventory.quantity, 'Location Inventory added')
+
+     case_detail.quantity = case_detail.quantity - 2
+     case_detail.save!
+
+     location_inventory = LocationInventory.where(barcode: 'Location1', item: '12345').first
+     assert_equal(22, location_inventory.quantity, 'Location Inventory updated')
+
+     case_header.location = 'Location2'
+     case_header.save!
+
+     assert_equal(10, LocationInventory.where(barcode: 'Location1', item: '12345').first.quantity, 'From Location should have been down by 8')
+     assert_equal(12, LocationInventory.where(barcode: 'Location2', item: '12345').first.quantity, 'To Location should have been updated with from location inventory')
+
+
+   end
 
 
 end
