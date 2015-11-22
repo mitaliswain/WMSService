@@ -76,6 +76,7 @@ class CaseDetailTest < ActiveSupport::TestCase
      case_detail.case_id = case_header.id
      case_detail.warehouse = case_header.warehouse
      case_detail.case_header_id = case_header.id
+     case_detail.case_id = case_header.case_id
      case_detail.quantity = 10
      case_detail.item = '12345'
      case_detail.save!
@@ -110,6 +111,44 @@ class CaseDetailTest < ActiveSupport::TestCase
 
      assert_equal(10, LocationInventory.where(barcode: 'Location1', item: '12345').first.quantity, 'From Location should have been down by 8')
      assert_equal(12, LocationInventory.where(barcode: 'Location2', item: '12345').first.quantity, 'To Location should have been updated with from location inventory')
+
+
+   end
+
+   test "update case header quantity upon change in quantity" do
+
+     case_header = CaseHeader.new
+     case_header.client = 'WM'
+     case_header.warehouse = 'WH1'
+     case_header.location = 'Location1'
+     case_header.case_id = 'CaseID001'
+     case_header.save!
+
+     case_detail = CaseDetail.new
+     case_detail.client = case_header.client
+     case_detail.case_header_id = case_header.id
+     case_detail.warehouse = case_header.warehouse
+     case_detail.case_header_id = case_header.id
+     case_detail.case_id = case_header.case_id
+     case_detail.quantity = 10
+     case_detail.item = '12345'
+     case_detail.save!
+
+     case_header = CaseHeader.find(case_detail.case_header_id)
+     assert_equal(10, case_header.quantity, 'case header quantity should be updated')
+
+     case_detail = CaseDetail.new
+     case_detail.client = case_header.client
+     case_detail.case_header_id = case_header.id
+     case_detail.warehouse = case_header.warehouse
+     case_detail.case_header_id = case_header.id
+     case_detail.case_id = case_header.case_id
+     case_detail.quantity = 14
+     case_detail.item = '12345'
+     case_detail.save!
+
+     case_header = CaseHeader.find(case_detail.case_header_id)
+     assert_equal(24, case_header.quantity, 'case header quantity should be updated')
 
 
    end

@@ -25,7 +25,8 @@ module Inventory
       location_inventory_hash = []
       location_inventories = LocationInventory.select(location_inventory_data).where(filter_conditions)
       location_inventories.each { |location_inventory|
-        location_inventory_hash << {location_inventory: location_inventory}
+        case_header = CaseHeader.where(client: location_inventory.client, warehouse: location_inventory.warehouse, building: location_inventory.building, channel: location_inventory.channel, location: location_inventory.barcode)
+        location_inventory_hash << {location_inventory: location_inventory, case_header: (case_header || [])}
       }
       location_inventory_hash
     end

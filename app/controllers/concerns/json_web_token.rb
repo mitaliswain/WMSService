@@ -5,7 +5,7 @@ module JsonWebToken
 
      include Response
      
-    def encode(payload, expiration = 24.hours.from_now)
+    def encode(payload, expiration = 1.hours.from_now)
       payload = payload.dup
       payload['exp'] = expiration.to_i
       JWT.encode(payload, Rails.application.secrets.secret_key_base)

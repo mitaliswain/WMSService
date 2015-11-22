@@ -12,7 +12,7 @@ class CaseHeader < ActiveRecord::Base
   after_update :update_location_inventory , :if => :location_changed?
 
   def update_location_inventory
-    CaseDetail.where(case_id: self.id).each do |case_detail|
+    CaseDetail.where(case_header_id: self.id).each do |case_detail|
       LocationInventory.update_location_inventory(self.client, self.warehouse, self.channel, self.building,
                                                   self.location_was, self.location, case_detail.item, case_detail.quantity)
     end
