@@ -11,7 +11,7 @@ module Shipment
         rescue => error
           fatal_error(error.to_s, error.backtrace[0])
           raise ActiveRecord::Rollback
-          return self.message
+          return true
         end
       end
     end  
@@ -249,7 +249,7 @@ module Shipment
           workflow.each do |process, methods|
             methods.each do |method|
               response = self.send(method[:method])
-              return self.message unless response
+              return true unless response
             end
           end
        resource_processed_successfully(self.shipment.shipment_nbr, "Received Successfully")

@@ -197,7 +197,7 @@ case_receiving_one:
   innerpack_qty: 1
   standardcase_qty: 1
   po_qty: 1
-  shipped_quantity: 20
+  shipped_quantity: 100
   received_qty: 1
   verified_qty: 1
   cases_rcvd: 1

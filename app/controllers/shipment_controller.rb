@@ -80,7 +80,12 @@ class ShipmentController < ApplicationController
   
   def receive
     shipment = Shipment::ShipmentReceive.new(params[:shipment])
-    shipment.receive_shipment
+    if params[:shipment][:receiving_type] == 'Pallet'
+      shipment.receive_pallet
+    else
+      shipment.receive_shipment
+    end
+
     render json: shipment.message.to_json, status: shipment.message[:status]
   end
   

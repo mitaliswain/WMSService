@@ -5,6 +5,7 @@ module Shipment
   class ShipmentReceive
     
     include ShipmentReceiveProcessing
+    include ShipmentReceivePalletProcessing
     include ShipmentReceiveValidation
     include Response
     include Utility
