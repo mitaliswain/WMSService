@@ -9,6 +9,7 @@ module Shipment
     def is_valid_receive_data?(to_validate)
 
       valid_table = {
+          'pallet' => 'valid_pallet?',
           'location' => 'valid_location?',
           'case' => 'valid_case?',
           'lot_number' => 'valid_lot_number?',
@@ -29,6 +30,15 @@ module Shipment
       end
     end
 
+    def valid_pallet?
+      CaseHeader.where(default_key).where(pallet_id: shipment.pallet).each do |case_in_pallet|
+        if case_in_pallet.record_status != 'Created'
+          validation_failed('422', :pallet_id, "Case #{case_in_pallet.case_id} is already received")
+          return
+        end
+      end
+      validation_success(:pallet_id)
+    end
 
     def valid_location?
 

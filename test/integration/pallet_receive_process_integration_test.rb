@@ -28,7 +28,7 @@ class PalletReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
     @configuration = GlobalConfiguration.get_configuration(@condition)
   end
 
-=begin
+
   def test_receive_pallet
     update_old = {value: @configuration.Receiving_Type}
     GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
@@ -54,15 +54,13 @@ class PalletReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
     message = JSON.parse(response.body)
     assert_equal "#{@pallet_id} Received Successfully", message.message, "Pallet received successfully"
 
-    cases = CaseHeader.where(pallet_id: @pallet_id)
-    cases.each do |cs|
+    CaseHeader.where(pallet_id: @pallet_id).each do |cs|
       assert_equal 'Received', cs.record_status, "Pallet received successfully"
     end
 
     GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
 
   end
-=end
 
   def test_reject_receive_pallet_if_any_of_the_case_is_invalid
     update_old = {value: @configuration.Receiving_Type}
@@ -89,13 +87,11 @@ class PalletReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
              innerpack_qty: 1
          }
 
-    assert_equal 201, status, 'message in service'
+    assert_equal 422, status, 'Invalid Pallet'
     message = JSON.parse(response.body)
-    p message
-    assert_equal "#{@pallet_id} Received Successfully", message.message, "Shipment received successfully"
+    assert_equal "Case #{case_id} already received", message.errors[0]["message"], "Shipment received successfully"
 
-    cases = CaseHeader.where(pallet_id: @pallet_id)
-    cases.each do |cs|
+    CaseHeader.where(pallet_id: @pallet_id).each do |cs|
       assert_equal 'Created', cs.record_status, "Pallet rejected successfully" if cs.case_id != case_id
     end
 
@@ -103,6 +99,39 @@ class PalletReceiveProcessIntegrationTest < ActionDispatch::IntegrationTest
 
   end
 
+  def test_invalid_location
+    update_old = {value: @configuration.Receiving_Type}
+    GlobalConfiguration.set_configuration({value: 'Case'}, @condition.merge({key: 'Receiving_Type'}))
+
+    invalid_location = 'Invalid_Location'
+
+    # Check the valida shipment
+    post "#{@url}receive",
+
+
+         shipment: {
+             receiving_type: 'Pallet',
+             client: @client,
+             warehouse: @warehouse,
+             channel: @channel,
+             building: @building,
+             location: invalid_location,
+             shipment_nbr: @shipment_nbr,
+             pallet: @pallet_id,
+             innerpack_qty: 1
+         }
+
+    assert_equal 422, status, 'Invalid Location'
+    message = JSON.parse(response.body)
+    assert_equal "Location #{invalid_location} not found", message.errors[0]["message"], "Shipment received successfully"
+
+    CaseHeader.where(pallet_id: @pallet_id).each do |cs|
+      assert_equal 'Created', cs.record_status, 'Pallet not received'
+    end
+
+    GlobalConfiguration.set_configuration(update_old, @condition.merge({key: 'Receiving_Type'}))
+
+  end
 
 end
  

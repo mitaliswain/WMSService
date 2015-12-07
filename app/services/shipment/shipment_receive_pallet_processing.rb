@@ -8,12 +8,15 @@ module Shipment
 
         begin
           receive_cases_in_the_pallet(case_headers)
-        rescue
-          fatal_error("Cases in pallet #{shipment.pallet} are already received", '')
+          resource_processed_successfully(self.shipment.pallet, "Received Successfully")
+          return true
+        rescue => error
+          fatal_error(error.to_s, error.backtrace[0])
+          raise ActiveRecord::Rollback
+          return false
         end
-
       end
-        resource_processed_successfully(self.shipment.pallet, "Received Successfully")
+
     end
 
     def receive_cases_in_the_pallet(case_headers)
@@ -24,9 +27,7 @@ module Shipment
         @shipment[:case_id] = case_to_be_received.case_id
 
         response = receive_shipment
-        p response
         if  !response
-          p 'raised'
           raise ActiveRecord::Rollback
         end
 

@@ -11,7 +11,7 @@ module Shipment
         rescue => error
           fatal_error(error.to_s, error.backtrace[0])
           raise ActiveRecord::Rollback
-          return true
+          return false
         end
       end
     end  
@@ -19,16 +19,10 @@ module Shipment
   
     def create_case
       
-       if Case_receiving_enabled?
-         case_header = update_case_header
-         case_detail = update_case_detail(case_header)
-       else
-        case_header = create_case_header
-        case_detail = create_case_detail(case_header)
-       end
-       true
+      Case_receiving_enabled? ? update_case_detail(update_case_header) : create_case_detail(create_case_header)
+      true
     
-     end
+   end
      
      def update_case_header
        case_header = CaseHeader.where(default_key)
@@ -249,7 +243,7 @@ module Shipment
           workflow.each do |process, methods|
             methods.each do |method|
               response = self.send(method[:method])
-              return true unless response
+              return false unless response
             end
           end
        resource_processed_successfully(self.shipment.shipment_nbr, "Received Successfully")
