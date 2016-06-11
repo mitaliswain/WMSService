@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20151024194652) do
 
-  create_table "asn_details", force: true do |t|
+  create_table "asn_details", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.integer  "shipped_quantity"
   end
 
-  create_table "asn_headers", force: true do |t|
+  create_table "asn_headers", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "case_details", force: true do |t|
+  create_table "case_details", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -281,7 +281,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "case_headers", force: true do |t|
+  create_table "case_headers", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -337,7 +337,10 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.string   "transfer"
     t.string   "transfer_from"
     t.string   "form_co"
+    t.string   "from_div"
     t.string   "transfer_to"
+    t.string   "to_co"
+    t.string   "to_div"
     t.string   "cross_dock"
     t.datetime "received_date"
     t.string   "received_by"
@@ -385,12 +388,10 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.string   "from_building"
     t.string   "to_channel"
     t.string   "to_building"
-    t.string   "location"
-    t.string   "previous_location"
     t.string   "location_type"
   end
 
-  create_table "global_configurations", force: true do |t|
+  create_table "global_configurations", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -429,7 +430,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "item_inner_packs", force: true do |t|
+  create_table "item_inner_packs", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -484,7 +485,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "item_masters", force: true do |t|
+  create_table "item_masters", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -609,7 +610,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "location_inventories", force: true do |t|
+  create_table "location_inventories", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "building"
@@ -700,7 +701,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "location_masters", force: true do |t|
+  create_table "location_masters", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -771,7 +772,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "location_types", force: true do |t|
+  create_table "location_types", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -801,7 +802,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "messages", force: true do |t|
+  create_table "messages", force: :cascade do |t|
     t.string   "client"
     t.string   "message_id"
     t.string   "message_description"
@@ -824,7 +825,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "serial_numbers", force: true do |t|
+  create_table "serial_numbers", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"
@@ -857,7 +858,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.datetime "updated_at"
   end
 
-  create_table "user_masters", force: true do |t|
+  create_table "user_masters", force: :cascade do |t|
     t.string   "client"
     t.string   "user_id"
     t.string   "password"
@@ -879,7 +880,7 @@ ActiveRecord::Schema.define(version: 20151024194652) do
     t.string   "updated_prc"
   end
 
-  create_table "vendor_masters", force: true do |t|
+  create_table "vendor_masters", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
     t.string   "channel"

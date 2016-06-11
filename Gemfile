@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.2.1"
+ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -11,6 +11,7 @@ group :development, :test do
   gem 'simplecov', :require => false, :group => :test
 end
 
+gem 'dalli'
 
 group :production do
   gem 'pg'

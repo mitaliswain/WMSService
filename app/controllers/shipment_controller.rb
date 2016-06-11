@@ -12,8 +12,16 @@ class ShipmentController < ApplicationController
 
   def index
      filter_conditions = params[:filter_conditions]
-     shipment_hash = Shipment::ShipmentMaintenance.new.get_shipments(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+
+     shipment_hashes = Shipment::ShipmentMaintenance.new.get_shipments(basic_parameters: basic_parameters, filter_conditions: filter_conditions, expand: params[:expand])
+     shipment_hash =
+     Rails.cache.fetch("shipment", expires_in: 60.minutes) do
+        shipment_hashes.to_json
+     end
+
      render json: shipment_hash
+
+
      rescue Exception => e
        shipment_hash.fatal_error(e.message)
        render json: shipment_hash.message.to_json, status: '500'
@@ -38,6 +46,7 @@ class ShipmentController < ApplicationController
     asn = Shipment::ShipmentMaintenance.new
     message = asn.add_shipment_header(params[:app_parameters], params[:fields_to_update])
     render json: message.to_json, status: message[:status]
+    Rails.cache.delete("shipment")
     rescue Exception => e
       asn.fatal_error(e.message)
       render json: asn.message.to_json, status: '500'
