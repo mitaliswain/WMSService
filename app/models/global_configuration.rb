@@ -1,5 +1,20 @@
 class GlobalConfiguration < ActiveRecord::Base
-  
+
+  before_create :default_status, :default_building, :default_channel
+
+  def default_status
+    self.enable = true
+  end
+
+  def default_building
+    self.building = nil if self.building.empty?
+  end
+
+  def default_channel
+    self.channel = nil if self.channel.empty?
+  end
+
+
   def initialize option_data={}
     super
     self.option = option_data 

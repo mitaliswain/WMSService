@@ -190,9 +190,9 @@ module Shipment
           item_inner_pack.channel = item_master.channel
           item_inner_pack.item = item_master.item
           item_inner_pack.innerpack_qty = self.shipment.innerpack_qty.to_i
-          item_inner_pack.innerpack_wgt = self.shipment.innerpack_qty.to_i * item_master.unit_wgt
-          item_inner_pack.innerpack_vol = self.shipment.innerpack_qty.to_i * item_master.unit_wgt
-          item_inner_pack.innerpack_len = self.shipment.innerpack_qty.to_i * item_master.unit_len
+          item_inner_pack.innerpack_wgt = self.shipment.innerpack_qty.to_i * item_master.unit_wgt.to_i
+          item_inner_pack.innerpack_vol = self.shipment.innerpack_qty.to_i * item_master.unit_wgt.to_i
+          item_inner_pack.innerpack_len = self.shipment.innerpack_qty.to_i * item_master.unit_len.to_i
 
           item_inner_pack.save!
         end
