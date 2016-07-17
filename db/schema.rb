@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151024194652) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "asn_details", force: :cascade do |t|
     t.string   "client"
     t.string   "warehouse"
